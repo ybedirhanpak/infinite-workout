@@ -3,7 +3,7 @@ export class Progress {
     public name: string,
     public sets: number,
     public reps: number,
-    public repType: 'sec' | 'reps',
+    public repType: string,
     public exercises: string[],
     public currentExercise: number,
     public priority: number,

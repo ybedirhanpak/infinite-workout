@@ -18,26 +18,23 @@ export class ProgressService {
 
   addProgress(
     name: string,
-    exercises: string[],
     sets: number,
     reps: number,
-    repType: 'sec' | 'reps',
-    priority: number,
-    enabled: boolean,
-    currentExercise: number
+    repType: string,
+    exercises: string[]
   ) {
     const newProgress = new Progress(
       name,
-      exercises,
       sets,
       reps,
       repType,
-      priority,
-      enabled,
-      currentExercise
+      exercises,
+      0,
+      0,
+      true
     );
 
-    this.progresses.pipe(
+    return this.progresses.pipe(
       take(1),
       delay(1000),
       tap((progresses) => {

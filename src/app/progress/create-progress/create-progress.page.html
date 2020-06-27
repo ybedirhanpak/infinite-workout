@@ -5,7 +5,10 @@
     </ion-buttons>
     <ion-title>Create a Progress</ion-title>
     <ion-buttons slot="end">
-      <ion-button>
+      <ion-button
+        [disabled]="!form || form?.invalid"
+        (click)="createProgress()"
+      >
         <ion-icon name="checkmark-outline" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -27,19 +30,29 @@
         <ion-col size-sm="3" offset-sm="3">
           <ion-item>
             <ion-label position="floating">Sets</ion-label>
-            <ion-input type="number" formControlName="name"></ion-input>
+            <ion-input type="number" formControlName="sets"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col size-sm="3" class="reps-wrapper">
           <div>
             <ion-item>
-              <ion-label position="floating">Reps</ion-label>
-              <ion-input type="number" formControlName="name"></ion-input>
+              <ion-label position="floating"
+                >{{repType === 'reps' ? 'Reps' : 'Seconds'}}</ion-label
+              >
+              <ion-input type="number" formControlName="reps"></ion-input>
             </ion-item>
           </div>
           <div>
-            <ion-button class="ion-no-margin" fill="clear" slot="end">
-              <ion-icon name="sync-outline" slot="icon-only"></ion-icon>
+            <ion-button
+              class="ion-no-margin"
+              fill="clear"
+              slot="end"
+              (click)="changeRepType()"
+            >
+              <ion-icon
+                name="swap-vertical-outline"
+                slot="icon-only"
+              ></ion-icon>
             </ion-button>
           </div>
         </ion-col>
@@ -58,7 +71,7 @@
           <ion-button
             color="primary"
             expand="block"
-            [fill]="reorder ? 'solid' : 'clear'"
+            fill="clear"
             (click)="reorder = !reorder"
           >
             <ion-icon name="list-outline" slot="icon-only"></ion-icon>
