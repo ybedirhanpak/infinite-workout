@@ -3,6 +3,7 @@ import {
   ModalController,
   LoadingController,
   NavController,
+  AlertController,
 } from '@ionic/angular';
 import { ProgressService } from '../progress.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -17,6 +18,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./edit-progress.page.scss'],
 })
 export class EditProgressPage implements OnInit, OnDestroy {
+  paramSub: Subscription;
   progress: Progress;
   progressSub: Subscription;
   isLoading = false;
@@ -29,11 +31,12 @@ export class EditProgressPage implements OnInit, OnDestroy {
     private loadingController: LoadingController,
     private progressService: ProgressService,
     private navController: NavController,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private alertController: AlertController
   ) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe((paramMap) => {
+    this.paramSub = this.route.paramMap.subscribe((paramMap) => {
       if (!paramMap.has('progressId')) {
         this.navController.navigateBack('/home/progress');
         return;
@@ -41,40 +44,47 @@ export class EditProgressPage implements OnInit, OnDestroy {
       this.isLoading = true;
       this.progressSub = this.progressService
         .getProgress(parseInt(paramMap.get('progressId')))
-        .subscribe((progress) => {
-          this.progress = progress;
+        .subscribe(
+          (progress) => {
+            this.progress = progress;
 
-          if (!this.progress) {
-            // TODO SHOW ERROR
-            return;
+            if (!this.progress) {
+              this.showErrorModal();
+              return;
+            }
+            const { name, sets, reps, repType, exercises } = this.progress;
+
+            this.exercises = exercises;
+            this.repType = repType;
+
+            this.form = new FormGroup({
+              name: new FormControl(name, {
+                updateOn: 'blur',
+                validators: [Validators.required],
+              }),
+              sets: new FormControl(sets, {
+                updateOn: 'blur',
+                validators: [Validators.required, Validators.min(1)],
+              }),
+              reps: new FormControl(reps, {
+                updateOn: 'blur',
+                validators: [Validators.required, Validators.min(1)],
+              }),
+            });
+
+            this.isLoading = false;
+          },
+          (error) => {
+            this.showErrorModal();
+            this.isLoading = false;
           }
-          const { name, sets, reps, repType, exercises } = this.progress;
-
-          this.exercises = exercises;
-          this.repType = repType;
-
-          this.form = new FormGroup({
-            name: new FormControl(name, {
-              updateOn: 'blur',
-              validators: [Validators.required],
-            }),
-            sets: new FormControl(sets, {
-              updateOn: 'blur',
-              validators: [Validators.required, Validators.min(1)],
-            }),
-            reps: new FormControl(reps, {
-              updateOn: 'blur',
-              validators: [Validators.required, Validators.min(1)],
-            }),
-          });
-
-          this.isLoading = false;
-        });
+        );
     });
   }
 
   ngOnDestroy() {
     this.progressSub.unsubscribe();
+    this.paramSub.unsubscribe();
   }
 
   addExercise() {
@@ -125,14 +135,37 @@ export class EditProgressPage implements OnInit, OnDestroy {
         loadingEl.present();
 
         const { name, sets, reps } = this.form.value;
-        // TODO IMPLEMENT update progress
-        // this.progressService
-        //   .addProgress(name, sets, reps, this.repType, this.exercises)
-        //   .subscribe((data) => {
-        //     loadingEl.dismiss();
-        //     this.form.reset();
-        //     this.navController.navigateBack('/home/progress');
-        //   });
+        this.progressService
+          .updateProgress(
+            this.progress.id,
+            name,
+            sets,
+            reps,
+            this.repType,
+            this.exercises
+          )
+          .subscribe((data) => {
+            loadingEl.dismiss();
+            this.form.reset();
+            this.navController.navigateBack('/home/progress');
+          });
+      });
+  }
+
+  showErrorModal() {
+    this.alertController
+      .create({
+        header: 'Error occured.',
+        message: 'Please try again.',
+        buttons: [
+          {
+            text: 'Okay',
+            handler: () => this.navController.navigateBack('/home/progress'),
+          },
+        ],
+      })
+      .then((alertEl) => {
+        alertEl.present();
       });
   }
 }
