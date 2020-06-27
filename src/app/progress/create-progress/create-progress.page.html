@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home/progress"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Create a Progress</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="checkmark-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form">
+    <ion-grid class="ion-padding">
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item>
+            <ion-label position="floating">Name</ion-label>
+            <ion-input type="text" formControlName="name"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="3" offset-sm="3">
+          <ion-item>
+            <ion-label position="floating">Sets</ion-label>
+            <ion-input type="number" formControlName="name"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size-sm="3" class="reps-wrapper">
+          <div>
+            <ion-item>
+              <ion-label position="floating">Reps</ion-label>
+              <ion-input type="number" formControlName="name"></ion-input>
+            </ion-item>
+          </div>
+          <div>
+            <ion-button class="ion-no-margin" fill="clear" slot="end">
+              <ion-icon name="sync-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-padding">
+        <ion-col size="8" size-sm="4" offset-sm="3">
+          <ion-button
+            color="primary"
+            expand="block"
+            fill="clear"
+            (click)="addExercise()"
+            >ADD EXERCISE</ion-button
+          >
+        </ion-col>
+        <ion-col size="4" size-sm="2">
+          <ion-button
+            color="primary"
+            expand="block"
+            [fill]="reorder ? 'solid' : 'clear'"
+            (click)="reorder = !reorder"
+          >
+            <ion-icon name="list-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-reorder-group
+            [disabled]="!reorder"
+            (ionItemReorder)="reorderExercises($event)"
+          >
+            <ion-item-sliding *ngFor="let exercise of exercises">
+              <ion-item>
+                <ion-label>{{exercise}}</ion-label>
+                <ion-reorder slot="end">
+                  <ion-icon name="repeat"></ion-icon>
+                </ion-reorder>
+              </ion-item>
+              <ion-item-options side="end">
+                <ion-item-option
+                  color="danger"
+                  (click)="removeExercise(exercise)"
+                >
+                  <ion-icon
+                    name="trash"
+                    slot="icon-only"
+                    size="small"
+                  ></ion-icon>
+                </ion-item-option>
+              </ion-item-options>
+            </ion-item-sliding>
+          </ion-reorder-group>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

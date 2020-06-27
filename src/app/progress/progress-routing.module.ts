@@ -6,8 +6,15 @@ import { ProgressPage } from './progress.page';
 const routes: Routes = [
   {
     path: '',
-    component: ProgressPage
-  }
+    component: ProgressPage,
+  },
+  {
+    path: 'create',
+    loadChildren: () =>
+      import('./create-progress/create-progress.module').then(
+        (m) => m.CreateProgressPageModule
+      ),
+  },
 ];
 
 @NgModule({
