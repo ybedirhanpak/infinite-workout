@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ModalController, LoadingController } from '@ionic/angular';
+import {
+  ModalController,
+  LoadingController,
+  NavController,
+} from '@ionic/angular';
 import { AddExerciseComponent } from '../add-exercise/add-exercise.component';
 import { ProgressService } from '../progress.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-create-progress',
@@ -13,14 +17,14 @@ import { Router } from '@angular/router';
 export class CreateProgressPage implements OnInit {
   form: FormGroup;
   repType: string = 'reps';
-  exercises: string[] = ['Pushup', 'Diamond Pushup'];
+  exercises: string[] = [];
 
   reorder = false;
   constructor(
     private modalController: ModalController,
     private loadingController: LoadingController,
     private progressService: ProgressService,
-    private router: Router
+    private navController: NavController
   ) {}
 
   ngOnInit() {
@@ -94,7 +98,7 @@ export class CreateProgressPage implements OnInit {
           .subscribe((data) => {
             loadingEl.dismiss();
             this.form.reset();
-            this.router.navigate(['/', 'home', 'progress']);
+            this.navController.navigateBack('/home/progress');
           });
       });
   }

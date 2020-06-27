@@ -1,5 +1,7 @@
 {
   "name": "infinite-calisthenics",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

@@ -1,5 +1,6 @@
 export class Progress {
   constructor(
+    public id: number,
     public name: string,
     public sets: number,
     public reps: number,
