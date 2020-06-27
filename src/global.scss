@@ -28,8 +28,15 @@
 /* Fonts */
 @import './theme/font.scss';
 
+/* App */
 .md,
 .ios {
   --ion-font-family: 'Maven Pro', -apple-system, BlinkMacSystemFont,
     'Helvetica Neue', 'Roboto', sans-serif;
+}
+
+/* Progress */
+.reps-wrapper {
+  display: flex;
+  align-items: flex-end;
 }

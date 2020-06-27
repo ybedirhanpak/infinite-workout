@@ -15,6 +15,13 @@ const routes: Routes = [
         (m) => m.CreateProgressPageModule
       ),
   },
+  {
+    path: 'edit/:progressId',
+    loadChildren: () =>
+      import('./edit-progress/edit-progress.module').then(
+        (m) => m.EditProgressPageModule
+      ),
+  },
 ];
 
 @NgModule({

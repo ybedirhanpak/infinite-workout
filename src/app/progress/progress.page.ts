@@ -3,6 +3,7 @@ import { ProgressService } from './progress.service';
 import { Progress } from './progress.model';
 import { Subscription } from 'rxjs';
 import { LoadingController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-progress',
@@ -15,7 +16,8 @@ export class ProgressPage implements OnInit, OnDestroy {
   isLoading = false;
   constructor(
     private progressService: ProgressService,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -47,5 +49,9 @@ export class ProgressPage implements OnInit, OnDestroy {
           loadingEl.dismiss();
         });
       });
+  }
+
+  editProgress(progress: Progress) {
+    this.router.navigate(['/', 'home', 'progress', 'edit', progress.id]);
   }
 }

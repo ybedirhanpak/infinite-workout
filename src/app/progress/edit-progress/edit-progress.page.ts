@@ -1,32 +1,52 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {
   ModalController,
   LoadingController,
   NavController,
 } from '@ionic/angular';
-import { AddExerciseComponent } from '../add-exercise/add-exercise.component';
 import { ProgressService } from '../progress.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AddExerciseComponent } from '../add-exercise/add-exercise.component';
+import { ActivatedRoute } from '@angular/router';
+import { Progress } from '../progress.model';
+import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-create-progress',
-  templateUrl: './create-progress.page.html',
-  styleUrls: ['./create-progress.page.scss'],
+  selector: 'app-edit-progress',
+  templateUrl: './edit-progress.page.html',
+  styleUrls: ['./edit-progress.page.scss'],
 })
-export class CreateProgressPage implements OnInit {
+export class EditProgressPage implements OnInit {
+  progress: Progress;
+  progressSub: Subscription;
+  isLoading = false;
   form: FormGroup;
   repType: string = 'reps';
   exercises: string[] = [];
-
   reorder = false;
   constructor(
     private modalController: ModalController,
     private loadingController: LoadingController,
     private progressService: ProgressService,
-    private navController: NavController
+    private navController: NavController,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
+    this.route.paramMap.subscribe((paramMap) => {
+      if (!paramMap.has('progressId')) {
+        this.navController.navigateBack('/home/progress');
+        return;
+      }
+      this.isLoading = true;
+      this.progressService
+        .getProgress(parseInt(paramMap.get('progressId')))
+        .subscribe((progress) => {
+          this.progress = progress;
+          this.isLoading = false;
+        });
+    });
+
     this.form = new FormGroup({
       name: new FormControl(null, {
         updateOn: 'blur',
