@@ -87,26 +87,17 @@ export class ProgressService {
     );
   }
 
-  deleteProgress2(id: number) {
-    let updatedProgressList: Progress[] = [];
+  getProgress(id: number) {
     return from(this.storage.get(PROGRESS_KEY)).pipe(
-      switchMap((progresses: Progress[]) => {
+      map((progresses) => {
         if (!progresses || progresses?.length <= 0) {
           return [];
         }
-        const index = progresses.findIndex((p: Progress) => p.id === id);
-        if (index < 0) {
-          updatedProgressList = progresses;
-          return progresses;
-        }
-        updatedProgressList = progresses.slice(index, 1);
-        return from(this.storage.set(PROGRESS_KEY, updatedProgressList));
+        return progresses;
       }),
-      switchMap(() => {
-        return this.progresses;
-      }),
-      tap((progresses: Progress[]) => {
-        this._progresses.next(progresses);
+      switchMap((progresses: Progress[]) => {
+        const progress = progresses.filter((p: Progress) => p.id === id)[0];
+        return of(progress);
       })
     );
   }

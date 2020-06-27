@@ -3,11 +3,11 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home/progress"></ion-back-button>
     </ion-buttons>
-    <ion-title>Create a Progress</ion-title>
+    <ion-title>Edit Progress</ion-title>
     <ion-buttons slot="end">
       <ion-button
         [disabled]="!form || form?.invalid"
-        (click)="createProgress()"
+        (click)="updateProgress()"
       >
         <ion-icon name="checkmark-outline" slot="icon-only"></ion-icon>
       </ion-button>
@@ -16,7 +16,21 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="form">
+  <ion-grid *ngIf="isLoading">
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-spinner name="crescent"></ion-spinner>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid *ngIf="!isLoading && !progress">
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <p>Progress not found.</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <form [formGroup]="form" *ngIf="!isLoading && progress">
     <ion-grid class="ion-padding">
       <ion-row>
         <ion-col size-sm="6" offset-sm="3">

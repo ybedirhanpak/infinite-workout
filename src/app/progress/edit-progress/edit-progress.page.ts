@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {
   ModalController,
   LoadingController,
@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './edit-progress.page.html',
   styleUrls: ['./edit-progress.page.scss'],
 })
-export class EditProgressPage implements OnInit {
+export class EditProgressPage implements OnInit, OnDestroy {
   progress: Progress;
   progressSub: Subscription;
   isLoading = false;
@@ -39,28 +39,42 @@ export class EditProgressPage implements OnInit {
         return;
       }
       this.isLoading = true;
-      this.progressService
+      this.progressSub = this.progressService
         .getProgress(parseInt(paramMap.get('progressId')))
         .subscribe((progress) => {
           this.progress = progress;
+
+          if (!this.progress) {
+            // TODO SHOW ERROR
+            return;
+          }
+          const { name, sets, reps, repType, exercises } = this.progress;
+
+          this.exercises = exercises;
+          this.repType = repType;
+
+          this.form = new FormGroup({
+            name: new FormControl(name, {
+              updateOn: 'blur',
+              validators: [Validators.required],
+            }),
+            sets: new FormControl(sets, {
+              updateOn: 'blur',
+              validators: [Validators.required, Validators.min(1)],
+            }),
+            reps: new FormControl(reps, {
+              updateOn: 'blur',
+              validators: [Validators.required, Validators.min(1)],
+            }),
+          });
+
           this.isLoading = false;
         });
     });
+  }
 
-    this.form = new FormGroup({
-      name: new FormControl(null, {
-        updateOn: 'blur',
-        validators: [Validators.required],
-      }),
-      sets: new FormControl(null, {
-        updateOn: 'blur',
-        validators: [Validators.required, Validators.min(1)],
-      }),
-      reps: new FormControl(null, {
-        updateOn: 'blur',
-        validators: [Validators.required, Validators.min(1)],
-      }),
-    });
+  ngOnDestroy() {
+    this.progressSub.unsubscribe();
   }
 
   addExercise() {
@@ -102,7 +116,7 @@ export class EditProgressPage implements OnInit {
     }
   }
 
-  createProgress() {
+  updateProgress() {
     this.loadingController
       .create({
         message: 'Creating...',
@@ -111,14 +125,14 @@ export class EditProgressPage implements OnInit {
         loadingEl.present();
 
         const { name, sets, reps } = this.form.value;
-
-        this.progressService
-          .addProgress(name, sets, reps, this.repType, this.exercises)
-          .subscribe((data) => {
-            loadingEl.dismiss();
-            this.form.reset();
-            this.navController.navigateBack('/home/progress');
-          });
+        // TODO IMPLEMENT update progress
+        // this.progressService
+        //   .addProgress(name, sets, reps, this.repType, this.exercises)
+        //   .subscribe((data) => {
+        //     loadingEl.dismiss();
+        //     this.form.reset();
+        //     this.navController.navigateBack('/home/progress');
+        //   });
       });
   }
 }
