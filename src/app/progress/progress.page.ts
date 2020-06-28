@@ -29,7 +29,6 @@ export class ProgressPage implements OnInit, OnDestroy {
   ionViewWillEnter() {
     this.isLoading = true;
     this.progressService.fetchProgresses().subscribe((data) => {
-      console.log('Fetch Data', data);
       this.isLoading = false;
     });
   }

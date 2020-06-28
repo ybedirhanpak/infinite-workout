@@ -26,10 +26,7 @@
         <ion-list>
           <ion-item-sliding *ngFor="let progress of progressList">
             <ion-item-options side="start">
-              <ion-item-option
-                color="tertiary"
-                (click)="editProgress(progress)"
-              >
+              <ion-item-option color="primary" (click)="editProgress(progress)">
                 <ion-icon
                   name="pencil-outline"
                   slot="icon-only"

@@ -6,6 +6,12 @@
   font-size: 2rem;
 }
 
+.arrow-wrapper {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
 @media (min-width: 320px) {
   .circle-wrapper {
     height: 50%;
