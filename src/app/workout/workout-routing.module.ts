@@ -6,8 +6,15 @@ import { WorkoutPage } from './workout.page';
 const routes: Routes = [
   {
     path: '',
-    component: WorkoutPage
-  }
+    component: WorkoutPage,
+  },
+  {
+    path: 'history',
+    loadChildren: () =>
+      import('./workout-history/workout-history.module').then(
+        (m) => m.WorkoutHistoryPageModule
+      ),
+  },
 ];
 
 @NgModule({

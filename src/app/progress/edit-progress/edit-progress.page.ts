@@ -129,7 +129,7 @@ export class EditProgressPage implements OnInit, OnDestroy {
   updateProgress() {
     this.loadingController
       .create({
-        message: 'Creating...',
+        message: 'Updating...',
       })
       .then((loadingEl) => {
         loadingEl.present();

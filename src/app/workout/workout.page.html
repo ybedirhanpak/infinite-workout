@@ -12,7 +12,7 @@
           md="ellipsis-vertical"
         ></ion-icon>
       </ion-button>
-      <ion-button *ngIf="this.workoutStarted" (click)="stopWorkout()">
+      <ion-button *ngIf="this.workoutStarted" (click)="onStopButtonClick()">
         <ion-icon name="stop-circle-outline" slot="icon-only"> </ion-icon>
       </ion-button>
     </ion-buttons>

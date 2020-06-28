@@ -8,7 +8,14 @@
           </ion-title>
         </ion-toolbar>
       </ion-header>
-      <ion-content> </ion-content>
+      <ion-content>
+        <ion-list>
+          <ion-item (click)="menuNavigate('/home/workout/history')" button>
+            <ion-icon name="barbell-outline" slot="start"></ion-icon>
+            <ion-label>Workout History</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-content>
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-split-pane>

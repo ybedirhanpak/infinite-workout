@@ -9,6 +9,7 @@ import {
   PopoverController,
 } from '@ionic/angular';
 import { ToolbarPopoverComponent } from './toolbar-popover/toolbar-popover.component';
+import { WorkoutService } from './workout.service';
 
 const MIN_S = 60;
 const HOUR_S = 3600;
@@ -44,8 +45,8 @@ export class WorkoutPage implements OnInit, OnDestroy {
   constructor(
     private progressService: ProgressService,
     private alertController: AlertController,
-    private pickerController: PickerController,
-    private popoverController: PopoverController
+    private popoverController: PopoverController,
+    private workoutService: WorkoutService
   ) {}
 
   ngOnInit() {
@@ -167,7 +168,7 @@ export class WorkoutPage implements OnInit, OnDestroy {
     }
   }
 
-  stopWorkout() {
+  onStopButtonClick() {
     this.alertController
       .create({
         header: 'Are you sure?',
@@ -175,7 +176,7 @@ export class WorkoutPage implements OnInit, OnDestroy {
         buttons: [
           {
             text: 'Yes',
-            handler: () => this.resetWorkout(),
+            handler: () => this.stopWorkout(),
           },
           {
             text: 'Cancel',
@@ -221,5 +222,14 @@ export class WorkoutPage implements OnInit, OnDestroy {
     if (this.totalTimeInterval) {
       clearInterval(this.totalTimeInterval);
     }
+  }
+
+  stopWorkout() {
+    let sub = this.workoutService
+      .addWorkout([], new Date(), this.totalTimeString)
+      .subscribe(() => {
+        sub.unsubscribe();
+      });
+    this.resetWorkout();
   }
 }
