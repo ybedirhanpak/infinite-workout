@@ -15,6 +15,7 @@ const THEME_DARK = 'THEME_DARK';
 export class AppComponent implements OnInit {
   showExplore = false;
   darkMode = false;
+  initialToggle = false;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -32,7 +33,11 @@ export class AppComponent implements OnInit {
       this.splashScreen.hide();
       this.storage.get(THEME_DARK).then((isDark) => {
         if (isDark) {
-          this.setDarkMode();
+          this.darkMode = true;
+          document.body.classList.add('dark');
+        } else {
+          this.darkMode = false;
+          document.body.classList.remove('dark');
         }
       });
     });
@@ -46,17 +51,20 @@ export class AppComponent implements OnInit {
   }
 
   toggleDarkMode(event: any) {
-    this.darkMode = !this.darkMode;
-    if (this.darkMode) {
+    const isDark = event.detail.checked;
+
+    if (isDark === this.darkMode && this.initialToggle) {
+      this.initialToggle = true;
+      return;
+    }
+
+    if (isDark) {
       document.body.classList.add('dark');
     } else {
       document.body.classList.remove('dark');
     }
-    this.storage.set(THEME_DARK, this.darkMode);
+    this.storage.set(THEME_DARK, isDark);
   }
 
-  setDarkMode() {
-    this.darkMode = true;
-    document.body.classList.add('dark');
-  }
+  setDarkMode() {}
 }
