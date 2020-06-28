@@ -5,6 +5,9 @@
     </ion-buttons>
     <ion-title class="ion-text-center">Progress</ion-title>
     <ion-buttons slot="primary">
+      <ion-button (click)="toggleReorder()">
+        <ion-icon slot="icon-only" name="list-outline"></ion-icon>
+      </ion-button>
       <ion-button [routerLink]="['/','home','progress','create']">
         <ion-icon name="add-outline" slot="icon-only"></ion-icon>
       </ion-button>
@@ -23,7 +26,10 @@
   <ion-grid *ngIf="!isLoading && progressList && progressList.length > 0">
     <ion-row>
       <ion-col size-sm="6" offset-sm="3">
-        <ion-list>
+        <ion-reorder-group
+          [disabled]="!reorder"
+          (ionItemReorder)="reorderProgressList($event)"
+        >
           <ion-item-sliding *ngFor="let progress of progressList">
             <ion-item-options side="start">
               <ion-item-option color="primary" (click)="editProgress(progress)">
@@ -40,6 +46,9 @@
                 {{progress.reps}}-{{progress.repType}}</ion-label
               >
               <ion-label>{{progress.name}}</ion-label>
+              <ion-reorder slot="end">
+                <ion-icon name="repeat"></ion-icon>
+              </ion-reorder>
             </ion-item>
             <ion-item-options side="end">
               <ion-item-option
@@ -50,7 +59,7 @@
               </ion-item-option>
             </ion-item-options>
           </ion-item-sliding>
-        </ion-list>
+        </ion-reorder-group>
       </ion-col>
     </ion-row>
   </ion-grid>

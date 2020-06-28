@@ -14,6 +14,7 @@ export class ProgressPage implements OnInit, OnDestroy {
   progressList: Progress[] = [];
   listSub: Subscription;
   isLoading = false;
+  reorder = false;
   constructor(
     private progressService: ProgressService,
     private loadingController: LoadingController,
@@ -52,5 +53,20 @@ export class ProgressPage implements OnInit, OnDestroy {
 
   editProgress(progress: Progress) {
     this.router.navigate(['/', 'home', 'progress', 'edit', progress.id]);
+  }
+
+  toggleReorder() {
+    if (this.reorder) {
+      this.progressService
+        .reorderProgresses(this.progressList)
+        .subscribe(() => {});
+    }
+    this.reorder = !this.reorder;
+  }
+
+  reorderProgressList(event: any) {
+    const itemMove = this.progressList.splice(event.detail.from, 1)[0];
+    this.progressList.splice(event.detail.to, 0, itemMove);
+    event.detail.complete();
   }
 }

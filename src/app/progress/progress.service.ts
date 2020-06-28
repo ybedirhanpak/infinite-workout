@@ -141,4 +141,13 @@ export class ProgressService {
       })
     );
   }
+
+  reorderProgresses(reorderedList: Progress[]) {
+    return from(this.storage.set(PROGRESS_KEY, reorderedList)).pipe(
+      map((progresses) => {
+        console.log('Progresses', progresses);
+        this._progresses.next(reorderedList);
+      })
+    );
+  }
 }
