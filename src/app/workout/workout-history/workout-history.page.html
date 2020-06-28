@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home/workout"></ion-back-button>
+      <ion-back-button defaultHref="/home/progress"></ion-back-button>
     </ion-buttons>
     <ion-title class="ion-text-center">Workout History</ion-title>
     <ion-buttons slot="end">
@@ -15,6 +15,16 @@
     <ion-row>
       <ion-col size-sm="6" offset-sm="3" class="ion-text-center">
         <ion-spinner name="crescent"></ion-spinner>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid *ngIf="!isLoading && !(workoutList && workoutList.length > 0)">
+    <ion-row>
+      <ion-col size-sm="6" offset-sm="3" class="ion-text-center">
+        <p>There are no workouts to show.</p>
+        <ion-button [routerLink]="['/','home','workout']" fill="clear"
+          >Do your first workout now!</ion-button
+        >
       </ion-col>
     </ion-row>
   </ion-grid>

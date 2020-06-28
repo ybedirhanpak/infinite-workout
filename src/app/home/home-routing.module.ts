@@ -21,6 +21,11 @@ const routes: Routes = [
           import('../workout/workout.module').then((m) => m.WorkoutPageModule),
       },
       {
+        path: 'explore',
+        loadChildren: () =>
+          import('../explore/explore.module').then((m) => m.ExplorePageModule),
+      },
+      {
         path: '',
         redirectTo: '/home/progress',
         pathMatch: 'full',

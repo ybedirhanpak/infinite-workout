@@ -23,6 +23,16 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  <ion-grid *ngIf="!isLoading && !(progressList && progressList.length > 0)">
+    <ion-row>
+      <ion-col size-sm="6" offset-sm="3" class="ion-text-center">
+        <p>There is no progress to show.</p>
+        <ion-button [routerLink]="['/','home','progress','create']" fill="clear"
+          >Create your first progress</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <ion-grid *ngIf="!isLoading && progressList && progressList.length > 0">
     <ion-row>
       <ion-col size-sm="6" offset-sm="3">
@@ -31,16 +41,7 @@
           (ionItemReorder)="reorderProgressList($event)"
         >
           <ion-item-sliding *ngFor="let progress of progressList">
-            <ion-item-options side="start">
-              <ion-item-option color="primary" (click)="editProgress(progress)">
-                <ion-icon
-                  name="pencil-outline"
-                  slot="icon-only"
-                  size="small"
-                ></ion-icon>
-              </ion-item-option>
-            </ion-item-options>
-            <ion-item>
+            <ion-item (click)="editProgress(progress)">
               <ion-grid>
                 <ion-row>
                   <ion-col size="4" class="title-wrapper">

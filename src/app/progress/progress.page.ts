@@ -56,6 +56,9 @@ export class ProgressPage implements OnInit, OnDestroy {
   }
 
   toggleReorder() {
+    if (!this.progressList || this.progressList.length <= 0) {
+      return;
+    }
     if (this.reorder) {
       let sub = this.progressService
         .reorderProgresses(this.progressList)
