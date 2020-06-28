@@ -3,6 +3,7 @@ import { Workout } from '../workout.model';
 import { Subscription } from 'rxjs';
 import { WorkoutService } from '../workout.service';
 import { LoadingController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-workout-history',
@@ -16,13 +17,15 @@ export class WorkoutHistoryPage implements OnInit, OnDestroy {
 
   constructor(
     private workoutService: WorkoutService,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.workoutSub = this.workoutService.workoutList.subscribe(
       (workoutList) => {
         this.workoutList = workoutList;
+        console.log('Workout list', workoutList);
       }
     );
   }
@@ -49,5 +52,9 @@ export class WorkoutHistoryPage implements OnInit, OnDestroy {
           loadingEl.dismiss();
         });
       });
+  }
+
+  onWorkoutClick(workout: Workout) {
+    this.router.navigate(['/', 'home', 'workout', 'detail', workout.id]);
   }
 }

@@ -15,6 +15,13 @@ const routes: Routes = [
         (m) => m.WorkoutHistoryPageModule
       ),
   },
+  {
+    path: 'detail/:workoutId',
+    loadChildren: () =>
+      import('./workout-detail/workout-detail.module').then(
+        (m) => m.WorkoutDetailPageModule
+      ),
+  },
 ];
 
 @NgModule({

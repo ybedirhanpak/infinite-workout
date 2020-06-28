@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { BehaviorSubject, of, from } from 'rxjs';
-import { Workout } from './workout.model';
+import { Workout, ExerciseRecord } from './workout.model';
 import { take, tap, delay, switchMap, map } from 'rxjs/operators';
 
 const WORKOUT_KEY = 'WORKOUT';
@@ -32,7 +32,7 @@ export class WorkoutService {
     );
   }
 
-  addWorkout(exercises: string[], date: Date, totalTime: string) {
+  addWorkout(exercises: ExerciseRecord[], date: Date, totalTime: string) {
     const newWorkout = new Workout(Date.now(), exercises, date, totalTime);
 
     return from(this.storage.get(WORKOUT_KEY)).pipe(

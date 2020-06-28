@@ -10,6 +10,7 @@ import {
 } from '@ionic/angular';
 import { ToolbarPopoverComponent } from './toolbar-popover/toolbar-popover.component';
 import { WorkoutService } from './workout.service';
+import { ExerciseRecord } from './workout.model';
 
 const MIN_S = 60;
 const HOUR_S = 3600;
@@ -225,8 +226,17 @@ export class WorkoutPage implements OnInit, OnDestroy {
   }
 
   stopWorkout() {
+    const exercises: ExerciseRecord[] = this.progressList.map((progress) => {
+      return {
+        name: progress.currentExercise
+          ? progress.currentExercise.name
+          : progress.name,
+        progressName: progress.name,
+        setRep: `${progress.sets}x${progress.reps} ${progress.repType}`,
+      };
+    });
     let sub = this.workoutService
-      .addWorkout([], new Date(), this.totalTimeString)
+      .addWorkout(exercises, new Date(), this.totalTimeString)
       .subscribe(() => {
         sub.unsubscribe();
       });
