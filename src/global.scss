@@ -35,6 +35,10 @@
     'Helvetica Neue', 'Roboto', sans-serif;
 }
 
+ion-picker {
+  touch-action: none;
+}
+
 /* Progress */
 .reps-wrapper {
   display: flex;

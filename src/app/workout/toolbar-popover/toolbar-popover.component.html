@@ -1,0 +1,18 @@
+<ion-list>
+  <form #workoutForm="ngForm">
+    <ion-item>
+      <ion-label>Rest</ion-label>
+      <ion-datetime
+        display-format="HH:mm:ss"
+        picker-format="HH:mm:ss"
+        value="00:02:00"
+        [ngModel]="restTimeIn"
+        name="rest-time"
+        #restTime="ngModel"
+      ></ion-datetime>
+    </ion-item>
+    <ion-item lines="none" detail="false" button (click)="dismissPopover()">
+      Save
+    </ion-item>
+  </form>
+</ion-list>

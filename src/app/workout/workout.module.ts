@@ -10,6 +10,8 @@ import { WorkoutPage } from './workout.page';
 
 import { NgCircleProgressModule } from 'ng-circle-progress';
 
+import { ToolbarPopoverComponent } from './toolbar-popover/toolbar-popover.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -28,6 +30,6 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
       renderOnClick: false,
     }),
   ],
-  declarations: [WorkoutPage],
+  declarations: [WorkoutPage, ToolbarPopoverComponent],
 })
 export class WorkoutPageModule {}

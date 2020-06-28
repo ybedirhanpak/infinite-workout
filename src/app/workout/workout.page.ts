@@ -2,7 +2,13 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Progress } from '../progress/progress.model';
 import { ProgressService } from '../progress/progress.service';
 import { Subscription } from 'rxjs';
-import { IonSlides, AlertController } from '@ionic/angular';
+import {
+  IonSlides,
+  AlertController,
+  PickerController,
+  PopoverController,
+} from '@ionic/angular';
+import { ToolbarPopoverComponent } from './toolbar-popover/toolbar-popover.component';
 
 const MIN_S = 60;
 const HOUR_S = 3600;
@@ -17,6 +23,8 @@ const RED_COLOR = 'var(--ion-color-danger, black)';
   styleUrls: ['./workout.page.scss'],
 })
 export class WorkoutPage implements OnInit, OnDestroy {
+  /** Popover */
+  popover: HTMLIonPopoverElement;
   /** Top Slides */
   @ViewChild('progressSlider') progressSlider: IonSlides;
   private listSub: Subscription;
@@ -24,7 +32,7 @@ export class WorkoutPage implements OnInit, OnDestroy {
   isLoading = false;
   /** Circle Progress*/
   workoutStarted = false;
-  restTime = 5; // total rest in seconds
+  restTime = 180; // total rest in seconds
   currentRestTime = 0;
   restPercent = 0;
   restString = '00:00:00';
@@ -35,13 +43,16 @@ export class WorkoutPage implements OnInit, OnDestroy {
   totalTimeInterval: NodeJS.Timeout;
   constructor(
     private progressService: ProgressService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private pickerController: PickerController,
+    private popoverController: PopoverController
   ) {}
 
   ngOnInit() {
     this.listSub = this.progressService.progresses.subscribe((progressList) => {
       this.progressList = progressList;
     });
+    this.resetWorkout();
   }
 
   ionViewWillEnter() {
@@ -66,6 +77,36 @@ export class WorkoutPage implements OnInit, OnDestroy {
     }
   }
 
+  openPopOver(event: any) {
+    this.popoverController
+      .create({
+        component: ToolbarPopoverComponent,
+        event: event,
+        translucent: true,
+        componentProps: {
+          restTime: this.secondsToString(this.restTime),
+        },
+      })
+      .then((popover) => {
+        this.popover = popover;
+        popover.present();
+
+        return popover.onDidDismiss();
+      })
+      .then((resData) => {
+        if (resData.role === 'confirm') {
+          const restTimeStr = resData.data;
+          this.restTime = this.stringToSeconds(restTimeStr);
+        }
+      });
+  }
+
+  closePopOver() {
+    if (this.popover) {
+      this.popover.dismiss();
+    }
+  }
+
   secondsToString(sec: number) {
     let seconds = Math.min(sec, MAX_S);
     const hours = Math.floor(seconds / HOUR_S);
@@ -76,6 +117,15 @@ export class WorkoutPage implements OnInit, OnDestroy {
     return `${this.padZero(hours)}:${this.padZero(mins)}:${this.padZero(
       seconds
     )}`;
+  }
+
+  stringToSeconds(str: string) {
+    const parsed = str.split(':');
+    const h = parseInt(parsed[0]) || 0;
+    const m = parseInt(parsed[1]) || 0;
+    const s = parseInt(parsed[2]) || 0;
+
+    return h * HOUR_S + m * MIN_S + s;
   }
 
   padZero(num: number) {

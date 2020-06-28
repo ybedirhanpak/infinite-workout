@@ -12,6 +12,13 @@
   justify-content: center;
 }
 
+.progress-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 @media (min-width: 320px) {
   .circle-wrapper {
     height: 50%;
