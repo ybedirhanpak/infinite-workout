@@ -16,4 +16,33 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content> </ion-content>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-sm="6" offset-sm="3" class="ion-text-center">
+        <h1>3x5 Pushup</h1>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div class="circle-wrapper">
+    <circle-progress
+      [percent]="85"
+      [radius]="100"
+      [outerStrokeWidth]="16"
+      [innerStrokeWidth]="1"
+      [outerStrokeColor]="'var(--ion-color-secondary, black)'"
+      [innerStrokeColor]="'var(--ion-color-secondary, black)'"
+      [animation]="true"
+      [showSubtitle]="false"
+      [title]="'00:00:00'"
+      [showUnits]="false"
+    ></circle-progress>
+  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <h1 class="total-time">00:00:00</h1>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

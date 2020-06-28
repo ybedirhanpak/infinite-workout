@@ -25,6 +25,7 @@
     "@ionic/angular": "^5.0.0",
     "@ionic/storage": "^2.2.0",
     "cordova-sqlite-storage": "^5.0.0",
+    "ng-circle-progress": "^1.5.1",
     "rxjs": "~6.5.1",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
