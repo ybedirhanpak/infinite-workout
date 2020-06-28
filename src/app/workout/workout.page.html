@@ -5,12 +5,15 @@
     </ion-buttons>
     <ion-title class="ion-text-center">Workout</ion-title>
     <ion-buttons slot="end">
-      <ion-button>
+      <ion-button *ngIf="!this.workoutStarted">
         <ion-icon
           slot="icon-only"
           ios="ellipsis-horizontal"
           md="ellipsis-vertical"
         ></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="this.workoutStarted" (click)="stopWorkout()">
+        <ion-icon name="stop-circle-outline"> </ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -44,22 +47,25 @@
   </ion-grid>
   <div class="circle-wrapper">
     <circle-progress
-      [percent]="10"
+      [percent]="restPercent"
       [radius]="100"
       [outerStrokeWidth]="16"
       [innerStrokeWidth]="1"
       [outerStrokeColor]="'var(--ion-color-secondary, black)'"
       [innerStrokeColor]="'var(--ion-color-secondary, black)'"
-      [animation]="true"
+      [animation]="false"
       [showSubtitle]="false"
-      [title]="'00:00:00'"
+      [title]="restString"
+      [titleColor]="restStringColor"
+      [animateTitle]="true"
       [showUnits]="false"
+      (onClick)="onCircleClick()"
     ></circle-progress>
   </div>
   <ion-grid>
     <ion-row>
       <ion-col class="ion-text-center">
-        <h1 class="total-time">00:00:00</h1>
+        <h1 class="total-time">{{ totalTimeString }}</h1>
       </ion-col>
     </ion-row>
   </ion-grid>
