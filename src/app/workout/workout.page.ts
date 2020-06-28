@@ -16,7 +16,7 @@ const MIN_S = 60;
 const HOUR_S = 3600;
 const MAX_S = HOUR_S * 100 - 1;
 
-const BLACK_COLOR = 'black';
+const BLACK_COLOR = 'var(--ion-color-dark, black)';
 const RED_COLOR = 'var(--ion-color-danger, black)';
 
 @Component({
@@ -34,7 +34,7 @@ export class WorkoutPage implements OnInit, OnDestroy {
   isLoading = false;
   /** Circle Progress*/
   workoutStarted = false;
-  restTime = 180; // total rest in seconds
+  restTime = 120; // total rest in seconds
   currentRestTime = 0;
   restPercent = 0;
   restString = '00:00:00';
