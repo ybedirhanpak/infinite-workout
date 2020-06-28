@@ -1,3 +1,5 @@
+import { Exercise } from './exercise.model';
+
 export class Progress {
   constructor(
     public id: number,
@@ -5,9 +7,8 @@ export class Progress {
     public sets: number,
     public reps: number,
     public repType: string,
-    public exercises: string[],
-    public currentExercise: number,
-    public priority: number,
+    public exercises: Exercise[],
+    public currentExercise: Exercise,
     public enabled: boolean
   ) {}
 }

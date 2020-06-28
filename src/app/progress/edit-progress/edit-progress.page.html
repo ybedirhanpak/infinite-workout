@@ -100,7 +100,15 @@
           >
             <ion-item-sliding *ngFor="let exercise of exercises">
               <ion-item>
-                <ion-label>{{exercise}}</ion-label>
+                <ion-icon
+                  *ngIf="exercise.selected"
+                  name="star-outline"
+                  slot="start"
+                  size="small"
+                ></ion-icon>
+                <ion-label (click)="onExerciseClick(exercise)"
+                  >{{exercise.name}}</ion-label
+                >
                 <ion-reorder slot="end">
                   <ion-icon name="repeat"></ion-icon>
                 </ion-reorder>

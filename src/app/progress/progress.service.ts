@@ -3,6 +3,7 @@ import { Storage } from '@ionic/storage';
 import { BehaviorSubject, of, from } from 'rxjs';
 import { Progress } from './progress.model';
 import { take, tap, delay, switchMap, map } from 'rxjs/operators';
+import { Exercise } from './exercise.model';
 
 const PROGRESS_KEY = 'PROGRESS';
 
@@ -37,7 +38,7 @@ export class ProgressService {
     sets: number,
     reps: number,
     repType: string,
-    exercises: string[]
+    exercises: Exercise[]
   ) {
     const newProgress = new Progress(
       Date.now(),
@@ -46,8 +47,7 @@ export class ProgressService {
       reps,
       repType,
       exercises,
-      0,
-      0,
+      exercises.find((e) => e.selected),
       true
     );
 
@@ -107,7 +107,7 @@ export class ProgressService {
     sets: number,
     reps: number,
     repType: string,
-    exercises: string[]
+    exercises: Exercise[]
   ) {
     return from(this.storage.get(PROGRESS_KEY)).pipe(
       map((progresses) => {
@@ -129,8 +129,7 @@ export class ProgressService {
           reps,
           repType,
           exercises,
-          oldProgress.currentExercise,
-          oldProgress.priority,
+          exercises.find((e) => e.selected),
           oldProgress.enabled
         );
         progresses[index] = updatedProgress;

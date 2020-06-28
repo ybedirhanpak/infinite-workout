@@ -3,7 +3,10 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home/workout"></ion-back-button>
     </ion-buttons>
-    <ion-title>Workout History</ion-title>
+    <ion-title class="ion-text-center">Workout History</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" [disabled]="true"></ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -31,10 +34,10 @@
             <ion-item>
               <ion-grid class="ion-no-padding">
                 <ion-row class="ion-no-padding">
-                  <ion-col size="6" size-sm="3" offset-sm="3">
+                  <ion-col size="6">
                     <p>{{workout.date | date }}</p>
                   </ion-col>
-                  <ion-col size="6" size-sm="3">
+                  <ion-col size="6">
                     <p>{{workout.totalTime}}</p>
                   </ion-col>
                 </ion-row>

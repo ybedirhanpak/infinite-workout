@@ -38,7 +38,12 @@
             class="progress-wrapper"
           >
             <p class="ion-no-margin">{{progress.sets}}x{{progress.reps}}</p>
-            <p class="ion-no-margin">{{ progress.name }}</p>
+            <p *ngIf="progress.currentExercise" class="ion-no-margin">
+              {{ progress.currentExercise.name }}
+            </p>
+            <p *ngIf="!progress.currentExercise" class="ion-no-margin">
+              {{ progress.name }}
+            </p>
           </ion-slide>
         </ion-slides>
       </ion-col>

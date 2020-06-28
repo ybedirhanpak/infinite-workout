@@ -11,6 +11,7 @@ import { AddExerciseComponent } from '../add-exercise/add-exercise.component';
 import { ActivatedRoute } from '@angular/router';
 import { Progress } from '../progress.model';
 import { Subscription } from 'rxjs';
+import { Exercise } from '../exercise.model';
 
 @Component({
   selector: 'app-edit-progress',
@@ -24,7 +25,7 @@ export class EditProgressPage implements OnInit, OnDestroy {
   isLoading = false;
   form: FormGroup;
   repType: string = 'reps';
-  exercises: string[] = [];
+  exercises: Exercise[] = [];
   reorder = false;
   constructor(
     private modalController: ModalController,
@@ -99,23 +100,41 @@ export class EditProgressPage implements OnInit, OnDestroy {
       .then((resultData) => {
         if (resultData.role === 'confirm') {
           const exerciseName = resultData.data.name;
-          this.exercises.push(exerciseName);
+          const index = this.exercises.findIndex(
+            (e) => e.name === exerciseName
+          );
+          if (index < 0) {
+            const selected = this.exercises.length === 0;
+            this.exercises.push(new Exercise(exerciseName, selected));
+          }
         }
       });
   }
 
-  removeExercise(exercise: string) {
-    const index = this.exercises.indexOf(exercise);
-    if (index < 0) {
-      return;
+  removeExercise(exercise: Exercise) {
+    const ex = this.exercises.find((e) => e.name == exercise.name);
+    if (ex) {
+      this.exercises = this.exercises.filter((e) => e.name !== ex.name);
+      if (ex.selected && this.exercises.length > 0) {
+        this.exercises[0].selected = true;
+      }
     }
-    this.exercises.splice(index, 1);
   }
 
   reorderExercises(event: any) {
     const itemMove = this.exercises.splice(event.detail.from, 1)[0];
     this.exercises.splice(event.detail.to, 0, itemMove);
     event.detail.complete();
+  }
+
+  onExerciseClick(exercise: Exercise) {
+    this.exercises.forEach((ex) => {
+      if (ex.name === exercise.name) {
+        ex.selected = true;
+      } else {
+        ex.selected = false;
+      }
+    });
   }
 
   changeRepType() {
