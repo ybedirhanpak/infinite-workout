@@ -1,7 +1,8 @@
 {
   "name": "infinite-calisthenics",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular"
 }
