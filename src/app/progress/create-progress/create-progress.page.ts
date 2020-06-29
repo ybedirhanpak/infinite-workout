@@ -8,6 +8,7 @@ import {
 import { AddExerciseComponent } from '../add-exercise/add-exercise.component';
 import { ProgressService } from '../progress.service';
 import { Exercise } from '../exercise.model';
+import { ExploreService } from '../../explore/explore.service';
 
 @Component({
   selector: 'app-create-progress',
@@ -23,7 +24,8 @@ export class CreateProgressPage implements OnInit {
     private modalController: ModalController,
     private loadingController: LoadingController,
     private progressService: ProgressService,
-    private navController: NavController
+    private navController: NavController,
+    private exploreService: ExploreService
   ) {}
 
   ngOnInit() {
@@ -111,6 +113,14 @@ export class CreateProgressPage implements OnInit {
         const { name, sets, reps } = this.form.value;
         this.progressService
           .addProgress(name, sets, reps, this.repType, this.exercises)
+          .subscribe((data) => {
+            // loadingEl.dismiss();
+            // this.form.reset();
+            // this.navController.navigateBack('/home/progress');
+          });
+
+        this.exploreService
+          .uploadProgress(name, sets, reps, this.repType, this.exercises)
           .subscribe((data) => {
             loadingEl.dismiss();
             this.form.reset();

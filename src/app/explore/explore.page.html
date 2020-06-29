@@ -9,4 +9,63 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content> </ion-content>
+<ion-content>
+  <ion-grid *ngIf="isLoading">
+    <ion-row>
+      <ion-col size-sm="6" offset-sm="3" class="ion-text-center">
+        <ion-spinner name="crescent"></ion-spinner>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid *ngIf="!isLoading && !(progressList && progressList.length > 0)">
+    <ion-row>
+      <ion-col size-sm="6" offset-sm="3" class="ion-text-center">
+        <p>There are no progresses to show.</p>
+        <ion-button [routerLink]="['/','home','progress','create']" fill="clear"
+          >Create your first progress</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid *ngIf="!isLoading && progressList && progressList.length > 0">
+    <ion-row>
+      <ion-col size-sm="6" offset-sm="3">
+        <ion-list>
+          <ion-item *ngFor="let progress of progressList">
+            <ion-grid class="ion-no-padding">
+              <ion-row>
+                <ion-col size="4" class="title-wrapper">
+                  <h5>
+                    {{progress.sets}} x {{progress.reps}} {{progress.repType}}
+                  </h5>
+                </ion-col>
+                <ion-col
+                  *ngIf="progress.currentExercise"
+                  size="6"
+                  class="title-wrapper"
+                >
+                  <h5 class="ion-no-margin" style="font-weight: bold;">
+                    {{progress.currentExercise.name}}
+                  </h5>
+                  <p class="ion-no-margin">{{progress.name}}</p>
+                </ion-col>
+                <ion-col
+                  *ngIf="!progress.currentExercise"
+                  size="6"
+                  class="title-wrapper"
+                >
+                  <h5 style="font-weight: bold;">
+                    {{progress.name}}
+                  </h5>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+            <ion-button (click)="downloadProgress(progress)" fill="clear">
+              <ion-icon name="download-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

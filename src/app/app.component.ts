@@ -13,7 +13,7 @@ const THEME_DARK = 'THEME_DARK';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  showExplore = false;
+  showExplore = true;
   darkMode = false;
   initialToggle = false;
   constructor(
