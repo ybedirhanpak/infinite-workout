@@ -114,14 +114,6 @@ export class CreateProgressPage implements OnInit {
         this.progressService
           .addProgress(name, sets, reps, this.repType, this.exercises)
           .subscribe((data) => {
-            // loadingEl.dismiss();
-            // this.form.reset();
-            // this.navController.navigateBack('/home/progress');
-          });
-
-        this.exploreService
-          .uploadProgress(name, sets, reps, this.repType, this.exercises)
-          .subscribe((data) => {
             loadingEl.dismiss();
             this.form.reset();
             this.navController.navigateBack('/home/progress');
