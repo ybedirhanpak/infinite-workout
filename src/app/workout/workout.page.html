@@ -5,12 +5,8 @@
     </ion-buttons>
     <ion-title class="ion-text-center">Workout</ion-title>
     <ion-buttons slot="end">
-      <ion-button *ngIf="!this.workoutStarted" (click)="openPopOver($event)">
-        <ion-icon
-          slot="icon-only"
-          ios="ellipsis-horizontal"
-          md="ellipsis-vertical"
-        ></ion-icon>
+      <ion-button *ngIf="!this.workoutStarted" (click)="onCircleClick()">
+        <ion-icon name="play-circle-outline" slot="icon-only"> </ion-icon>
       </ion-button>
       <ion-button *ngIf="this.workoutStarted" (click)="onStopButtonClick()">
         <ion-icon name="stop-circle-outline" slot="icon-only"> </ion-icon>
@@ -46,11 +42,36 @@
             </p>
           </ion-slide>
         </ion-slides>
+        <ion-button
+          fill="clear"
+          *ngIf="!isLoading && !(progressList && progressList.length > 0)"
+          [routerLink]="['/','home','progress']"
+        >
+          <ion-label>ADD PROGRESS</ion-label>
+        </ion-button>
       </ion-col>
       <ion-col size="3" size-sm="1" class="arrow-wrapper">
         <ion-button fill="clear" (click)="slideAction('forward')">
           <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
         </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size-sm="6" offset-sm="3">
+        <form #workoutForm="ngForm">
+          <ion-item>
+            <ion-label>Rest Time </ion-label>
+            <ion-datetime
+              display-format="HH:mm:ss"
+              picker-format="HH:mm:ss"
+              value="00:02:00"
+              [ngModel]="restTimeString"
+              name="rest-time"
+              #restTime="ngModel"
+              (ionChange)="onRestTimeChange($event)"
+            ></ion-datetime>
+          </ion-item>
+        </form>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -74,7 +95,7 @@
   <ion-grid>
     <ion-row>
       <ion-col class="ion-text-center">
-        <h1 class="total-time">{{ totalTimeString }}</h1>
+        <h1 class="total-time ion-no-margin">{{ totalTimeString }}</h1>
       </ion-col>
     </ion-row>
   </ion-grid>

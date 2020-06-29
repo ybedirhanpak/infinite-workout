@@ -2,13 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Progress } from '../progress/progress.model';
 import { ProgressService } from '../progress/progress.service';
 import { Subscription } from 'rxjs';
-import {
-  IonSlides,
-  AlertController,
-  PickerController,
-  PopoverController,
-} from '@ionic/angular';
-import { ToolbarPopoverComponent } from './toolbar-popover/toolbar-popover.component';
+import { IonSlides, AlertController, PopoverController } from '@ionic/angular';
 import { WorkoutService } from './workout.service';
 import { ExerciseRecord } from './workout.model';
 
@@ -35,6 +29,7 @@ export class WorkoutPage implements OnInit, OnDestroy {
   /** Circle Progress*/
   workoutStarted = false;
   restTime = 120; // total rest in seconds
+  restTimeString = '00:02:00';
   currentRestTime = 0;
   restPercent = 0;
   restString = '00:00:00';
@@ -79,34 +74,10 @@ export class WorkoutPage implements OnInit, OnDestroy {
     }
   }
 
-  openPopOver(event: any) {
-    this.popoverController
-      .create({
-        component: ToolbarPopoverComponent,
-        event: event,
-        translucent: true,
-        componentProps: {
-          restTime: this.secondsToString(this.restTime),
-        },
-      })
-      .then((popover) => {
-        this.popover = popover;
-        popover.present();
-
-        return popover.onDidDismiss();
-      })
-      .then((resData) => {
-        if (resData.role === 'confirm') {
-          const restTimeStr = resData.data;
-          this.restTime = this.stringToSeconds(restTimeStr);
-        }
-      });
-  }
-
-  closePopOver() {
-    if (this.popover) {
-      this.popover.dismiss();
-    }
+  onRestTimeChange(event: any) {
+    const restTimeValue = event.detail.value;
+    this.restTimeString = restTimeValue;
+    this.restTime = this.stringToSeconds(restTimeValue);
   }
 
   secondsToString(sec: number) {
