@@ -39,6 +39,11 @@ ion-picker {
   touch-action: none;
 }
 
+ion-label.form-error {
+  font-size: 0.75rem !important;
+  color: var(--ion-color-danger, red) !important;
+}
+
 /* Progress */
 .reps-wrapper {
   display: flex;

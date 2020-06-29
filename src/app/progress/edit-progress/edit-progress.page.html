@@ -38,6 +38,15 @@
             <ion-label position="floating">Name</ion-label>
             <ion-input type="text" formControlName="name"></ion-input>
           </ion-item>
+          <ion-item
+            lines="none"
+            class="ion-no-margin"
+            *ngIf="!form.get('name').valid && form.get('name').touched"
+          >
+            <ion-label class="form-error"
+              >Name must be between 1 and 25 characters long.</ion-label
+            >
+          </ion-item>
         </ion-col>
       </ion-row>
       <ion-row>
