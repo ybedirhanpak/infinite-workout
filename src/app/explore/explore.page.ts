@@ -36,7 +36,9 @@ export class ExplorePage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.progressSub.unsubscribe();
+    if (this.progressSub) {
+      this.progressSub.unsubscribe();
+    }
   }
 
   downloadProgress(progress: Progress) {

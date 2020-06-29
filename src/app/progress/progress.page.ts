@@ -35,7 +35,9 @@ export class ProgressPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.listSub.unsubscribe();
+    if (this.listSub) {
+      this.listSub.unsubscribe();
+    }
   }
 
   deleteProgress(progress: Progress) {

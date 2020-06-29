@@ -61,7 +61,7 @@ export class EditProgressPage implements OnInit, OnDestroy {
             this.form = new FormGroup({
               name: new FormControl(name, {
                 updateOn: 'blur',
-                validators: [Validators.required],
+                validators: [Validators.required, Validators.maxLength(20)],
               }),
               sets: new FormControl(sets, {
                 updateOn: 'blur',
@@ -84,8 +84,12 @@ export class EditProgressPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.progressSub.unsubscribe();
-    this.paramSub.unsubscribe();
+    if (this.progressSub) {
+      this.progressSub.unsubscribe();
+    }
+    if (this.paramSub) {
+      this.paramSub.unsubscribe();
+    }
   }
 
   addExercise() {

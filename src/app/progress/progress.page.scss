@@ -3,3 +3,9 @@
   flex-direction: column;
   justify-content: center;
 }
+
+.progress-name {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

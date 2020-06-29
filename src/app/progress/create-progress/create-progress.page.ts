@@ -32,7 +32,7 @@ export class CreateProgressPage implements OnInit {
     this.form = new FormGroup({
       name: new FormControl(null, {
         updateOn: 'blur',
-        validators: [Validators.required],
+        validators: [Validators.required, Validators.maxLength(20)],
       }),
       sets: new FormControl(null, {
         updateOn: 'blur',

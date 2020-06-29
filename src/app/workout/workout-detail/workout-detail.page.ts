@@ -49,8 +49,12 @@ export class WorkoutDetailPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.workoutSub.unsubscribe();
-    this.paramSub.unsubscribe();
+    if (this.workoutSub) {
+      this.workoutSub.unsubscribe();
+    }
+    if (this.paramSub) {
+      this.paramSub.unsubscribe();
+    }
   }
 
   showErrorModal() {

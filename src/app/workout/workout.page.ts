@@ -60,7 +60,9 @@ export class WorkoutPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.listSub.unsubscribe();
+    if (this.listSub) {
+      this.listSub.unsubscribe();
+    }
   }
 
   slideAction(action: 'forward' | 'back') {

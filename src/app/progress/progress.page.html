@@ -41,22 +41,28 @@
           (ionItemReorder)="reorderProgressList($event)"
         >
           <ion-item-sliding *ngFor="let progress of progressList">
-            <ion-item (click)="editProgress(progress)">
-              <ion-grid>
+            <ion-item (click)="editProgress(progress)" button detail="false">
+              <ion-grid class="ion-no-padding">
                 <ion-row>
-                  <ion-col size="4" class="title-wrapper">
-                    <h5>
-                      {{progress.sets}} x {{progress.reps}} {{progress.repType}}
-                    </h5>
+                  <ion-col size="3" class="title-wrapper ion-margin-vertical">
+                    <p class="ion-no-margin">
+                      {{progress.sets}} x {{progress.reps}}
+                    </p>
+                    <p class="ion-no-margin">
+                      {{progress.repType}}
+                    </p>
                   </ion-col>
                   <ion-col
                     *ngIf="progress.currentExercise"
-                    size="8"
+                    size="9"
                     class="title-wrapper"
                   >
-                    <h5 class="ion-no-margin" style="font-weight: bold;">
+                    <p
+                      class="ion-no-margin progress-name"
+                      style="font-weight: bold;"
+                    >
                       {{progress.currentExercise.name}}
-                    </h5>
+                    </p>
                     <p class="ion-no-margin">{{progress.name}}</p>
                   </ion-col>
                   <ion-col
@@ -64,9 +70,12 @@
                     size="8"
                     class="title-wrapper"
                   >
-                    <h5 style="font-weight: bold;">
+                    <p
+                      class="ion-no-margin progress-name"
+                      style="font-weight: bold;"
+                    >
                       {{progress.name}}
-                    </h5>
+                    </p>
                   </ion-col>
                 </ion-row>
               </ion-grid>

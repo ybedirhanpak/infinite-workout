@@ -38,7 +38,9 @@ export class WorkoutHistoryPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.workoutSub.unsubscribe();
+    if (this.workoutSub) {
+      this.workoutSub.unsubscribe();
+    }
   }
 
   deleteWorkout(workout: Workout) {

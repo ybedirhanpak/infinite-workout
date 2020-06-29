@@ -41,15 +41,15 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col size-sm="3" offset-sm="3">
+        <ion-col size="5" size-sm="2" offset-sm="3">
           <ion-item>
             <ion-label position="floating">Sets</ion-label>
             <ion-input type="number" formControlName="sets"></ion-input>
           </ion-item>
         </ion-col>
-        <ion-col size-sm="3" class="reps-wrapper">
+        <ion-col size="7" size-sm="4" class="reps-wrapper">
           <div>
-            <ion-item>
+            <ion-item class="ion-no-padding">
               <ion-label position="floating"
                 >{{repType === 'reps' ? 'Reps' : 'Seconds'}}</ion-label
               >
@@ -71,7 +71,7 @@
           </div>
         </ion-col>
       </ion-row>
-      <ion-row class="ion-padding">
+      <ion-row class="ion-no-padding">
         <ion-col size="8" size-sm="4" offset-sm="3">
           <ion-button
             color="primary"
