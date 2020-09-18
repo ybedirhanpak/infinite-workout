@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Progress } from '../progress/progress.model';
 import { ProgressService } from '../progress/progress.service';
 import { Subscription } from 'rxjs';
-import { IonSlides, AlertController, PopoverController } from '@ionic/angular';
+import { IonSlides, AlertController } from '@ionic/angular';
 import { WorkoutService } from './workout.service';
 import { ExerciseRecord } from './workout.model';
 
@@ -19,9 +19,6 @@ const RED_COLOR = 'var(--ion-color-danger, black)';
   styleUrls: ['./workout.page.scss'],
 })
 export class WorkoutPage implements OnInit, OnDestroy {
-  /** Popover */
-  popover: HTMLIonPopoverElement;
-
   /** Top Slides */
   @ViewChild('progressSlider') progressSlider: IonSlides;
   private listSub: Subscription;
@@ -44,7 +41,6 @@ export class WorkoutPage implements OnInit, OnDestroy {
   constructor(
     private progressService: ProgressService,
     private alertController: AlertController,
-    private popoverController: PopoverController,
     private workoutService: WorkoutService
   ) {}
 
