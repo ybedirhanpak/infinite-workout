@@ -5,15 +5,21 @@ import { Workout, ExerciseRecord } from './workout.model';
 import { take, tap, delay, switchMap, map } from 'rxjs/operators';
 
 const WORKOUT_KEY = 'WORKOUT';
+const REST_TIME_KEY = 'REST_TIME_KEY';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WorkoutService {
   private _workoutList = new BehaviorSubject<Workout[]>([]);
+  private _restTime = new BehaviorSubject<number>(0);
 
   get workoutList() {
     return this._workoutList.asObservable();
+  }
+
+  get restTime() {
+    return this._restTime.asObservable();
   }
 
   constructor(private storage: Storage) {}
@@ -83,5 +89,17 @@ export class WorkoutService {
         return of(workout);
       })
     );
+  }
+
+  fetchRestTime() {
+    this.storage.get(REST_TIME_KEY).then(value => {
+      this._restTime.next(value);
+    });
+  }
+
+  saveRestTime(restTime: number) {
+    this.storage.set(REST_TIME_KEY, restTime).then(() => {
+      this._restTime.next(restTime);
+    });
   }
 }
