@@ -149,7 +149,11 @@ export class WorkoutPage implements OnInit, OnDestroy {
         message: 'Do you want to end this workout?',
         buttons: [
           {
-            text: 'Yes',
+            text: 'Save',
+            handler: () => this.saveWorkout(),
+          },
+          {
+            text: 'Discard',
             handler: () => this.stopWorkout(),
           },
           {
@@ -199,6 +203,10 @@ export class WorkoutPage implements OnInit, OnDestroy {
   }
 
   stopWorkout() {
+    this.resetWorkout();
+  }
+
+  saveWorkout() {
     const exercises: ExerciseRecord[] = this.progressList.map((progress) => {
       return {
         name: progress.currentExercise
