@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Progress } from '../progress/progress.model';
 import { ProgressService } from '../progress/progress.service';
 import { Subscription } from 'rxjs';
-import { IonSlides, AlertController, PopoverController } from '@ionic/angular';
+import { IonSlides, AlertController } from '@ionic/angular';
 import { WorkoutService } from './workout.service';
 import { ExerciseRecord } from './workout.model';
 
@@ -19,14 +19,13 @@ const RED_COLOR = 'var(--ion-color-danger, black)';
   styleUrls: ['./workout.page.scss'],
 })
 export class WorkoutPage implements OnInit, OnDestroy {
-  /** Popover */
-  popover: HTMLIonPopoverElement;
   /** Top Slides */
   @ViewChild('progressSlider') progressSlider: IonSlides;
   private listSub: Subscription;
   progressList: Progress[];
   isLoading = false;
-  /** Circle Progress*/
+
+  /** Circle Progress */
   workoutStarted = false;
   restTime = 120; // total rest in seconds
   restTimeString = '00:02:00';
@@ -38,10 +37,10 @@ export class WorkoutPage implements OnInit, OnDestroy {
   currentTotalTime = 0;
   totalTimeString = '00:00:00';
   totalTimeInterval: NodeJS.Timeout;
+
   constructor(
     private progressService: ProgressService,
     private alertController: AlertController,
-    private popoverController: PopoverController,
     private workoutService: WorkoutService
   ) {}
 
@@ -50,6 +49,11 @@ export class WorkoutPage implements OnInit, OnDestroy {
       this.progressList = progressList;
     });
     this.resetWorkout();
+
+    this.workoutService.restTime.subscribe((value) => {
+      this.restTime = value;
+      this.restTimeString = this.secondsToString(this.restTime);
+    });
   }
 
   ionViewWillEnter() {
@@ -57,6 +61,8 @@ export class WorkoutPage implements OnInit, OnDestroy {
     this.progressService.fetchProgresses().subscribe((data) => {
       this.isLoading = false;
     });
+
+    this.workoutService.fetchRestTime();
   }
 
   ngOnDestroy() {
@@ -79,7 +85,7 @@ export class WorkoutPage implements OnInit, OnDestroy {
   onRestTimeChange(event: any) {
     const restTimeValue = event.detail.value;
     this.restTimeString = restTimeValue;
-    this.restTime = this.stringToSeconds(restTimeValue);
+    this.workoutService.saveRestTime(this.stringToSeconds(restTimeValue));
   }
 
   secondsToString(sec: number) {
@@ -149,7 +155,11 @@ export class WorkoutPage implements OnInit, OnDestroy {
         message: 'Do you want to end this workout?',
         buttons: [
           {
-            text: 'Yes',
+            text: 'Save',
+            handler: () => this.saveWorkout(),
+          },
+          {
+            text: 'Discard',
             handler: () => this.stopWorkout(),
           },
           {
@@ -199,6 +209,10 @@ export class WorkoutPage implements OnInit, OnDestroy {
   }
 
   stopWorkout() {
+    this.resetWorkout();
+  }
+
+  saveWorkout() {
     const exercises: ExerciseRecord[] = this.progressList.map((progress) => {
       return {
         name: progress.currentExercise
