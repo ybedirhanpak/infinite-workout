@@ -55,3 +55,37 @@ ion-label.form-error {
   flex-direction: column;
   justify-content: center;
 }
+
+.progress-item {
+  --ion-safe-area-right: 0;
+
+  &-content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 1rem;
+    padding-right: 0;
+
+    .rep-set {
+      margin-right: 1rem;
+    }
+
+    .exercise {
+      flex: 1;
+    }
+
+    .reorder {
+      width: 4rem;
+      text-align: center;
+
+      ion-reorder {
+        width: 100%;
+        height: 100%;
+      }
+
+      &.hidden {
+        opacity: 0;
+      }
+    }
+  }
+}

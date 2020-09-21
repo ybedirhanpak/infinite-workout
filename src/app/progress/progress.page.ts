@@ -40,6 +40,10 @@ export class ProgressPage implements OnInit, OnDestroy {
     }
   }
 
+  isProgressListNotEmpty() {
+    return !this.isLoading && this.progressList && this.progressList.length > 0;
+  }
+
   deleteProgress(progress: Progress) {
     this.loadingController
       .create({

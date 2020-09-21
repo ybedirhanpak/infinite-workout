@@ -5,8 +5,12 @@
     </ion-buttons>
     <ion-title class="ion-text-center">Progress</ion-title>
     <ion-buttons slot="primary">
-      <ion-button (click)="toggleReorder()">
-        <ion-icon slot="icon-only" name="list-outline"></ion-icon>
+      <ion-button *ngIf="isProgressListNotEmpty()" (click)="toggleReorder()">
+        <ion-icon
+          slot="icon-only"
+          name="list-outline"
+          [color]="reorder ? 'primary' : 'dark'"
+        ></ion-icon>
       </ion-button>
       <ion-button [routerLink]="['/','home','progress','create']">
         <ion-icon name="add-outline" slot="icon-only"></ion-icon>
@@ -16,84 +20,91 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid *ngIf="isLoading">
+  <ion-grid>
     <ion-row>
-      <ion-col size-sm="6" offset-sm="3" class="ion-text-center">
-        <ion-spinner name="crescent"></ion-spinner>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-grid *ngIf="!isLoading && !(progressList && progressList.length > 0)">
-    <ion-row>
-      <ion-col size-sm="6" offset-sm="3" class="ion-text-center">
-        <p>There are no progresses to show.</p>
-        <ion-button [routerLink]="['/','home','progress','create']" fill="clear"
-          >Create your first progress</ion-button
+      <ion-col size-sm="6" offset-sm="3" class="ion-no-padding">
+        <!-- Loading Spinner -->
+        <div *ngIf="isLoading" class="ion-text-center">
+          <ion-spinner name="crescent"></ion-spinner>
+        </div>
+        <!-- Empty list message -->
+        <div
+          *ngIf="!isLoading && !(progressList && progressList.length > 0)"
+          class="ion-text-center"
         >
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-grid *ngIf="!isLoading && progressList && progressList.length > 0">
-    <ion-row>
-      <ion-col size-sm="6" offset-sm="3">
-        <ion-reorder-group
-          [disabled]="!reorder"
-          (ionItemReorder)="reorderProgressList($event)"
-        >
-          <ion-item-sliding *ngFor="let progress of progressList">
-            <ion-item (click)="editProgress(progress)" button detail="false">
-              <ion-grid class="ion-no-padding">
-                <ion-row>
-                  <ion-col size="3" class="title-wrapper ion-margin-vertical">
+          <p>There are no progresses to show.</p>
+          <ion-button
+            [routerLink]="['/','home','progress','create']"
+            fill="clear"
+            >Create your first progress</ion-button
+          >
+        </div>
+        <!-- Progress list -->
+        <div *ngIf="isProgressListNotEmpty()">
+          <ion-reorder-group
+            [disabled]="!reorder"
+            (ionItemReorder)="reorderProgressList($event)"
+          >
+            <ion-item-sliding
+              class="ion-no-padding"
+              *ngFor="let progress of progressList"
+            >
+              <ion-item
+                class="progress-item ion-no-padding"
+                (click)="editProgress(progress)"
+                detail="false"
+              >
+                <div class="progress-item-content">
+                  <div class="rep-set">
                     <p class="ion-no-margin">
                       {{progress.sets}} x {{progress.reps}}
                     </p>
-                    <p class="ion-no-margin">
-                      {{progress.repType}}
-                    </p>
-                  </ion-col>
-                  <ion-col
-                    *ngIf="progress.currentExercise"
-                    size="9"
-                    class="title-wrapper"
-                  >
-                    <p
-                      class="ion-no-margin progress-name"
-                      style="font-weight: bold;"
-                    >
-                      {{progress.currentExercise.name}}
-                    </p>
-                    <p class="ion-no-margin">{{progress.name}}</p>
-                  </ion-col>
-                  <ion-col
-                    *ngIf="!progress.currentExercise"
-                    size="8"
-                    class="title-wrapper"
-                  >
-                    <p
-                      class="ion-no-margin progress-name"
-                      style="font-weight: bold;"
-                    >
-                      {{progress.name}}
-                    </p>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-
-              <ion-reorder slot="end">
-                <ion-icon name="repeat"></ion-icon>
-              </ion-reorder>
-            </ion-item>
-            <ion-item-options side="end">
-              <ion-item-option
-                color="danger"
-                (click)="deleteProgress(progress)"
-              >
-                <ion-icon name="trash" slot="icon-only" size="small"></ion-icon>
-              </ion-item-option>
-            </ion-item-options>
-          </ion-item-sliding>
-        </ion-reorder-group>
+                    <p class="ion-no-margin">{{progress.repType}}</p>
+                  </div>
+                  <div class="exercise">
+                    <div *ngIf="progress.currentExercise">
+                      <p
+                        class="ion-no-margin progress-name"
+                        style="font-weight: bold"
+                      >
+                        {{progress.currentExercise.name}}
+                      </p>
+                      <p class="ion-no-margin">{{progress.name}}</p>
+                    </div>
+                    <div *ngIf="!progress.currentExercise">
+                      <p
+                        class="ion-no-margin progress-name"
+                        style="font-weight: bold"
+                      >
+                        {{progress.name}}
+                      </p>
+                    </div>
+                  </div>
+                  <div [ngClass]="{'reorder': 'true', 'hidden': !reorder}">
+                    <ion-reorder>
+                      <ion-icon
+                        name="reorder-two-outline"
+                        size="large"
+                      ></ion-icon>
+                    </ion-reorder>
+                  </div>
+                </div>
+              </ion-item>
+              <ion-item-options side="end">
+                <ion-item-option
+                  color="danger"
+                  (click)="deleteProgress(progress)"
+                >
+                  <ion-icon
+                    name="trash"
+                    slot="icon-only"
+                    size="small"
+                  ></ion-icon>
+                </ion-item-option>
+              </ion-item-options>
+            </ion-item-sliding>
+          </ion-reorder-group>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>
