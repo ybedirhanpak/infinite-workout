@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home/progress"></ion-back-button>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title class="ion-text-center">Explore</ion-title>
     <ion-buttons slot="end">
@@ -10,64 +10,58 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-grid *ngIf="isLoading">
+  <ion-grid>
     <ion-row>
-      <ion-col size-sm="6" offset-sm="3" class="ion-text-center">
-        <ion-spinner name="crescent"></ion-spinner>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-grid *ngIf="!isLoading && !(progressList && progressList.length > 0)">
-    <ion-row>
-      <ion-col size-sm="6" offset-sm="3" class="ion-text-center">
-        <p>There are no progresses to show.</p>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-grid *ngIf="!isLoading && progressList && progressList.length > 0">
-    <ion-row>
-      <ion-col size-sm="6" offset-sm="3">
-        <ion-list>
-          <ion-item
-            *ngFor="let progress of progressList"
-            [routerLink]="['/','home','explore','progress',progress.id]"
-          >
-            <ion-grid class="ion-no-padding">
-              <ion-row>
-                <ion-col size="4" class="title-wrapper ion-margin-vertical">
-                  <h5 class="ion-no-margin">
+      <ion-col size-sm="6" offset-sm="3" class="ion-no-padding">
+        <!-- Loading Spinner -->
+        <div *ngIf="isLoading" class="ion-text-center">
+          <ion-spinner name="crescent"></ion-spinner>
+        </div>
+        <!-- Empty list message -->
+        <div
+          *ngIf="!isLoading && !(progressList && progressList.length > 0)"
+          class="ion-text-center"
+        >
+          <p>There are no progresses to show.</p>
+        </div>
+        <!-- Progress list -->
+        <div *ngIf="!isLoading && progressList && progressList.length > 0">
+          <ion-list class="ion-no-padding">
+            <ion-item
+              *ngFor="let progress of progressList"
+              [routerLink]="['/','home','explore','progress',progress.id]"
+              class="progress-item ion-no-padding"
+            >
+              <div class="progress-item-content">
+                <div class="rep-set">
+                  <p class="ion-no-margin">
                     {{progress.sets}} x {{progress.reps}}
-                  </h5>
-                  <h5 class="ion-no-margin">
-                    {{progress.repType}}
-                  </h5>
-                </ion-col>
-                <ion-col
-                  *ngIf="progress.currentExercise"
-                  size="6"
-                  class="title-wrapper"
-                >
-                  <h5 class="ion-no-margin" style="font-weight: bold;">
-                    {{progress.currentExercise.name}}
-                  </h5>
-                  <p class="ion-no-margin progress-name">{{progress.name}}</p>
-                </ion-col>
-                <ion-col
-                  *ngIf="!progress.currentExercise"
-                  size="6"
-                  class="title-wrapper"
-                >
-                  <p
-                    class="ion-no-margin progress-name"
-                    style="font-weight: bold;"
-                  >
-                    {{progress.name}}
                   </p>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-          </ion-item>
-        </ion-list>
+                  <p class="ion-no-margin">{{progress.repType}}</p>
+                </div>
+                <div class="exercise">
+                  <div *ngIf="progress.currentExercise">
+                    <p
+                      class="ion-no-margin progress-name"
+                      style="font-weight: bold"
+                    >
+                      {{progress.currentExercise.name}}
+                    </p>
+                    <p class="ion-no-margin">{{progress.name}}</p>
+                  </div>
+                  <div *ngIf="!progress.currentExercise">
+                    <p
+                      class="ion-no-margin progress-name"
+                      style="font-weight: bold"
+                    >
+                      {{progress.name}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </ion-item>
+          </ion-list>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>
