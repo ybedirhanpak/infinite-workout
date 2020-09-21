@@ -5,8 +5,12 @@
     </ion-buttons>
     <ion-title class="ion-text-center">Progress</ion-title>
     <ion-buttons slot="primary">
-      <ion-button (click)="toggleReorder()">
-        <ion-icon slot="icon-only" name="list-outline"></ion-icon>
+      <ion-button *ngIf="isProgressListNotEmpty()" (click)="toggleReorder()">
+        <ion-icon
+          slot="icon-only"
+          name="list-outline"
+          [color]="reorder ? 'primary' : 'dark'"
+        ></ion-icon>
       </ion-button>
       <ion-button [routerLink]="['/','home','progress','create']">
         <ion-icon name="add-outline" slot="icon-only"></ion-icon>
@@ -36,26 +40,29 @@
           >
         </div>
         <!-- Progress list -->
-        <div *ngIf="!isLoading && progressList && progressList.length > 0">
+        <div *ngIf="isProgressListNotEmpty()">
           <ion-reorder-group
             [disabled]="!reorder"
             (ionItemReorder)="reorderProgressList($event)"
           >
-            <ion-item-sliding *ngFor="let progress of progressList">
-              <ion-item (click)="editProgress(progress)" button detail="false">
-                <ion-grid class="ion-no-padding">
-                  <ion-row>
-                    <ion-col size="3" class="title-wrapper ion-margin-vertical">
-                      <p class="ion-no-margin">
-                        {{progress.sets}} x {{progress.reps}}
-                      </p>
-                      <p class="ion-no-margin">{{progress.repType}}</p>
-                    </ion-col>
-                    <ion-col
-                      *ngIf="progress.currentExercise"
-                      size="9"
-                      class="title-wrapper"
-                    >
+            <ion-item-sliding
+              class="ion-no-padding"
+              *ngFor="let progress of progressList"
+            >
+              <ion-item
+                class="progress-item ion-no-padding"
+                (click)="editProgress(progress)"
+                detail="false"
+              >
+                <div class="progress-item-content">
+                  <div class="rep-set">
+                    <p class="ion-no-margin">
+                      {{progress.sets}} x {{progress.reps}}
+                    </p>
+                    <p class="ion-no-margin">{{progress.repType}}</p>
+                  </div>
+                  <div class="exercise">
+                    <div *ngIf="progress.currentExercise">
                       <p
                         class="ion-no-margin progress-name"
                         style="font-weight: bold"
@@ -63,24 +70,25 @@
                         {{progress.currentExercise.name}}
                       </p>
                       <p class="ion-no-margin">{{progress.name}}</p>
-                    </ion-col>
-                    <ion-col
-                      *ngIf="!progress.currentExercise"
-                      size="8"
-                      class="title-wrapper"
-                    >
+                    </div>
+                    <div *ngIf="!progress.currentExercise">
                       <p
                         class="ion-no-margin progress-name"
                         style="font-weight: bold"
                       >
                         {{progress.name}}
                       </p>
-                    </ion-col>
-                  </ion-row>
-                </ion-grid>
-                <ion-reorder slot="end">
-                  <ion-icon name="repeat"></ion-icon>
-                </ion-reorder>
+                    </div>
+                  </div>
+                  <div [ngClass]="{'reorder': 'true', 'hidden': !reorder}">
+                    <ion-reorder>
+                      <ion-icon
+                        name="reorder-two-outline"
+                        size="large"
+                      ></ion-icon>
+                    </ion-reorder>
+                  </div>
+                </div>
               </ion-item>
               <ion-item-options side="end">
                 <ion-item-option
