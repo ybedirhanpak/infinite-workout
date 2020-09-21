@@ -1,0 +1,10 @@
+.workout {
+    &-header {
+        margin-bottom: 1rem;
+        &-group {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+    }
+}
