@@ -63,15 +63,18 @@ ion-label.form-error {
     display: flex;
     flex-direction: row;
     width: 100%;
-    padding: 1rem;
-    padding-right: 0;
+    padding: 1rem 0;
 
     .rep-set {
-      margin-right: 1rem;
+      width: 20%;
+      text-align: center;
     }
 
     .exercise {
+      display: flex;
       flex: 1;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .reorder {
