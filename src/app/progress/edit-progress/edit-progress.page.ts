@@ -27,6 +27,7 @@ export class EditProgressPage implements OnInit, OnDestroy {
   repType: string = 'reps';
   exercises: Exercise[] = [];
   reorder = false;
+  progressChanged = false;
   constructor(
     private modalController: ModalController,
     private loadingController: LoadingController,
@@ -73,6 +74,10 @@ export class EditProgressPage implements OnInit, OnDestroy {
               }),
             });
 
+            this.form.valueChanges.subscribe(() => {
+              this.progressChanged = true;
+            });
+
             this.isLoading = false;
           },
           (error) => {
@@ -89,6 +94,33 @@ export class EditProgressPage implements OnInit, OnDestroy {
     }
     if (this.paramSub) {
       this.paramSub.unsubscribe();
+    }
+  }
+
+  goBack() {
+    if (this.progressChanged) {
+      this.alertController.create({
+        header: 'Are you sure?',
+        message: 'Do you want to save the changes?',
+        buttons: [
+          {
+            text: 'Save',
+            handler: () => this.updateProgress(),
+          },
+          {
+            text: 'Discard',
+            handler: () => this.navController.navigateBack('/home/progress'),
+          },
+          {
+            text: 'Cancel',
+            role: 'cancel',
+          },
+        ],
+      }).then((alert) => {
+        alert.present();
+      });
+    } else {
+      this.navController.navigateBack('/home/progress');
     }
   }
 
@@ -110,6 +142,7 @@ export class EditProgressPage implements OnInit, OnDestroy {
           if (index < 0) {
             const selected = this.exercises.length === 0;
             this.exercises.push(new Exercise(exerciseName, selected));
+            this.progressChanged = true;
           }
         }
       });
@@ -122,6 +155,7 @@ export class EditProgressPage implements OnInit, OnDestroy {
       if (ex.selected && this.exercises.length > 0) {
         this.exercises[0].selected = true;
       }
+      this.progressChanged = true;
     }
   }
 
@@ -129,6 +163,7 @@ export class EditProgressPage implements OnInit, OnDestroy {
     const itemMove = this.exercises.splice(event.detail.from, 1)[0];
     this.exercises.splice(event.detail.to, 0, itemMove);
     event.detail.complete();
+    this.progressChanged = true;
   }
 
   onExerciseClick(exercise: Exercise) {
@@ -139,6 +174,7 @@ export class EditProgressPage implements OnInit, OnDestroy {
         ex.selected = false;
       }
     });
+    this.progressChanged = true;
   }
 
   changeRepType() {
@@ -147,9 +183,13 @@ export class EditProgressPage implements OnInit, OnDestroy {
     } else {
       this.repType = 'reps';
     }
+    this.progressChanged = true;
   }
 
   updateProgress() {
+    if (this.form.invalid) {
+      return;
+    }
     this.loadingController
       .create({
         message: 'Updating...',

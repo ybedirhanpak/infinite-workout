@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home/progress"></ion-back-button>
+      <ion-button (click)="goBack()">
+        <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title>Progress Detail</ion-title>
     <ion-buttons slot="end">
@@ -9,7 +11,11 @@
         [disabled]="!form || form?.invalid"
         (click)="updateProgress()"
       >
-        <ion-icon name="checkmark-outline" slot="icon-only"></ion-icon>
+        <ion-icon
+          name="checkmark-outline"
+          slot="icon-only"
+          [color]="progressChanged ? 'primary' : 'default'"
+        ></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
