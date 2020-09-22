@@ -41,6 +41,10 @@ export class ExplorePage implements OnInit, OnDestroy {
     }
   }
 
+  openProgressDetail(progress: Progress) {
+    this.router.navigate(['/', 'home', 'explore', 'progress', progress.id]);
+  }
+
   downloadProgress(progress: Progress) {
     if (!progress) {
       return;

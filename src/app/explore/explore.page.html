@@ -27,7 +27,7 @@
       <ion-list class="ion-no-padding">
         <ion-item
           *ngFor="let progress of progressList"
-          [routerLink]="['/','home','explore','progress',progress.id]"
+          (click)="openProgressDetail(progress)"
           class="progress-item ion-no-padding"
         >
           <div class="progress-item-content">
