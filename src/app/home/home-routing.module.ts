@@ -34,7 +34,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/home/progress',
+    redirectTo: '/home/workout',
     pathMatch: 'full',
   },
 ];
