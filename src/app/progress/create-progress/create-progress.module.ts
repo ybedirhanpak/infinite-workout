@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { CreateProgressPageRoutingModule } from './create-progress-routing.module';
 
 import { CreateProgressPage } from './create-progress.page';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { CreateProgressPage } from './create-progress.page';
     ReactiveFormsModule,
     IonicModule,
     CreateProgressPageRoutingModule,
+    SharedModule,
   ],
   declarations: [CreateProgressPage],
 })
