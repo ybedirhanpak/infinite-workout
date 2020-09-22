@@ -92,3 +92,53 @@ ion-picker {
     }
   }
 }
+
+/* Progress Detail */
+.progress-detail {
+  .progress-name {
+    margin-bottom: 0.3rem;
+  }
+
+  .repetition {
+    display: flex;
+    flex-direction: row;
+
+    .set {
+      flex: 1;
+      margin-right: 0.3rem;
+    }
+
+    .rep {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+
+      &-input {
+        flex: 1;
+      }
+
+      &-type {
+        height: 100%;
+        ion-button {
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  .exercise {
+    &-top {
+      display: flex;
+      flex-direction: row;
+      margin: 0.3rem 0;
+
+      &-add {
+        flex: 1;
+      }
+
+      &-reorder {
+        flex: 1;
+      }
+    }
+  }
+}
