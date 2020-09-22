@@ -219,7 +219,8 @@ export class WorkoutPage implements OnInit, OnDestroy {
           ? progress.currentExercise.name
           : progress.name,
         progressName: progress.name,
-        setRep: `${progress.sets}x${progress.reps} ${progress.repType}`,
+        setRep: `${progress.sets} x ${progress.reps}`,
+        repType: progress.repType,
       };
     });
     let sub = this.workoutService
