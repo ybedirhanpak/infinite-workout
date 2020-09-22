@@ -31,15 +31,15 @@ export class CreateProgressPage implements OnInit {
   ngOnInit() {
     this.form = new FormGroup({
       name: new FormControl(null, {
-        updateOn: 'blur',
+        updateOn: 'change',
         validators: [Validators.required, Validators.maxLength(20)],
       }),
       sets: new FormControl(null, {
-        updateOn: 'blur',
+        updateOn: 'change',
         validators: [Validators.required, Validators.min(1)],
       }),
       reps: new FormControl(null, {
-        updateOn: 'blur',
+        updateOn: 'change',
         validators: [Validators.required, Validators.min(1)],
       }),
     });

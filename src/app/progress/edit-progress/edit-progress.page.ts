@@ -60,15 +60,15 @@ export class EditProgressPage implements OnInit, OnDestroy {
 
             this.form = new FormGroup({
               name: new FormControl(name, {
-                updateOn: 'blur',
+                updateOn: 'change',
                 validators: [Validators.required, Validators.maxLength(20)],
               }),
               sets: new FormControl(sets, {
-                updateOn: 'blur',
+                updateOn: 'change',
                 validators: [Validators.required, Validators.min(1)],
               }),
               reps: new FormControl(reps, {
-                updateOn: 'blur',
+                updateOn: 'change',
                 validators: [Validators.required, Validators.min(1)],
               }),
             });
