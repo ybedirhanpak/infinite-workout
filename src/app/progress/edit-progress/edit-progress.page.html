@@ -81,7 +81,7 @@
               <ion-button
                 color="primary"
                 expand="block"
-                fill="clear"
+                [fill]="reorder ? 'solid' : 'clear'"
                 (click)="reorder = !reorder"
               >
                 <ion-icon name="list-outline" slot="icon-only"></ion-icon>
@@ -105,7 +105,10 @@
                     >{{exercise.name}}</ion-label
                   >
                   <ion-reorder slot="end">
-                    <ion-icon name="repeat"></ion-icon>
+                    <ion-icon
+                      name="reorder-two-outline"
+                      size="large"
+                    ></ion-icon>
                   </ion-reorder>
                 </ion-item>
                 <ion-item-options side="end">

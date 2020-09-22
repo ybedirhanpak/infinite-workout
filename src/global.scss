@@ -148,5 +148,20 @@ ion-picker {
         flex: 1;
       }
     }
+
+    &-list {
+      ion-item {
+        --ion-safe-area-right: 0;
+        ion-reorder {
+          width: 6rem;
+          height: 100%;
+          margin: 0;
+          text-align: center;
+          ion-icon {
+            height: 100%;
+          }
+        }
+      }
+    }
   }
 }
