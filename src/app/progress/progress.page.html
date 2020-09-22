@@ -31,9 +31,13 @@
       class="ion-text-center"
     >
       <p>There are no progresses to show.</p>
-      <ion-button [routerLink]="['/','home','progress','create']" fill="clear"
+      <ion-button [routerLink]="['/','home','progress','create']" fill="clear" expand="block"
         >Create your first progress</ion-button
       >
+      <p>OR</p>
+      <ion-button [routerLink]="['/','home','explore']" fill="clear" expand="block"
+      >Explore progresses</ion-button
+    >
     </div>
     <!-- Progress list -->
     <div *ngIf="isProgressListNotEmpty()">
