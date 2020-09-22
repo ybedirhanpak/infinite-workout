@@ -4,6 +4,7 @@ import { Platform, MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
+import { ThemeService } from './shared/services/theme.service';
 
 const THEME_DARK = 'THEME_DARK';
 
@@ -16,13 +17,14 @@ export class AppComponent implements OnInit {
   showExplore = true;
   darkMode = false;
   initialToggle = false;
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private router: Router,
     private menuController: MenuController,
-    private storage: Storage
+    private themeService: ThemeService
   ) {
     this.initializeApp();
   }
@@ -31,19 +33,15 @@ export class AppComponent implements OnInit {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.storage.get(THEME_DARK).then((isDark) => {
-        if (isDark) {
-          this.darkMode = true;
-          document.body.classList.add('dark');
-        } else {
-          this.darkMode = false;
-          document.body.classList.remove('dark');
-        }
-      });
+      this.themeService.fetchTheme();
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.themeService.darkMode.subscribe((value) => {
+      this.darkMode = value;
+    });
+  }
 
   menuNavigate(path: string) {
     this.router.navigateByUrl(path);
@@ -58,13 +56,6 @@ export class AppComponent implements OnInit {
       return;
     }
 
-    if (isDark) {
-      document.body.classList.add('dark');
-    } else {
-      document.body.classList.remove('dark');
-    }
-    this.storage.set(THEME_DARK, isDark);
+    this.themeService.setTheme(isDark);
   }
-
-  setDarkMode() {}
 }
