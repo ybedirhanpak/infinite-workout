@@ -16,128 +16,119 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid *ngIf="isLoading">
+  <ion-grid>
     <ion-row>
-      <ion-col class="ion-text-center">
-        <ion-spinner name="crescent"></ion-spinner>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-grid *ngIf="!isLoading && !progress">
-    <ion-row>
-      <ion-col class="ion-text-center">
-        <p>Progress not found.</p>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <form [formGroup]="form" *ngIf="!isLoading && progress">
-    <ion-grid class="ion-padding">
-      <ion-row>
-        <ion-col size-sm="6" offset-sm="3">
-          <ion-item>
-            <ion-label position="floating">Name</ion-label>
-            <ion-input type="text" formControlName="name"></ion-input>
-          </ion-item>
-          <ion-item
-            lines="none"
-            class="ion-no-margin"
-            *ngIf="!form.get('name').valid && form.get('name').touched"
-          >
-            <ion-label class="form-error"
-              >Name must be between 1 and 25 characters long.</ion-label
-            >
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="5" size-sm="2" offset-sm="3">
-          <ion-item>
-            <ion-label position="floating">Sets</ion-label>
-            <ion-input type="number" formControlName="sets"></ion-input>
-          </ion-item>
-        </ion-col>
-        <ion-col size="7" size-sm="4" class="reps-wrapper">
-          <div>
-            <ion-item class="ion-no-padding">
-              <ion-label position="floating"
-                >{{repType === 'reps' ? 'Reps' : 'Seconds'}}</ion-label
-              >
-              <ion-input type="number" formControlName="reps"></ion-input>
-            </ion-item>
-          </div>
-          <div>
-            <ion-button
-              class="ion-no-margin"
-              fill="clear"
-              slot="end"
-              (click)="changeRepType()"
-            >
-              <ion-icon
-                name="swap-vertical-outline"
-                slot="icon-only"
-              ></ion-icon>
-            </ion-button>
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row class="ion-no-padding">
-        <ion-col size="8" size-sm="4" offset-sm="3">
-          <ion-button
-            color="primary"
-            expand="block"
-            fill="clear"
-            (click)="addExercise()"
-            >ADD EXERCISE</ion-button
-          >
-        </ion-col>
-        <ion-col size="4" size-sm="2">
-          <ion-button
-            color="primary"
-            expand="block"
-            fill="clear"
-            (click)="reorder = !reorder"
-          >
-            <ion-icon name="list-outline" slot="icon-only"></ion-icon>
-          </ion-button>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size-sm="6" offset-sm="3">
-          <ion-reorder-group
-            [disabled]="!reorder"
-            (ionItemReorder)="reorderExercises($event)"
-          >
-            <ion-item-sliding *ngFor="let exercise of exercises">
+      <ion-col size-md="8" offset-md="2" class="ion-no-padding">
+        <div *ngIf="isLoading" class="ion-text-center">
+          <ion-spinner name="crescent"></ion-spinner>
+        </div>
+        <div *ngIf="!isLoading && !progress" class="ion-text-center">
+          <p>Progress not found.</p>
+        </div>
+        <div *ngIf="!isLoading && progress" class="progress-detail">
+          <form [formGroup]="form">
+            <div class="progress-name">
               <ion-item>
-                <ion-icon
-                  *ngIf="exercise.selected"
-                  name="star-outline"
-                  slot="start"
-                  size="small"
-                ></ion-icon>
-                <ion-label (click)="onExerciseClick(exercise)"
-                  >{{exercise.name}}</ion-label
-                >
-                <ion-reorder slot="end">
-                  <ion-icon name="repeat"></ion-icon>
-                </ion-reorder>
+                <ion-label position="floating">Name</ion-label>
+                <ion-input type="text" formControlName="name"></ion-input>
               </ion-item>
-              <ion-item-options side="end">
-                <ion-item-option
-                  color="danger"
-                  (click)="removeExercise(exercise)"
+              <p
+                class="form-error"
+                *ngIf="!form.get('name').valid && form.get('name').touched"
+              >
+                Name must be between 1 and 25 characters long.
+              </p>
+            </div>
+            <div class="repetition">
+              <ion-item class="set">
+                <ion-label position="floating">Sets</ion-label>
+                <ion-input type="number" formControlName="sets"></ion-input>
+              </ion-item>
+              <div class="rep">
+                <div class="rep-input">
+                  <ion-item>
+                    <ion-label position="floating"
+                      >{{repType === 'reps' ? 'Reps' : 'Seconds'}}</ion-label
+                    >
+                    <ion-input type="number" formControlName="reps"></ion-input>
+                  </ion-item>
+                </div>
+                <div class="rep-type">
+                  <ion-button
+                    class="ion-no-margin"
+                    fill="clear"
+                    slot="end"
+                    (click)="changeRepType()"
+                  >
+                    <ion-icon
+                      name="swap-vertical-outline"
+                      slot="icon-only"
+                    ></ion-icon>
+                  </ion-button>
+                </div>
+              </div>
+            </div>
+            <div class="exercise">
+              <div class="exercise-top">
+                <div class="exercise-top-add">
+                  <ion-button
+                  color="primary"
+                  expand="block"
+                  fill="clear"
+                  (click)="addExercise()"
+                  >ADD EXERCISE</ion-button
                 >
-                  <ion-icon
-                    name="trash"
-                    slot="icon-only"
-                    size="small"
-                  ></ion-icon>
-                </ion-item-option>
-              </ion-item-options>
-            </ion-item-sliding>
-          </ion-reorder-group>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </form>
+                </div>
+                <div class="exercise-top-reorder">
+                  <ion-button
+                  color="primary"
+                  expand="block"
+                  fill="clear"
+                  (click)="reorder = !reorder"
+                >
+                  <ion-icon name="list-outline" slot="icon-only"></ion-icon>
+                </ion-button>
+                </div>
+              </div>
+              <div class="exercise-list">
+                <ion-reorder-group
+                [disabled]="!reorder"
+                (ionItemReorder)="reorderExercises($event)"
+              >
+                <ion-item-sliding *ngFor="let exercise of exercises">
+                  <ion-item>
+                    <ion-icon
+                      *ngIf="exercise.selected"
+                      name="star-outline"
+                      slot="start"
+                      size="small"
+                    ></ion-icon>
+                    <ion-label (click)="onExerciseClick(exercise)"
+                      >{{exercise.name}}</ion-label
+                    >
+                    <ion-reorder slot="end">
+                      <ion-icon name="repeat"></ion-icon>
+                    </ion-reorder>
+                  </ion-item>
+                  <ion-item-options side="end">
+                    <ion-item-option
+                      color="danger"
+                      (click)="removeExercise(exercise)"
+                    >
+                      <ion-icon
+                        name="trash"
+                        slot="icon-only"
+                        size="small"
+                      ></ion-icon>
+                    </ion-item-option>
+                  </ion-item-options>
+                </ion-item-sliding>
+              </ion-reorder-group>
+              </div>
+            </div>
+          </form>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
