@@ -15,8 +15,8 @@ ionic serve
 ## Screenshots
 
 <div>
-<img alt='Get it on Google Play' src='https://raw.githubusercontent.com/ybedirhanpak/infinite-workout/master/.github/assets/screenshot_1.jpg' width="200"/>
-<img alt='Get it on Google Play' src='https://raw.githubusercontent.com/ybedirhanpak/infinite-workout/master/.github/assets/screenshot_2.jpg' width="200"/>
-<img alt='Get it on Google Play' src='https://raw.githubusercontent.com/ybedirhanpak/infinite-workout/master/.github/assets/screenshot_3.jpg' width="200"/>
-<img alt='Get it on Google Play' src='https://raw.githubusercontent.com/ybedirhanpak/infinite-workout/master/.github/assets/screenshot_4.jpg' width="200"/>
+<img alt='Get it on Google Play' src='https://raw.githubusercontent.com/ybedirhanpak/infinite-workout/master/.github/assets/screenshot_1.png' width="200"/>
+<img alt='Get it on Google Play' src='https://raw.githubusercontent.com/ybedirhanpak/infinite-workout/master/.github/assets/screenshot_2.png' width="200"/>
+<img alt='Get it on Google Play' src='https://raw.githubusercontent.com/ybedirhanpak/infinite-workout/master/.github/assets/screenshot_3.png' width="200"/>
+<img alt='Get it on Google Play' src='https://raw.githubusercontent.com/ybedirhanpak/infinite-workout/master/.github/assets/screenshot_4.png' width="200"/>
 </div>
