@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { EditProgressPageRoutingModule } from './edit-progress-routing.module';
 
 import { EditProgressPage } from './edit-progress.page';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { EditProgressPage } from './edit-progress.page';
     ReactiveFormsModule,
     IonicModule,
     EditProgressPageRoutingModule,
+    SharedModule,
   ],
   declarations: [EditProgressPage],
 })

@@ -16,36 +16,26 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid *ngIf="isLoading">
-    <ion-row>
-      <ion-col class="ion-text-center">
-        <ion-spinner name="crescent"></ion-spinner>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-grid *ngIf="!isLoading && !progress">
-    <ion-row>
-      <ion-col class="ion-text-center">
-        <p>Progress not found.</p>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-grid class="ion-padding" *ngIf="!isLoading && progress">
-    <ion-row>
-      <ion-col size-sm="6" offset-sm="3">
+  <app-page-layout>
+    <div *ngIf="isLoading" class="ion-text-center">
+      <ion-spinner name="crescent"></ion-spinner>
+    </div>
+    <div *ngIf="!isLoading && !progress" class="ion-text-center">
+      <p>Progress not found.</p>
+    </div>
+    <div *ngIf="!isLoading && progress" class="progress-detail">
+      <div class="progress-name">
         <ion-item>
           <ion-label>{{progress.name}}</ion-label>
         </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size-sm="3" offset-sm="3">
-        <ion-item>
-          <ion-label>Sets: {{ progress.sets }}</ion-label>
-        </ion-item>
-      </ion-col>
-      <ion-col size-sm="3" class="reps-wrapper">
-        <div>
+      </div>
+      <div class="repetition">
+        <div class="set">
+          <ion-item>
+            <ion-label>Sets: {{ progress.sets }}</ion-label>
+          </ion-item>
+        </div>
+        <div class="rep">
           <ion-item>
             <ion-label
               >{{ progress.repType | uppercase }} : {{ progress.reps
@@ -53,27 +43,19 @@
             >
           </ion-item>
         </div>
-      </ion-col>
-    </ion-row>
-    <ion-row class="ion-padding ion-text-center">
-      <ion-col size="12" size-sm="6" offset-sm="3">
-        <ion-label color="primary">EXERCISE LIST</ion-label>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size-sm="6" offset-sm="3">
-        <ion-list *ngIf="progress.exercises">
-          <ion-item *ngFor="let exercise of progress.exercises">
-            <ion-icon
-              *ngIf="exercise.selected"
-              name="star-outline"
-              slot="start"
-              size="small"
-            ></ion-icon>
-            <ion-label>{{exercise.name}}</ion-label>
-          </ion-item>
-        </ion-list>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+      </div>
+      <div class="exercise">
+        <div class="ion-text-center">
+          <p color="primary">EXERCISE LIST</p>
+        </div>
+        <div class="exercise-list">
+          <ion-list *ngIf="progress.exercises">
+            <ion-item *ngFor="let exercise of progress.exercises">
+              <ion-label>{{exercise.name}}</ion-label>
+            </ion-item>
+          </ion-list>
+        </div>
+      </div>
+    </div>
+  </app-page-layout>
 </ion-content>

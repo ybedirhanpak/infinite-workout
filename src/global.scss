@@ -39,9 +39,13 @@ ion-picker {
   touch-action: none;
 }
 
-ion-label.form-error {
+.form-error {
   font-size: 0.75rem !important;
   color: var(--ion-color-danger, red) !important;
+}
+
+.app-padding {
+  padding: 0.3em;
 }
 
 /* Progress */
@@ -63,15 +67,18 @@ ion-label.form-error {
     display: flex;
     flex-direction: row;
     width: 100%;
-    padding: 1rem;
-    padding-right: 0;
+    padding: 1rem 0;
 
     .rep-set {
-      margin-right: 1rem;
+      width: 20%;
+      text-align: center;
     }
 
     .exercise {
+      display: flex;
       flex: 1;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .reorder {
@@ -85,6 +92,60 @@ ion-label.form-error {
 
       &.hidden {
         opacity: 0;
+      }
+    }
+  }
+}
+
+/* Progress Detail */
+.progress-detail {
+  .progress-name {
+    margin-bottom: 0.3rem;
+  }
+
+  .repetition {
+    display: flex;
+    flex-direction: row;
+
+    .set {
+      flex: 1;
+      margin-right: 0.3rem;
+    }
+
+    .rep {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+
+      ion-item {
+        width: 100%;
+      }
+
+      &-input {
+        flex: 1;
+      }
+
+      &-type {
+        height: 100%;
+        ion-button {
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  .exercise {
+    &-top {
+      display: flex;
+      flex-direction: row;
+      margin: 0.3rem 0;
+
+      &-add {
+        flex: 1;
+      }
+
+      &-reorder {
+        flex: 1;
       }
     }
   }

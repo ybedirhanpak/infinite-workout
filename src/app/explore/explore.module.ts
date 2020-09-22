@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { ExplorePageRoutingModule } from './explore-routing.module';
 
 import { ExplorePage } from './explore.page';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ExplorePageRoutingModule
+    ExplorePageRoutingModule,
+    SharedModule,
   ],
-  declarations: [ExplorePage]
+  declarations: [ExplorePage],
 })
 export class ExplorePageModule {}

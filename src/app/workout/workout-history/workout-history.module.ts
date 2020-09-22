@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { WorkoutHistoryPageRoutingModule } from './workout-history-routing.module';
 
 import { WorkoutHistoryPage } from './workout-history.page';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    WorkoutHistoryPageRoutingModule
+    WorkoutHistoryPageRoutingModule,
+    SharedModule
   ],
   declarations: [WorkoutHistoryPage]
 })

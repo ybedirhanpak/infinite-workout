@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { ProgressDetailPageRoutingModule } from './progress-detail-routing.module';
 
 import { ProgressDetailPage } from './progress-detail.page';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ProgressDetailPageRoutingModule
+    ProgressDetailPageRoutingModule,
+    SharedModule,
   ],
-  declarations: [ProgressDetailPage]
+  declarations: [ProgressDetailPage],
 })
 export class ProgressDetailPageModule {}

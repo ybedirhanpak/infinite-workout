@@ -10,38 +10,26 @@
 </ion-header>
 
 <ion-content>
-  <form (ngSubmit)="onConfirm()" #addExerciseForm="ngForm">
-    <ion-grid>
-      <ion-row>
-        <ion-col size-sm="6" offset-sm="3">
-          <ion-item>
-            <ion-label position="floating">Exercise Name</ion-label>
-            <ion-input type="text" ngModel name="exercise-name" required>
-            </ion-input>
-          </ion-item>
-          <ion-item
-            lines="none"
-            class="ion-no-margin"
-            *ngIf="addExerciseForm.invalid && addExerciseForm.touched"
-          >
-            <ion-label class="form-error"
-              >Name must be between 1 and 25 characters long.</ion-label
-            >
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size-sm="6" offset-sm="3">
-          <ion-button
-            color="primary"
-            expand="block"
-            fill="clear"
-            type="submit"
-            [disabled]="addExerciseForm.invalid"
-            >Confirm</ion-button
-          >
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </form>
+  <div class="app-padding">
+    <form (ngSubmit)="onConfirm()" #addExerciseForm="ngForm">
+      <ion-item>
+        <ion-label position="floating">Exercise Name</ion-label>
+        <ion-input type="text" ngModel name="exercise-name" required> </ion-input>
+      </ion-item>
+      <p
+        class="form-error"
+        *ngIf="addExerciseForm.invalid && addExerciseForm.touched"
+      >
+        Name must be between 1 and 25 characters long.
+      </p>
+      <ion-button
+        color="primary"
+        expand="block"
+        fill="clear"
+        type="submit"
+        [disabled]="addExerciseForm.invalid"
+        >Confirm</ion-button
+      >
+    </form>
+  </div>
 </ion-content>
