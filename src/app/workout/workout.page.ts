@@ -84,7 +84,6 @@ export class WorkoutPage implements OnInit, OnDestroy {
 
   onRestTimeChange(event: any) {
     const restTimeValue = event.detail.value;
-    this.restTimeString = restTimeValue;
     this.workoutService.saveRestTime(this.stringToSeconds(restTimeValue));
   }
 

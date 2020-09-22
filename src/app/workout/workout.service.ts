@@ -22,7 +22,9 @@ export class WorkoutService {
     return this._restTime.asObservable();
   }
 
-  constructor(private storage: Storage) {}
+  constructor(private storage: Storage) {
+    this.saveRestTime(120);
+  }
 
   fetchWorkoutList() {
     return from(this.storage.get(WORKOUT_KEY)).pipe(
