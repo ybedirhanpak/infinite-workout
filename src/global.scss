@@ -117,6 +117,10 @@ ion-picker {
       display: flex;
       flex-direction: row;
 
+      ion-item {
+        width: 100%;
+      }
+
       &-input {
         flex: 1;
       }
