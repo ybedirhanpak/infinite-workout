@@ -88,16 +88,15 @@
               (ionItemReorder)="reorderExercises($event)"
             >
               <ion-item-sliding *ngFor="let exercise of exercises">
-                <ion-item>
-                  <ion-icon
+                <ion-item (click)="onExerciseClick(exercise)">
+                  <ion-note
                     *ngIf="exercise.selected"
-                    name="star-outline"
                     slot="start"
-                    size="small"
-                  ></ion-icon>
-                  <ion-label (click)="onExerciseClick(exercise)"
-                    >{{exercise.name}}</ion-label
+                    color="primary"
                   >
+                    SELECTED
+                  </ion-note>
+                  <ion-label>{{exercise.name}}</ion-label>
                   <ion-reorder slot="end">
                     <ion-icon
                       name="reorder-two-outline"

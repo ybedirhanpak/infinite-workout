@@ -152,6 +152,10 @@ ion-picker {
     &-list {
       ion-item {
         --ion-safe-area-right: 0;
+        ion-note {
+          margin: 0;
+        }
+
         ion-reorder {
           width: 6rem;
           height: 100%;
