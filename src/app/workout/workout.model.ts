@@ -2,6 +2,7 @@ export interface ExerciseRecord {
   name: string;
   progressName: string;
   setRep: string;
+  repType: string;
 }
 
 export class Workout {
