@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { IonSlides, AlertController } from '@ionic/angular';
 import { WorkoutService } from './workout.service';
 import { ExerciseRecord } from './workout.model';
+import { ThemeService } from '../shared/services/theme.service';
 
 const MIN_S = 60;
 const HOUR_S = 3600;
@@ -38,10 +39,14 @@ export class WorkoutPage implements OnInit, OnDestroy {
   totalTimeString = '00:00:00';
   totalTimeInterval: NodeJS.Timeout;
 
+  /** Theme */
+  isDarkMode = false;
+
   constructor(
     private progressService: ProgressService,
     private alertController: AlertController,
-    private workoutService: WorkoutService
+    private workoutService: WorkoutService,
+    private themeService: ThemeService
   ) {}
 
   ngOnInit() {
@@ -54,6 +59,10 @@ export class WorkoutPage implements OnInit, OnDestroy {
       this.restTime = value;
       this.restTimeString = this.secondsToString(this.restTime);
     });
+
+    this.themeService.darkMode.subscribe((isDark) => {
+      this.isDarkMode = isDark;
+    })
   }
 
   ionViewWillEnter() {
