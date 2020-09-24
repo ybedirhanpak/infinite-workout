@@ -75,19 +75,15 @@ export class WorkoutService {
     this.WORKOUT_LIST.next(updatedWorkoutList);
   }
 
-  getWorkout(id: number) {
-    return from(this.storage.get(WORKOUT_KEY)).pipe(
-      map((workoutList) => {
-        if (!workoutList || workoutList?.length <= 0) {
-          return [];
-        }
-        return workoutList;
-      }),
-      switchMap((workoutList: Workout[]) => {
-        const workout = workoutList.filter((w: Workout) => w.id === id)[0];
-        return of(workout);
-      })
-    );
+  /**
+   * Retrevies workout from workout list
+   * @param id identifier of workout to be retreived
+   */
+  async getWorkout(id: number) {
+    const workoutList = await this.storage.get(WORKOUT_KEY);
+    const adjustedList = this.adjustWorkoutList(workoutList);
+    const workout = adjustedList.filter((w: Workout) => w.id === id)[0];
+    return workout;
   }
 
   fetchRestTime() {

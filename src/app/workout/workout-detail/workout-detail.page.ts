@@ -13,7 +13,6 @@ import { WorkoutService } from '../services/workout.service';
 export class WorkoutDetailPage implements OnInit, OnDestroy {
   paramSub: Subscription;
   workout: Workout;
-  workoutSub: Subscription;
   isLoading = false;
   constructor(
     private alertController: AlertController,
@@ -29,29 +28,25 @@ export class WorkoutDetailPage implements OnInit, OnDestroy {
         return;
       }
       this.isLoading = true;
-      this.workoutSub = this.workoutService
-        .getWorkout(parseInt(paramMap.get('workoutId')))
-        .subscribe(
-          (workout) => {
-            this.workout = workout;
-            if (!this.workout) {
-              this.showErrorModal();
-              return;
-            }
-            this.isLoading = false;
-          },
-          (error) => {
+      this.workoutService
+        .getWorkout(parseInt(paramMap.get('workoutId'), 10))
+        .then((workout) => {
+          this.workout = workout;
+          if (!this.workout) {
             this.showErrorModal();
-            this.isLoading = false;
+            return;
           }
-        );
+        })
+        .catch(() => {
+          this.showErrorModal();
+        })
+        .finally(() => {
+          this.isLoading = false;
+        });
     });
   }
 
   ngOnDestroy() {
-    if (this.workoutSub) {
-      this.workoutSub.unsubscribe();
-    }
     if (this.paramSub) {
       this.paramSub.unsubscribe();
     }
