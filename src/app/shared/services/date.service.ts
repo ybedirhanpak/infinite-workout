@@ -24,14 +24,23 @@ export class DateService {
     return num.toString();
   }
 
+  /**
+   * Converts string to second.
+   * Expects strings to be in format 'HH:MM:SS'
+   *
+   * @param str string to be converted to second
+   */
   stringToSeconds(str: string) {
     const split = str.split(':');
+    if (split.length !== 3) {
+      throw new Error('String format must be "HH:MM:SS"');
+    }
 
-    const h = parseInt(split[0], 10) || 0;
-    const m = parseInt(split[1], 10) || 0;
-    const s = parseInt(split[2], 10) || 0;
+    const hour = parseInt(split[0], 10) || 0;
+    const minute = parseInt(split[1], 10) || 0;
+    const second = parseInt(split[2], 10) || 0;
 
-    return h * this.HOUR_S + m * this.MIN_S + s;
+    return hour * this.HOUR_S + minute * this.MIN_S + second;
   }
 
   secondsToString(sec: number) {
