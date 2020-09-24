@@ -25,14 +25,13 @@ export class WorkoutHistoryPage implements OnInit, OnDestroy {
     this.workoutSub = this.workoutService.workoutList.subscribe(
       (workoutList) => {
         this.workoutList = workoutList;
-        console.log('Workout list', workoutList);
       }
     );
   }
 
   ionViewWillEnter() {
     this.isLoading = true;
-    this.workoutService.fetchWorkoutList().subscribe((data) => {
+    this.workoutService.fetchWorkoutList().then(() => {
       this.isLoading = false;
     });
   }

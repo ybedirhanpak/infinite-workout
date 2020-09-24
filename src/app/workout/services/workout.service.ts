@@ -26,18 +26,24 @@ export class WorkoutService {
     this.saveRestTime(120);
   }
 
-  fetchWorkoutList() {
-    return from(this.storage.get(WORKOUT_KEY)).pipe(
-      map((workoutList) => {
-        if (!workoutList || workoutList?.length <= 0) {
-          return [];
-        }
-        return workoutList;
-      }),
-      tap((workoutList) => {
-        this.WORKOUT_LIST.next(workoutList);
-      })
-    );
+  /**
+   * Returns empty list if given workout list is null or empty
+   * @param workoutList is the lis to be adjusted
+   */
+  private adjustWorkoutList(workoutList: Workout[]) {
+    if (!workoutList || workoutList?.length <= 0) {
+      return [];
+    }
+    return workoutList;
+  }
+
+  /**
+   * Fetchs workout list from storage and updates behavior subject
+   */
+  async fetchWorkoutList() {
+    const workoutList = await this.storage.get(WORKOUT_KEY);
+    const adjustedList = this.adjustWorkoutList(workoutList);
+    this.WORKOUT_LIST.next(adjustedList);
   }
 
   addWorkout(exercises: ExerciseRecord[], date: Date, totalTime: string) {
