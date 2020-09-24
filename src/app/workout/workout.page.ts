@@ -91,7 +91,10 @@ export class WorkoutPage implements OnInit, OnDestroy {
     const restTimeValue = event.detail.value;
     this.workoutService.saveRestTime(
       this.dateService.stringToSeconds(restTimeValue)
-    );
+    )
+    .catch(() => {
+      // TODO: Display error message
+    });
   }
 
   onCircleClick() {

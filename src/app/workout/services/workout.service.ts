@@ -94,9 +94,12 @@ export class WorkoutService {
     this.REST_TIME.next(restTime);
   }
 
-  saveRestTime(restTime: number) {
-    this.storage.set(REST_TIME_KEY, restTime).then(() => {
-      this.REST_TIME.next(restTime);
-    });
+  /**
+   * Saves resttime into storage and behavior subject
+   * @param restTime new value of restTime to be saved
+   */
+  async saveRestTime(restTime: number) {
+    await this.storage.set(REST_TIME_KEY, restTime);
+    this.REST_TIME.next(restTime);
   }
 }
