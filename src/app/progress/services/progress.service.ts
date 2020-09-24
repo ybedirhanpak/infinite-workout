@@ -11,10 +11,10 @@ const PROGRESS_KEY = 'PROGRESS';
   providedIn: 'root',
 })
 export class ProgressService {
-  private _progresses = new BehaviorSubject<Progress[]>([]);
+  private PROGRESS_LIST = new BehaviorSubject<Progress[]>([]);
 
   get progresses() {
-    return this._progresses.asObservable();
+    return this.PROGRESS_LIST.asObservable();
   }
 
   constructor(private storage: Storage) {}
@@ -28,7 +28,7 @@ export class ProgressService {
         return progresses;
       }),
       tap((progresses) => {
-        this._progresses.next(progresses);
+        this.PROGRESS_LIST.next(progresses);
       })
     );
   }
@@ -61,7 +61,7 @@ export class ProgressService {
       tap((progresses: Progress[]) => {
         const updatedProgressList = progresses.concat(newProgress);
         this.storage.set(PROGRESS_KEY, updatedProgressList).then(() => {
-          this._progresses.next(updatedProgressList);
+          this.PROGRESS_LIST.next(updatedProgressList);
         });
       })
     );
@@ -80,7 +80,7 @@ export class ProgressService {
           (p: Progress) => p.id !== id
         );
         this.storage.set(PROGRESS_KEY, updatedProgressList).then(() => {
-          this._progresses.next(updatedProgressList);
+          this.PROGRESS_LIST.next(updatedProgressList);
         });
       })
     );
@@ -134,7 +134,7 @@ export class ProgressService {
         );
         progresses[index] = updatedProgress;
         this.storage.set(PROGRESS_KEY, progresses).then(() => {
-          this._progresses.next(progresses);
+          this.PROGRESS_LIST.next(progresses);
         });
         return progresses;
       })
@@ -145,7 +145,7 @@ export class ProgressService {
     return from(this.storage.set(PROGRESS_KEY, reorderedList)).pipe(
       map((progresses) => {
         console.log('Progresses', progresses);
-        this._progresses.next(reorderedList);
+        this.PROGRESS_LIST.next(reorderedList);
       })
     );
   }
