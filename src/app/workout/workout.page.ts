@@ -4,7 +4,7 @@ import { ProgressService } from '../progress/progress.service';
 import { Subscription } from 'rxjs';
 import { IonSlides, AlertController } from '@ionic/angular';
 import { WorkoutService } from './workout.service';
-import { ExerciseRecord } from './workout.model';
+import { ExerciseRecord } from './models/workout.model';
 import { ThemeService } from '../shared/services/theme.service';
 
 const MIN_S = 60;

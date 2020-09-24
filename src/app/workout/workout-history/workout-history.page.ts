@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Workout } from '../workout.model';
+import { Workout } from '../models/workout.model';
 import { Subscription } from 'rxjs';
 import { WorkoutService } from '../workout.service';
 import { LoadingController } from '@ionic/angular';

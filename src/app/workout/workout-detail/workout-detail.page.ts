@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { Workout } from '../../workout/workout.model';
+import { Workout } from '../models/workout.model';
 import { ActivatedRoute } from '@angular/router';
 import { WorkoutService } from '../workout.service';
 
