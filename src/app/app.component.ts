@@ -14,9 +14,8 @@ const THEME_DARK = 'THEME_DARK';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  showExplore = true;
+  // State of dark mode of application
   darkMode = false;
-  initialToggle = false;
 
   constructor(
     private platform: Platform,
@@ -38,24 +37,27 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Change darkMode state according to themeService
     this.themeService.darkMode.subscribe((value) => {
       this.darkMode = value;
     });
   }
 
+  /**
+   * Navigates to a path and closes menu controller
+   *
+   * @param path is path of the redirected page
+   */
   menuNavigate(path: string) {
     this.router.navigateByUrl(path);
     this.menuController.close();
   }
 
+  /**
+   * Changes app theme between light and dark with toggle button event
+   */
   toggleDarkMode(event: any) {
-    const isDark = event.detail.checked;
-
-    if (isDark === this.darkMode && this.initialToggle) {
-      this.initialToggle = true;
-      return;
-    }
-
-    this.themeService.setTheme(isDark);
+    const isDarkChecked = event.detail.checked;
+    this.themeService.setTheme(isDarkChecked);
   }
 }
