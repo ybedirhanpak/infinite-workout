@@ -4,7 +4,7 @@ import { BehaviorSubject, from, of } from 'rxjs';
 import { Progress, ProgressData } from '../progress/models/progress.model';
 import { Exercise } from '../progress/exercise.model';
 import { switchMap, take, tap, map } from 'rxjs/operators';
-import { ProgressService } from '../progress/progress.service';
+import { ProgressService } from '../progress/services/progress.service';
 
 const BASE_URL = 'https://infinite-workout.firebaseio.com';
 

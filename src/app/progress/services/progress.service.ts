@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { BehaviorSubject, of, from } from 'rxjs';
-import { Progress } from './models/progress.model';
+import { Progress } from '../models/progress.model';
 import { take, tap, delay, switchMap, map } from 'rxjs/operators';
-import { Exercise } from './exercise.model';
+import { Exercise } from '../exercise.model';
 
 const PROGRESS_KEY = 'PROGRESS';
 

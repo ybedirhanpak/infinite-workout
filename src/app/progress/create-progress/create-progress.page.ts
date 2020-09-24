@@ -6,7 +6,7 @@ import {
   NavController,
 } from '@ionic/angular';
 import { AddExerciseComponent } from '../add-exercise/add-exercise.component';
-import { ProgressService } from '../progress.service';
+import { ProgressService } from '../services/progress.service';
 import { Exercise } from '../exercise.model';
 import { ExploreService } from '../../explore/explore.service';
 
