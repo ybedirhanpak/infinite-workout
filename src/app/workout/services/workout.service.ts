@@ -11,15 +11,15 @@ const REST_TIME_KEY = 'REST_TIME_KEY';
   providedIn: 'root',
 })
 export class WorkoutService {
-  private _workoutList = new BehaviorSubject<Workout[]>([]);
-  private _restTime = new BehaviorSubject<number>(0);
+  private WORKOUT_LIST = new BehaviorSubject<Workout[]>([]);
+  private REST_TIME = new BehaviorSubject<number>(0);
 
   get workoutList() {
-    return this._workoutList.asObservable();
+    return this.WORKOUT_LIST.asObservable();
   }
 
   get restTime() {
-    return this._restTime.asObservable();
+    return this.REST_TIME.asObservable();
   }
 
   constructor(private storage: Storage) {
@@ -35,7 +35,7 @@ export class WorkoutService {
         return workoutList;
       }),
       tap((workoutList) => {
-        this._workoutList.next(workoutList);
+        this.WORKOUT_LIST.next(workoutList);
       })
     );
   }
@@ -53,7 +53,7 @@ export class WorkoutService {
       tap((workoutList: Workout[]) => {
         const updatedWorkoutList = workoutList.concat(newWorkout);
         this.storage.set(WORKOUT_KEY, updatedWorkoutList).then(() => {
-          this._workoutList.next(updatedWorkoutList);
+          this.WORKOUT_LIST.next(updatedWorkoutList);
         });
       })
     );
@@ -72,7 +72,7 @@ export class WorkoutService {
           (w: Workout) => w.id !== id
         );
         this.storage.set(WORKOUT_KEY, updatedWorkoutList).then(() => {
-          this._workoutList.next(updatedWorkoutList);
+          this.WORKOUT_LIST.next(updatedWorkoutList);
         });
       })
     );
@@ -95,13 +95,13 @@ export class WorkoutService {
 
   fetchRestTime() {
     this.storage.get(REST_TIME_KEY).then(value => {
-      this._restTime.next(value);
+      this.REST_TIME.next(value);
     });
   }
 
   saveRestTime(restTime: number) {
     this.storage.set(REST_TIME_KEY, restTime).then(() => {
-      this._restTime.next(restTime);
+      this.REST_TIME.next(restTime);
     });
   }
 }
