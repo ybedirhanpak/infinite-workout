@@ -7,7 +7,7 @@ import {
 } from '@ionic/angular';
 import { ProgressService } from '../services/progress.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AddExerciseComponent } from '../add-exercise/add-exercise.component';
+import { AddExerciseComponent } from '../components/add-exercise/add-exercise.component';
 import { ActivatedRoute } from '@angular/router';
 import { Progress } from '../models/progress.model';
 import { Subscription } from 'rxjs';
