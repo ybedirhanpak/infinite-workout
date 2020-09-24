@@ -46,23 +46,19 @@ export class WorkoutService {
     this.WORKOUT_LIST.next(adjustedList);
   }
 
-  addWorkout(exercises: ExerciseRecord[], date: Date, totalTime: string) {
+  /**
+   * Creates and saves workout record
+   * @param exercises list of exercises executed in the workout
+   * @param date date of execution of workout
+   * @param totalTime amount of time passed through workout
+   */
+  async saveWorkout(exercises: ExerciseRecord[], date: Date, totalTime: string) {
     const newWorkout = new Workout(Date.now(), exercises, date, totalTime);
-
-    return from(this.storage.get(WORKOUT_KEY)).pipe(
-      map((workoutList) => {
-        if (!workoutList || workoutList?.length <= 0) {
-          return [];
-        }
-        return workoutList;
-      }),
-      tap((workoutList: Workout[]) => {
-        const updatedWorkoutList = workoutList.concat(newWorkout);
-        this.storage.set(WORKOUT_KEY, updatedWorkoutList).then(() => {
-          this.WORKOUT_LIST.next(updatedWorkoutList);
-        });
-      })
-    );
+    const workoutList = await this.storage.get(WORKOUT_KEY);
+    const adjustedList = this.adjustWorkoutList(workoutList);
+    const updatedList = adjustedList.concat(newWorkout);
+    await this.storage.set(WORKOUT_KEY, updatedList);
+    this.WORKOUT_LIST.next(updatedList);
   }
 
   deleteWorkout(id: number) {

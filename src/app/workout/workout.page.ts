@@ -190,6 +190,9 @@ export class WorkoutPage implements OnInit, OnDestroy {
     this.resetWorkout();
   }
 
+  /**
+   * Stops workout and saves the workout record
+   */
   saveWorkout() {
     const exercises: ExerciseRecord[] = this.progressList.map((progress) => {
       return {
@@ -201,11 +204,14 @@ export class WorkoutPage implements OnInit, OnDestroy {
         repType: progress.repType,
       };
     });
-    let sub = this.workoutService
-      .addWorkout(exercises, new Date(), this.totalTimeString)
-      .subscribe(() => {
-        sub.unsubscribe();
-      });
-    this.resetWorkout();
+
+    this.workoutService.saveWorkout(exercises, new Date(), this.totalTimeString)
+    .then(() => {
+      this.resetWorkout();
+      // TODO: Navigate to workout record page
+    })
+    .catch(() => {
+      // TODO: Display error message
+    });
   }
 }
