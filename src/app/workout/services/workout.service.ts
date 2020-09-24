@@ -61,23 +61,18 @@ export class WorkoutService {
     this.WORKOUT_LIST.next(updatedList);
   }
 
-  deleteWorkout(id: number) {
-    return from(this.storage.get(WORKOUT_KEY)).pipe(
-      map((workoutList) => {
-        if (!workoutList || workoutList?.length <= 0) {
-          return [];
-        }
-        return workoutList;
-      }),
-      tap((workoutList: Workout[]) => {
-        const updatedWorkoutList = workoutList.filter(
-          (w: Workout) => w.id !== id
-        );
-        this.storage.set(WORKOUT_KEY, updatedWorkoutList).then(() => {
-          this.WORKOUT_LIST.next(updatedWorkoutList);
-        });
-      })
+  /**
+   * Deletes workout from storage and behavior subject
+   * @param id identifier of the workout to be deleted
+   */
+  async deleteWorkout(id: number) {
+    const workoutList = await this.storage.get(WORKOUT_KEY);
+    const adjustedList = this.adjustWorkoutList(workoutList);
+    const updatedWorkoutList = adjustedList.filter(
+      (w: Workout) => w.id !== id
     );
+    await this.storage.set(WORKOUT_KEY, updatedWorkoutList);
+    this.WORKOUT_LIST.next(updatedWorkoutList);
   }
 
   getWorkout(id: number) {

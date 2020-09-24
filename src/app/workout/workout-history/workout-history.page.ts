@@ -42,6 +42,10 @@ export class WorkoutHistoryPage implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Deletes given workout from workout history
+   * @param workout workout to be deleted
+   */
   deleteWorkout(workout: Workout) {
     this.loadingController
       .create({
@@ -49,8 +53,12 @@ export class WorkoutHistoryPage implements OnInit, OnDestroy {
       })
       .then((loadingEl) => {
         loadingEl.present();
-        this.workoutService.deleteWorkout(workout.id).subscribe(() => {
+        this.workoutService.deleteWorkout(workout.id)
+        .then(() => {
           loadingEl.dismiss();
+        })
+        .catch(() => {
+          // TODO: Display error message
         });
       });
   }
