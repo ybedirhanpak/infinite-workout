@@ -14,7 +14,7 @@ const THEME_DARK = 'THEME_DARK';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  // State of dark mode of application
+  // Value of if dark mode is used
   darkMode = false;
 
   constructor(
