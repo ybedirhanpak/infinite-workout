@@ -11,7 +11,7 @@ import { AddExerciseComponent } from '../components/add-exercise/add-exercise.co
 import { ActivatedRoute } from '@angular/router';
 import { Progress } from '../models/progress.model';
 import { Subscription } from 'rxjs';
-import { Exercise } from '../exercise.model';
+import { Exercise } from '../models/exercise.model';
 
 @Component({
   selector: 'app-edit-progress',

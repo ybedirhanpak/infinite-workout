@@ -1,4 +1,4 @@
-import { Exercise } from '../exercise.model';
+import { Exercise } from './exercise.model';
 
 export interface ProgressData {
   id: number;
