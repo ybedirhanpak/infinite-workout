@@ -17,9 +17,10 @@ const RED_COLOR = 'var(--ion-color-danger, black)';
   styleUrls: ['./workout.page.scss'],
 })
 export class WorkoutPage implements OnInit, OnDestroy {
+  /** Subscriptions */
+  private subscriptions = new Subscription();
   /** Top Slides */
   @ViewChild('progressSlider') progressSlider: IonSlides;
-  private progressListSub: Subscription;
   progressList: Progress[];
   isLoading = false;
 
@@ -36,9 +37,6 @@ export class WorkoutPage implements OnInit, OnDestroy {
   totalTimeString = '00:00:00';
   totalTimeInterval: NodeJS.Timeout;
 
-  /** Rest Time */
-  private restTimeSub: Subscription;
-
   /** Theme */
   isDarkMode = false;
 
@@ -51,14 +49,14 @@ export class WorkoutPage implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.progressListSub = this.progressService.progresses.subscribe((progressList) => {
+    this.subscriptions.add(this.progressService.progresses.subscribe((progressList) => {
       this.progressList = progressList;
-    });
+    }));
 
-    this.restTimeSub = this.workoutService.restTime.subscribe((value) => {
+    this.subscriptions.add(this.workoutService.restTime.subscribe((value) => {
       this.restTime = value;
       this.restTimeString = this.dateService.secondsToString(this.restTime);
-    });
+    }));
 
     this.themeService.darkMode.subscribe((isDark) => {
       this.isDarkMode = isDark;
@@ -75,12 +73,7 @@ export class WorkoutPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.progressListSub) {
-      this.progressListSub.unsubscribe();
-    }
-    if (this.restTimeSub) {
-      this.restTimeSub.unsubscribe();
-    }
+    this.subscriptions.unsubscribe();
   }
 
   slideAction(action: 'forward' | 'back') {
