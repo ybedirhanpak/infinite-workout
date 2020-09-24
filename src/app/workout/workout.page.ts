@@ -6,10 +6,7 @@ import { IonSlides, AlertController } from '@ionic/angular';
 import { WorkoutService } from './services/workout.service';
 import { ExerciseRecord } from './models/workout.model';
 import { ThemeService } from '../shared/services/theme.service';
-
-const MIN_S = 60;
-const HOUR_S = 3600;
-const MAX_S = HOUR_S * 100 - 1;
+import { DateService } from '../shared/services/date.service';
 
 const BLACK_COLOR = 'var(--ion-color-dark, black)';
 const RED_COLOR = 'var(--ion-color-danger, black)';
@@ -22,11 +19,11 @@ const RED_COLOR = 'var(--ion-color-danger, black)';
 export class WorkoutPage implements OnInit, OnDestroy {
   /** Top Slides */
   @ViewChild('progressSlider') progressSlider: IonSlides;
-  private listSub: Subscription;
+  private progressListSub: Subscription;
   progressList: Progress[];
   isLoading = false;
 
-  /** Circle Progress */
+  /** Workout */
   workoutStarted = false;
   restTime = 120; // total rest in seconds
   restTimeString = '00:02:00';
@@ -39,6 +36,9 @@ export class WorkoutPage implements OnInit, OnDestroy {
   totalTimeString = '00:00:00';
   totalTimeInterval: NodeJS.Timeout;
 
+  /** Rest Time */
+  private restTimeSub: Subscription;
+
   /** Theme */
   isDarkMode = false;
 
@@ -46,23 +46,24 @@ export class WorkoutPage implements OnInit, OnDestroy {
     private progressService: ProgressService,
     private alertController: AlertController,
     private workoutService: WorkoutService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private dateService: DateService
   ) {}
 
   ngOnInit() {
-    this.listSub = this.progressService.progresses.subscribe((progressList) => {
+    this.progressListSub = this.progressService.progresses.subscribe((progressList) => {
       this.progressList = progressList;
     });
     this.resetWorkout();
 
-    this.workoutService.restTime.subscribe((value) => {
+    this.restTimeSub = this.workoutService.restTime.subscribe((value) => {
       this.restTime = value;
-      this.restTimeString = this.secondsToString(this.restTime);
+      this.restTimeString = this.dateService.secondsToString(this.restTime);
     });
 
     this.themeService.darkMode.subscribe((isDark) => {
       this.isDarkMode = isDark;
-    })
+    });
   }
 
   ionViewWillEnter() {
@@ -75,8 +76,11 @@ export class WorkoutPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.listSub) {
-      this.listSub.unsubscribe();
+    if (this.progressListSub) {
+      this.progressListSub.unsubscribe();
+    }
+    if (this.restTimeSub) {
+      this.restTimeSub.unsubscribe();
     }
   }
 
@@ -93,37 +97,9 @@ export class WorkoutPage implements OnInit, OnDestroy {
 
   onRestTimeChange(event: any) {
     const restTimeValue = event.detail.value;
-    this.workoutService.saveRestTime(this.stringToSeconds(restTimeValue));
-  }
-
-  secondsToString(sec: number) {
-    let seconds = Math.min(sec, MAX_S);
-    const hours = Math.floor(seconds / HOUR_S);
-    seconds = seconds % HOUR_S;
-    const mins = Math.floor(seconds / MIN_S);
-    seconds = seconds % MIN_S;
-
-    return `${this.padZero(hours)}:${this.padZero(mins)}:${this.padZero(
-      seconds
-    )}`;
-  }
-
-  stringToSeconds(str: string) {
-    const parsed = str.split(':');
-    const h = parseInt(parsed[0]) || 0;
-    const m = parseInt(parsed[1]) || 0;
-    const s = parseInt(parsed[2]) || 0;
-
-    return h * HOUR_S + m * MIN_S + s;
-  }
-
-  padZero(num: number) {
-    let zeros = '00';
-    if (!num) {
-      return zeros;
-    }
-    const numS = num.toString();
-    return zeros.substr(0, zeros.length - numS.length) + numS;
+    this.workoutService.saveRestTime(
+      this.dateService.stringToSeconds(restTimeValue)
+    );
   }
 
   onCircleClick() {
@@ -182,7 +158,7 @@ export class WorkoutPage implements OnInit, OnDestroy {
   }
 
   updateRestTime() {
-    this.restString = this.secondsToString(this.currentRestTime);
+    this.restString = this.dateService.secondsToString(this.currentRestTime);
     this.restPercent = Math.min(
       (this.currentRestTime / this.restTime) * 100,
       100
@@ -196,7 +172,9 @@ export class WorkoutPage implements OnInit, OnDestroy {
   }
 
   updateTotalTime() {
-    this.totalTimeString = this.secondsToString(this.currentTotalTime);
+    this.totalTimeString = this.dateService.secondsToString(
+      this.currentTotalTime
+    );
     this.currentTotalTime++;
   }
 
