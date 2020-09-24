@@ -86,10 +86,12 @@ export class WorkoutService {
     return workout;
   }
 
-  fetchRestTime() {
-    this.storage.get(REST_TIME_KEY).then(value => {
-      this.REST_TIME.next(value);
-    });
+  /**
+   * Retrevies rest time from storage and updates behavior subject
+   */
+  async fetchRestTime() {
+    const restTime = await this.storage.get(REST_TIME_KEY);
+    this.REST_TIME.next(restTime);
   }
 
   saveRestTime(restTime: number) {
