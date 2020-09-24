@@ -8,9 +8,6 @@ import { ExerciseRecord } from './models/workout.model';
 import { ThemeService } from '../shared/services/theme.service';
 import { DateService } from '../shared/services/date.service';
 
-const BLACK_COLOR = 'var(--ion-color-dark, black)';
-const RED_COLOR = 'var(--ion-color-danger, black)';
-
 @Component({
   selector: 'app-workout',
   templateUrl: './workout.page.html',
@@ -31,7 +28,7 @@ export class WorkoutPage implements OnInit, OnDestroy {
   currentRestTime = 0;
   restPercent = 0;
   restString = '00:00:00';
-  restStringColor = 'black';
+  restStringColor = this.themeService.BLACK;
   restInterval: NodeJS.Timeout;
   currentTotalTime = 0;
   totalTimeString = '00:00:00';
@@ -159,9 +156,9 @@ export class WorkoutPage implements OnInit, OnDestroy {
       100
     );
     if (this.restPercent === 100) {
-      this.restStringColor = RED_COLOR;
+      this.restStringColor = this.themeService.RED;
     } else {
-      this.restStringColor = BLACK_COLOR;
+      this.restStringColor = this.themeService.BLACK;
     }
     this.currentRestTime++;
   }
@@ -178,7 +175,7 @@ export class WorkoutPage implements OnInit, OnDestroy {
     this.currentRestTime = 0;
     this.restPercent = 0;
     this.restString = '00:00:00';
-    this.restStringColor = BLACK_COLOR;
+    this.restStringColor = this.themeService.BLACK;
     if (this.restInterval) {
       clearInterval(this.restInterval);
     }

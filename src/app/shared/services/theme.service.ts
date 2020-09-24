@@ -12,6 +12,9 @@ export class ThemeService {
 
   private DARK_MODE = new BehaviorSubject<boolean>(false);
 
+  BLACK = 'var(--ion-color-dark, black)';
+  RED = 'var(--ion-color-danger, red)';
+
   get darkMode() {
     return this.DARK_MODE.asObservable();
   }
