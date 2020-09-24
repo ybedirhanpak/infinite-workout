@@ -19,7 +19,11 @@ export class ThemeService {
     return this.DARK_MODE.asObservable();
   }
 
-  private updateBodyTheme(isDark: true) {
+  /**
+   * Updates theme class of body element
+   * @param isDark value of if dark mode is used
+   */
+  private updateBodyTheme(isDark: boolean) {
     if (isDark) {
       document.body.classList.add('dark');
     } else {
@@ -36,10 +40,13 @@ export class ThemeService {
     this.DARK_MODE.next(isDark);
   }
 
-  setTheme(darkMode: boolean) {
-    this.storage.set(THEME_DARK, darkMode).then((isDark) => {
-      this.updateBodyTheme(isDark);
-      this.DARK_MODE.next(isDark);
-    });
+  /**
+   * Saves theme value to storages and updates behavior subject
+   * @param darkMode value of if dark mode is used
+   */
+  async setTheme(darkMode: boolean) {
+    await this.storage.set(THEME_DARK, darkMode);
+    this.updateBodyTheme(darkMode);
+    this.DARK_MODE.next(darkMode);
   }
 }
