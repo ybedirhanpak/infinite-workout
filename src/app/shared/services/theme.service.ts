@@ -10,10 +10,10 @@ const THEME_DARK = 'THEME_DARK';
 export class ThemeService {
   constructor(private storage: Storage) {}
 
-  private _darkMode = new BehaviorSubject<boolean>(false);
+  private DARK_MODE = new BehaviorSubject<boolean>(false);
 
   get darkMode() {
-    return this._darkMode.asObservable();
+    return this.DARK_MODE.asObservable();
   }
 
   private updateBodyTheme(isDark: true) {
@@ -27,14 +27,14 @@ export class ThemeService {
   fetchTheme() {
     this.storage.get(THEME_DARK).then((isDark) => {
       this.updateBodyTheme(isDark);
-      this._darkMode.next(isDark);
+      this.DARK_MODE.next(isDark);
     });
   }
 
   setTheme(darkMode: boolean) {
     this.storage.set(THEME_DARK, darkMode).then((isDark) => {
       this.updateBodyTheme(isDark);
-      this._darkMode.next(isDark);
+      this.DARK_MODE.next(isDark);
     });
   }
 }
