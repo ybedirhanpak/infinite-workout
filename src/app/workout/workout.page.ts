@@ -54,7 +54,6 @@ export class WorkoutPage implements OnInit, OnDestroy {
     this.progressListSub = this.progressService.progresses.subscribe((progressList) => {
       this.progressList = progressList;
     });
-    this.resetWorkout();
 
     this.restTimeSub = this.workoutService.restTime.subscribe((value) => {
       this.restTime = value;
