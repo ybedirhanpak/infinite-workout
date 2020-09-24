@@ -27,11 +27,13 @@ export class ThemeService {
     }
   }
 
-  fetchTheme() {
-    this.storage.get(THEME_DARK).then((isDark) => {
-      this.updateBodyTheme(isDark);
-      this.DARK_MODE.next(isDark);
-    });
+  /**
+   * Retrevies theme value from storage and updates behavior subject
+   */
+  async fetchTheme() {
+    const isDark = await this.storage.get(THEME_DARK);
+    this.updateBodyTheme(isDark);
+    this.DARK_MODE.next(isDark);
   }
 
   setTheme(darkMode: boolean) {
