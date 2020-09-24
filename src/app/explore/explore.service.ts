@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, from, of } from 'rxjs';
-import { Progress, ProgressData } from '../progress/progress.model';
+import { Progress, ProgressData } from '../progress/models/progress.model';
 import { Exercise } from '../progress/exercise.model';
 import { switchMap, take, tap, map } from 'rxjs/operators';
 import { ProgressService } from '../progress/progress.service';

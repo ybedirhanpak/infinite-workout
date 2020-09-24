@@ -9,7 +9,7 @@ import { ProgressService } from '../progress.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AddExerciseComponent } from '../add-exercise/add-exercise.component';
 import { ActivatedRoute } from '@angular/router';
-import { Progress } from '../progress.model';
+import { Progress } from '../models/progress.model';
 import { Subscription } from 'rxjs';
 import { Exercise } from '../exercise.model';
 

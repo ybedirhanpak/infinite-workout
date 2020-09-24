@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Progress } from '../progress/progress.model';
+import { Progress } from '../progress/models/progress.model';
 import { ExploreService } from './explore.service';
 import { Subscription } from 'rxjs';
 import { LoadingController } from '@ionic/angular';

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { Progress } from '../progress/progress.model';
+import { Progress } from '../progress/models/progress.model';
 import { ProgressService } from '../progress/progress.service';
 import { Subscription } from 'rxjs';
 import { IonSlides, AlertController } from '@ionic/angular';
