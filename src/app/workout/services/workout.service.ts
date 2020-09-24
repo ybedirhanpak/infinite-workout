@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { BehaviorSubject, of, from } from 'rxjs';
-import { Workout, ExerciseRecord } from './models/workout.model';
+import { Workout, ExerciseRecord } from '../models/workout.model';
 import { take, tap, delay, switchMap, map } from 'rxjs/operators';
 
 const WORKOUT_KEY = 'WORKOUT';

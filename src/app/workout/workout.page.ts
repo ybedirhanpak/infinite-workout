@@ -3,7 +3,7 @@ import { Progress } from '../progress/progress.model';
 import { ProgressService } from '../progress/progress.service';
 import { Subscription } from 'rxjs';
 import { IonSlides, AlertController } from '@ionic/angular';
-import { WorkoutService } from './workout.service';
+import { WorkoutService } from './services/workout.service';
 import { ExerciseRecord } from './models/workout.model';
 import { ThemeService } from '../shared/services/theme.service';
 

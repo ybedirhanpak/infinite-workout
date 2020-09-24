@@ -3,7 +3,7 @@ import { AlertController, NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { Workout } from '../models/workout.model';
 import { ActivatedRoute } from '@angular/router';
-import { WorkoutService } from '../workout.service';
+import { WorkoutService } from '../services/workout.service';
 
 @Component({
   selector: 'app-workout-detail',
