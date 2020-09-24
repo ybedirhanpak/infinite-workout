@@ -43,6 +43,11 @@ export class DateService {
     return hour * this.HOUR_S + minute * this.MIN_S + second;
   }
 
+  /**
+   * Convert second to time string in format 'HH:MM:SS'
+   *
+   * @param sec second to be converted
+   */
   secondsToString(sec: number) {
     let seconds = Math.min(sec, this.MAX_S);
     const hours = Math.floor(seconds / this.HOUR_S);
@@ -50,8 +55,8 @@ export class DateService {
     const mins = Math.floor(seconds / this.MIN_S);
     seconds = seconds % this.MIN_S;
 
-    return `${this.padZero(hours)}:${this.padZero(mins)}:${this.padZero(
-      seconds
-    )}`;
+    return (
+      `${this.padZero(hours)}:${this.padZero(mins)}:${this.padZero(seconds)}`
+    );
   }
 }
