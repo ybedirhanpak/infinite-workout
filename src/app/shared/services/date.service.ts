@@ -10,13 +10,18 @@ export class DateService {
 
   constructor() {}
 
+  /**
+   * Adds 0 prefix to numbers less than 10
+   *
+   * @param num number to be padded
+   */
   padZero(num: number) {
-    const zeros = '00';
-    if (!num) {
-      return zeros;
+    if (!num || num < 0) {
+      return '00';
+    } else if (num < 10) {
+      return `0${num}`;
     }
-    const numString = num.toString();
-    return zeros.substr(0, zeros.length - numString.length) + numString;
+    return num.toString();
   }
 
   stringToSeconds(str: string) {
