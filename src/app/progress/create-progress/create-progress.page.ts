@@ -8,7 +8,6 @@ import {
 import { AddExerciseComponent } from '../components/add-exercise/add-exercise.component';
 import { ProgressService } from '../services/progress.service';
 import { Exercise } from '../models/exercise.model';
-import { ExploreService } from '../../explore/explore.service';
 
 @Component({
   selector: 'app-create-progress',
@@ -17,15 +16,15 @@ import { ExploreService } from '../../explore/explore.service';
 })
 export class CreateProgressPage implements OnInit {
   form: FormGroup;
-  repType: string = 'reps';
+  repType = 'reps';
   exercises: Exercise[] = [];
   reorder = false;
+
   constructor(
     private modalController: ModalController,
     private loadingController: LoadingController,
     private progressService: ProgressService,
-    private navController: NavController,
-    private exploreService: ExploreService
+    private navController: NavController
   ) {}
 
   ngOnInit() {
@@ -45,14 +44,17 @@ export class CreateProgressPage implements OnInit {
     });
   }
 
+  /**
+   * Opens add exercise modal and adds resulting exercise to progress
+   */
   addExercise() {
     this.modalController
       .create({
         component: AddExerciseComponent,
       })
-      .then((modalEl) => {
-        modalEl.present();
-        return modalEl.onDidDismiss();
+      .then((modal) => {
+        modal.present();
+        return modal.onDidDismiss();
       })
       .then((resultData) => {
         if (resultData.role === 'confirm') {
@@ -68,8 +70,12 @@ export class CreateProgressPage implements OnInit {
       });
   }
 
+  /**
+   * Removes an exercise from progress
+   * @param exercise exercise to be removed
+   */
   removeExercise(exercise: Exercise) {
-    const ex = this.exercises.find((e) => e.name == exercise.name);
+    const ex = this.exercises.find((e) => e.name === exercise.name);
     if (ex) {
       this.exercises = this.exercises.filter((e) => e.name !== ex.name);
       if (ex.selected && this.exercises.length > 0) {
@@ -78,12 +84,20 @@ export class CreateProgressPage implements OnInit {
     }
   }
 
+  /**
+   * Changes order of exercise list
+   * @param event change in exercise list's order
+   */
   reorderExercises(event: any) {
     const itemMove = this.exercises.splice(event.detail.from, 1)[0];
     this.exercises.splice(event.detail.to, 0, itemMove);
     event.detail.complete();
   }
 
+  /**
+   * Makes an exercise "selected exercise"
+   * @param exercise clicked exercise
+   */
   onExerciseClick(exercise: Exercise) {
     this.exercises.forEach((ex) => {
       if (ex.name === exercise.name) {
@@ -94,29 +108,39 @@ export class CreateProgressPage implements OnInit {
     });
   }
 
+  /**
+   * Changes rep type of progress
+   */
   changeRepType() {
-    if (this.repType == 'reps') {
+    if (this.repType === 'reps') {
       this.repType = 'sec';
     } else {
       this.repType = 'reps';
     }
   }
 
+  /**
+   * Creates progress
+   */
   createProgress() {
     this.loadingController
       .create({
         message: 'Creating...',
       })
-      .then((loadingEl) => {
-        loadingEl.present();
-
+      .then((loading) => {
+        loading.present();
         const { name, sets, reps } = this.form.value;
         this.progressService
-          .addProgress(name, sets, reps, this.repType, this.exercises)
-          .subscribe((data) => {
-            loadingEl.dismiss();
+          .saveProgress(name, sets, reps, this.repType, this.exercises)
+          .then(() => {
             this.form.reset();
             this.navController.navigateBack('/home/progress');
+          })
+          .catch(() => {
+            // TODO: Display error message
+          })
+          .finally(() => {
+            loading.dismiss();
           });
       });
   }

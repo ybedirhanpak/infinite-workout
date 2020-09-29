@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { BehaviorSubject, of, from } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Workout, ExerciseRecord } from '../models/workout.model';
-import { take, tap, delay, switchMap, map } from 'rxjs/operators';
 
+// Keys
 const WORKOUT_KEY = 'WORKOUT';
 const REST_TIME_KEY = 'REST_TIME_KEY';
+
+// Defaults
+const REST_TIME_DEFAULT = 90;
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +26,6 @@ export class WorkoutService {
   }
 
   constructor(private storage: Storage) {
-    this.saveRestTime(120);
   }
 
   /**
@@ -41,9 +43,10 @@ export class WorkoutService {
    * Fetchs workout list from storage and updates behavior subject
    */
   async fetchWorkoutList() {
-    const workoutList = await this.storage.get(WORKOUT_KEY);
-    const adjustedList = this.adjustWorkoutList(workoutList);
-    this.WORKOUT_LIST.next(adjustedList);
+    const workoutList = this.adjustWorkoutList(
+      await this.storage.get(WORKOUT_KEY)
+    );
+    this.WORKOUT_LIST.next(workoutList);
   }
 
   /**
@@ -52,11 +55,16 @@ export class WorkoutService {
    * @param date date of execution of workout
    * @param totalTime amount of time passed through workout
    */
-  async saveWorkout(exercises: ExerciseRecord[], date: Date, totalTime: string) {
+  async saveWorkout(
+    exercises: ExerciseRecord[],
+    date: Date,
+    totalTime: string
+  ) {
     const newWorkout = new Workout(Date.now(), exercises, date, totalTime);
-    const workoutList = await this.storage.get(WORKOUT_KEY);
-    const adjustedList = this.adjustWorkoutList(workoutList);
-    const updatedList = adjustedList.concat(newWorkout);
+    const workoutList = this.adjustWorkoutList(
+      await this.storage.get(WORKOUT_KEY)
+    );
+    const updatedList = workoutList.concat(newWorkout);
     await this.storage.set(WORKOUT_KEY, updatedList);
     this.WORKOUT_LIST.next(updatedList);
   }
@@ -66,13 +74,12 @@ export class WorkoutService {
    * @param id identifier of the workout to be deleted
    */
   async deleteWorkout(id: number) {
-    const workoutList = await this.storage.get(WORKOUT_KEY);
-    const adjustedList = this.adjustWorkoutList(workoutList);
-    const updatedWorkoutList = adjustedList.filter(
-      (w: Workout) => w.id !== id
+    const workoutList = this.adjustWorkoutList(
+      await this.storage.get(WORKOUT_KEY)
     );
-    await this.storage.set(WORKOUT_KEY, updatedWorkoutList);
-    this.WORKOUT_LIST.next(updatedWorkoutList);
+    const updatedList = workoutList.filter((w: Workout) => w.id !== id);
+    await this.storage.set(WORKOUT_KEY, updatedList);
+    this.WORKOUT_LIST.next(updatedList);
   }
 
   /**
@@ -80,9 +87,10 @@ export class WorkoutService {
    * @param id identifier of workout to be retreived
    */
   async getWorkout(id: number) {
-    const workoutList = await this.storage.get(WORKOUT_KEY);
-    const adjustedList = this.adjustWorkoutList(workoutList);
-    const workout = adjustedList.filter((w: Workout) => w.id === id)[0];
+    const workoutList = this.adjustWorkoutList(
+      await this.storage.get(WORKOUT_KEY)
+    );
+    const workout = workoutList.filter((w: Workout) => w.id === id)[0];
     return workout;
   }
 
@@ -90,8 +98,16 @@ export class WorkoutService {
    * Retrevies rest time from storage and updates behavior subject
    */
   async fetchRestTime() {
-    const restTime = await this.storage.get(REST_TIME_KEY);
-    this.REST_TIME.next(restTime);
+    let restTime = await this.storage.get(REST_TIME_KEY);
+    // If rest time is undefined or null, make it default value
+    if (restTime !== 0 && !restTime) {
+      await this.storage.set(REST_TIME_KEY, REST_TIME_DEFAULT);
+      restTime = REST_TIME_DEFAULT;
+    }
+    // If rest time is changed, update it
+    if (restTime !== this.REST_TIME.value) {
+      this.REST_TIME.next(restTime);
+    }
   }
 
   /**

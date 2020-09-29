@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { BehaviorSubject, of, from } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Progress } from '../models/progress.model';
-import { take, tap, delay, switchMap, map } from 'rxjs/operators';
 import { Exercise } from '../models/exercise.model';
 
 const PROGRESS_KEY = 'PROGRESS';
@@ -13,27 +12,42 @@ const PROGRESS_KEY = 'PROGRESS';
 export class ProgressService {
   private PROGRESS_LIST = new BehaviorSubject<Progress[]>([]);
 
-  get progresses() {
+  get progressList() {
     return this.PROGRESS_LIST.asObservable();
   }
 
   constructor(private storage: Storage) {}
 
-  fetchProgresses() {
-    return from(this.storage.get(PROGRESS_KEY)).pipe(
-      map((progresses) => {
-        if (!progresses || progresses?.length <= 0) {
-          return [];
-        }
-        return progresses;
-      }),
-      tap((progresses) => {
-        this.PROGRESS_LIST.next(progresses);
-      })
-    );
+  /**
+   * Returns empty list if given progress list is null or empty
+   * @param progressList is the lis to be adjusted
+   */
+  adjustProgressList(progressList: Progress[]) {
+    if (!progressList || progressList?.length <= 0) {
+      return [];
+    }
+    return progressList;
   }
 
-  addProgress(
+  /**
+   * Fetchs progress list from storage and updates behavior subject
+   */
+  async fetchProgressList() {
+    const progressList = this.adjustProgressList(
+      await this.storage.get(PROGRESS_KEY)
+    );
+    this.PROGRESS_LIST.next(progressList);
+  }
+
+  /**
+   * Creates and saves progress
+   * @param name name of the progress
+   * @param sets number of sets
+   * @param reps number of reps
+   * @param repType type of rep, either 'reps' or 'sec'
+   * @param exercises list of exercises
+   */
+  async saveProgress(
     name: string,
     sets: number,
     reps: number,
@@ -50,58 +64,52 @@ export class ProgressService {
       exercises.find((e) => e.selected),
       true
     );
-
-    return from(this.storage.get(PROGRESS_KEY)).pipe(
-      map((progresses) => {
-        if (!progresses || progresses?.length <= 0) {
-          return [];
-        }
-        return progresses;
-      }),
-      tap((progresses: Progress[]) => {
-        const updatedProgressList = progresses.concat(newProgress);
-        this.storage.set(PROGRESS_KEY, updatedProgressList).then(() => {
-          this.PROGRESS_LIST.next(updatedProgressList);
-        });
-      })
+    const progressList = this.adjustProgressList(
+      await this.storage.get(PROGRESS_KEY)
     );
+    const updatedList = progressList.concat(newProgress);
+    await this.storage.set(PROGRESS_KEY, updatedList);
+    this.PROGRESS_LIST.next(updatedList);
   }
 
-  deleteProgress(id: number) {
-    return from(this.storage.get(PROGRESS_KEY)).pipe(
-      map((progresses) => {
-        if (!progresses || progresses?.length <= 0) {
-          return [];
-        }
-        return progresses;
-      }),
-      tap((progresses: Progress[]) => {
-        const updatedProgressList = progresses.filter(
-          (p: Progress) => p.id !== id
-        );
-        this.storage.set(PROGRESS_KEY, updatedProgressList).then(() => {
-          this.PROGRESS_LIST.next(updatedProgressList);
-        });
-      })
+  /**
+   * Deletes progress from storage and behavior subject
+   * @param id identifier of the progress to be deleted
+   */
+  async deleteProgress(id: number) {
+    const progressList = this.adjustProgressList(
+      await this.storage.get(PROGRESS_KEY)
     );
+    const updatedList = progressList.filter((p: Progress) => p.id !== id);
+    await this.storage.set(PROGRESS_KEY, updatedList);
+    this.PROGRESS_LIST.next(updatedList);
   }
 
-  getProgress(id: number) {
-    return from(this.storage.get(PROGRESS_KEY)).pipe(
-      map((progresses) => {
-        if (!progresses || progresses?.length <= 0) {
-          return [];
-        }
-        return progresses;
-      }),
-      switchMap((progresses: Progress[]) => {
-        const progress = progresses.filter((p: Progress) => p.id === id)[0];
-        return of(progress);
-      })
+  /**
+   * Retrevies progress from progress list
+   * @param id identifier of progress to be retreived
+   */
+  async getProgress(id: number) {
+    const progressList = this.adjustProgressList(
+      await this.storage.get(PROGRESS_KEY)
     );
+    const progress = progressList.filter((p: Progress) => p.id === id)[0];
+    if (!progress) {
+      throw Error('Invalid progress ID');
+    }
+    return progress;
   }
 
-  updateProgress(
+  /**
+   * Updates values of a progress
+   * @param id identifier of progress to be updated
+   * @param name name of the progress
+   * @param sets number of sets
+   * @param reps number of reps
+   * @param repType type of rep, either 'reps' or 'sec'
+   * @param exercises list of exercises
+   */
+  async updateProgress(
     id: number,
     name: string,
     sets: number,
@@ -109,44 +117,39 @@ export class ProgressService {
     repType: string,
     exercises: Exercise[]
   ) {
-    return from(this.storage.get(PROGRESS_KEY)).pipe(
-      map((progresses) => {
-        if (!progresses || progresses?.length <= 0) {
-          return [];
-        }
-        return progresses;
-      }),
-      map((progresses: Progress[]) => {
-        const index = progresses.findIndex((p: Progress) => p.id === id);
-        if (index < 0) {
-          return;
-        }
-        const oldProgress = progresses[index];
-        const updatedProgress = new Progress(
-          oldProgress.id,
-          name,
-          sets,
-          reps,
-          repType,
-          exercises,
-          exercises.find((e) => e.selected),
-          oldProgress.enabled
-        );
-        progresses[index] = updatedProgress;
-        this.storage.set(PROGRESS_KEY, progresses).then(() => {
-          this.PROGRESS_LIST.next(progresses);
-        });
-        return progresses;
-      })
+    const progressList = this.adjustProgressList(
+      await this.storage.get(PROGRESS_KEY)
     );
+
+    const index = progressList.findIndex((p: Progress) => p.id === id);
+
+    if (index < 0) {
+      throw Error('Invalid progress ID');
+    }
+
+    const oldProgress = progressList[index];
+    const updatedProgress = new Progress(
+      oldProgress.id,
+      name,
+      sets,
+      reps,
+      repType,
+      exercises,
+      exercises.find((e) => e.selected),
+      oldProgress.enabled
+    );
+    progressList[index] = updatedProgress;
+
+    await this.storage.set(PROGRESS_KEY, progressList);
+    this.PROGRESS_LIST.next(progressList);
   }
 
-  reorderProgresses(reorderedList: Progress[]) {
-    return from(this.storage.set(PROGRESS_KEY, reorderedList)).pipe(
-      map((progresses) => {
-        console.log('Progresses', progresses);
-        this.PROGRESS_LIST.next(reorderedList);
-      })
-    );
+  /**
+   * Updates progress list with reordered version
+   * @param reorderedList new version of list which is reordered
+   */
+  async reorderProgresses(reorderedList: Progress[]) {
+    await this.storage.set(PROGRESS_KEY, reorderedList);
+    this.PROGRESS_LIST.next(reorderedList);
   }
 }
