@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ProgressService } from './progress.service';
-import { Progress } from './progress.model';
+import { ProgressService } from './services/progress.service';
+import { Progress } from './models/progress.model';
 import { Subscription } from 'rxjs';
 import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -11,10 +11,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./progress.page.scss'],
 })
 export class ProgressPage implements OnInit, OnDestroy {
+  /** Subscription */
+  private subscriptions = new Subscription();
+
+  /** Progress list */
   progressList: Progress[] = [];
-  listSub: Subscription;
   isLoading = false;
   reorder = false;
+
   constructor(
     private progressService: ProgressService,
     private loadingController: LoadingController,
@@ -22,59 +26,86 @@ export class ProgressPage implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.listSub = this.progressService.progresses.subscribe((progressList) => {
-      this.progressList = progressList;
-    });
+    this.subscriptions.add(
+      this.progressService.progressList.subscribe((progressList) => {
+        this.progressList = progressList;
+      })
+    );
   }
 
   ionViewWillEnter() {
     this.isLoading = true;
-    this.progressService.fetchProgresses().subscribe((data) => {
-      this.isLoading = false;
-    });
+    // Fetch progress list when user enters this page.
+    this.progressService
+      .fetchProgressList()
+      .then(() => {
+        this.isLoading = false;
+      })
+      .catch(() => {
+        // TODO: Display error message
+      });
   }
 
   ngOnDestroy() {
-    if (this.listSub) {
-      this.listSub.unsubscribe();
-    }
+    this.subscriptions.unsubscribe();
   }
 
+  /**
+   * @returns if the progress list empty or not.
+   */
   isProgressListNotEmpty() {
     return !this.isLoading && this.progressList && this.progressList.length > 0;
   }
 
+  /**
+   * Deletes given progress
+   * @param progress progress to be deleted
+   */
   deleteProgress(progress: Progress) {
     this.loadingController
       .create({
         message: 'Deleting...',
       })
-      .then((loadingEl) => {
-        loadingEl.present();
-        this.progressService.deleteProgress(progress.id).subscribe(() => {
-          loadingEl.dismiss();
-        });
+      .then((loading) => {
+        loading.present();
+        this.progressService
+          .deleteProgress(progress.id)
+          .catch(() => {
+            // TODO: Display error message
+          })
+          .finally(() => {
+            loading.dismiss();
+          });
       });
   }
 
+  /**
+   * Navigates to progress edit page
+   * @param progress progress to be edited
+   */
   editProgress(progress: Progress) {
     this.router.navigate(['/', 'home', 'progress', 'edit', progress.id]);
   }
 
+  /**
+   * Opens and closes reorder option for progress list
+   */
   toggleReorder() {
     if (!this.progressList || this.progressList.length <= 0) {
       return;
     }
     if (this.reorder) {
-      let sub = this.progressService
-        .reorderProgresses(this.progressList)
-        .subscribe(() => {
-          sub.unsubscribe();
-        });
+      this.progressService.reorderProgresses(this.progressList).catch(() => {
+        // TODO: Display error message
+      });
     }
     this.reorder = !this.reorder;
   }
 
+  /**
+   * Executed when list is reordered
+   * @param event change in ordering of progress list
+   */
   reorderProgressList(event: any) {
     const itemMove = this.progressList.splice(event.detail.from, 1)[0];
     this.progressList.splice(event.detail.to, 0, itemMove);

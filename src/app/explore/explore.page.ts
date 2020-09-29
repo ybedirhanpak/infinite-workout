@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Progress } from '../progress/progress.model';
-import { ExploreService } from './explore.service';
+import { Progress } from '../progress/models/progress.model';
+import { ExploreService } from './services/explore.service';
 import { Subscription } from 'rxjs';
 import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -11,9 +11,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./explore.page.scss'],
 })
 export class ExplorePage implements OnInit, OnDestroy {
+  /** Subscription */
+  private subscriptions = new Subscription();
+
+  /** Progress list */
   progressList: Progress[];
-  progressSub: Subscription;
   isLoading = false;
+
   constructor(
     private exploreService: ExploreService,
     private loadingController: LoadingController,
@@ -21,30 +25,42 @@ export class ExplorePage implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.progressSub = this.exploreService.progressList.subscribe(
-      (progressList) => {
+    this.subscriptions.add(
+      this.exploreService.progressList.subscribe((progressList) => {
         this.progressList = progressList;
-      }
+      })
     );
   }
 
   ionViewWillEnter() {
     this.isLoading = true;
-    this.exploreService.fetchBookings().subscribe((fetchData) => {
-      this.isLoading = false;
-    });
+    // Fetch progress list when user enters this page
+    this.exploreService
+      .fetchProgressList()
+      .then(() => {
+        this.isLoading = false;
+      })
+      .catch(() => {
+        // TODO: Display error message
+      });
   }
 
   ngOnDestroy() {
-    if (this.progressSub) {
-      this.progressSub.unsubscribe();
-    }
+    this.subscriptions.unsubscribe();
   }
 
+  /**
+   * Navigates to progress detail page
+   * @param progress progress which its detail page will be opened
+   */
   openProgressDetail(progress: Progress) {
     this.router.navigate(['/', 'home', 'explore', 'progress', progress.id]);
   }
 
+  /**
+   * Downloads progress to local
+   * @param progress progress to be downloaded
+   */
   downloadProgress(progress: Progress) {
     if (!progress) {
       return;
@@ -53,11 +69,15 @@ export class ExplorePage implements OnInit, OnDestroy {
       .create({
         message: 'Downloading...',
       })
-      .then((loadingEl) => {
-        loadingEl.present();
-        this.exploreService.downloadProgress(progress.id).subscribe((data) => {
-          loadingEl.dismiss();
+      .then((loading) => {
+        loading.present();
+        this.exploreService.downloadProgress(progress.id)
+        .then(() => {
           this.router.navigate(['/', 'home', 'progress']);
+        }).catch(() => {
+          // TODO: Displat error message
+        }).finally(() => {
+          loading.dismiss();
         });
       });
   }

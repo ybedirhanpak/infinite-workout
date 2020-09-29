@@ -64,10 +64,8 @@
             <ion-datetime
               display-format="HH:mm:ss"
               picker-format="HH:mm:ss"
-              value="00:02:00"
-              [ngModel]="restTimeString"
+              [value]="restTimeString"
               name="rest-time"
-              #restTime="ngModel"
               (ionChange)="onRestTimeChange($event)"
             ></ion-datetime>
           </ion-item>

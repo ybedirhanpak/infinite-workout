@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Workout } from '../workout.model';
+import { Workout } from '../models/workout.model';
 import { Subscription } from 'rxjs';
-import { WorkoutService } from '../workout.service';
+import { WorkoutService } from '../services/workout.service';
 import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
@@ -25,14 +25,13 @@ export class WorkoutHistoryPage implements OnInit, OnDestroy {
     this.workoutSub = this.workoutService.workoutList.subscribe(
       (workoutList) => {
         this.workoutList = workoutList;
-        console.log('Workout list', workoutList);
       }
     );
   }
 
   ionViewWillEnter() {
     this.isLoading = true;
-    this.workoutService.fetchWorkoutList().subscribe((data) => {
+    this.workoutService.fetchWorkoutList().then(() => {
       this.isLoading = false;
     });
   }
@@ -43,6 +42,10 @@ export class WorkoutHistoryPage implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Deletes given workout from workout history
+   * @param workout workout to be deleted
+   */
   deleteWorkout(workout: Workout) {
     this.loadingController
       .create({
@@ -50,8 +53,12 @@ export class WorkoutHistoryPage implements OnInit, OnDestroy {
       })
       .then((loadingEl) => {
         loadingEl.present();
-        this.workoutService.deleteWorkout(workout.id).subscribe(() => {
+        this.workoutService.deleteWorkout(workout.id)
+        .then(() => {
           loadingEl.dismiss();
+        })
+        .catch(() => {
+          // TODO: Display error message
         });
       });
   }

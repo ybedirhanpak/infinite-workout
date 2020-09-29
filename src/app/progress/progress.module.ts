@@ -8,7 +8,7 @@ import { ProgressPageRoutingModule } from './progress-routing.module';
 
 import { ProgressPage } from './progress.page';
 
-import { AddExerciseComponent } from './add-exercise/add-exercise.component';
+import { AddExerciseComponent } from './components/add-exercise/add-exercise.component';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({

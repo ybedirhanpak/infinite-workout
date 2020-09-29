@@ -10,13 +10,20 @@ const THEME_DARK = 'THEME_DARK';
 export class ThemeService {
   constructor(private storage: Storage) {}
 
-  private _darkMode = new BehaviorSubject<boolean>(false);
+  private DARK_MODE = new BehaviorSubject<boolean>(false);
+
+  BLACK = 'var(--ion-color-dark, black)';
+  RED = 'var(--ion-color-danger, red)';
 
   get darkMode() {
-    return this._darkMode.asObservable();
+    return this.DARK_MODE.asObservable();
   }
 
-  private updateBodyTheme(isDark: true) {
+  /**
+   * Updates theme class of body element
+   * @param isDark value of if dark mode is used
+   */
+  private updateBodyTheme(isDark: boolean) {
     if (isDark) {
       document.body.classList.add('dark');
     } else {
@@ -24,17 +31,22 @@ export class ThemeService {
     }
   }
 
-  fetchTheme() {
-    this.storage.get(THEME_DARK).then((isDark) => {
-      this.updateBodyTheme(isDark);
-      this._darkMode.next(isDark);
-    });
+  /**
+   * Retrevies theme value from storage and updates behavior subject
+   */
+  async fetchTheme() {
+    const isDark = await this.storage.get(THEME_DARK);
+    this.updateBodyTheme(isDark);
+    this.DARK_MODE.next(isDark);
   }
 
-  setTheme(darkMode: boolean) {
-    this.storage.set(THEME_DARK, darkMode).then((isDark) => {
-      this.updateBodyTheme(isDark);
-      this._darkMode.next(isDark);
-    });
+  /**
+   * Saves theme value to storages and updates behavior subject
+   * @param darkMode value of if dark mode is used
+   */
+  async setTheme(darkMode: boolean) {
+    await this.storage.set(THEME_DARK, darkMode);
+    this.updateBodyTheme(darkMode);
+    this.DARK_MODE.next(darkMode);
   }
 }

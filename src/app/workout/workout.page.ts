@@ -1,18 +1,12 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { Progress } from '../progress/progress.model';
-import { ProgressService } from '../progress/progress.service';
+import { Progress } from '../progress/models/progress.model';
+import { ProgressService } from '../progress/services/progress.service';
 import { Subscription } from 'rxjs';
 import { IonSlides, AlertController } from '@ionic/angular';
-import { WorkoutService } from './workout.service';
-import { ExerciseRecord } from './workout.model';
+import { WorkoutService } from './services/workout.service';
+import { ExerciseRecord } from './models/workout.model';
 import { ThemeService } from '../shared/services/theme.service';
-
-const MIN_S = 60;
-const HOUR_S = 3600;
-const MAX_S = HOUR_S * 100 - 1;
-
-const BLACK_COLOR = 'var(--ion-color-dark, black)';
-const RED_COLOR = 'var(--ion-color-danger, black)';
+import { DateService } from '../shared/services/date.service';
 
 @Component({
   selector: 'app-workout',
@@ -20,20 +14,22 @@ const RED_COLOR = 'var(--ion-color-danger, black)';
   styleUrls: ['./workout.page.scss'],
 })
 export class WorkoutPage implements OnInit, OnDestroy {
+  /** Subscriptions */
+  private subscriptions = new Subscription();
+
   /** Top Slides */
   @ViewChild('progressSlider') progressSlider: IonSlides;
-  private listSub: Subscription;
   progressList: Progress[];
   isLoading = false;
 
-  /** Circle Progress */
+  /** Workout */
   workoutStarted = false;
-  restTime = 120; // total rest in seconds
-  restTimeString = '00:02:00';
+  restTime = 60; // total rest in seconds
+  restTimeString = '00:01:00';
   currentRestTime = 0;
   restPercent = 0;
   restString = '00:00:00';
-  restStringColor = 'black';
+  restStringColor = this.themeService.BLACK;
   restInterval: NodeJS.Timeout;
   currentTotalTime = 0;
   totalTimeString = '00:00:00';
@@ -46,40 +42,48 @@ export class WorkoutPage implements OnInit, OnDestroy {
     private progressService: ProgressService,
     private alertController: AlertController,
     private workoutService: WorkoutService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private dateService: DateService
   ) {}
 
   ngOnInit() {
-    this.listSub = this.progressService.progresses.subscribe((progressList) => {
-      this.progressList = progressList;
-    });
-    this.resetWorkout();
+    this.subscriptions.add(
+      this.progressService.progressList.subscribe((progressList) => {
+        this.progressList = progressList;
+      })
+    );
 
-    this.workoutService.restTime.subscribe((value) => {
-      this.restTime = value;
-      this.restTimeString = this.secondsToString(this.restTime);
-    });
+    this.subscriptions.add(
+      this.workoutService.restTime.subscribe((value) => {
+        this.restTime = value;
+        this.restTimeString = this.dateService.secondsToString(this.restTime);
+      })
+    );
 
-    this.themeService.darkMode.subscribe((isDark) => {
+    this.subscriptions.add(this.themeService.darkMode.subscribe((isDark) => {
       this.isDarkMode = isDark;
-    })
+    }));
   }
 
   ionViewWillEnter() {
     this.isLoading = true;
-    this.progressService.fetchProgresses().subscribe((data) => {
+    // Fetch progress list when user enters this page
+    this.progressService.fetchProgressList().then(() => {
       this.isLoading = false;
     });
 
+    // Fetch rest time value when user enters this page
     this.workoutService.fetchRestTime();
   }
 
   ngOnDestroy() {
-    if (this.listSub) {
-      this.listSub.unsubscribe();
-    }
+    this.subscriptions.unsubscribe();
   }
 
+  /**
+   * Executes slide behavior of progress slider
+   * @param action direction of slide
+   */
   slideAction(action: 'forward' | 'back') {
     if (!this.progressSlider) {
       return;
@@ -91,56 +95,41 @@ export class WorkoutPage implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Saves rest time value with workout service
+   * @param event change of rest time
+   */
   onRestTimeChange(event: any) {
     const restTimeValue = event.detail.value;
-    this.workoutService.saveRestTime(this.stringToSeconds(restTimeValue));
+    this.workoutService
+      .saveRestTime(this.dateService.stringToSeconds(restTimeValue))
+      .catch(() => {
+        // TODO: Display error message
+      });
   }
 
-  secondsToString(sec: number) {
-    let seconds = Math.min(sec, MAX_S);
-    const hours = Math.floor(seconds / HOUR_S);
-    seconds = seconds % HOUR_S;
-    const mins = Math.floor(seconds / MIN_S);
-    seconds = seconds % MIN_S;
-
-    return `${this.padZero(hours)}:${this.padZero(mins)}:${this.padZero(
-      seconds
-    )}`;
-  }
-
-  stringToSeconds(str: string) {
-    const parsed = str.split(':');
-    const h = parseInt(parsed[0]) || 0;
-    const m = parseInt(parsed[1]) || 0;
-    const s = parseInt(parsed[2]) || 0;
-
-    return h * HOUR_S + m * MIN_S + s;
-  }
-
-  padZero(num: number) {
-    let zeros = '00';
-    if (!num) {
-      return zeros;
-    }
-    const numS = num.toString();
-    return zeros.substr(0, zeros.length - numS.length) + numS;
-  }
-
+  /**
+   * On first execution for each workout, starts the workout.
+   * On subsequent executions, resets rest time; until workout is finished.
+   */
   onCircleClick() {
-    /* Start the workout */
     if (!this.workoutStarted) {
+      // Start the workout
       this.workoutStarted = true;
 
-      this.updateRestTime();
+      // Start counting rest time
+      this.increaseRestTime();
       this.restInterval = setInterval(() => {
-        this.updateRestTime();
+        this.increaseRestTime();
       }, 1000);
 
-      this.updateTotalTime();
+      // Start counting total time
+      this.increaseTotalTime();
       this.totalTimeInterval = setInterval(() => {
-        this.updateTotalTime();
+        this.increaseTotalTime();
       }, 1000);
     } else {
+      // Reset rest time
       if (this.restInterval) {
         clearInterval(this.restInterval);
       }
@@ -149,13 +138,18 @@ export class WorkoutPage implements OnInit, OnDestroy {
       this.restPercent = 0;
       this.currentRestTime = 0;
 
-      this.updateRestTime();
+      // Re-start counting reset time
+      this.increaseRestTime();
       this.restInterval = setInterval(() => {
-        this.updateRestTime();
+        this.increaseRestTime();
       }, 1000);
     }
   }
 
+  /**
+   * Executes click behavior of stop button
+   * Displays an alert to user with these options: Save, Discard, Cancel.
+   */
   onStopButtonClick() {
     this.alertController
       .create({
@@ -181,31 +175,43 @@ export class WorkoutPage implements OnInit, OnDestroy {
       });
   }
 
-  updateRestTime() {
-    this.restString = this.secondsToString(this.currentRestTime);
+  /**
+   * Increases the value of rest time and updates rest time string
+   */
+  increaseRestTime() {
+    this.restString = this.dateService.secondsToString(this.currentRestTime);
     this.restPercent = Math.min(
       (this.currentRestTime / this.restTime) * 100,
       100
     );
     if (this.restPercent === 100) {
-      this.restStringColor = RED_COLOR;
+      this.restStringColor = this.themeService.RED;
     } else {
-      this.restStringColor = BLACK_COLOR;
+      this.restStringColor = this.themeService.BLACK;
     }
     this.currentRestTime++;
   }
 
-  updateTotalTime() {
-    this.totalTimeString = this.secondsToString(this.currentTotalTime);
+  /**
+   * Increases the value of total time and updates total time string
+   */
+  increaseTotalTime() {
+    this.totalTimeString = this.dateService.secondsToString(
+      this.currentTotalTime
+    );
     this.currentTotalTime++;
   }
 
+  /**
+   * Clears reset and total time increase intervals.
+   * Resets everything on their default.
+   */
   resetWorkout() {
     this.workoutStarted = false;
     this.currentRestTime = 0;
     this.restPercent = 0;
     this.restString = '00:00:00';
-    this.restStringColor = BLACK_COLOR;
+    this.restStringColor = this.themeService.BLACK;
     if (this.restInterval) {
       clearInterval(this.restInterval);
     }
@@ -216,10 +222,16 @@ export class WorkoutPage implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Stops workout without saving it.
+   */
   stopWorkout() {
     this.resetWorkout();
   }
 
+  /**
+   * Stops workout and saves the workout record
+   */
   saveWorkout() {
     const exercises: ExerciseRecord[] = this.progressList.map((progress) => {
       return {
@@ -231,11 +243,15 @@ export class WorkoutPage implements OnInit, OnDestroy {
         repType: progress.repType,
       };
     });
-    let sub = this.workoutService
-      .addWorkout(exercises, new Date(), this.totalTimeString)
-      .subscribe(() => {
-        sub.unsubscribe();
+
+    this.workoutService
+      .saveWorkout(exercises, new Date(), this.totalTimeString)
+      .then(() => {
+        this.resetWorkout();
+        // TODO: Navigate to workout record page
+      })
+      .catch(() => {
+        // TODO: Display error message
       });
-    this.resetWorkout();
   }
 }

@@ -1,20 +1,18 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoadingController, NavController } from '@ionic/angular';
-import { Progress } from 'src/app/progress/progress.model';
-import { ExploreService } from '../explore.service';
+import { Progress } from 'src/app/progress/models/progress.model';
+import { ExploreService } from '../services/explore.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-progress-detail',
   templateUrl: './progress-detail.page.html',
   styleUrls: ['./progress-detail.page.scss'],
 })
-export class ProgressDetailPage implements OnInit, OnDestroy {
-  paramSub: Subscription;
+export class ProgressDetailPage implements OnInit {
   progress: Progress;
-  progressSub: Subscription;
   isLoading = false;
+
   constructor(
     private route: ActivatedRoute,
     private loadingController: LoadingController,
@@ -24,28 +22,24 @@ export class ProgressDetailPage implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.paramSub = this.route.paramMap.subscribe((paramMap) => {
+    this.route.paramMap.subscribe((paramMap) => {
       if (!paramMap.has('progressId')) {
         this.navController.navigateBack('/home/progress');
         return;
       }
-
       this.isLoading = true;
-      this.progressSub = this.exploreService
-        .getProgress(parseInt(paramMap.get('progressId')))
-        .subscribe((progress) => {
+      this.exploreService
+        .getProgress(parseInt(paramMap.get('progressId'), 10))
+        .then((progress) => {
           this.progress = progress;
           this.isLoading = false;
         });
     });
   }
 
-  ngOnDestroy() {
-    if (this.progressSub) {
-      this.progressSub.unsubscribe();
-    }
-  }
-
+  /**
+   * Downloads progress to local progress list
+   */
   downloadProgress() {
     if (!this.progress) {
       return;
@@ -58,10 +52,14 @@ export class ProgressDetailPage implements OnInit, OnDestroy {
         loadingEl.present();
         this.exploreService
           .downloadProgress(this.progress.id)
-          .subscribe((data) => {
-            console.log('Download data', data);
-            loadingEl.dismiss();
+          .then(() => {
             this.router.navigate(['/', 'home', 'progress']);
+          })
+          .catch(() => {
+            // TODO: Display error message
+          })
+          .finally(() => {
+            loadingEl.dismiss();
           });
       });
   }
