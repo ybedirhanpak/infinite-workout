@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController, NavController } from '@ionic/angular';
 import { Progress } from 'src/app/progress/models/progress.model';
-import { ExploreService } from '../explore.service';
+import { ExploreService } from '../services/explore.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
