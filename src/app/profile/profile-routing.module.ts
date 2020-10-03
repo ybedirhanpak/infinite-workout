@@ -6,8 +6,22 @@ import { ProfilePage } from './profile.page';
 const routes: Routes = [
   {
     path: '',
-    component: ProfilePage
-  }
+    component: ProfilePage,
+  },
+  {
+    path: 'history',
+    loadChildren: () =>
+      import('./workout-history/workout-history.module').then(
+        (m) => m.WorkoutHistoryPageModule
+      ),
+  },
+  {
+    path: 'detail/:workoutId',
+    loadChildren: () =>
+      import('./workout-detail/workout-detail.module').then(
+        (m) => m.WorkoutDetailPageModule
+      ),
+  },
 ];
 
 @NgModule({

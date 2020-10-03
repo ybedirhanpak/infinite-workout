@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { Workout } from '../models/workout.model';
+import { Workout } from '../../workout/models/workout.model';
 import { ActivatedRoute } from '@angular/router';
-import { WorkoutService } from '../services/workout.service';
+import { WorkoutService } from '../../workout/services/workout.service';
 
 @Component({
   selector: 'app-workout-detail',
