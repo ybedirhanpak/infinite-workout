@@ -22,6 +22,10 @@ const routes: Routes = [
         (m) => m.WorkoutDetailPageModule
       ),
   },
+  {
+    path: 'settings',
+    loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
+  },
 ];
 
 @NgModule({
