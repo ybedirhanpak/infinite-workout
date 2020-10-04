@@ -56,18 +56,7 @@
         </ion-button>
       </div>
     </div>
-    <form #workoutForm="ngForm">
-      <ion-item>
-        <ion-label>Rest Time </ion-label>
-        <ion-datetime
-          display-format="HH:mm:ss"
-          picker-format="HH:mm:ss"
-          [value]="restTimeString"
-          name="rest-time"
-          (ionChange)="onRestTimeChange($event)"
-        ></ion-datetime>
-      </ion-item>
-    </form>
+    <app-rest-time-picker></app-rest-time-picker>
     <div class="time">
       <div class="total-time">
         <span class="total-time__header">Total Time</span>
