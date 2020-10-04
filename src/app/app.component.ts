@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Platform, MenuController } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -13,9 +12,7 @@ export class AppComponent implements OnInit {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
-    private router: Router,
-    private menuController: MenuController
+    private statusBar: StatusBar
   ) {
     this.initializeApp();
   }
@@ -28,14 +25,4 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {}
-
-  /**
-   * Navigates to a path and closes menu controller
-   *
-   * @param path is path of the redirected page
-   */
-  menuNavigate(path: string) {
-    this.router.navigateByUrl(path);
-    this.menuController.close();
-  }
 }
