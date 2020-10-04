@@ -1,32 +1,5 @@
 <ion-app>
   <ion-split-pane contentId="main-content">
-    <ion-menu contentId="main-content" type="overlay">
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>
-            Infinite Workout
-          </ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content>
-        <ion-list>
-          <ion-item (click)="menuNavigate('/home/workout/history')" button>
-            <ion-icon name="bar-chart-outline" slot="start"></ion-icon>
-            <ion-label>Workout History</ion-label>
-          </ion-item>
-          <ion-item lines="none">
-            <ion-label>Dark Mode</ion-label>
-            <ion-toggle
-              [checked]="darkMode"
-              (ionChange)="toggleDarkMode($event)"
-              slot="start"
-              name="dark-mode"
-              color="dark"
-            ></ion-toggle>
-          </ion-item>
-        </ion-list>
-      </ion-content>
-    </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-split-pane>
 </ion-app>

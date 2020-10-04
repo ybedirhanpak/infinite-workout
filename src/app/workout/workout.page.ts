@@ -25,7 +25,6 @@ export class WorkoutPage implements OnInit, OnDestroy {
   /** Workout */
   workoutStarted = false;
   restTime = 60; // total rest in seconds
-  restTimeString = '00:01:00';
   currentRestTime = 0;
   restPercent = 0;
   restString = '00:00:00';
@@ -56,7 +55,6 @@ export class WorkoutPage implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.workoutService.restTime.subscribe((value) => {
         this.restTime = value;
-        this.restTimeString = this.dateService.secondsToString(this.restTime);
       })
     );
 
@@ -93,19 +91,6 @@ export class WorkoutPage implements OnInit, OnDestroy {
     } else if (action === 'back') {
       this.progressSlider.slidePrev();
     }
-  }
-
-  /**
-   * Saves rest time value with workout service
-   * @param event change of rest time
-   */
-  onRestTimeChange(event: any) {
-    const restTimeValue = event.detail.value;
-    this.workoutService
-      .saveRestTime(this.dateService.stringToSeconds(restTimeValue))
-      .catch(() => {
-        // TODO: Display error message
-      });
   }
 
   /**

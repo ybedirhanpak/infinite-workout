@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home/profile"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-page-layout>
+    <ion-list>
+      <ion-item>
+        <ion-label>Dark Mode</ion-label>
+        <app-dark-mode-toggle></app-dark-mode-toggle>
+      </ion-item>
+      <app-rest-time-picker></app-rest-time-picker>
+    </ion-list>
+  </app-page-layout>
+</ion-content>

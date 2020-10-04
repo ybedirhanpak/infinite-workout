@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home/workout"></ion-back-button>
+      <ion-back-button defaultHref="/home/profile"></ion-back-button>
     </ion-buttons>
     <ion-title>Workout History</ion-title>
     <ion-buttons slot="end">
@@ -20,7 +20,7 @@
       class="ion-text-center"
     >
       <p>There are no workouts to show.</p>
-      <ion-button [routerLink]="['/','home','workout']" fill="clear"
+      <ion-button routerLink="/home/workout" fill="clear"
         >Do your first workout now!</ion-button
       >
     </div>
@@ -38,7 +38,7 @@
           class="ion-no-padding"
         >
           <ion-item
-            (click)="onWorkoutClick(workout)"
+            [routerLink]="['/','home','profile','detail', workout.id]"
             button
             detail
             class="ion-no-padding"

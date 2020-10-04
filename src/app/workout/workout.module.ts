@@ -9,6 +9,7 @@ import { WorkoutPageRoutingModule } from './workout-routing.module';
 import { WorkoutPage } from './workout.page';
 
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
       responsive: true,
       renderOnClick: false,
     }),
+    SharedModule
   ],
   declarations: [WorkoutPage],
 })

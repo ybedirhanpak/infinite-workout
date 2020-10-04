@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Platform, MenuController } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Router } from '@angular/router';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { ThemeService } from './shared/services/theme.service';
 
 @Component({
@@ -11,50 +11,26 @@ import { ThemeService } from './shared/services/theme.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  // Value of if dark mode is used
-  darkMode = false;
-
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private router: Router,
-    private menuController: MenuController,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private screenOrientation: ScreenOrientation
   ) {
     this.initializeApp();
+    this.themeService.fetchTheme();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.themeService.fetchTheme();
+      if (this.platform.is('cordova') || this.platform.is('capacitor')) {
+        this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+      }
     });
   }
 
-  ngOnInit() {
-    // Change darkMode state according to themeService
-    this.themeService.darkMode.subscribe((value) => {
-      this.darkMode = value;
-    });
-  }
-
-  /**
-   * Navigates to a path and closes menu controller
-   *
-   * @param path is path of the redirected page
-   */
-  menuNavigate(path: string) {
-    this.router.navigateByUrl(path);
-    this.menuController.close();
-  }
-
-  /**
-   * Changes app theme between light and dark with toggle button event
-   */
-  toggleDarkMode(event: any) {
-    const isDarkChecked = event.detail.checked;
-    this.themeService.setTheme(isDarkChecked);
-  }
+  ngOnInit() {}
 }

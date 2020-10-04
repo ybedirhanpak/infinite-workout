@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Workout } from '../models/workout.model';
+import { Workout } from '../../workout/models/workout.model';
 import { Subscription } from 'rxjs';
-import { WorkoutService } from '../services/workout.service';
+import { WorkoutService } from '../../workout/services/workout.service';
 import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
@@ -61,9 +61,5 @@ export class WorkoutHistoryPage implements OnInit, OnDestroy {
           // TODO: Display error message
         });
       });
-  }
-
-  onWorkoutClick(workout: Workout) {
-    this.router.navigate(['/', 'home', 'workout', 'detail', workout.id]);
   }
 }

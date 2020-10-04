@@ -26,6 +26,10 @@ const routes: Routes = [
           import('../explore/explore.module').then((m) => m.ExplorePageModule),
       },
       {
+        path: 'profile',
+        loadChildren: () => import('../profile/profile.module').then( m => m.ProfilePageModule)
+      },
+      {
         path: '',
         redirectTo: '/home/progress',
         pathMatch: 'full',

@@ -1,50 +1,128 @@
-.circle-wrapper {
-  height: 50%;
-}
-
-.total-time {
-  font-size: 2rem;
-}
-
-.arrow-wrapper {
+.exercise-slide {
   display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 0.5rem 0;
+  .exercise {
+    width: 50%;
+    ion-slide {
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+    &__content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .arrow {
+    width: 25%;
+    ion-button {
+      width: 100%;
+      height: 100%;
+    }
+  }
 }
 
-.progress-wrapper {
+.time {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-}
-
-@media (min-width: 320px) {
-  .circle-wrapper {
-    height: 50%;
-  }
 
   .total-time {
-    font-size: 2.5rem;
-  }
-}
-
-@media (min-width: 375px) {
-  .circle-wrapper {
-    height: 50%;
-  }
-
-  .total-time {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    text-align: center;
     font-size: 3rem;
-  }
-}
 
-@media (min-width: 768px) {
-  .circle-wrapper {
-    height: 65%;
+    &__count {
+      font-size: 4rem;
+    }
   }
 
-  .total-time {
-    font-size: 3.5rem;
+  .rest-circle {
+    width: 50%;
+  }
+
+  // Ipad pro 12.9"
+  @media (max-width: 1024px) {
+    flex-direction: column-reverse;
+    .total-time {
+      width: 100%;
+      flex-direction: column;
+
+      &__header {
+        margin-right: 1rem;
+      }
+    }
+    .rest-circle {
+      width: 90%;
+    }
+  }
+
+  // Ipad 9.71"
+  @media (max-width: 768px) {
+    .rest-circle {
+      width: 80%;
+    }
+  }
+
+  // Surface Duo
+  @media (max-width: 540px) {
+    .total-time {
+      font-size: 2rem;
+
+      &__count {
+        font-size: 3rem;
+      }
+    }
+
+    .rest-circle {
+      width: 70%;
+    }
+  }
+
+  // Mobile
+  @media (max-width: 480px) {
+    .total-time {
+      font-size: 3rem;
+      flex-direction: column;
+
+      &__count {
+        font-size: 3rem;
+      }
+    }
+    .rest-circle {
+      width: 90%;
+    }
+  }
+
+  // Small Mobile
+  @media (max-width: 375px) {
+    .total-time {
+      font-size: 2rem;
+      flex-direction: row;
+
+      &__count {
+        font-size: 2rem;
+      }
+    }
+  }
+
+  // XSmall Mobile
+  @media (max-width: 320px) {
+    .total-time {
+      font-size: 1.5rem;
+      flex-direction: row;
+
+      &__count {
+        font-size: 1.5rem;
+      }
+    }
   }
 }

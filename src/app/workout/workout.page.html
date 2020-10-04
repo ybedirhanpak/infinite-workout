@@ -16,14 +16,14 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row class="ion-padding">
-      <ion-col size="3" size-md="1" offset-md="2" class="arrow-wrapper">
+  <app-page-layout>
+    <div class="exercise-slide">
+      <div class="arrow">
         <ion-button fill="clear" (click)="slideAction('back')">
           <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
         </ion-button>
-      </ion-col>
-      <ion-col size="6" size-md="6" class="ion-text-center">
+      </div>
+      <div class="exercise ion-text-center">
         <ion-spinner name="crescent" *ngIf="isLoading"></ion-spinner>
         <ion-slides
           #progressSlider
@@ -31,7 +31,7 @@
         >
           <ion-slide
             *ngFor="let progress of progressList"
-            class="progress-wrapper"
+            class="exercise__content"
           >
             <p class="ion-no-margin">{{progress.sets}}x{{progress.reps}}</p>
             <p *ngIf="progress.currentExercise" class="ion-no-margin">
@@ -47,53 +47,41 @@
           *ngIf="!isLoading && !(progressList && progressList.length > 0)"
           [routerLink]="['/','home','progress']"
         >
-          <ion-label>ADD PROGRESS</ion-label>
+          <ion-text>ADD PROGRESS</ion-text>
         </ion-button>
-      </ion-col>
-      <ion-col size="3" size-md="1" class="arrow-wrapper">
+      </div>
+      <div class="arrow">
         <ion-button fill="clear" (click)="slideAction('forward')">
           <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
         </ion-button>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size-md="8" offset-md="2" class="ion-no-padding">
-        <form #workoutForm="ngForm">
-          <ion-item>
-            <ion-label>Rest Time </ion-label>
-            <ion-datetime
-              display-format="HH:mm:ss"
-              picker-format="HH:mm:ss"
-              [value]="restTimeString"
-              name="rest-time"
-              (ionChange)="onRestTimeChange($event)"
-            ></ion-datetime>
-          </ion-item>
-        </form>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <div class="circle-wrapper">
-    <circle-progress
-      [percent]="restPercent"
-      [radius]="100"
-      [outerStrokeWidth]="16"
-      [innerStrokeWidth]="1"
-      [outerStrokeColor]="'var(--ion-color-primary, black)'"
-      [innerStrokeColor]="'var(--ion-color-primary, black)'"
-      [animation]="false"
-      [showSubtitle]="!workoutStarted"
-      [title]="restString"
-      [subtitle]="'START'"
-      [subtitleFontSize]="'24'"
-      [subtitleColor]="isDarkMode ? '#fff' : '#000'"
-      [titleColor]="restStringColor"
-      [animateTitle]="true"
-      [showUnits]="false"
-      (onClick)="onCircleClick()"
-    ></circle-progress>
-  </div>
-  <div class="ion-text-center">
-    <h1 class="total-time ion-no-margin">{{ totalTimeString }}</h1>
-  </div>
+      </div>
+    </div>
+    <app-rest-time-picker></app-rest-time-picker>
+    <div class="time">
+      <div class="total-time">
+        <span class="total-time__header">Total Time</span>
+        <span class="total-time__count">{{ totalTimeString }}</span>
+      </div>
+      <div class="rest-circle">
+        <circle-progress
+          [percent]="restPercent"
+          [radius]="100"
+          [outerStrokeWidth]="16"
+          [innerStrokeWidth]="1"
+          [outerStrokeColor]="'var(--ion-color-primary, black)'"
+          [innerStrokeColor]="'var(--ion-color-primary, black)'"
+          [animation]="false"
+          [showSubtitle]="!workoutStarted"
+          [title]="restString"
+          [subtitle]="'START'"
+          [subtitleFontSize]="'24'"
+          [subtitleColor]="isDarkMode ? '#fff' : '#000'"
+          [titleColor]="restStringColor"
+          [animateTitle]="true"
+          [showUnits]="false"
+          (onClick)="onCircleClick()"
+        ></circle-progress>
+      </div>
+    </div>
+  </app-page-layout>
 </ion-content>
