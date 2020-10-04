@@ -39,6 +39,10 @@
     width: 50%;
     text-align: center;
     font-size: 3rem;
+
+    &__count {
+      font-size: 4rem;
+    }
   }
 
   .rest-circle {
@@ -47,14 +51,13 @@
 
   // Ipad pro 12.9"
   @media (max-width: 1024px) {
-    flex-direction: column;
+    flex-direction: column-reverse;
     .total-time {
       width: 100%;
-      flex-direction: row;
-      margin: 1rem 0;
+      flex-direction: column;
 
-      span {
-        margin: 0 1rem;
+      &__header {
+        margin-right: 1rem;
       }
     }
     .rest-circle {
@@ -69,10 +72,30 @@
     }
   }
 
+  // Surface Duo
+  @media (max-width: 540px) {
+    .total-time {
+      font-size: 2rem;
+
+      &__count {
+        font-size: 3rem;
+      }
+    }
+
+    .rest-circle {
+      width: 70%;
+    }
+  }
+
   // Mobile
   @media (max-width: 480px) {
     .total-time {
-      font-size: 2rem;
+      font-size: 3rem;
+      flex-direction: column;
+
+      &__count {
+        font-size: 3rem;
+      }
     }
     .rest-circle {
       width: 90%;
@@ -82,7 +105,24 @@
   // Small Mobile
   @media (max-width: 375px) {
     .total-time {
+      font-size: 2rem;
+      flex-direction: row;
+
+      &__count {
+        font-size: 2rem;
+      }
+    }
+  }
+
+  // XSmall Mobile
+  @media (max-width: 320px) {
+    .total-time {
       font-size: 1.5rem;
+      flex-direction: row;
+
+      &__count {
+        font-size: 1.5rem;
+      }
     }
   }
 }
