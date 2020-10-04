@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { ThemeService } from './shared/services/theme.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class AppComponent implements OnInit {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private screenOrientation: ScreenOrientation
   ) {
     this.initializeApp();
     this.themeService.fetchTheme();
@@ -24,6 +26,9 @@ export class AppComponent implements OnInit {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      if (this.platform.is('cordova') || this.platform.is('capacitor')) {
+        this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+      }
     });
   }
 
