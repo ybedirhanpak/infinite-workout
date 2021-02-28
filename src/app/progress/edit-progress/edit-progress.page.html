@@ -85,9 +85,9 @@
             </div>
             <div class="exercise-top-reorder">
               <ion-button
-                color="primary"
+                [color]="reorder ? 'primary' : 'dark'"
                 expand="block"
-                [fill]="reorder ? 'solid' : 'clear'"
+                fill="clear"
                 (click)="reorder = !reorder"
               >
                 <ion-icon name="list-outline" slot="icon-only"></ion-icon>
