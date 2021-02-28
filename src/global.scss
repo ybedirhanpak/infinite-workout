@@ -154,7 +154,9 @@ ion-picker {
       ion-item {
         --ion-safe-area-right: 0;
         ion-note {
-          margin: 0;
+          margin-right: 0;
+          padding-right: 1rem;
+          font-size: 0.8rem;
         }
 
         ion-reorder {
