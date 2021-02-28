@@ -179,6 +179,9 @@ export class EditProgressPage implements OnInit {
    * @param exercise exercise that is clicked on
    */
   onExerciseClick(exercise: Exercise) {
+    if (this.reorder) {
+      return;
+    }
     this.exercises.forEach((ex) => {
       if (ex.name === exercise.name) {
         ex.selected = true;
