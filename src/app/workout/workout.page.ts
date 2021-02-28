@@ -34,9 +34,6 @@ export class WorkoutPage implements OnInit, OnDestroy {
   totalTimeString = '00:00:00';
   totalTimeInterval: NodeJS.Timeout;
 
-  /** Theme */
-  isDarkMode = false;
-
   constructor(
     private progressService: ProgressService,
     private alertController: AlertController,
@@ -57,10 +54,6 @@ export class WorkoutPage implements OnInit, OnDestroy {
         this.restTime = value;
       })
     );
-
-    this.subscriptions.add(this.themeService.darkMode.subscribe((isDark) => {
-      this.isDarkMode = isDark;
-    }));
   }
 
   ionViewWillEnter() {
