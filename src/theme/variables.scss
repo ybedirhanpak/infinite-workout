@@ -253,7 +253,7 @@
    * -------------------------------------------
    */
 
-  body {
+  body:not(.light) {
     @include dark-colors();
   }
 
@@ -262,7 +262,7 @@
    * -------------------------------------------
    */
 
-  .ios body {
+  .ios body:not(.light) {
     @include ios-dark-theme();
   }
 
@@ -271,7 +271,7 @@
    * -------------------------------------------
    */
 
-  .md body {
+  .md body:not(.light) {
     @include md-dark-theme();
   }
 }
