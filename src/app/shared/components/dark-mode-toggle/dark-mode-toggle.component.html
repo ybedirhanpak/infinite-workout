@@ -1,6 +1,17 @@
-<ion-toggle
-  [checked]="darkMode"
-  (ionChange)="toggleDarkMode($event)"
-  name="dark-mode"
-  color="dark"
-></ion-toggle>
+<ion-list>
+  <ion-radio-group [(ngModel)]="selectedTheme" (ionChange)="updateSelectedTheme(selectedTheme)">
+    <ion-list-header>
+      <ion-label style="font-size: 1rem;">
+        Theme Options
+      </ion-label>
+    </ion-list-header>
+
+    <ion-item *ngFor="let option of themeOptions" >
+      <ion-avatar slot="start">
+        <img [src]="option.image" />
+      </ion-avatar>
+      <ion-radio [value]="option.value"></ion-radio>
+      <ion-label class="ion-margin">{{ option.name }}</ion-label>
+    </ion-item>
+  </ion-radio-group>
+</ion-list>

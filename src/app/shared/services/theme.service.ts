@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { BehaviorSubject } from 'rxjs';
+import { Theme } from '../interfaces/theme';
 
-const THEME_DARK = 'THEME_DARK';
+const THEME_STORAGE_KEY = 'THEME_STORAGE_KEY';
 
 @Injectable({
   providedIn: 'root',
@@ -10,23 +11,29 @@ const THEME_DARK = 'THEME_DARK';
 export class ThemeService {
   constructor(private storage: Storage) {}
 
-  private DARK_MODE = new BehaviorSubject<boolean>(false);
+  // Some colors to be used in some parts of the app
+  public BLACK = 'var(--ion-color-dark, black)';
+  public RED = 'var(--ion-color-danger, red)';
 
-  BLACK = 'var(--ion-color-dark, black)';
-  RED = 'var(--ion-color-danger, red)';
+  private THEME_VALUE = new BehaviorSubject<Theme>(Theme.light);
 
-  get darkMode() {
-    return this.DARK_MODE.asObservable();
+  get themeValue() {
+    return this.THEME_VALUE.asObservable();
   }
 
   /**
    * Updates theme class of body element
-   * @param isDark value of if dark mode is used
+   * @param theme value of selected theme
    */
-  private updateBodyTheme(isDark: boolean) {
-    if (isDark) {
+  private updateBodyTheme(theme: Theme) {
+    if (theme === Theme.dark) {
       document.body.classList.add('dark');
+      document.body.classList.remove('light');
+    } else if (theme === Theme.light) {
+      document.body.classList.add('light');
+      document.body.classList.remove('dark');
     } else {
+      document.body.classList.remove('light');
       document.body.classList.remove('dark');
     }
   }
@@ -35,18 +42,18 @@ export class ThemeService {
    * Retrevies theme value from storage and updates behavior subject
    */
   async fetchTheme() {
-    const isDark = await this.storage.get(THEME_DARK);
-    this.updateBodyTheme(isDark);
-    this.DARK_MODE.next(isDark);
+    const theme = await this.storage.get(THEME_STORAGE_KEY);
+    this.updateBodyTheme(theme);
+    this.THEME_VALUE.next(theme);
   }
 
   /**
    * Saves theme value to storages and updates behavior subject
-   * @param darkMode value of if dark mode is used
+   * @param theme value of selected theme
    */
-  async setTheme(darkMode: boolean) {
-    await this.storage.set(THEME_DARK, darkMode);
-    this.updateBodyTheme(darkMode);
-    this.DARK_MODE.next(darkMode);
+  async setTheme(theme: Theme) {
+    await this.storage.set(THEME_STORAGE_KEY, theme);
+    this.updateBodyTheme(theme);
+    this.THEME_VALUE.next(theme);
   }
 }
