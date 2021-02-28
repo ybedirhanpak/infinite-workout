@@ -1,6 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
+import { Theme } from '../../interfaces/theme';
 import { ThemeService } from '../../services/theme.service';
+
+interface ThemeOption {
+  value: Theme;
+  name: string;
+  image: string;
+}
 
 @Component({
   selector: 'app-dark-mode-toggle',
@@ -8,8 +15,17 @@ import { ThemeService } from '../../services/theme.service';
   styleUrls: ['./dark-mode-toggle.component.scss'],
 })
 export class DarkModeToggleComponent implements OnInit {
-  // Value of if dark mode is used
-  darkMode = false;
+  selectedTheme = Theme.light;
+
+  themeOptions: ThemeOption[] = [
+    { value: Theme.light, name: 'Light', image: 'assets/img/light-theme.png' },
+    { value: Theme.dark, name: 'Dark', image: 'assets/img/dark-theme.png' },
+    {
+      value: Theme.system,
+      name: 'System Theme',
+      image: 'assets/img/system-theme.png',
+    },
+  ];
 
   constructor(private platform: Platform, private themeService: ThemeService) {
     this.platform.ready().then(() => {
@@ -18,17 +34,18 @@ export class DarkModeToggleComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Change darkMode state according to themeService
-    this.themeService.darkMode.subscribe((value) => {
-      this.darkMode = value;
+    // Read initial theme value
+    this.themeService.themeValue.subscribe((value) => {
+      this.selectedTheme = value;
     });
   }
 
   /**
-   * Changes app theme between light and dark with toggle button event
+   * Updates whole app's theme according to selected value from radio group
+   *
+   * @param value selected theme option value
    */
-  toggleDarkMode(event: any) {
-    const isDarkChecked = event.detail.checked;
-    this.themeService.setTheme(isDarkChecked);
+  updateSelectedTheme(value: Theme) {
+    this.themeService.setTheme(value);
   }
 }
