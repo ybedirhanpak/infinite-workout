@@ -51,7 +51,7 @@
         >
           <ion-item
             class="progress-item ion-no-padding"
-            (click)="editProgress(progress)"
+            (click)="onProgressClick(progress)"
             detail="false"
           >
             <div class="progress-item-content">
@@ -80,12 +80,10 @@
                   </p>
                 </div>
               </div>
-              <div [ngClass]="{'reorder': 'true', 'hidden': !reorder}">
-                <ion-reorder>
-                  <ion-icon name="reorder-two-outline" size="large"></ion-icon>
-                </ion-reorder>
-              </div>
             </div>
+            <ion-reorder slot="end" class="wide-reorder">
+              <ion-icon name="reorder-two-outline" size="large"></ion-icon>
+            </ion-reorder>
           </ion-item>
           <ion-item-options side="end">
             <ion-item-option color="danger" (click)="deleteProgress(progress)">
