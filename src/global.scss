@@ -70,7 +70,7 @@ ion-picker {
     padding: 1rem 0;
 
     .rep-set {
-      width: 20%;
+      padding: 0 1rem;
       text-align: center;
     }
 
@@ -79,20 +79,6 @@ ion-picker {
       flex: 1;
       flex-direction: column;
       justify-content: center;
-    }
-
-    .reorder {
-      width: 4rem;
-      text-align: center;
-
-      ion-reorder {
-        width: 100%;
-        height: 100%;
-      }
-
-      &.hidden {
-        opacity: 0;
-      }
     }
   }
 }
@@ -170,5 +156,15 @@ ion-picker {
         }
       }
     }
+  }
+}
+
+ion-reorder.wide-reorder {
+  width: 6rem;
+  height: 100%;
+  margin: 0;
+  text-align: center;
+  ion-icon {
+    height: 100%;
   }
 }
