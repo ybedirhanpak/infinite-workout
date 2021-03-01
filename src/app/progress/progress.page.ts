@@ -83,7 +83,10 @@ export class ProgressPage implements OnInit, OnDestroy {
    * Navigates to progress edit page
    * @param progress progress to be edited
    */
-  editProgress(progress: Progress) {
+  onProgressClick(progress: Progress) {
+    if (this.reorder) {
+      return;
+    }
     this.router.navigate(['/', 'home', 'progress', 'edit', progress.id]);
   }
 
