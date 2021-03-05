@@ -18,7 +18,9 @@
     "paths": {
       "@services/*": ["./src/app/services/*"],
       "@models/*": ["./src/app/models/*"]
-    }
+    },
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
