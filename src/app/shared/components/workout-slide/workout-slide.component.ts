@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-interface WorkoutCard {
-  name: string;
-  category: string;
-  imageUrl: string;
-}
+// Model
+import { Workout } from '@models/workout.model';
+
+// Service
+import { WorkoutService } from '@services/workout.service';
 
 @Component({
   selector: 'app-workout-slide',
@@ -12,7 +13,7 @@ interface WorkoutCard {
   styleUrls: ['./workout-slide.component.scss'],
 })
 export class WorkoutSlideComponent implements OnInit {
-  @Input() workoutCards: WorkoutCard[] = [];
+  @Input() workouts: Workout[] = [];
 
   slideOptions = {
     initialSlide: 0,
@@ -20,7 +21,12 @@ export class WorkoutSlideComponent implements OnInit {
     slidesPerView: 2.2,
   };
 
-  constructor() {}
+  constructor(private workoutService: WorkoutService, private router: Router) {}
 
   ngOnInit() {}
+
+  onWorkoutClick(workout: Workout) {
+    this.workoutService.setWorkoutDetail(workout);
+    this.router.navigateByUrl("/home/workout-detail")
+  }
 }

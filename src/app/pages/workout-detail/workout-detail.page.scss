@@ -1,4 +1,13 @@
 .workout-detail {
+  padding-bottom: 1rem;
+
+  .cover-image {
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
   .exercise {
     &-details {
       display: flex;
@@ -8,5 +17,12 @@
         color: var(--ion-color-step-600, #666666);
       }
     }
+  }
+}
+
+.start-button {
+  text-transform: uppercase;
+  span {
+    color: white;
   }
 }

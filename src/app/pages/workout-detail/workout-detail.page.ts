@@ -1,5 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+
+// Model
 import { Workout } from '@models/workout.model';
+
+// Service
+import { WorkoutService } from '@services/workout.service';
 
 @Component({
   selector: 'app-workout-detail',
@@ -10,9 +15,11 @@ export class WorkoutDetailPage implements OnInit {
 
   @Input() workout: Workout;
 
-  constructor() { }
+  constructor(private workoutService: WorkoutService) { }
 
   ngOnInit() {
+    this.workoutService.workoutDetail.subscribe((workout) => {
+      this.workout = workout;
+    })
   }
-
 }
