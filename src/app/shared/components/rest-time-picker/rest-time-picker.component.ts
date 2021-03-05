@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { WorkoutService } from 'src/app/workout/services/workout.service';
+import { Component, OnInit } from '@angular/core';
+import { TrainingService } from 'src/app/training/services/training.service';
 import { DateService } from '../../services/date.service';
 
 @Component({
@@ -12,19 +12,19 @@ export class RestTimePickerComponent implements OnInit {
   restTimeString = '00:00:00';
 
   constructor(
-    private workoutService: WorkoutService,
+    private trainingService: TrainingService,
     private dateService: DateService
   ) {}
 
   ngOnInit() {
-    this.workoutService.restTime.subscribe((value) => {
+    this.trainingService.restTime.subscribe((value) => {
       this.restTime = value;
       this.restTimeString = this.dateService.secondsToString(this.restTime);
     });
   }
 
   ionViewWillEnter() {
-    this.workoutService.fetchRestTime();
+    this.trainingService.fetchRestTime();
   }
 
   /**
@@ -33,7 +33,7 @@ export class RestTimePickerComponent implements OnInit {
    */
   onRestTimeChange(event: any) {
     const restTimeValue = event.detail.value;
-    this.workoutService
+    this.trainingService
       .saveRestTime(this.dateService.stringToSeconds(restTimeValue))
       .catch(() => {
         // TODO: Display error message

@@ -1,9 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Workout } from '../../workout/models/workout.model';
+import { TrainingRecord } from '../../training/models/training.model';
 import { Subscription } from 'rxjs';
-import { WorkoutService } from '../../workout/services/workout.service';
+import { TrainingService } from '../../training/services/training.service';
 import { LoadingController } from '@ionic/angular';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-workout-history',
@@ -11,18 +10,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./workout-history.page.scss'],
 })
 export class WorkoutHistoryPage implements OnInit, OnDestroy {
-  workoutList: Workout[] = [];
+  workoutList: TrainingRecord[] = [];
   workoutSub: Subscription;
   isLoading = false;
 
   constructor(
-    private workoutService: WorkoutService,
-    private loadingController: LoadingController,
-    private router: Router
+    private trainingService: TrainingService,
+    private loadingController: LoadingController
   ) {}
 
   ngOnInit() {
-    this.workoutSub = this.workoutService.workoutList.subscribe(
+    this.workoutSub = this.trainingService.trainingRecordList.subscribe(
       (workoutList) => {
         this.workoutList = workoutList;
       }
@@ -31,7 +29,7 @@ export class WorkoutHistoryPage implements OnInit, OnDestroy {
 
   ionViewWillEnter() {
     this.isLoading = true;
-    this.workoutService.fetchWorkoutList().then(() => {
+    this.trainingService.fetchTrainingRecordList().then(() => {
       this.isLoading = false;
     });
   }
@@ -46,14 +44,14 @@ export class WorkoutHistoryPage implements OnInit, OnDestroy {
    * Deletes given workout from workout history
    * @param workout workout to be deleted
    */
-  deleteWorkout(workout: Workout) {
+  deleteWorkout(workout: TrainingRecord) {
     this.loadingController
       .create({
         message: 'Deleting...',
       })
       .then((loadingEl) => {
         loadingEl.present();
-        this.workoutService.deleteWorkout(workout.id)
+        this.trainingService.deleteTrainingRecord(workout.id)
         .then(() => {
           loadingEl.dismiss();
         })

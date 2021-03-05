@@ -16,9 +16,9 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'workout',
+        path: 'training',
         loadChildren: () =>
-          import('../workout/workout.module').then((m) => m.WorkoutPageModule),
+          import('../training/training.module').then((m) => m.TrainingPageModule),
       },
       {
         path: 'explore',
@@ -38,7 +38,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/home/workout',
+    redirectTo: '/home/training',
     pathMatch: 'full',
   },
 ];

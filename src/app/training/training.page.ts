@@ -3,17 +3,17 @@ import { Progress } from '../progress/models/progress.model';
 import { ProgressService } from '../progress/services/progress.service';
 import { Subscription } from 'rxjs';
 import { IonSlides, AlertController } from '@ionic/angular';
-import { WorkoutService } from './services/workout.service';
-import { ExerciseRecord } from './models/workout.model';
+import { TrainingService } from './services/training.service';
+import { ExerciseRecord } from './models/training.model';
 import { ThemeService } from '../shared/services/theme.service';
 import { DateService } from '../shared/services/date.service';
 
 @Component({
   selector: 'app-workout',
-  templateUrl: './workout.page.html',
-  styleUrls: ['./workout.page.scss'],
+  templateUrl: './training.page.html',
+  styleUrls: ['./training.page.scss'],
 })
-export class WorkoutPage implements OnInit, OnDestroy {
+export class TrainingPage implements OnInit, OnDestroy {
   /** Subscriptions */
   private subscriptions = new Subscription();
 
@@ -22,8 +22,8 @@ export class WorkoutPage implements OnInit, OnDestroy {
   progressList: Progress[];
   isLoading = false;
 
-  /** Workout */
-  workoutStarted = false;
+  /** TrainingRecord */
+  trainingStarted = false;
   restTime = 60; // total rest in seconds
   currentRestTime = 0;
   restPercent = 0;
@@ -37,7 +37,7 @@ export class WorkoutPage implements OnInit, OnDestroy {
   constructor(
     private progressService: ProgressService,
     private alertController: AlertController,
-    private workoutService: WorkoutService,
+    private trainingService: TrainingService,
     private themeService: ThemeService,
     private dateService: DateService
   ) {}
@@ -50,7 +50,7 @@ export class WorkoutPage implements OnInit, OnDestroy {
     );
 
     this.subscriptions.add(
-      this.workoutService.restTime.subscribe((value) => {
+      this.trainingService.restTime.subscribe((value) => {
         this.restTime = value;
       })
     );
@@ -64,7 +64,7 @@ export class WorkoutPage implements OnInit, OnDestroy {
     });
 
     // Fetch rest time value when user enters this page
-    this.workoutService.fetchRestTime();
+    this.trainingService.fetchRestTime();
   }
 
   ngOnDestroy() {
@@ -91,9 +91,9 @@ export class WorkoutPage implements OnInit, OnDestroy {
    * On subsequent executions, resets rest time; until workout is finished.
    */
   onCircleClick() {
-    if (!this.workoutStarted) {
+    if (!this.trainingStarted) {
       // Start the workout
-      this.workoutStarted = true;
+      this.trainingStarted = true;
 
       // Start counting rest time
       this.increaseRestTime();
@@ -136,11 +136,11 @@ export class WorkoutPage implements OnInit, OnDestroy {
         buttons: [
           {
             text: 'Save',
-            handler: () => this.saveWorkout(),
+            handler: () => this.saveTraining(),
           },
           {
             text: 'Discard',
-            handler: () => this.stopWorkout(),
+            handler: () => this.stopTraining(),
           },
           {
             text: 'Cancel',
@@ -184,8 +184,8 @@ export class WorkoutPage implements OnInit, OnDestroy {
    * Clears reset and total time increase intervals.
    * Resets everything on their default.
    */
-  resetWorkout() {
-    this.workoutStarted = false;
+  resetTraining() {
+    this.trainingStarted = false;
     this.currentRestTime = 0;
     this.restPercent = 0;
     this.restString = '00:00:00';
@@ -203,14 +203,14 @@ export class WorkoutPage implements OnInit, OnDestroy {
   /**
    * Stops workout without saving it.
    */
-  stopWorkout() {
-    this.resetWorkout();
+  stopTraining() {
+    this.resetTraining();
   }
 
   /**
    * Stops workout and saves the workout record
    */
-  saveWorkout() {
+  saveTraining() {
     const exercises: ExerciseRecord[] = this.progressList.map((progress) => {
       return {
         name: progress.currentExercise
@@ -222,10 +222,10 @@ export class WorkoutPage implements OnInit, OnDestroy {
       };
     });
 
-    this.workoutService
-      .saveWorkout(exercises, new Date(), this.totalTimeString)
+    this.trainingService
+      .saveTrainingRecord(exercises, new Date(), this.totalTimeString)
       .then(() => {
-        this.resetWorkout();
+        this.resetTraining();
         // TODO: Navigate to workout record page
       })
       .catch(() => {
