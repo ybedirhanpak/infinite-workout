@@ -1,0 +1,13 @@
+<ion-grid>
+  <ion-row>
+    <ion-slides style="padding-bottom: 1rem;" [options]="slideOptions">
+      <ion-slide *ngFor="let workout of workoutCards">
+        <ion-col>
+          <app-workout-card [name]="workout.name" [category]="workout.category" [imageUrl]="workout.imageUrl"
+            [duration]="workout.duration">
+          </app-workout-card>
+        </ion-col>
+      </ion-slide>
+    </ion-slides>
+  </ion-row>
+</ion-grid>
