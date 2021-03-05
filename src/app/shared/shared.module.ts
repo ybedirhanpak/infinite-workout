@@ -7,6 +7,8 @@ import { PageLayoutComponent } from './components/page-layout/page-layout.compon
 import { RestTimePickerComponent } from './components/rest-time-picker/rest-time-picker.component';
 import { WorkoutCardComponent } from './components/workout-card/workout-card.component';
 import { WorkoutSlideComponent } from './components/workout-slide/workout-slide.component';
+import { ClickableComponent } from './components/clickable/clickable.component';
+
 
 
 @NgModule({
@@ -15,7 +17,8 @@ import { WorkoutSlideComponent } from './components/workout-slide/workout-slide.
     DarkModeToggleComponent,
     RestTimePickerComponent,
     WorkoutCardComponent,
-    WorkoutSlideComponent
+    WorkoutSlideComponent,
+    ClickableComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +30,8 @@ import { WorkoutSlideComponent } from './components/workout-slide/workout-slide.
     DarkModeToggleComponent,
     RestTimePickerComponent,
     WorkoutCardComponent,
-    WorkoutSlideComponent
+    WorkoutSlideComponent,
+    ClickableComponent
   ],
 })
 export class SharedModule {}
