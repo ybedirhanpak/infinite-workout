@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Gym Perfection",
+        "category": "Hypertrophy",
+        "imageUrl": "https://images.pexels.com/photos/3490348/pexels-photo-3490348.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        "duration": "45 min"
+    },
+    {
+        "name": "Beautiful Morning",
+        "category": "Cardio",
+        "imageUrl": "https://images.pexels.com/photos/35009/runner-marathon-military-afghanistan.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        "duration": "50 min"
+    },
+    {
+        "name": "Superman",
+        "category": "Strength",
+        "imageUrl": "https://images.pexels.com/photos/17840/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        "duration": "60 min"
+    },
+    {
+        "name": "Full Body",
+        "category": "Hypertrophy & Strength",
+        "imageUrl": "https://images.pexels.com/photos/28080/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        "duration": "45 min"
+    },
+    {
+        "name": "Home Workout",
+        "category": "Calisthenics",
+        "imageUrl": "https://images.pexels.com/photos/4048236/pexels-photo-4048236.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        "duration": "40 min"
+    }
+]
