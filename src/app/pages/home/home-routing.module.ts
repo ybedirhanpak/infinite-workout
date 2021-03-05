@@ -18,7 +18,9 @@ const routes: Routes = [
       {
         path: 'training',
         loadChildren: () =>
-          import('../training/training.module').then((m) => m.TrainingPageModule),
+          import('../training/training.module').then(
+            (m) => m.TrainingPageModule
+          ),
       },
       {
         path: 'explore',
@@ -27,7 +29,15 @@ const routes: Routes = [
       },
       {
         path: 'profile',
-        loadChildren: () => import('../profile/profile.module').then( m => m.ProfilePageModule)
+        loadChildren: () =>
+          import('../profile/profile.module').then((m) => m.ProfilePageModule),
+      },
+      {
+        path: 'my-library',
+        loadChildren: () =>
+          import('../../pages/my-library/my-library.module').then(
+            (m) => m.MyLibraryPageModule
+          ),
       },
       {
         path: '',
