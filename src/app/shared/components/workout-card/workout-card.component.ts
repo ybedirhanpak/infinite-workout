@@ -12,8 +12,15 @@ export class WorkoutCardComponent implements OnInit {
   @Input() imageUrl: string = 'assets/img/light-theme.png';
   @Input() duration: string = '10 min';
 
+  clicked = false;
+
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.clicked = false;
+  }
 
+  mouseClick(click: boolean) {
+    this.clicked = click;
+  }
 }
