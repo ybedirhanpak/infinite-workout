@@ -5,7 +5,7 @@ export interface ExerciseRecord {
   repType: string;
 }
 
-export class Workout {
+export class TrainingRecord {
   constructor(
     public id: number,
     public exercises: ExerciseRecord[],

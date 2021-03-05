@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { WorkoutPageRoutingModule } from './workout-routing.module';
+import { TrainingPageRoutingModule } from './training-routing.module';
 
-import { WorkoutPage } from './workout.page';
+import { TrainingPage } from './training.page';
 
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { SharedModule } from '../shared/shared.module';
@@ -17,7 +17,7 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    WorkoutPageRoutingModule,
+    TrainingPageRoutingModule,
     NgCircleProgressModule.forRoot({
       radius: 100,
       outerStrokeWidth: 16,
@@ -31,6 +31,6 @@ import { SharedModule } from '../shared/shared.module';
     }),
     SharedModule
   ],
-  declarations: [WorkoutPage],
+  declarations: [TrainingPage],
 })
-export class WorkoutPageModule {}
+export class TrainingPageModule {}
