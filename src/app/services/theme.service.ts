@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { BehaviorSubject } from 'rxjs';
-import { Theme } from '../interfaces/theme';
 
 const THEME_STORAGE_KEY = 'THEME_STORAGE_KEY';
+
+export enum Theme {
+  light = 'light',
+  dark = 'dark',
+  system = 'system',
+}
 
 @Injectable({
   providedIn: 'root',

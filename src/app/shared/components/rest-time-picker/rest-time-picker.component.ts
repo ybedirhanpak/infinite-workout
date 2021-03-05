@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TrainingService } from 'src/app/training/services/training.service';
-import { DateService } from '../../services/date.service';
+import { TrainingService } from 'src/app/services/training.service';
+import { DateService } from '../../../services/date.service';
 
 @Component({
   selector: 'app-rest-time-picker',

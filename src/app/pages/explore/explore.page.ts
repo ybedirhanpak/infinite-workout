@@ -1,9 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Progress } from '../progress/models/progress.model';
-import { ExploreService } from './services/explore.service';
-import { Subscription } from 'rxjs';
 import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+
+// Model
+import { Progress } from '@models/progress.model';
+
+// Service
+import { ExploreService } from '@services/explore.service';
 
 @Component({
   selector: 'app-explore',
@@ -71,14 +75,17 @@ export class ExplorePage implements OnInit, OnDestroy {
       })
       .then((loading) => {
         loading.present();
-        this.exploreService.downloadProgress(progress.id)
-        .then(() => {
-          this.router.navigate(['/', 'home', 'progress']);
-        }).catch(() => {
-          // TODO: Displat error message
-        }).finally(() => {
-          loading.dismiss();
-        });
+        this.exploreService
+          .downloadProgress(progress.id)
+          .then(() => {
+            this.router.navigate(['/', 'home', 'progress']);
+          })
+          .catch(() => {
+            // TODO: Displat error message
+          })
+          .finally(() => {
+            loading.dismiss();
+          });
       });
   }
 }

@@ -3,7 +3,9 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
-import { ThemeService } from './shared/services/theme.service';
+
+// Service
+import { ThemeService } from '@services/theme.service';
 
 @Component({
   selector: 'app-root',

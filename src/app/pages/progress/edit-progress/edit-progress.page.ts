@@ -5,12 +5,18 @@ import {
   NavController,
   AlertController,
 } from '@ionic/angular';
-import { ProgressService } from '../services/progress.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AddExerciseComponent } from '../components/add-exercise/add-exercise.component';
 import { ActivatedRoute } from '@angular/router';
-import { Progress } from '../models/progress.model';
-import { Exercise } from '../models/exercise.model';
+
+// Model
+import { Progress } from '@models/progress.model';
+import { Exercise } from '@models/exercise.model';
+
+// Service
+import { ProgressService } from '@services/progress.service';
+
+// Component
+import { AddExerciseComponent } from '../components/add-exercise/add-exercise.component';
 
 @Component({
   selector: 'app-edit-progress',
