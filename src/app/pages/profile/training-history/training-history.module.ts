@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
 
-import { WorkoutDetailPageRoutingModule } from './workout-detail-routing.module';
+import { TrainingHistoryPageRoutingModule } from './training-history-routing.module';
+import { TrainingHistoryPage } from './training-history.page';
 
-import { WorkoutDetailPage } from './workout-detail.page';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
@@ -14,9 +13,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    WorkoutDetailPageRoutingModule,
+    TrainingHistoryPageRoutingModule,
     SharedModule
   ],
-  declarations: [WorkoutDetailPage]
+  declarations: [TrainingHistoryPage]
 })
-export class WorkoutDetailPageModule {}
+export class TrainingHistoryPageModule {}

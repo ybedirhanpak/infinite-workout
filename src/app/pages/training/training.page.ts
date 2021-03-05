@@ -13,7 +13,7 @@ import { ThemeService } from '@services/theme.service';
 import { DateService } from '@services/date.service';
 
 @Component({
-  selector: 'app-workout',
+  selector: 'app-training',
   templateUrl: './training.page.html',
   styleUrls: ['./training.page.scss'],
 })
@@ -91,12 +91,12 @@ export class TrainingPage implements OnInit, OnDestroy {
   }
 
   /**
-   * On first execution for each workout, starts the workout.
-   * On subsequent executions, resets rest time; until workout is finished.
+   * On first execution for each training, starts the training.
+   * On subsequent executions, resets rest time; until training is finished.
    */
   onCircleClick() {
     if (!this.trainingStarted) {
-      // Start the workout
+      // Start the training
       this.trainingStarted = true;
 
       // Start counting rest time
@@ -136,7 +136,7 @@ export class TrainingPage implements OnInit, OnDestroy {
     this.alertController
       .create({
         header: 'Are you sure?',
-        message: 'Do you want to end this workout?',
+        message: 'Do you want to end this training?',
         buttons: [
           {
             text: 'Save',
@@ -205,14 +205,14 @@ export class TrainingPage implements OnInit, OnDestroy {
   }
 
   /**
-   * Stops workout without saving it.
+   * Stops training without saving it.
    */
   stopTraining() {
     this.resetTraining();
   }
 
   /**
-   * Stops workout and saves the workout record
+   * Stops training and saves the training record
    */
   saveTraining() {
     const exercises: ExerciseRecord[] = this.progressList.map((progress) => {
@@ -230,7 +230,7 @@ export class TrainingPage implements OnInit, OnDestroy {
       .saveTrainingRecord(exercises, new Date(), this.totalTimeString)
       .then(() => {
         this.resetTraining();
-        // TODO: Navigate to workout record page
+        // TODO: Navigate to training record page
       })
       .catch(() => {
         // TODO: Display error message

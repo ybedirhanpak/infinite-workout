@@ -1,19 +1,24 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { TrainingRecord } from '../../../models/training.model';
 import { ActivatedRoute } from '@angular/router';
-import { TrainingService } from '../../../services/training.service';
+
+// Model
+import { TrainingRecord } from '@models/training.model';
+
+// Service
+import { TrainingService } from '@services/training.service';
 
 @Component({
-  selector: 'app-workout-detail',
-  templateUrl: './workout-detail.page.html',
-  styleUrls: ['./workout-detail.page.scss'],
+  selector: 'app-training-record',
+  templateUrl: './training-record.page.html',
+  styleUrls: ['./training-record.page.scss'],
 })
-export class WorkoutDetailPage implements OnInit, OnDestroy {
+export class TrainingRecordPage implements OnInit, OnDestroy {
   paramSub: Subscription;
-  workout: TrainingRecord;
+  trainingRecord: TrainingRecord;
   isLoading = false;
+
   constructor(
     private alertController: AlertController,
     private navController: NavController,
@@ -23,16 +28,16 @@ export class WorkoutDetailPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.paramSub = this.route.paramMap.subscribe((paramMap) => {
-      if (!paramMap.has('workoutId')) {
+      if (!paramMap.has('id')) {
         this.navController.navigateBack('/home/training');
         return;
       }
       this.isLoading = true;
       this.trainingService
-        .getTrainingRecord(parseInt(paramMap.get('workoutId'), 10))
-        .then((workout) => {
-          this.workout = workout;
-          if (!this.workout) {
+        .getTrainingRecord(parseInt(paramMap.get('id'), 10))
+        .then((trainingRecord) => {
+          this.trainingRecord = trainingRecord;
+          if (!this.trainingRecord) {
             this.showErrorModal();
             return;
           }

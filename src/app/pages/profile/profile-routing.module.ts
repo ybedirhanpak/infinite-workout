@@ -11,15 +11,15 @@ const routes: Routes = [
   {
     path: 'history',
     loadChildren: () =>
-      import('./workout-history/workout-history.module').then(
-        (m) => m.WorkoutHistoryPageModule
+      import('./training-history/training-history.module').then(
+        (m) => m.TrainingHistoryPageModule
       ),
   },
   {
-    path: 'detail/:workoutId',
+    path: 'detail/:id',
     loadChildren: () =>
-      import('./workout-detail/workout-detail.module').then(
-        (m) => m.WorkoutDetailPageModule
+      import('./training-record/training-record.module').then(
+        (m) => m.TrainingRecordPageModule
       ),
   },
   {

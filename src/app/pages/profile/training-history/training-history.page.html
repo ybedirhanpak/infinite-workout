@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home/profile"></ion-back-button>
     </ion-buttons>
-    <ion-title>Workout History</ion-title>
+    <ion-title>Training History</ion-title>
     <ion-buttons slot="end">
       <ion-button fill="clear" [disabled]="true"></ion-button>
     </ion-buttons>
@@ -16,40 +16,40 @@
       <ion-spinner name="crescent"></ion-spinner>
     </div>
     <div
-      *ngIf="!isLoading && !(workoutList && workoutList.length > 0)"
+      *ngIf="!isLoading && !(trainingRecordList && trainingRecordList.length > 0)"
       class="ion-text-center"
     >
-      <p>There are no workouts to show.</p>
+      <p>There are no training history to show.</p>
       <ion-button routerLink="/home/training" fill="clear"
-        >Do your first workout now!</ion-button
+        >Do your first training now!</ion-button
       >
     </div>
     <div
-      class="workout-list"
-      *ngIf="!isLoading && workoutList && workoutList.length > 0"
+      class="training-list"
+      *ngIf="!isLoading && trainingRecordList && trainingRecordList.length > 0"
     >
-      <div class="workout-list-header">
+      <div class="training-list-header">
         <h3>Date</h3>
         <h3>Total Time</h3>
       </div>
-      <ion-list class="workout-list-content ion-no-padding">
+      <ion-list class="training-list-content ion-no-padding">
         <ion-item-sliding
-          *ngFor="let workout of workoutList"
+          *ngFor="let trainingRecord of trainingRecordList"
           class="ion-no-padding"
         >
           <ion-item
-            [routerLink]="['/','home','profile','detail', workout.id]"
+            [routerLink]="['/','home','profile','detail', trainingRecord.id]"
             button
             detail
             class="ion-no-padding"
           >
             <div class="item-content">
-              <p>{{workout.date | date }}</p>
-              <p>{{workout.totalTime}}</p>
+              <p>{{trainingRecord.date | date }}</p>
+              <p>{{trainingRecord.totalTime}}</p>
             </div>
           </ion-item>
           <ion-item-options side="end">
-            <ion-item-option color="danger" (click)="deleteWorkout(workout)">
+            <ion-item-option color="danger" (click)="deleteTrainingRecord(trainingRecord)">
               <ion-icon name="trash" slot="icon-only" size="small"></ion-icon>
             </ion-item-option>
           </ion-item-options>

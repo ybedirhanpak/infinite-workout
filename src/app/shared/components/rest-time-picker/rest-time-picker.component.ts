@@ -28,7 +28,7 @@ export class RestTimePickerComponent implements OnInit {
   }
 
   /**
-   * Saves rest time value with workout service
+   * Saves rest time value with training service
    * @param event change of rest time
    */
   onRestTimeChange(event: any) {

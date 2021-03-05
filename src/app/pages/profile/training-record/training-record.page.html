@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home/profile/history"></ion-back-button>
     </ion-buttons>
-    <ion-title>Workout Details</ion-title>
+    <ion-title>Training Record</ion-title>
     <ion-buttons slot="end">
       <ion-button fill="clear" [disabled]="true"></ion-button>
     </ion-buttons>
@@ -15,30 +15,30 @@
     <div *ngIf="isLoading" class="ion-text-center">
       <ion-spinner name="crescent"></ion-spinner>
     </div>
-    <div *ngIf="!isLoading && workout" class="workout">
-      <div class="workout-header ion-text-center">
-        <div class="workout-header-group">
+    <div *ngIf="!isLoading && trainingRecord" class="training-record">
+      <div class="trainingRecord-header ion-text-center">
+        <div class="trainingRecord-header-group">
           <h1>Date:</h1>
-          <h1>{{ workout.date | date }}</h1>
+          <h1>{{ trainingRecord.date | date }}</h1>
         </div>
-        <div class="workout-header-group">
+        <div class="trainingRecord-header-group">
           <h2>Total Time:</h2>
-          <h2>{{ workout.totalTime }}</h2>
+          <h2>{{ trainingRecord.totalTime }}</h2>
         </div>
       </div>
       <div
-        *ngIf="!(workout.exercises && workout.exercises.length > 0)"
+        *ngIf="!(trainingRecord.exercises && trainingRecord.exercises.length > 0)"
         class="ion-text-center"
       >
-        <p>No exercise recorded for this workout.</p>
+        <p>No exercise recorded for this trainingRecord.</p>
       </div>
       <div
-        *ngIf="workout.exercises && workout.exercises.length > 0"
+        *ngIf="trainingRecord.exercises && trainingRecord.exercises.length > 0"
         class="progress-list"
       >
         <ion-list class="ion-no-padding">
           <ion-item
-            *ngFor="let exercise of workout.exercises"
+            *ngFor="let exercise of trainingRecord.exercises"
             class="progress-item ion-no-padding"
           >
             <div class="progress-item-content">
