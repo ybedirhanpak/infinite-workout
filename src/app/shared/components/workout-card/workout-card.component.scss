@@ -1,10 +1,6 @@
 .workout-card {
   margin: 0;
 
-  &.clicked {
-    transform: scale(0.9);
-  }
-
   img {
     height: 160px;
     width: 100%;
