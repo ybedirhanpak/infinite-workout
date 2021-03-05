@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Workout Detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="workout-detail" *ngIf="workout">
+    <img class="cover-image" [src]="workout.imageUrl" [alt]="workout.name">
+    <h1 class="ion-padding-horizontal" style="font-weight: bold;">{{ workout.name }}</h1>
+    <ion-list lines="none">
+      <ion-item>
+        <ion-icon name="time-outline" slot="start"></ion-icon>{{ workout.duration }}
+      </ion-item>
+      <ion-item>
+        <ion-icon name="trophy-outline" slot="start"></ion-icon>{{ workout.category }}
+      </ion-item>
+      <ion-item>
+        <ion-icon name="barbell-outline" slot="start"></ion-icon>{{ workout.equipments }}
+      </ion-item>
+    </ion-list>
+    <h2 class="ion-padding-horizontal" style="font-weight: bold;">Overview</h2>
+    <ion-list *ngIf="workout.exercises">
+      <ion-item class="exercise" *ngFor="let exercise of workout.exercises">
+        <ion-avatar slot="start">
+          <img [src]="exercise.imageUrl" [alt]="exercise.name">
+        </ion-avatar>
+        <ion-label>
+          <h3>{{ exercise.name }}</h3>
+          <div class="exercise-details">
+            <p>{{ exercise.repetition }}</p>
+            <p>{{ exercise.weight }}</p>
+          </div>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

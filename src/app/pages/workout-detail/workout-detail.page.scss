@@ -1,0 +1,12 @@
+.workout-detail {
+  .exercise {
+    &-details {
+      display: flex;
+
+      p {
+        flex: 1;
+        color: var(--ion-color-step-600, #666666);
+      }
+    }
+  }
+}
