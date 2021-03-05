@@ -9,7 +9,7 @@ import { TrainingPageRoutingModule } from './training-routing.module';
 import { TrainingPage } from './training.page';
 
 import { NgCircleProgressModule } from 'ng-circle-progress';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({

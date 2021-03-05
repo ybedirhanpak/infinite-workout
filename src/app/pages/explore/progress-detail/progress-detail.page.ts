@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController, NavController } from '@ionic/angular';
-import { Progress } from 'src/app/progress/models/progress.model';
-import { ExploreService } from '../services/explore.service';
 import { ActivatedRoute, Router } from '@angular/router';
+
+// Model
+import { Progress } from '@models/progress.model';
+
+// Service
+import { ExploreService } from '@services/explore.service';
 
 @Component({
   selector: 'app-progress-detail',

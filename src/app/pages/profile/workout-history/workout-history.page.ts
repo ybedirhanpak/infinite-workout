@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { TrainingRecord } from '../../training/models/training.model';
+import { TrainingRecord } from '../../../models/training.model';
 import { Subscription } from 'rxjs';
-import { TrainingService } from '../../training/services/training.service';
+import { TrainingService } from '../../../services/training.service';
 import { LoadingController } from '@ionic/angular';
 
 @Component({

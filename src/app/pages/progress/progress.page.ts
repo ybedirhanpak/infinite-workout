@@ -1,9 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ProgressService } from './services/progress.service';
-import { Progress } from './models/progress.model';
 import { Subscription } from 'rxjs';
 import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
+
+// Model
+import { Progress } from '@models/progress.model';
+
+// Service
+import { ProgressService } from '../../services/progress.service';
 
 @Component({
   selector: 'app-progress',

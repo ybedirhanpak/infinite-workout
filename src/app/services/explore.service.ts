@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, from, of } from 'rxjs';
-import { Progress, ProgressData } from '../../progress/models/progress.model';
-import { ProgressService } from '../../progress/services/progress.service';
+import { BehaviorSubject } from 'rxjs';
+
+// Model
+import { Progress, ProgressData } from '@models/progress.model';
+
+// Service
+import { ProgressService } from '@services/progress.service';
 
 const BASE_URL = 'https://infinite-workout.firebaseio.com';
 

@@ -5,9 +5,15 @@ import {
   LoadingController,
   NavController,
 } from '@ionic/angular';
+
+// Model
+import { Exercise } from '../../../models/exercise.model';
+
+// Service
+import { ProgressService } from '../../../services/progress.service';
+
+// Component
 import { AddExerciseComponent } from '../components/add-exercise/add-exercise.component';
-import { ProgressService } from '../services/progress.service';
-import { Exercise } from '../models/exercise.model';
 
 @Component({
   selector: 'app-create-progress',

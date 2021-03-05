@@ -1,12 +1,16 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { Progress } from '../progress/models/progress.model';
-import { ProgressService } from '../progress/services/progress.service';
 import { Subscription } from 'rxjs';
 import { IonSlides, AlertController } from '@ionic/angular';
-import { TrainingService } from './services/training.service';
-import { ExerciseRecord } from './models/training.model';
-import { ThemeService } from '../shared/services/theme.service';
-import { DateService } from '../shared/services/date.service';
+
+// Model
+import { ExerciseRecord } from '@models/training.model';
+import { Progress } from '@models/progress.model';
+
+// Service
+import { ProgressService } from '@services/progress.service';
+import { TrainingService } from '@services/training.service';
+import { ThemeService } from '@services/theme.service';
+import { DateService } from '@services/date.service';
 
 @Component({
   selector: 'app-workout',

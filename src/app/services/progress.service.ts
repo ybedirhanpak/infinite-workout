@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { BehaviorSubject } from 'rxjs';
-import { Progress } from '../models/progress.model';
-import { Exercise } from '../models/exercise.model';
+
+// Model
+import { Progress } from '@models/progress.model';
+import { Exercise } from '@models/exercise.model';
 
 const PROGRESS_KEY = 'PROGRESS';
 

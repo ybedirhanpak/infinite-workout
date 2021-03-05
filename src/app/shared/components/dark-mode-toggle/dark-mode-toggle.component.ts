@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
-import { Theme } from '../../interfaces/theme';
-import { ThemeService } from '../../services/theme.service';
+import { ThemeService, Theme } from '../../../services/theme.service';
 
 interface ThemeOption {
   value: Theme;
