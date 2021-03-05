@@ -27,6 +27,6 @@ export class WorkoutSlideComponent implements OnInit {
 
   onWorkoutClick(workout: Workout) {
     this.workoutService.setWorkoutDetail(workout);
-    this.router.navigateByUrl("/home/workout-detail")
+    this.router.navigateByUrl("/home/my-library/workout-detail")
   }
 }

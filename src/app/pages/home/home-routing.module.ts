@@ -40,10 +40,6 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'workout-detail',
-        loadChildren: () => import('../workout-detail/workout-detail.module').then( m => m.WorkoutDetailPageModule)
-      },
-      {
         path: '',
         redirectTo: '/home/progress',
         pathMatch: 'full',
