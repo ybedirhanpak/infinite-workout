@@ -8,13 +8,16 @@ import { MyLibraryPageRoutingModule } from './my-library-routing.module';
 
 import { MyLibraryPage } from './my-library.page';
 
+import { SharedModule } from '../../shared/shared.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MyLibraryPageRoutingModule
+    MyLibraryPageRoutingModule,
+    SharedModule,
   ],
-  declarations: [MyLibraryPage]
+  declarations: [MyLibraryPage],
 })
 export class MyLibraryPageModule {}
