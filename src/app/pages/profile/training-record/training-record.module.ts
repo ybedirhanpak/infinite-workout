@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { WorkoutHistoryPageRoutingModule } from './workout-history-routing.module';
+import { TrainingRecordPageRoutingModule } from './training-record-routing.module';
 
-import { WorkoutHistoryPage } from './workout-history.page';
+import { TrainingRecordPage } from './training-record.page';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    WorkoutHistoryPageRoutingModule,
+    TrainingRecordPageRoutingModule,
     SharedModule
   ],
-  declarations: [WorkoutHistoryPage]
+  declarations: [TrainingRecordPage]
 })
-export class WorkoutHistoryPageModule {}
+export class TrainingRecordPageModule {}
