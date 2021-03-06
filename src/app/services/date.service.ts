@@ -15,7 +15,7 @@ export class DateService {
    *
    * @param num number to be padded
    */
-  padZero(num: number) {
+  pad(num: number) {
     if (!num || num < 0) {
       return '00';
     } else if (num < 10) {
@@ -26,21 +26,31 @@ export class DateService {
 
   /**
    * Converts string to second.
-   * Expects strings to be in format 'HH:MM:SS'
+   * Expects strings to be in format 'HH:MM:SS' or 'MM:SS'
    *
    * @param str string to be converted to second
    */
   stringToSeconds(str: string) {
     const split = str.split(':');
-    if (split.length !== 3) {
-      throw new Error('String format must be "HH:MM:SS"');
+
+    if (split.length === 2) {
+      // MM:SS format
+      const minute = parseInt(split[0], 10) || 0;
+      const second = parseInt(split[0], 10) || 0;
+
+      return minute * this.MIN_S + second;
     }
 
-    const hour = parseInt(split[0], 10) || 0;
-    const minute = parseInt(split[1], 10) || 0;
-    const second = parseInt(split[2], 10) || 0;
+    if (split.length === 3) {
+      // HH:MM:SS format
+      const hour = parseInt(split[0], 10) || 0;
+      const minute = parseInt(split[1], 10) || 0;
+      const second = parseInt(split[2], 10) || 0;
 
-    return hour * this.HOUR_S + minute * this.MIN_S + second;
+      return hour * this.HOUR_S + minute * this.MIN_S + second;
+    }
+
+    throw new Error('String format must be either "HH:MM:SS" or "MM:SS"');
   }
 
   /**
@@ -55,8 +65,10 @@ export class DateService {
     const mins = Math.floor(seconds / this.MIN_S);
     seconds = seconds % this.MIN_S;
 
-    return (
-      `${this.padZero(hours)}:${this.padZero(mins)}:${this.padZero(seconds)}`
-    );
+    if (hours > 0) {
+      return `${this.pad(hours)}:${this.pad(mins)}:${this.pad(seconds)}`;
+    }
+
+    return `${this.pad(mins)}:${this.pad(seconds)}`;
   }
 }
