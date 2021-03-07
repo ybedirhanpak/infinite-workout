@@ -16,7 +16,7 @@
             {
                 "id": 1,
                 "name": "Biceps Curl",
-                "imageUrl": "https://images.pexels.com/photos/3763115/pexels-photo-3763115.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                "imageUrl": "https://images.unsplash.com/photo-1543975200-8e313fb04fc7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80",
                 "load": {
                     "type": "weight",
                     "opts": {
@@ -86,7 +86,7 @@
             {
                 "id": 3,
                 "name": "Deadlift",
-                "imageUrl": "https://images.unsplash.com/photo-1566241142404-6c2bb4201a30?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
+                "imageUrl": "https://images.unsplash.com/photo-1584863231364-2edc166de576?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1650&q=80",
                 "load": {
                     "type": "weight",
                     "opts": {
@@ -105,7 +105,7 @@
             {
                 "id": 4,
                 "name": "Shoulder Press",
-                "imageUrl": "https://images.pexels.com/photos/2628215/pexels-photo-2628215.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                "imageUrl": "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1649&q=80",
                 "load": {
                     "type": "weight",
                     "opts": {
@@ -124,7 +124,7 @@
             {
                 "id": 1,
                 "name": "Biceps Curl",
-                "imageUrl": "https://images.pexels.com/photos/3763115/pexels-photo-3763115.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                "imageUrl": "https://images.unsplash.com/photo-1543975200-8e313fb04fc7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80",
                 "load": {
                     "type": "weight",
                     "opts": {
@@ -159,7 +159,7 @@
             {
                 "id": 1,
                 "name": "Biceps Curl",
-                "imageUrl": "https://images.pexels.com/photos/3763115/pexels-photo-3763115.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                "imageUrl": "https://images.unsplash.com/photo-1543975200-8e313fb04fc7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80",
                 "load": {
                     "type": "weight",
                     "opts": {
@@ -178,7 +178,7 @@
             {
                 "id": 4,
                 "name": "Shoulder Press",
-                "imageUrl": "https://images.pexels.com/photos/2628215/pexels-photo-2628215.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                "imageUrl": "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1649&q=80",
                 "load": {
                     "type": "weight",
                     "opts": {
@@ -197,7 +197,7 @@
             {
                 "id": 5,
                 "name": "Pull Up",
-                "imageUrl": "https://images.pexels.com/photos/4608162/pexels-photo-4608162.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                "imageUrl": "https://images.unsplash.com/photo-1597347316205-36f6c451902a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
                 "load": {
                     "type": "bodyWeight"
                 },
@@ -212,7 +212,7 @@
             {
                 "id": 3,
                 "name": "Deadlift",
-                "imageUrl": "https://images.unsplash.com/photo-1566241142404-6c2bb4201a30?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
+                "imageUrl": "https://images.unsplash.com/photo-1584863231364-2edc166de576?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1650&q=80",
                 "load": {
                     "type": "weight",
                     "opts": {
@@ -247,7 +247,7 @@
             {
                 "id": 5,
                 "name": "Pull Up",
-                "imageUrl": "https://images.pexels.com/photos/4608162/pexels-photo-4608162.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                "imageUrl": "https://images.unsplash.com/photo-1597347316205-36f6c451902a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
                 "load": {
                     "type": "bodyWeight"
                 },
@@ -262,7 +262,7 @@
             {
                 "id": 6,
                 "name": "Push Up",
-                "imageUrl": "https://images.pexels.com/photos/176782/pexels-photo-176782.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                "imageUrl": "https://images.unsplash.com/photo-1566351566999-d975d35c3325?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1651&q=80",
                 "load": {
                     "type": "bodyWeight"
                 },
@@ -277,7 +277,7 @@
             {
                 "id": 7,
                 "name": "Squat",
-                "imageUrl": "https://images.pexels.com/photos/3775566/pexels-photo-3775566.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                "imageUrl": "https://images.unsplash.com/photo-1536922246289-88c42f957773?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1980&q=80",
                 "load": {
                     "type": "bodyWeight"
                 },
@@ -308,7 +308,7 @@
             {
                 "id": 9,
                 "name": "Leg Raise",
-                "imageUrl": "https://images.pexels.com/photos/3755018/pexels-photo-3755018.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                "imageUrl": "https://images.unsplash.com/photo-1520787497953-1985ca467702?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1550&q=80",
                 "load": {
                     "type": "bodyWeight"
                 },
@@ -332,6 +332,91 @@
                     "opts": {
                         "set": 3,
                         "rep": 12
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Mix Workout",
+        "category": "Calisthenics & Weight & Cardio",
+        "imageUrl": "https://images.unsplash.com/photo-1581009137042-c552e485697a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
+        "duration": {
+            "type": "time",
+            "opts": {
+                "time": 40,
+                "unit": "min"
+            }
+        },
+        "equipments": ["Body Weight"],
+        "exercises": [
+            {
+                "id": 5,
+                "name": "Pull Up",
+                "imageUrl": "https://images.unsplash.com/photo-1597347316205-36f6c451902a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
+                "load": {
+                    "type": "bodyWeight"
+                },
+                "rep": {
+                    "type": "setRep",
+                    "opts": {
+                        "set": 4,
+                        "rep": 10
+                    }
+                }
+            },
+            {
+                "id": 8,
+                "name": "Plank",
+                "imageUrl": "https://images.pexels.com/photos/2294354/pexels-photo-2294354.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                "load": {
+                    "type": "bodyWeight"
+                },
+                "rep": {
+                    "type": "setTime",
+                    "opts": {
+                        "set": 3,
+                        "time": 40,
+                        "unit": "sec"
+                    }
+                }
+            },
+            {
+                "id": 2,
+                "name": "Running",
+                "imageUrl": "https://images.pexels.com/photos/936094/pexels-photo-936094.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                "load": {
+                    "type": "distance",
+                    "opts": {
+                        "distance": 10,
+                        "unit": "km"
+                    }
+                },
+                "rep": {
+                    "type": "time",
+                    "opts": {
+                        "time": 50,
+                        "unit": "min"
+                    }
+                }
+            },
+            {
+                "id": 4,
+                "name": "Shoulder Press",
+                "imageUrl": "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1649&q=80",
+                "load": {
+                    "type": "weight",
+                    "opts": {
+                        "weight": 40,
+                        "unit": "kg"
+                    }
+                },
+                "rep": {
+                    "type": "setRep",
+                    "opts": {
+                        "set": 4,
+                        "rep": 6
                     }
                 }
             }
