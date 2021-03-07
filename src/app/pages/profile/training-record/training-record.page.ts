@@ -29,7 +29,7 @@ export class TrainingRecordPage implements OnInit, OnDestroy {
   ngOnInit() {
     this.paramSub = this.route.paramMap.subscribe((paramMap) => {
       if (!paramMap.has('id')) {
-        this.navController.navigateBack('/home/training');
+        this.navController.navigateBack('/home');
         return;
       }
       this.isLoading = true;
@@ -65,7 +65,7 @@ export class TrainingRecordPage implements OnInit, OnDestroy {
         buttons: [
           {
             text: 'Okay',
-            handler: () => this.navController.navigateBack('/home/training'),
+            handler: () => this.navController.navigateBack('/home'),
           },
         ],
       })

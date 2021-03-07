@@ -15,34 +15,19 @@
     <div *ngIf="isLoading" class="ion-text-center">
       <ion-spinner name="crescent"></ion-spinner>
     </div>
-    <div
-      *ngIf="!isLoading && !(trainingRecordList && trainingRecordList.length > 0)"
-      class="ion-text-center"
-    >
+    <div *ngIf="!isLoading && !(trainingRecordList && trainingRecordList.length > 0)" class="ion-text-center">
       <p>There are no training history to show.</p>
-      <ion-button routerLink="/home/training" fill="clear"
-        >Do your first training now!</ion-button
-      >
+      <ion-button routerLink="/training" fill="clear">Do your first training now!</ion-button>
     </div>
-    <div
-      class="training-list"
-      *ngIf="!isLoading && trainingRecordList && trainingRecordList.length > 0"
-    >
+    <div class="training-list" *ngIf="!isLoading && trainingRecordList && trainingRecordList.length > 0">
       <div class="training-list-header">
         <h3>Date</h3>
         <h3>Total Time</h3>
       </div>
       <ion-list class="training-list-content ion-no-padding">
-        <ion-item-sliding
-          *ngFor="let trainingRecord of trainingRecordList"
-          class="ion-no-padding"
-        >
-          <ion-item
-            [routerLink]="['/','home','profile','detail', trainingRecord.id]"
-            button
-            detail
-            class="ion-no-padding"
-          >
+        <ion-item-sliding *ngFor="let trainingRecord of trainingRecordList" class="ion-no-padding">
+          <ion-item [routerLink]="['/','home','profile','detail', trainingRecord.id]" button detail
+            class="ion-no-padding">
             <div class="item-content">
               <p>{{trainingRecord.date | date }}</p>
               <p>{{trainingRecord.totalTime}}</p>
