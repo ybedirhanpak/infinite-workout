@@ -4,15 +4,33 @@
         "name": "Gym Perfection",
         "category": "Hypertrophy",
         "imageUrl": "https://images.pexels.com/photos/3490348/pexels-photo-3490348.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-        "duration": "45 min",
+        "duration": {
+            "type": "time",
+            "opts": {
+                "time": 45,
+                "unit": "min"
+            }
+        },
         "equipments": ["Barbell", "Dumbbell"],
         "exercises": [
             {
                 "id": 1,
                 "name": "Biceps Curl",
                 "imageUrl": "https://images.pexels.com/photos/3763115/pexels-photo-3763115.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-                "repetition": "3 sets 12 reps",
-                "weight": "15 kg"
+                "load": {
+                    "type": "weight",
+                    "opts": {
+                        "weight": 15,
+                        "unit": "kg"
+                    }
+                },
+                "rep": {
+                    "type": "setRep",
+                    "opts": {
+                        "set": 3,
+                        "rep": 12
+                    }
+                }
             }
         ]
     },
@@ -21,15 +39,33 @@
         "name": "Beautiful Morning",
         "category": "Cardio",
         "imageUrl": "https://images.pexels.com/photos/35009/runner-marathon-military-afghanistan.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-        "duration": "50 min",
+        "duration": {
+            "type": "time",
+            "opts": {
+                "time": 50,
+                "unit": "min"
+            }
+        },
         "equipments": ["Body Weight"],
         "exercises": [
             {
                 "id": 2,
                 "name": "Running",
                 "imageUrl": "https://images.pexels.com/photos/936094/pexels-photo-936094.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-                "repetition": "50 min",
-                "weight": "10 km"
+                "load": {
+                    "type": "distance",
+                    "opts": {
+                        "distance": 10,
+                        "unit": "km"
+                    }
+                },
+                "rep": {
+                    "type": "time",
+                    "opts": {
+                        "time": 50,
+                        "unit": "min"
+                    }
+                }
             }
         ]
     },
@@ -38,29 +74,71 @@
         "name": "Superman",
         "category": "Strength",
         "imageUrl": "https://images.pexels.com/photos/17840/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-        "duration": "60 min",
+        "duration": {
+            "type": "time",
+            "opts": {
+                "time": 60,
+                "unit": "min"
+            }
+        },
         "equipments": ["Barbell", "Dumbbell"],
         "exercises": [
             {
                 "id": 3,
                 "name": "Deadlift",
                 "imageUrl": "https://images.unsplash.com/photo-1566241142404-6c2bb4201a30?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
-                "repetition": "5 sets 5 reps",
-                "weight": "80 kg"
+                "load": {
+                    "type": "weight",
+                    "opts": {
+                        "weight": 80,
+                        "unit": "kg"
+                    }
+                },
+                "rep": {
+                    "type": "setRep",
+                    "opts": {
+                        "set": 5,
+                        "rep": 5
+                    }
+                }
             },
             {
                 "id": 4,
                 "name": "Shoulder Press",
                 "imageUrl": "https://images.pexels.com/photos/2628215/pexels-photo-2628215.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-                "repetition": "4 sets 6 reps",
-                "weight": "40 kg"
+                "load": {
+                    "type": "weight",
+                    "opts": {
+                        "weight": 40,
+                        "unit": "kg"
+                    }
+                },
+                "rep": {
+                    "type": "setRep",
+                    "opts": {
+                        "set": 4,
+                        "rep": 6
+                    }
+                }
             },
             {
                 "id": 1,
                 "name": "Biceps Curl",
                 "imageUrl": "https://images.pexels.com/photos/3763115/pexels-photo-3763115.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-                "repetition": "4 sets 6 reps",
-                "weight": "20 kg"
+                "load": {
+                    "type": "weight",
+                    "opts": {
+                        "weight": 20,
+                        "unit": "kg"
+                    }
+                },
+                "rep": {
+                    "type": "setRep",
+                    "opts": {
+                        "set": 4,
+                        "rep": 6
+                    }
+                }
             }
         ]
     },
@@ -69,36 +147,86 @@
         "name": "Full Body",
         "category": "Hypertrophy & Strength",
         "imageUrl": "https://images.pexels.com/photos/28080/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-        "duration": "45 min",
+        "duration": {
+            "type": "time",
+            "opts": {
+                "time": 45,
+                "unit": "min"
+            }
+        },
         "equipments": ["Barbell", "Dumbbell", "Body Weight"],
         "exercises": [
             {
                 "id": 1,
                 "name": "Biceps Curl",
                 "imageUrl": "https://images.pexels.com/photos/3763115/pexels-photo-3763115.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-                "repetition": "3 sets 12 reps",
-                "weight": "15 kg"
+                "load": {
+                    "type": "weight",
+                    "opts": {
+                        "weight": 15,
+                        "unit": "kg"
+                    }
+                },
+                "rep": {
+                    "type": "setRep",
+                    "opts": {
+                        "set": 3,
+                        "rep": 12
+                    }
+                }
             },
             {
                 "id": 4,
                 "name": "Shoulder Press",
                 "imageUrl": "https://images.pexels.com/photos/2628215/pexels-photo-2628215.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-                "repetition": "4 sets 12 reps",
-                "weight": "20 kg"
+                "load": {
+                    "type": "weight",
+                    "opts": {
+                        "weight": 20,
+                        "unit": "kg"
+                    }
+                },
+                "rep": {
+                    "type": "setRep",
+                    "opts": {
+                        "set": 4,
+                        "rep": 12
+                    }
+                }
             },
             {
                 "id": 5,
                 "name": "Pull Up",
                 "imageUrl": "https://images.pexels.com/photos/4608162/pexels-photo-4608162.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-                "repetition": "4 sets 12 reps",
-                "weight": "Body weight"
+                "load": {
+                    "type": "bodyWeight"
+                },
+                "rep": {
+                    "type": "setRep",
+                    "opts": {
+                        "set": 4,
+                        "rep": 12
+                    }
+                }
             },
             {
                 "id": 3,
                 "name": "Deadlift",
                 "imageUrl": "https://images.unsplash.com/photo-1566241142404-6c2bb4201a30?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
-                "repetition": "4 sets 5 reps",
-                "weight": "60 kg"
+                "load": {
+                    "type": "weight",
+                    "opts": {
+                        "weight": 60,
+                        "unit": "kg"
+                    }
+                },
+                "rep": {
+                    "type": "setRep",
+                    "opts": {
+                        "set": 4,
+                        "rep": 5
+                    }
+                }
             }
         ]
     },
@@ -107,50 +235,105 @@
         "name": "Home Workout",
         "category": "Calisthenics",
         "imageUrl": "https://images.pexels.com/photos/1191804/pexels-photo-1191804.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-        "duration": "40 min",
+        "duration": {
+            "type": "time",
+            "opts": {
+                "time": 40,
+                "unit": "min"
+            }
+        },
         "equipments": ["Body Weight"],
         "exercises": [
             {
                 "id": 5,
                 "name": "Pull Up",
                 "imageUrl": "https://images.pexels.com/photos/4608162/pexels-photo-4608162.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-                "repetition": "4 sets 10 reps",
-                "weight": "Body weight"
+                "load": {
+                    "type": "bodyWeight"
+                },
+                "rep": {
+                    "type": "setRep",
+                    "opts": {
+                        "set": 4,
+                        "rep": 10
+                    }
+                }
             },
             {
                 "id": 6,
                 "name": "Push Up",
                 "imageUrl": "https://images.pexels.com/photos/176782/pexels-photo-176782.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-                "repetition": "4 sets 12 reps",
-                "weight": "Body weight"
+                "load": {
+                    "type": "bodyWeight"
+                },
+                "rep": {
+                    "type": "setRep",
+                    "opts": {
+                        "set": 4,
+                        "rep": 12
+                    }
+                }
             },
             {
                 "id": 7,
                 "name": "Squat",
                 "imageUrl": "https://images.pexels.com/photos/3775566/pexels-photo-3775566.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-                "repetition": "4 sets 12 reps",
-                "weight": "Body weight"
+                "load": {
+                    "type": "bodyWeight"
+                },
+                "rep": {
+                    "type": "setRep",
+                    "opts": {
+                        "set": 4,
+                        "rep": 12
+                    }
+                }
             },
             {
                 "id": 8,
                 "name": "Plank",
                 "imageUrl": "https://images.pexels.com/photos/2294354/pexels-photo-2294354.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-                "repetition": "4 sets 40 seconds",
-                "weight": "Body weight"
+                "load": {
+                    "type": "bodyWeight"
+                },
+                "rep": {
+                    "type": "setTime",
+                    "opts": {
+                        "set": 4,
+                        "time": 40,
+                        "unit": "sec"
+                    }
+                }
             },
             {
                 "id": 9,
                 "name": "Leg Raise",
                 "imageUrl": "https://images.pexels.com/photos/3755018/pexels-photo-3755018.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-                "repetition": "3 sets 10 reps",
-                "weight": "Body weight"
+                "load": {
+                    "type": "bodyWeight"
+                },
+                "rep": {
+                    "type": "setRep",
+                    "opts": {
+                        "set": 3,
+                        "rep": 10
+                    }
+                }
             },
             {
                 "id": 10,
                 "name": "Dips",
                 "imageUrl": "https://images.unsplash.com/photo-1598267416809-5c73f1b24404?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=977&q=80",
-                "repetition": "3 sets 12 reps",
-                "weight": "Body weight"
+                "load": {
+                    "type": "bodyWeight"
+                },
+                "rep": {
+                    "type": "setRep",
+                    "opts": {
+                        "set": 3,
+                        "rep": 12
+                    }
+                }
             }
         ]
     }
