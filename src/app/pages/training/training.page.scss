@@ -1,128 +1,87 @@
-.exercise-slide {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  margin: 0.5rem 0;
-  .exercise {
-    width: 50%;
-    ion-slide {
-      margin-top: auto;
-      margin-bottom: auto;
-    }
-    &__content {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
+.training-page-body {
+  height: calc(100vh - 112px);
+
+  ion-slides {
+    height: 100%;
   }
-  .arrow {
-    width: 25%;
-    ion-button {
-      width: 100%;
-      height: 100%;
+
+  .exercise {
+    height: 100%;
+    transition: 0.4s ease;
+
+    &.next {
+      transform: scale(0.8);
+    }
+
+    &.prev {
+      transform: scale(0.8);
+    }
+
+    &-card {
+      height: 60%;
+      margin: 0;
+
+      img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        object-position: center;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      ion-card-header {
+        text-align: start;
+        padding: 0.8rem 1rem;
+        height: 7.5rem;
+
+        ion-card-subtitle {
+          line-height: 1rem;
+          text-transform: uppercase;
+          margin-bottom: 0.25rem;
+        }
+
+        ion-card-title {
+          font-size: 1.5rem;
+          line-height: 1.5rem;
+          margin-bottom: 0.25rem;
+        }
+
+        ion-text {
+          font-size: 1rem;
+          line-height: 1rem;
+        }
+      }
+
+      ion-card-content {
+        ion-text {
+          font-size: 1.5rem;
+        }
+      }
+    }
+
+    &-clock {
+      height: 35%;
+    }
+
+    &-next {
+      height: 5%;
+
+      ion-text {
+        font-size: 1rem;
+        text-transform: uppercase;
+        color: var(--ion-color-step-600, #666666);
+        font-weight: 700;
+      }
     }
   }
 }
 
-.time {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-
-  .total-time {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    text-align: center;
-    font-size: 3rem;
-
-    &__count {
-      font-size: 4rem;
-    }
-  }
-
-  .rest-circle {
-    width: 50%;
-  }
-
-  // Ipad pro 12.9"
-  @media (max-width: 1024px) {
-    flex-direction: column-reverse;
-    .total-time {
-      width: 100%;
-      flex-direction: column;
-
-      &__header {
-        margin-right: 1rem;
-      }
-    }
-    .rest-circle {
-      width: 90%;
-    }
-  }
-
-  // Ipad 9.71"
-  @media (max-width: 768px) {
-    .rest-circle {
-      width: 80%;
-    }
-  }
-
-  // Surface Duo
-  @media (max-width: 540px) {
-    .total-time {
-      font-size: 2rem;
-
-      &__count {
-        font-size: 3rem;
-      }
-    }
-
-    .rest-circle {
-      width: 70%;
-    }
-  }
-
-  // Mobile
-  @media (max-width: 480px) {
-    .total-time {
-      font-size: 3rem;
-      flex-direction: column;
-
-      &__count {
-        font-size: 3rem;
-      }
-    }
-    .rest-circle {
-      width: 90%;
-    }
-  }
-
-  // Small Mobile
-  @media (max-width: 375px) {
-    .total-time {
-      font-size: 2rem;
-      flex-direction: row;
-
-      &__count {
-        font-size: 2rem;
-      }
-    }
-  }
-
-  // XSmall Mobile
-  @media (max-width: 320px) {
-    .total-time {
-      font-size: 1.5rem;
-      flex-direction: row;
-
-      &__count {
-        font-size: 1.5rem;
-      }
-    }
+.footer-button {
+  span {
+    color: white;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    font-weight: bold;
   }
 }
