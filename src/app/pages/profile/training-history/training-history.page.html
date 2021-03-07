@@ -17,7 +17,7 @@
     </div>
     <div *ngIf="!isLoading && !(trainingRecordList && trainingRecordList.length > 0)" class="ion-text-center">
       <p>There are no training history to show.</p>
-      <ion-button routerLink="/training" fill="clear">Do your first training now!</ion-button>
+      <ion-button routerLink="/home/my-library/" fill="clear">Do your first training now!</ion-button>
     </div>
     <div class="training-list" *ngIf="!isLoading && trainingRecordList && trainingRecordList.length > 0">
       <div class="training-list-header">
