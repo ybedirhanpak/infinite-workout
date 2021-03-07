@@ -7,6 +7,7 @@ import { getLoadString, getRepString, Workout } from '@models/workout.model';
 // Service
 import { WorkoutService } from '@services/workout.service';
 
+
 @Component({
   selector: 'app-workout-detail',
   templateUrl: './workout-detail.page.html',
@@ -18,9 +19,14 @@ export class WorkoutDetailPage implements OnInit {
   duration = '';
   exercises = [];
 
-  constructor(private workoutService: WorkoutService, private router: Router) {}
+  constructor(
+    private workoutService: WorkoutService,
+    private router: Router
+  ) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ionViewWillEnter() {
     this.workoutService.workoutDetail.subscribe((workout) => {
       this.workout = workout;
       const { time, unit } = this.workout.duration.opts;
@@ -41,7 +47,7 @@ export class WorkoutDetailPage implements OnInit {
   }
 
   startWorkout() {
-    this.workoutService.setWorkoutDetail(this.workout);
     this.router.navigateByUrl('/training');
+    this.workoutService.setWorkoutDetail(this.workout);
   }
 }
