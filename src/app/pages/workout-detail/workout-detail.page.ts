@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 // Model
-import { Workout } from '@models/workout.model';
+import { getLoadString, getRepString, Workout } from '@models/workout.model';
 
 // Service
 import { WorkoutService } from '@services/workout.service';
@@ -17,7 +18,7 @@ export class WorkoutDetailPage implements OnInit {
   duration = '';
   exercises = [];
 
-  constructor(private workoutService: WorkoutService) {}
+  constructor(private workoutService: WorkoutService, private router: Router) {}
 
   ngOnInit() {
     this.workoutService.workoutDetail.subscribe((workout) => {
@@ -26,36 +27,8 @@ export class WorkoutDetailPage implements OnInit {
       this.duration = `${time} ${unit}`;
 
       this.exercises = this.workout.exercises.map((exercise) => {
-        let load = '';
-        let rep = '';
-
-        switch (exercise.load.type) {
-          case 'weight':
-            load = `${exercise.load.opts.weight} ${exercise.load.opts.unit}`;
-            break;
-          case 'distance':
-            load = `${exercise.load.opts.distance} ${exercise.load.opts.unit}`;
-            break;
-          case 'bodyWeight':
-            load = 'Body weight';
-            break;
-          default:
-            break;
-        }
-
-        switch (exercise.rep.type) {
-          case 'setRep':
-            rep = `${exercise.rep.opts.set} sets ${exercise.rep.opts.rep} reps`;
-            break;
-          case 'time':
-            rep = `${exercise.rep.opts.time} ${exercise.rep.opts.unit}`;
-            break;
-          case 'setTime':
-            rep = `${exercise.rep.opts.set} sets ${exercise.rep.opts.time} ${exercise.rep.opts.unit}`;
-            break;
-          default:
-            break;
-        }
+        let load = getLoadString(exercise);
+        let rep = getRepString(exercise);
 
         return {
           name: exercise.name,
@@ -65,5 +38,10 @@ export class WorkoutDetailPage implements OnInit {
         };
       });
     });
+  }
+
+  startWorkout() {
+    this.workoutService.setWorkoutDetail(this.workout);
+    this.router.navigateByUrl('/training');
   }
 }
