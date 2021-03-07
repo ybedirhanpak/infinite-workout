@@ -16,13 +16,6 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'training',
-        loadChildren: () =>
-          import('../training/training.module').then(
-            (m) => m.TrainingPageModule
-          ),
-      },
-      {
         path: 'explore',
         loadChildren: () =>
           import('../explore/explore.module').then((m) => m.ExplorePageModule),
@@ -41,14 +34,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/home/progress',
+        redirectTo: '/home/my-library',
         pathMatch: 'full',
       },
     ],
   },
   {
     path: '',
-    redirectTo: '/home/training',
+    redirectTo: '/home/my-library',
     pathMatch: 'full',
   },
 ];
