@@ -64,24 +64,44 @@ interface Exercise {
   rep: SetRep | Time | SetTime;
 }
 
-const a: Exercise = {
-  id: 1,
-  name: 'Exercise',
-  duration: '10 min',
-  load: {
-    type: 'weight',
-    opts: {
-      weight: 10,
-      unit: 'kg',
-    },
-  },
-  rep: {
-    type: 'setRep',
-    opts: {
-      set: 3,
-      rep: 12,
-    },
-  },
+export const getLoadString = (exercise: Exercise) => {
+  let load = '';
+
+  switch (exercise.load.type) {
+    case 'weight':
+      load = `${exercise.load.opts.weight} ${exercise.load.opts.unit}`;
+      break;
+    case 'distance':
+      load = `${exercise.load.opts.distance} ${exercise.load.opts.unit}`;
+      break;
+    case 'bodyWeight':
+      load = 'Body weight';
+      break;
+    default:
+      break;
+  }
+
+  return load;
+};
+
+export const getRepString = (exercise: Exercise) => {
+  let rep = '';
+
+  switch (exercise.rep.type) {
+    case 'setRep':
+      rep = `${exercise.rep.opts.set} sets ${exercise.rep.opts.rep} reps`;
+      break;
+    case 'time':
+      rep = `${exercise.rep.opts.time} ${exercise.rep.opts.unit}`;
+      break;
+    case 'setTime':
+      rep = `${exercise.rep.opts.set} sets ${exercise.rep.opts.time} ${exercise.rep.opts.unit}`;
+      break;
+    default:
+      break;
+  }
+
+  return rep;
 };
 
 export interface Workout {
