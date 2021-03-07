@@ -1,7 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonSlides } from '@ionic/angular';
+
+// Model
 import { getLoadString, Workout } from '@models/workout.model';
+
+// Service
 import { DateService } from '@services/date.service';
 import { WorkoutService } from '@services/workout.service';
 
@@ -92,16 +96,16 @@ export class TrainingPage implements OnInit {
   };
 
   /** Training */
-  trainingStarted = false;
-  trainingPaused = true;
-  totalTime = 0;
-  totalTimeString = '00:00:00';
+  trainingStarted: boolean;
+  trainingPaused: boolean;
+  totalTime: number;
+  totalTimeString: string;
   totalTimeInterval: NodeJS.Timeout;
 
   workout: Workout;
-  exerciseClocks: ExerciseClock[] = [];
+  exerciseClocks: ExerciseClock[];
   currentExercise: ExerciseClock;
-  currentIndex = 0;
+  currentIndex: number;
 
   constructor(
     private dateService: DateService,
@@ -109,7 +113,18 @@ export class TrainingPage implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ionViewWillEnter() {
+    // Initialize variables
+    this.trainingStarted = false;
+    this.trainingPaused = true;
+    this.totalTime = 0;
+    this.totalTimeString = '00:00:00';
+    this.exerciseClocks = [];
+    this.currentIndex = 0;
+    this.slides.slideTo(this.currentIndex);
+
     this.workoutService.workoutDetail.subscribe((workout) => {
       this.workout = workout;
 
