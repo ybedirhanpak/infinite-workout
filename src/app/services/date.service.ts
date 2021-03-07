@@ -54,18 +54,19 @@ export class DateService {
   }
 
   /**
-   * Convert second to time string in format 'HH:MM:SS'
+   * Convert second to time string in format 'HH:MM:SS' or 'MM:SS'
    *
    * @param sec second to be converted
+   * @param forceHours if format forced to be 'HH:MM:SS'
    */
-  secondsToString(sec: number) {
+  secondsToString(sec: number, forceHours = false) {
     let seconds = Math.min(sec, this.MAX_S);
     const hours = Math.floor(seconds / this.HOUR_S);
     seconds = seconds % this.HOUR_S;
     const mins = Math.floor(seconds / this.MIN_S);
     seconds = seconds % this.MIN_S;
 
-    if (hours > 0) {
+    if (forceHours || hours > 0) {
       return `${this.pad(hours)}:${this.pad(mins)}:${this.pad(seconds)}`;
     }
 
