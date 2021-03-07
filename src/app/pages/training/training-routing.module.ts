@@ -6,7 +6,7 @@ import { TrainingPage } from './training.page';
 const routes: Routes = [
   {
     path: '',
-    component: TrainingPage,
+    component: TrainingPage
   }
 ];
 

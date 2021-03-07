@@ -1,239 +1,335 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { IonSlides, AlertController } from '@ionic/angular';
-
-// Model
-import { ExerciseRecord } from '@models/training.model';
-import { Progress } from '@models/progress.model';
-
-// Service
-import { ProgressService } from '@services/progress.service';
-import { TrainingService } from '@services/training.service';
-import { ThemeService } from '@services/theme.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { IonSlides } from '@ionic/angular';
+import { getLoadString, Workout } from '@models/workout.model';
 import { DateService } from '@services/date.service';
+import { WorkoutService } from '@services/workout.service';
+
+// Exercise card types
+
+interface SetRep {
+  type: 'setRep';
+  opts: {
+    set: number;
+    currentSet: number;
+    rep: number;
+  };
+}
+
+interface Time {
+  type: 'time';
+  opts: {
+    time: number;
+    unit: 'min' | 'sec';
+  };
+}
+
+interface SetTime {
+  type: 'setTime';
+  opts: {
+    set: number;
+    currentSet: number;
+    repTime: string;
+  };
+}
+
+interface Clock {
+  mode: 'timer' | 'stopwatch';
+  reset: boolean;
+  pause: boolean;
+  max: number;
+  current: number;
+}
+
+interface ExerciseClock {
+  name: string;
+  imageUrl: string;
+  load?: string;
+  rep: SetRep | Time | SetTime;
+  clock: Clock;
+  next?: string;
+}
 
 @Component({
   selector: 'app-training',
   templateUrl: './training.page.html',
   styleUrls: ['./training.page.scss'],
 })
-export class TrainingPage implements OnInit, OnDestroy {
-  /** Subscriptions */
-  private subscriptions = new Subscription();
+export class TrainingPage implements OnInit {
+  /** Slide */
+  @ViewChild(IonSlides) slides: IonSlides;
 
-  /** Top Slides */
-  @ViewChild('progressSlider') progressSlider: IonSlides;
-  progressList: Progress[];
-  isLoading = false;
+  slideOptions = {
+    initialSlide: 0,
+    speed: 500,
+    slidesPerView: 1.4,
+    centeredSlides: true,
+  };
 
-  /** TrainingRecord */
+  slideLoaded = false;
+
+  /** Rest */
+  restTime = 90; // seconds
+
+  rest: ExerciseClock = {
+    name: 'Rest',
+    imageUrl:
+      'https://images.unsplash.com/photo-1569535188944-249671c96238?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80',
+    rep: {
+      type: 'time',
+      opts: {
+        time: this.restTime,
+        unit: 'sec',
+      },
+    },
+    clock: {
+      mode: 'timer',
+      reset: true,
+      pause: true,
+      max: this.restTime,
+      current: this.restTime,
+    },
+  };
+
+  /** Training */
   trainingStarted = false;
-  restTime = 60; // total rest in seconds
-  currentRestTime = 0;
-  restPercent = 0;
-  restString = '00:00:00';
-  restStringColor = this.themeService.BLACK;
-  restInterval: NodeJS.Timeout;
-  currentTotalTime = 0;
+  trainingPaused = true;
+  totalTime = 0;
   totalTimeString = '00:00:00';
   totalTimeInterval: NodeJS.Timeout;
 
+  workout: Workout;
+  exerciseClocks: ExerciseClock[] = [];
+  currentExercise: ExerciseClock;
+  currentIndex = 0;
+
   constructor(
-    private progressService: ProgressService,
-    private alertController: AlertController,
-    private trainingService: TrainingService,
-    private themeService: ThemeService,
-    private dateService: DateService
+    private dateService: DateService,
+    private workoutService: WorkoutService,
+    private router: Router
   ) {}
 
   ngOnInit() {
-    this.subscriptions.add(
-      this.progressService.progressList.subscribe((progressList) => {
-        this.progressList = progressList;
-      })
-    );
+    this.workoutService.workoutDetail.subscribe((workout) => {
+      this.workout = workout;
 
-    this.subscriptions.add(
-      this.trainingService.restTime.subscribe((value) => {
-        this.restTime = value;
-      })
-    );
-  }
+      // Create exercise clocks
+      this.workout.exercises.forEach((exercise) => {
+        const load = getLoadString(exercise);
+        let rep = 0;
+        let set = 0;
+        let time = 0;
+        let unit: 'min' | 'sec' = 'sec';
+        let clockTime = 0;
 
-  ionViewWillEnter() {
-    this.isLoading = true;
-    // Fetch progress list when user enters this page
-    this.progressService.fetchProgressList().then(() => {
-      this.isLoading = false;
-    });
+        switch (exercise.rep.type) {
+          case 'setRep':
+            // There will be multiple clocks for each set
+            // Each clock will be stopwatch starting from 0 up to 2 mins
+            rep = exercise.rep.opts.rep;
+            set = exercise.rep.opts.set;
 
-    // Fetch rest time value when user enters this page
-    this.trainingService.fetchRestTime();
-  }
+            for (let i = 1; i <= set; i++) {
+              this.exerciseClocks.push({
+                name: exercise.name,
+                imageUrl: exercise.imageUrl,
+                load: load,
+                rep: {
+                  type: 'setRep',
+                  opts: {
+                    rep: rep,
+                    set: set,
+                    currentSet: i,
+                  },
+                },
+                clock: {
+                  mode: 'stopwatch',
+                  reset: true,
+                  pause: true,
+                  max: 120,
+                  current: 0,
+                },
+              });
+              this.exerciseClocks.push(this.rest);
+            }
+            break;
+          case 'time':
+            // There will be single clock for the time
+            // The clock will be timer
+            time = exercise.rep.opts.time;
+            unit = exercise.rep.opts.unit;
+            if (unit === 'min') {
+              clockTime = time * 60;
+            }
+            if (unit === 'sec') {
+              clockTime = time;
+            }
+            this.exerciseClocks.push({
+              name: exercise.name,
+              imageUrl: exercise.imageUrl,
+              load: load,
+              rep: {
+                type: 'time',
+                opts: {
+                  time: time,
+                  unit: unit,
+                },
+              },
+              clock: {
+                mode: 'timer',
+                reset: true,
+                pause: true,
+                max: clockTime,
+                current: 0,
+              },
+            });
+            break;
+          case 'setTime':
+            // There will be multiple clocks for each set
+            // Each clock will be timer, starting trom `time` down to 0
+            set = exercise.rep.opts.set;
+            time = exercise.rep.opts.time;
+            unit = exercise.rep.opts.unit;
+            if (unit === 'min') {
+              clockTime = time * 60;
+            }
+            if (unit === 'sec') {
+              clockTime = time;
+            }
+            for (let i = 1; i <= set; i++) {
+              this.exerciseClocks.push({
+                name: exercise.name,
+                imageUrl: exercise.imageUrl,
+                load: load,
+                rep: {
+                  type: 'setTime',
+                  opts: {
+                    repTime: `${time} ${unit}`,
+                    set: set,
+                    currentSet: i,
+                  },
+                },
+                clock: {
+                  mode: 'timer',
+                  reset: true,
+                  pause: true,
+                  max: clockTime,
+                  current: 0,
+                },
+              });
+              this.exerciseClocks.push(this.rest);
+            }
+            break;
+          default:
+            break;
+        }
+      });
 
-  ngOnDestroy() {
-    this.subscriptions.unsubscribe();
-  }
-
-  /**
-   * Executes slide behavior of progress slider
-   * @param action direction of slide
-   */
-  slideAction(action: 'forward' | 'back') {
-    if (!this.progressSlider) {
-      return;
-    }
-    if (action === 'forward') {
-      this.progressSlider.slideNext();
-    } else if (action === 'back') {
-      this.progressSlider.slidePrev();
-    }
-  }
-
-  /**
-   * On first execution for each training, starts the training.
-   * On subsequent executions, resets rest time; until training is finished.
-   */
-  onCircleClick() {
-    if (!this.trainingStarted) {
-      // Start the training
-      this.trainingStarted = true;
-
-      // Start counting rest time
-      this.increaseRestTime();
-      this.restInterval = setInterval(() => {
-        this.increaseRestTime();
-      }, 1000);
-
-      // Start counting total time
-      this.increaseTotalTime();
-      this.totalTimeInterval = setInterval(() => {
-        this.increaseTotalTime();
-      }, 1000);
-    } else {
-      // Reset rest time
-      if (this.restInterval) {
-        clearInterval(this.restInterval);
+      // Add 'next' field of each exercise
+      for (let i = 0; i < this.exerciseClocks.length - 1; i++) {
+        this.exerciseClocks[i].next = this.exerciseClocks[i + 1].name;
       }
 
-      this.restString = '00:00:00';
-      this.restPercent = 0;
-      this.currentRestTime = 0;
-
-      // Re-start counting reset time
-      this.increaseRestTime();
-      this.restInterval = setInterval(() => {
-        this.increaseRestTime();
-      }, 1000);
-    }
-  }
-
-  /**
-   * Executes click behavior of stop button
-   * Displays an alert to user with these options: Save, Discard, Cancel.
-   */
-  onStopButtonClick() {
-    this.alertController
-      .create({
-        header: 'Are you sure?',
-        message: 'Do you want to end this training?',
-        buttons: [
-          {
-            text: 'Save',
-            handler: () => this.saveTraining(),
-          },
-          {
-            text: 'Discard',
-            handler: () => this.stopTraining(),
-          },
-          {
-            text: 'Cancel',
-            role: 'cancel',
-          },
-        ],
-      })
-      .then((alertEl) => {
-        alertEl.present();
-      });
-  }
-
-  /**
-   * Increases the value of rest time and updates rest time string
-   */
-  increaseRestTime() {
-    this.restString = this.dateService.secondsToString(this.currentRestTime);
-    this.restPercent = Math.min(
-      (this.currentRestTime / this.restTime) * 100,
-      100
-    );
-    if (this.restPercent === 100) {
-      this.restStringColor = this.themeService.RED;
-    } else {
-      this.restStringColor = this.themeService.BLACK;
-    }
-    this.currentRestTime++;
-  }
-
-  /**
-   * Increases the value of total time and updates total time string
-   */
-  increaseTotalTime() {
-    this.totalTimeString = this.dateService.secondsToString(
-      this.currentTotalTime
-    );
-    this.currentTotalTime++;
-  }
-
-  /**
-   * Clears reset and total time increase intervals.
-   * Resets everything on their default.
-   */
-  resetTraining() {
-    this.trainingStarted = false;
-    this.currentRestTime = 0;
-    this.restPercent = 0;
-    this.restString = '00:00:00';
-    this.restStringColor = this.themeService.BLACK;
-    if (this.restInterval) {
-      clearInterval(this.restInterval);
-    }
-    this.currentTotalTime = 0;
-    this.totalTimeString = '00:00:00';
-    if (this.totalTimeInterval) {
-      clearInterval(this.totalTimeInterval);
-    }
-  }
-
-  /**
-   * Stops training without saving it.
-   */
-  stopTraining() {
-    this.resetTraining();
-  }
-
-  /**
-   * Stops training and saves the training record
-   */
-  saveTraining() {
-    const exercises: ExerciseRecord[] = this.progressList.map((progress) => {
-      return {
-        name: progress.currentExercise
-          ? progress.currentExercise.name
-          : progress.name,
-        progressName: progress.name,
-        setRep: `${progress.sets} x ${progress.reps}`,
-        repType: progress.repType,
-      };
+      // Start from the first exercise
+      this.currentExercise = this.exerciseClocks[0];
     });
+  }
 
-    this.trainingService
-      .saveTrainingRecord(exercises, new Date(), this.totalTimeString)
-      .then(() => {
-        this.resetTraining();
-        // TODO: Navigate to training record page
-      })
-      .catch(() => {
-        // TODO: Display error message
-      });
+  /** Total Time */
+
+  totalTimeTick() {
+    if (this.trainingPaused) {
+      if (this.totalTimeInterval) clearInterval(this.totalTimeInterval);
+      return;
+    }
+
+    this.totalTime++;
+    this.totalTimeString = this.dateService.secondsToString(
+      this.totalTime,
+      true
+    );
+  }
+
+  /** Clock Slide */
+
+  /**
+   * Starts time of the training and clock of current index
+   */
+  async startTime() {
+    // Start clock
+    const index = await this.slides.getActiveIndex();
+    this.startClock(index);
+    this.updateCurrentExercise(index);
+
+    // Start total time
+    this.totalTimeInterval = setInterval(() => {
+      this.totalTimeTick();
+    }, 1000);
+  }
+
+  async onSlideLoad(event: any) {
+    this.slideLoaded = true;
+    if (this.trainingStarted && !this.trainingPaused) {
+      this.startTime();
+    }
+  }
+
+  async onSlideChange(event: any) {
+    const nextIndex = await this.slides.getActiveIndex();
+    if (!this.trainingPaused) {
+      this.resetClock(this.currentIndex);
+      this.startClock(nextIndex);
+    }
+    this.updateCurrentExercise(nextIndex);
+  }
+
+  updateCurrentExercise(index: number) {
+    this.currentIndex = index;
+    this.currentExercise = this.exerciseClocks[this.currentIndex];
+  }
+
+  startClock(index: number) {
+    this.exerciseClocks[index].clock.reset = false;
+    this.exerciseClocks[index].clock.pause = false;
+  }
+
+  pauseClock(index: number) {
+    this.exerciseClocks[index].clock.pause = true;
+  }
+
+  resetClock(index: number) {
+    this.exerciseClocks[index].clock.reset = true;
+    this.exerciseClocks[index].clock.pause = true;
+  }
+
+  startTraining() {
+    this.trainingStarted = true;
+    this.trainingPaused = false;
+    this.startTime();
+  }
+
+  onFooterButtonClick() {
+    if (!this.trainingStarted) {
+      if (this.slideLoaded) {
+        this.startTraining();
+      } else {
+        // Display error message
+      }
+      return;
+    }
+
+    if (this.trainingPaused) {
+      // Resume
+      this.startTime();
+      this.trainingPaused = false;
+    } else {
+      // Pause
+      this.pauseClock(this.currentIndex);
+      this.trainingPaused = true;
+    }
+  }
+
+  finishTraining() {
+    this.router.navigate(['/home/']);
   }
 }
