@@ -1,12 +1,15 @@
 import {
   Component,
+  EventEmitter,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
+  Output,
   SimpleChanges,
 } from '@angular/core';
 import { DateService } from '@services/date.service';
+
 
 @Component({
   selector: 'app-clock-circle',
@@ -19,6 +22,8 @@ export class ClockCircleComponent implements OnInit, OnDestroy, OnChanges {
   @Input() current = 0;
   @Input() pause = false;
   @Input() reset = false;
+
+  @Output() onFinish = new EventEmitter<boolean>();
 
   currentString = '00:00';
   percent = 0;
@@ -102,11 +107,18 @@ export class ClockCircleComponent implements OnInit, OnDestroy, OnChanges {
     // Timer mode
     if (this.mode === 'timer' && this.current > 0) {
       this.current--;
+
+      if(this.current === 0) {
+        this.onFinish.emit(true);
+      }
     }
 
     // Stopwatch mode
     if (this.mode === 'stopwatch' && this.current < this.max) {
       this.current++;
+      if(this.current === this.max) {
+        this.onFinish.emit(true);
+      }
     }
 
     this.updateCircle();
