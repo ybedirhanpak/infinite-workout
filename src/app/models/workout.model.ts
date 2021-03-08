@@ -29,11 +29,17 @@ interface BodyWeight {
   };
 }
 
-interface SetRep {
+export interface SetRep {
   type: 'setRep';
   opts: {
     set: number;
-    rep: number;
+    sets: [
+      {
+        rep: number;
+        weight: number;
+        unit: 'kg' | 'lb';
+      }
+    ];
   };
 }
 
@@ -45,12 +51,17 @@ export interface Time {
   };
 }
 
-interface SetTime {
+export interface SetTime {
   type: 'setTime';
   opts: {
     set: number;
-    time: number;
-    unit: 'min' | 'sec';
+    sets: [
+      {
+        rep: number;
+        time: number;
+        unit: 'min' | 'sec';
+      }
+    ];
   };
 }
 
@@ -89,13 +100,13 @@ export const getRepString = (exercise: Exercise) => {
 
   switch (exercise.rep.type) {
     case 'setRep':
-      rep = `${exercise.rep.opts.set} sets ${exercise.rep.opts.rep} reps`;
+      rep = `${exercise.rep.opts.set} sets ${exercise.rep.opts.sets[0].rep} reps`;
       break;
     case 'time':
       rep = `${exercise.rep.opts.time} ${exercise.rep.opts.unit}`;
       break;
     case 'setTime':
-      rep = `${exercise.rep.opts.set} sets ${exercise.rep.opts.time} ${exercise.rep.opts.unit}`;
+      rep = `${exercise.rep.opts.set} sets ${exercise.rep.opts.sets[0].time} ${exercise.rep.opts.sets[0].unit}`;
       break;
     default:
       break;
