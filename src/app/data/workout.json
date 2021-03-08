@@ -362,7 +362,28 @@
                     "type": "setRep",
                     "opts": {
                         "set": 4,
-                        "rep": 10
+                        "sets": [
+                            {
+                                "rep": 12,
+                                "weight": 0,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 12,
+                                "weight": 0,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 12,
+                                "weight": 0,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 12,
+                                "weight": 0,
+                                "unit": "kg"
+                            }
+                        ]
                     }
                 }
             },
@@ -377,8 +398,28 @@
                     "type": "setTime",
                     "opts": {
                         "set": 3,
-                        "time": 40,
-                        "unit": "sec"
+                        "sets": [
+                            {
+                                "rep": 12,
+                                "time": 40,
+                                "unit": "sec"
+                            },
+                            {
+                                "rep": 12,
+                                "time": 40,
+                                "unit": "sec"
+                            },
+                            {
+                                "rep": 12,
+                                "time": 40,
+                                "unit": "sec"
+                            },
+                            {
+                                "rep": 12,
+                                "time": 40,
+                                "unit": "sec"
+                            }
+                        ]
                     }
                 }
             },
@@ -416,7 +457,29 @@
                     "type": "setRep",
                     "opts": {
                         "set": 4,
-                        "rep": 6
+                        "rep": 6,
+                        "sets": [
+                            {
+                                "rep": 6,
+                                "weight": 40,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 6,
+                                "weight": 40,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 6,
+                                "weight": 40,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 6,
+                                "weight": 40,
+                                "unit": "kg"
+                            }
+                        ]
                     }
                 }
             }
