@@ -3,24 +3,40 @@ import { Router } from '@angular/router';
 import { IonSlides } from '@ionic/angular';
 
 // Model
-import { getLoadString, Workout } from '@models/workout.model';
+import {
+  getLoadString,
+  Workout,
+  SetRep,
+  Time,
+  SetTime,
+} from '@models/workout.model';
 
 // Service
 import { DateService } from '@services/date.service';
 import { WorkoutService } from '@services/workout.service';
 
+// Date
+import WORKOUTS from '../../data/workout.json';
+
 // Exercise card types
 
-interface SetRep {
+interface CSetRep extends SetRep {
   type: 'setRep';
   opts: {
     set: number;
     currentSet: number;
-    rep: number;
+    sets: [
+      {
+        rep: number;
+        weight: number;
+        unit: 'kg' | 'lb';
+        checked: boolean;
+      }
+    ];
   };
 }
 
-interface Time {
+interface CTime extends Time {
   type: 'time';
   opts: {
     time: number;
@@ -28,16 +44,24 @@ interface Time {
   };
 }
 
-interface SetTime {
+interface CSetTime extends SetTime {
   type: 'setTime';
   opts: {
     set: number;
     currentSet: number;
-    repTime: string;
+    sets: [
+      {
+        rep: number;
+        time: number;
+        unit: 'min' | 'sec';
+        checked: boolean;
+      }
+    ];
   };
 }
 
 interface Clock {
+  disabled: boolean;
   mode: 'timer' | 'stopwatch';
   reset: boolean;
   pause: boolean;
@@ -49,7 +73,7 @@ interface ExerciseClock {
   name: string;
   imageUrl: string;
   load?: string;
-  rep: SetRep | Time | SetTime;
+  rep: CSetRep | CTime | CSetTime;
   clock: Clock;
   next?: string;
 }
@@ -87,6 +111,7 @@ export class TrainingPage implements OnInit {
       },
     },
     clock: {
+      disabled: false,
       mode: 'timer',
       reset: true,
       pause: true,
@@ -113,7 +138,9 @@ export class TrainingPage implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.workoutService.setWorkoutDetail(WORKOUTS[5] as Workout);
+  }
 
   ionViewWillEnter() {
     // Initialize variables
@@ -131,7 +158,6 @@ export class TrainingPage implements OnInit {
       // Create exercise clocks
       this.workout.exercises.forEach((exercise) => {
         const load = getLoadString(exercise);
-        let rep = 0;
         let set = 0;
         let time = 0;
         let unit: 'min' | 'sec' = 'sec';
@@ -141,32 +167,38 @@ export class TrainingPage implements OnInit {
           case 'setRep':
             // There will be multiple clocks for each set
             // Each clock will be stopwatch starting from 0 up to 2 mins
-            rep = exercise.rep.opts.rep;
             set = exercise.rep.opts.set;
 
-            for (let i = 1; i <= set; i++) {
-              this.exerciseClocks.push({
-                name: exercise.name,
-                imageUrl: exercise.imageUrl,
-                load: load,
-                rep: {
-                  type: 'setRep',
-                  opts: {
-                    rep: rep,
-                    set: set,
-                    currentSet: i,
-                  },
+            const repSets = exercise.rep.opts.sets.map((s) => {
+              return {
+                ...s,
+                checked: false,
+              };
+            });
+
+            this.exerciseClocks.push({
+              name: exercise.name,
+              imageUrl: exercise.imageUrl,
+              load: load,
+              rep: {
+                type: 'setRep',
+                opts: {
+                  set: set,
+                  currentSet: 0,
+                  sets: repSets as any,
                 },
-                clock: {
-                  mode: 'stopwatch',
-                  reset: true,
-                  pause: true,
-                  max: 120,
-                  current: 0,
-                },
-              });
-              this.exerciseClocks.push(this.rest);
-            }
+              },
+              clock: {
+                disabled: true,
+                mode: 'stopwatch',
+                reset: true,
+                pause: true,
+                max: 120,
+                current: 115,
+              },
+            });
+
+            // this.exerciseClocks.push(this.rest);
             break;
           case 'time':
             // There will be single clock for the time
@@ -191,6 +223,7 @@ export class TrainingPage implements OnInit {
                 },
               },
               clock: {
+                disabled: false,
                 mode: 'timer',
                 reset: true,
                 pause: true,
@@ -203,37 +236,45 @@ export class TrainingPage implements OnInit {
             // There will be multiple clocks for each set
             // Each clock will be timer, starting trom `time` down to 0
             set = exercise.rep.opts.set;
-            time = exercise.rep.opts.time;
-            unit = exercise.rep.opts.unit;
-            if (unit === 'min') {
+
+            const timeSets = exercise.rep.opts.sets.map((s) => {
+              return {
+                ...s,
+                checked: false,
+              };
+            });
+
+            const current = exercise.rep.opts.sets[0];
+
+            if (current.unit === 'min') {
               clockTime = time * 60;
             }
-            if (unit === 'sec') {
+            if (current.unit === 'sec') {
               clockTime = time;
             }
-            for (let i = 1; i <= set; i++) {
-              this.exerciseClocks.push({
-                name: exercise.name,
-                imageUrl: exercise.imageUrl,
-                load: load,
-                rep: {
-                  type: 'setTime',
-                  opts: {
-                    repTime: `${time} ${unit}`,
-                    set: set,
-                    currentSet: i,
-                  },
+
+            this.exerciseClocks.push({
+              name: exercise.name,
+              imageUrl: exercise.imageUrl,
+              load: load,
+              rep: {
+                type: 'setTime',
+                opts: {
+                  set: set,
+                  currentSet: 0,
+                  sets: timeSets as any,
                 },
-                clock: {
-                  mode: 'timer',
-                  reset: true,
-                  pause: true,
-                  max: clockTime,
-                  current: 0,
-                },
-              });
-              this.exerciseClocks.push(this.rest);
-            }
+              },
+              clock: {
+                disabled: false,
+                mode: 'timer',
+                reset: true,
+                pause: true,
+                max: clockTime,
+                current: 0,
+              },
+            });
+            // this.exerciseClocks.push(this.rest);
             break;
           default:
             break;
@@ -341,6 +382,74 @@ export class TrainingPage implements OnInit {
       // Pause
       this.pauseClock(this.currentIndex);
       this.trainingPaused = true;
+    }
+  }
+
+  getSetText(exercise: ExerciseClock, index: number) {
+    if ((exercise.rep as CSetRep).opts.sets[index].checked) {
+      return 'Done';
+    }
+
+    return 'Did it';
+  }
+
+  onSetClick(event: any, exercise: ExerciseClock, index: number) {
+    const opts = (exercise.rep as CSetRep).opts;
+    const checked = opts.sets[index].checked;
+    const set = opts.set;
+    if (!checked) {
+      // Update checkboxes
+      opts.sets[index].checked = true;
+      const nextIndex = Math.min(index + 1, set);
+      opts.currentSet = nextIndex;
+      for (let i = 0; i < index; i++) {
+        opts.sets[i].checked = true;
+      }
+      // Display Rest Clock
+      exercise.clock.disabled = false;
+    } else {
+      // Update checkboxes
+      opts.currentSet = index;
+      for (let i = index; i < set; i++) {
+        opts.sets[i].checked = false;
+      }
+    }
+  }
+
+  getRestText(exercise: ExerciseClock) {
+    if(exercise.clock.reset) {
+      return 'Start';
+    }
+    return 'Reset';
+  }
+
+  onRestReset(event: any, exercise: ExerciseClock, index: number) {
+    if(exercise.clock.reset) {
+      exercise.clock.reset = false;
+      exercise.clock.pause = false;
+    } else {
+      exercise.clock.reset = true;
+      exercise.clock.pause = true;
+    }
+  }
+
+  slideNextIfFinished(exercise: ExerciseClock) {
+    const { set, currentSet } = (exercise.rep as CSetRep).opts;
+    if(currentSet >= set) {
+      // Go to the next exercise
+      this.slides.slideNext();
+    }
+  }
+
+  onRestSkip(event: any, exercise: ExerciseClock, index: number) {
+    exercise.clock.disabled = true;
+    this.slideNextIfFinished(exercise);
+  }
+
+  onRestFinish(finished: boolean, exercise: ExerciseClock, index: number) {
+    if(finished) {
+      exercise.clock.disabled = true;
+      this.slideNextIfFinished(exercise);
     }
   }
 
