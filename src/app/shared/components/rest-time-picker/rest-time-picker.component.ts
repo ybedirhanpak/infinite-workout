@@ -19,7 +19,7 @@ export class RestTimePickerComponent implements OnInit {
   ngOnInit() {
     this.trainingService.restTime.subscribe((value) => {
       this.restTime = value;
-      this.restTimeString = this.dateService.secondsToString(this.restTime);
+      this.restTimeString = this.dateService.secondsToString(this.restTime, true);
     });
   }
 
