@@ -32,7 +32,6 @@ interface BodyWeight {
 export interface SetRep {
   type: 'setRep';
   opts: {
-    set: number;
     sets: [
       {
         rep: number;
@@ -54,10 +53,8 @@ export interface Time {
 export interface SetTime {
   type: 'setTime';
   opts: {
-    set: number;
     sets: [
       {
-        rep: number;
         time: number;
         unit: 'min' | 'sec';
       }
@@ -100,13 +97,13 @@ export const getRepString = (exercise: Exercise) => {
 
   switch (exercise.rep.type) {
     case 'setRep':
-      rep = `${exercise.rep.opts.set} sets ${exercise.rep.opts.sets[0].rep} reps`;
+      rep = `${exercise.rep.opts.sets.length} sets ${exercise.rep.opts.sets[0].rep} reps`;
       break;
     case 'time':
       rep = `${exercise.rep.opts.time} ${exercise.rep.opts.unit}`;
       break;
     case 'setTime':
-      rep = `${exercise.rep.opts.set} sets ${exercise.rep.opts.sets[0].time} ${exercise.rep.opts.sets[0].unit}`;
+      rep = `${exercise.rep.opts.sets.length} sets ${exercise.rep.opts.sets[0].time} ${exercise.rep.opts.sets[0].unit}`;
       break;
     default:
       break;
