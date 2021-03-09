@@ -6,6 +6,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 // Service
 import { ThemeService } from '@services/theme.service';
+import { TrainingService } from '@services/training.service';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,8 @@ export class AppComponent implements OnInit {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private themeService: ThemeService,
-    private screenOrientation: ScreenOrientation
+    private screenOrientation: ScreenOrientation,
+    private trainingService: TrainingService
   ) {
     this.initializeApp();
     this.themeService.fetchTheme();
@@ -31,6 +33,7 @@ export class AppComponent implements OnInit {
       if (this.platform.is('cordova') || this.platform.is('capacitor')) {
         this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
       }
+      this.trainingService.fetchRestTime();
     });
   }
 
