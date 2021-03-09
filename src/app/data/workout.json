@@ -27,8 +27,23 @@
                 "rep": {
                     "type": "setRep",
                     "opts": {
-                        "set": 3,
-                        "rep": 12
+                        "sets": [
+                            {
+                                "rep": 12,
+                                "weight": 15,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 12,
+                                "weight": 15,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 12,
+                                "weight": 15,
+                                "unit": "kg"
+                            }
+                        ]
                     }
                 }
             }
@@ -97,8 +112,33 @@
                 "rep": {
                     "type": "setRep",
                     "opts": {
-                        "set": 5,
-                        "rep": 5
+                        "sets": [
+                            {
+                                "rep": 5,
+                                "weight": 80,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 5,
+                                "weight": 80,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 5,
+                                "weight": 80,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 5,
+                                "weight": 80,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 5,
+                                "weight": 80,
+                                "unit": "kg"
+                            }
+                        ]
                     }
                 }
             },
@@ -116,8 +156,28 @@
                 "rep": {
                     "type": "setRep",
                     "opts": {
-                        "set": 4,
-                        "rep": 6
+                        "sets": [
+                            {
+                                "rep": 6,
+                                "weight": 40,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 6,
+                                "weight": 40,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 6,
+                                "weight": 40,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 6,
+                                "weight": 40,
+                                "unit": "kg"
+                            }
+                        ]
                     }
                 }
             },
@@ -135,8 +195,28 @@
                 "rep": {
                     "type": "setRep",
                     "opts": {
-                        "set": 4,
-                        "rep": 6
+                        "sets": [
+                            {
+                                "rep": 6,
+                                "weight": 20,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 6,
+                                "weight": 20,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 6,
+                                "weight": 20,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 6,
+                                "weight": 20,
+                                "unit": "kg"
+                            }
+                        ]
                     }
                 }
             }
@@ -170,8 +250,23 @@
                 "rep": {
                     "type": "setRep",
                     "opts": {
-                        "set": 3,
-                        "rep": 12
+                        "sets": [
+                            {
+                                "rep": 12,
+                                "weight": 15,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 12,
+                                "weight": 15,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 12,
+                                "weight": 15,
+                                "unit": "kg"
+                            }
+                        ]
                     }
                 }
             },
@@ -190,7 +285,29 @@
                     "type": "setRep",
                     "opts": {
                         "set": 4,
-                        "rep": 12
+                        "rep": 12,
+                        "sets": [
+                            {
+                                "rep": 12,
+                                "weight": 20,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 12,
+                                "weight": 20,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 12,
+                                "weight": 20,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 12,
+                                "weight": 20,
+                                "unit": "kg"
+                            }
+                        ]
                     }
                 }
             },
@@ -204,8 +321,28 @@
                 "rep": {
                     "type": "setRep",
                     "opts": {
-                        "set": 4,
-                        "rep": 12
+                        "sets": [
+                            {
+                                "rep": 12,
+                                "weight": 0,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 12,
+                                "weight": 0,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 12,
+                                "weight": 0,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 12,
+                                "weight": 0,
+                                "unit": "kg"
+                            }
+                        ]
                     }
                 }
             },
@@ -223,8 +360,28 @@
                 "rep": {
                     "type": "setRep",
                     "opts": {
-                        "set": 4,
-                        "rep": 5
+                        "sets": [
+                            {
+                                "rep": 5,
+                                "weight": 60,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 5,
+                                "weight": 60,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 5,
+                                "weight": 60,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 5,
+                                "weight": 60,
+                                "unit": "kg"
+                            }
+                        ]
                     }
                 }
             }
@@ -254,8 +411,28 @@
                 "rep": {
                     "type": "setRep",
                     "opts": {
-                        "set": 4,
-                        "rep": 10
+                        "sets": [
+                            {
+                                "rep": 10,
+                                "weight": 0,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 10,
+                                "weight": 0,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 10,
+                                "weight": 0,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 10,
+                                "weight": 0,
+                                "unit": "kg"
+                            }
+                        ]
                     }
                 }
             },
@@ -269,8 +446,28 @@
                 "rep": {
                     "type": "setRep",
                     "opts": {
-                        "set": 4,
-                        "rep": 12
+                        "sets": [
+                            {
+                                "rep": 12,
+                                "weight": 0,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 12,
+                                "weight": 0,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 12,
+                                "weight": 0,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 12,
+                                "weight": 0,
+                                "unit": "kg"
+                            }
+                        ]
                     }
                 }
             },
@@ -284,84 +481,6 @@
                 "rep": {
                     "type": "setRep",
                     "opts": {
-                        "set": 4,
-                        "rep": 12
-                    }
-                }
-            },
-            {
-                "id": 8,
-                "name": "Plank",
-                "imageUrl": "https://images.pexels.com/photos/2294354/pexels-photo-2294354.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-                "load": {
-                    "type": "bodyWeight"
-                },
-                "rep": {
-                    "type": "setTime",
-                    "opts": {
-                        "set": 4,
-                        "time": 40,
-                        "unit": "sec"
-                    }
-                }
-            },
-            {
-                "id": 9,
-                "name": "Leg Raise",
-                "imageUrl": "https://images.unsplash.com/photo-1520787497953-1985ca467702?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1550&q=80",
-                "load": {
-                    "type": "bodyWeight"
-                },
-                "rep": {
-                    "type": "setRep",
-                    "opts": {
-                        "set": 3,
-                        "rep": 10
-                    }
-                }
-            },
-            {
-                "id": 10,
-                "name": "Dips",
-                "imageUrl": "https://images.unsplash.com/photo-1598267416809-5c73f1b24404?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=977&q=80",
-                "load": {
-                    "type": "bodyWeight"
-                },
-                "rep": {
-                    "type": "setRep",
-                    "opts": {
-                        "set": 3,
-                        "rep": 12
-                    }
-                }
-            }
-        ]
-    },
-    {
-        "id": 5,
-        "name": "Mix Workout",
-        "category": "Calisthenics & Weight & Cardio",
-        "imageUrl": "https://images.unsplash.com/photo-1581009137042-c552e485697a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
-        "duration": {
-            "type": "time",
-            "opts": {
-                "time": 40,
-                "unit": "min"
-            }
-        },
-        "equipments": ["Body Weight"],
-        "exercises": [
-            {
-                "id": 5,
-                "name": "Pull Up",
-                "imageUrl": "https://images.unsplash.com/photo-1597347316205-36f6c451902a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
-                "load": {
-                    "type": "bodyWeight"
-                },
-                "rep": {
-                    "type": "setRep",
-                    "opts": {
-                        "set": 4,
                         "sets": [
                             {
                                 "rep": 12,
@@ -397,7 +516,124 @@
                 "rep": {
                     "type": "setTime",
                     "opts": {
-                        "set": 3,
+                        "set": 4,
+                        "time": 40,
+                        "unit": "sec",
+                        "sets": [
+                            {
+                                "weight": 0,
+                                "wUnit": "kg",
+                                "time": 40,
+                                "unit": "sec"
+                            },
+                            {
+                                "weight": 0,
+                                "wUnit": "kg",
+                                "time": 40,
+                                "unit": "sec"
+                            },
+                            {
+                                "weight": 0,
+                                "wUnit": "kg",
+                                "time": 40,
+                                "unit": "sec"
+                            },
+                            {
+                                "weight": 0,
+                                "wUnit": "kg",
+                                "time": 40,
+                                "unit": "sec"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "id": 9,
+                "name": "Leg Raise",
+                "imageUrl": "https://images.unsplash.com/photo-1520787497953-1985ca467702?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1550&q=80",
+                "load": {
+                    "type": "bodyWeight"
+                },
+                "rep": {
+                    "type": "setRep",
+                    "opts": {
+                        "sets": [
+                            {
+                                "rep": 10,
+                                "weight": 0,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 10,
+                                "weight": 0,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 10,
+                                "weight": 0,
+                                "unit": "kg"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "id": 10,
+                "name": "Dips",
+                "imageUrl": "https://images.unsplash.com/photo-1598267416809-5c73f1b24404?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=977&q=80",
+                "load": {
+                    "type": "bodyWeight"
+                },
+                "rep": {
+                    "type": "setRep",
+                    "opts": {
+                        "sets": [
+                            {
+                                "rep": 12,
+                                "weight": 0,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 12,
+                                "weight": 0,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 12,
+                                "weight": 0,
+                                "unit": "kg"
+                            }
+                        ]
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Mix Workout",
+        "category": "Calisthenics & Weight & Cardio",
+        "imageUrl": "https://images.unsplash.com/photo-1581009137042-c552e485697a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
+        "duration": {
+            "type": "time",
+            "opts": {
+                "time": 40,
+                "unit": "min"
+            }
+        },
+        "equipments": ["Body Weight"],
+        "exercises": [
+            {
+                "id": 8,
+                "name": "Plank",
+                "imageUrl": "https://images.pexels.com/photos/2294354/pexels-photo-2294354.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                "load": {
+                    "type": "bodyWeight"
+                },
+                "rep": {
+                    "type": "setTime",
+                    "opts": {
                         "sets": [
                             {
                                 "rep": 12,
@@ -418,6 +654,46 @@
                                 "rep": 12,
                                 "time": 40,
                                 "unit": "sec"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "id": 5,
+                "name": "Pull Up",
+                "imageUrl": "https://images.unsplash.com/photo-1597347316205-36f6c451902a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
+                "load": {
+                    "type": "bodyWeight"
+                },
+                "rep": {
+                    "type": "setRep",
+                    "opts": {
+                        "sets": [
+                            {
+                                "rep": 12,
+                                "weight": 0,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 12,
+                                "weight": 0,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 12,
+                                "weight": 0,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 12,
+                                "weight": 0,
+                                "unit": "kg"
+                            },
+                            {
+                                "rep": 12,
+                                "weight": 0,
+                                "unit": "kg"
                             }
                         ]
                     }

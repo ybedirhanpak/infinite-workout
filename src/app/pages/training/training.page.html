@@ -16,8 +16,13 @@
           <ion-card class="exercise-card" mode="ios">
             <img class="cover-image" [src]="exercise.imageUrl">
             <ion-card-header>
-              <ion-card-subtitle>{{ exercise.load }}</ion-card-subtitle>
-              <ion-card-title>{{ exercise.name }}</ion-card-title>
+              <ion-card-subtitle>
+                <ion-icon name="barbell-outline"></ion-icon>
+                {{ exercise.load }}
+              </ion-card-subtitle>
+              <ion-card-title>
+                {{ exercise.name }}
+              </ion-card-title>
               <div *ngIf="exercise.rep.type === 'setRep'">
                 <ion-text>{{ exercise.rep.opts.set }} sets</ion-text>
               </div>
@@ -29,48 +34,112 @@
                 </ion-text>
               </div>
             </ion-card-header>
-            <div class="content">
-              <div class="set-list-container" *ngIf="exercise.rep.type === 'setRep'">
-                <!-- Exercise -->
-                <ion-list class="set-list" *ngIf="exercise.clock.disabled">
-                  <ion-item class="ion-no-padding" [class.active]="i === exercise.rep.opts.currentSet"
-                    [class.disabled]="i > exercise.rep.opts.currentSet"
-                    *ngFor="let set of exercise.rep.opts.sets; index as i">
-                    <ion-label style="padding-left: 1rem;">30 kg</ion-label>
-                    <ion-label>10 reps</ion-label>
-                    <button style="background-color: transparent;" (click)="onSetClick($event, exercise, i)">
-                      <ion-checkbox slot="end" [checked]="exercise.rep.opts.sets[i].checked"></ion-checkbox>
-                    </button>
-                  </ion-item>
+            <ion-card-content class="ion-no-padding">
+              <ion-chip color="primary">
+                <div class="chip-container" *ngIf="!exercise.clock.rest">
+                  <ion-icon name="barbell-outline"></ion-icon>
+                  <ion-text *ngIf="exercise.rep.type === 'setRep' || exercise.rep.type === 'setTime'">
+                    Set: {{ getCurrentSet(exercise) }}
+                  </ion-text>
+                  <ion-text *ngIf="exercise.rep.type === 'time'">Set</ion-text>
+                </div>
+                <div class="chip-container" *ngIf="exercise.clock.rest">
+                  <ion-icon name="alarm-outline"></ion-icon>
+                  <ion-text> Rest </ion-text>
+                </div>
+              </ion-chip>
+            </ion-card-content>
+          </ion-card>
+          <div class="content">
+            <div class="set-list-container" *ngIf="exercise.rep.type === 'setRep'">
+              <!-- Set-Rep Exercise -->
+              <ion-content>
+                <ion-list class="set-list" [class.hidden]="exercise.clock.rest">
+                  <ion-card mode="ios" *ngFor="let set of exercise.rep.opts.sets; index as i" style="margin: 8px;">
+                    <ion-item class="ion-no-padding" [class.active]="i === exercise.rep.opts.currentSet"
+                      [class.disabled]="i > exercise.rep.opts.currentSet" lines="none">
+                      <ion-label style="padding-left: 1rem;">{{ getWeight(exercise, i) }}</ion-label>
+                      <ion-label>{{ set.rep }} reps</ion-label>
+                      <button style="background-color: transparent;" (click)="onSetClick($event, exercise, i)">
+                        <ion-checkbox slot="end" [checked]="exercise.rep.opts.sets[i].checked"></ion-checkbox>
+                      </button>
+                    </ion-item>
+                  </ion-card>
                 </ion-list>
-                <!-- Rest -->
-                <div class="rest-clock-container" *ngIf="!exercise.clock.disabled">
-                  <div class="clock-control-buttons">
-                    <ion-button fill="clear" (click)="onRestReset($event, exercise, i)">{{ getRestText(exercise)}}</ion-button>
-                    <ion-button fill="clear" (click)="onRestSkip($event, exercise, i)">Skip</ion-button>
-                  </div>
+                <!-- Set-Rep Rest -->
+                <div class="clock-control-container" [class.hidden]="!exercise.clock.rest">
                   <div class="clock-wrapper">
-                    <app-clock-circle [max]="exercise.clock.max" [current]="exercise.clock.current"
-                      [mode]="exercise.clock.mode" [pause]="exercise.clock.pause" [reset]="exercise.clock.reset"
-                      (onFinish)="onRestFinish($event, exercise, i)">
+                    <app-clock-circle [id]="exercise.clock.id" [max]="exercise.clock.max"
+                      [current]="exercise.clock.current" [mode]="exercise.clock.mode"
+                      (onFinish)="onClockFinish($event, exercise)">
                     </app-clock-circle>
                   </div>
+                  <div class="clock-control-buttons">
+                    <ion-button fill="clear" (click)="onRestReset(exercise)">
+                      <ion-icon slot="start" name="refresh-circle"></ion-icon>
+                      <ion-label slot="end">Reset</ion-label>
+                    </ion-button>
+                    <ion-button fill="clear" (click)="onRestSkip(exercise)">
+                      <ion-icon slot="start" name="play-forward-circle"></ion-icon>
+                      <ion-label slot="end">Skip</ion-label>
+                    </ion-button>
+                  </div>
                 </div>
+              </ion-content>
+            </div>
+            <!-- Set-Time Clock -->
+            <div class="clock-control-container" *ngIf="exercise.rep.type === 'setTime'">
+              <div class="clock-wrapper">
+                <app-clock-circle [id]="exercise.clock.id" [max]="exercise.clock.max" [current]="exercise.clock.current"
+                  [mode]="exercise.clock.mode" (onFinish)="onClockFinish($event, exercise)">
+                </app-clock-circle>
               </div>
-              <div style="width: 100%; height: 100%;"
-                *ngIf="exercise.rep.type === 'setTime' || exercise.rep.type === 'time'">
-                <div style="height: 20%;display: flex;justify-content: center;align-items: center;">
-                  <ion-button fill="clear" style="height: 100%; text-transform: uppercase;">Reset</ion-button>
-                  <!-- <ion-button fill="clear" style="height: 100%; text-transform: uppercase;">Skip</ion-button> -->
-                </div>
-                <div style="width: 80%; height: 80%; margin: 0 auto;">
-                  <app-clock-circle [max]="exercise.clock.max" [current]="exercise.clock.current"
-                    [mode]="exercise.clock.mode" [pause]="exercise.clock.pause" [reset]="exercise.clock.reset">
-                  </app-clock-circle>
-                </div>
+              <div class="clock-control-buttons" *ngIf="exercise.clock.rest">
+                <ion-button fill="clear" (click)="onRestReset(exercise)">
+                  <ion-icon slot="start" name="refresh-circle"></ion-icon>
+                  <ion-label>Reset</ion-label>
+                </ion-button>
+                <ion-button fill="clear" (click)="onRestSkip(exercise)">
+                  <ion-icon slot="start" name="play-forward-circle"></ion-icon>
+                  <ion-label>Skip</ion-label>
+                </ion-button>
+              </div>
+              <div class="clock-control-buttons" *ngIf="!exercise.clock.rest">
+                <ion-button fill="clear" (click)="onPreviousSet(exercise)">
+                  <ion-icon slot="start" name="arrow-back-circle"></ion-icon>
+                  <ion-label>Back</ion-label>
+                </ion-button>
+                <ion-button fill="clear" (click)="onNextSet(exercise)">
+                  <ion-icon slot="end" name="arrow-forward-circle"></ion-icon>
+                  <ion-label>Next</ion-label>
+                </ion-button>
               </div>
             </div>
-          </ion-card>
+            <!-- Time Clock -->
+            <div class="clock-control-container" *ngIf="exercise.rep.type === 'time'">
+              <div class="clock-wrapper">
+                <app-clock-circle [id]="exercise.clock.id" [max]="exercise.clock.max" [current]="exercise.clock.current"
+                  [mode]="exercise.clock.mode" (onFinish)="onClockFinish($event, exercise)">
+                </app-clock-circle>
+              </div>
+              <div class="clock-control-buttons" *ngIf="exercise.clock.rest">
+                <ion-button fill="clear" (click)="onRestReset(exercise)">
+                  <ion-icon slot="start" name="refresh-circle"></ion-icon>
+                  <ion-label>Reset</ion-label>
+                </ion-button>
+                <ion-button fill="clear" (click)="onRestSkip(exercise)">
+                  <ion-icon slot="start" name="play-forward-circle"></ion-icon>
+                  <ion-label>Skip</ion-label>
+                </ion-button>
+              </div>
+              <div class="clock-control-buttons" *ngIf="!exercise.clock.rest">
+                <ion-button fill="clear" (click)="onRestReset(exercise)">
+                  <ion-icon slot="start" name="refresh-circle"></ion-icon>
+                  <ion-label>Reset</ion-label>
+                </ion-button>
+              </div>
+            </div>
+          </div>
         </div>
       </ion-slide>
     </ion-slides>
@@ -81,7 +150,7 @@
   <ion-toolbar>
     <app-clickable>
       <ion-button class="footer-button no-ripple" expand="block" (click)="onFooterButtonClick()">
-        <span>{{!trainingStarted ? 'Start' : (trainingPaused ? 'Resume' : 'Pause')}}</span>
+        <ion-label slot="end">{{!trainingStarted ? 'Start' : (trainingPaused ? 'Resume' : 'Pause')}}</ion-label>
       </ion-button>
     </app-clickable>
   </ion-toolbar>
