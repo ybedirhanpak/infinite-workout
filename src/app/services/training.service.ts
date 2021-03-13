@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { Workout } from '@models/workout.model';
 import { BehaviorSubject } from 'rxjs';
-import { TrainingRecord, ExerciseRecord } from '../models/training.model';
+import { TrainingRecord } from '../models/training.model';
 
 // Storage Keys
 const TRAINING_RECORDS_KEY = 'TRAINING_RECORDS';
@@ -48,27 +49,25 @@ export class TrainingService {
     this.TRAINING_RECORD_LIST.next(trainingRecordList);
   }
 
-  /**
-   * Creates and saves trainingRecord record
-   * @param exercises list of exercises executed in the trainingRecord
-   * @param date date of execution of trainingRecord
-   * @param totalTime amount of time passed through trainingRecord
-   */
   async saveTrainingRecord(
-    exercises: ExerciseRecord[],
+    workout: Workout,
     date: Date,
-    totalTime: string
+    duration: string,
   ) {
-    const newTrainingRecord = new TrainingRecord(
-      Date.now(),
-      exercises,
-      date,
-      totalTime
-    );
     const trainingRecordList = this.adjustTrainingRecordList(
       await this.storage.get(TRAINING_RECORDS_KEY)
     );
-    const updatedList = trainingRecordList.concat(newTrainingRecord);
+    const lastTrainingRecord = trainingRecordList.length > 0 ? trainingRecordList[0] : undefined;
+    const id = lastTrainingRecord ? lastTrainingRecord.id + 1 : 0;
+
+    const newTrainingRecord: TrainingRecord = {
+      id,
+      workout,
+      date: date.toLocaleDateString(),
+      duration
+    };
+
+    const updatedList = [newTrainingRecord].concat(trainingRecordList);
     await this.storage.set(TRAINING_RECORDS_KEY, updatedList);
     this.TRAINING_RECORD_LIST.next(updatedList);
   }

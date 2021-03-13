@@ -1,15 +1,8 @@
-export interface ExerciseRecord {
-  name: string;
-  progressName: string;
-  setRep: string;
-  repType: string;
-}
+import { Workout } from "./workout.model";
 
-export class TrainingRecord {
-  constructor(
-    public id: number,
-    public exercises: ExerciseRecord[],
-    public date: Date,
-    public totalTime: string
-  ) {}
+export interface TrainingRecord {
+  id?: number;
+  workout: Workout;
+  duration: string;
+  date: string;
 }

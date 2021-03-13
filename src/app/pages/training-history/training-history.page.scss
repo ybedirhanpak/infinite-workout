@@ -1,27 +1,39 @@
 .training-list {
-    &-header {
-        display: flex;
-        flex-direction: row;
-        padding: 0 3.5rem 0 1rem;
+    padding-bottom: 1rem;
+}
 
-        h3 {
-            flex: 1;
+.training-history-card {
+    color: white;
+
+    .history-img-wrapper {
+        background-color: #564058;
+        background-image: linear-gradient(315deg, #564058 0%, #081f30 74%);
+        height: 200px;
+
+        img {
+            mix-blend-mode: soft-light;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
         }
     }
 
-    &-content {
-        ion-item {
-            --ion-safe-area-right: 1rem;
-            .item-content {
-                width: 100%;
-                display: flex;
-                flex-direction: row;
-                padding-left: 1rem;
-                
-                p {
-                    flex: 1;
-                }
-            }
-        }
+    .bottom-left {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .text {
+        font-size: 1.2rem;
+        text-transform: uppercase;
     }
 }
