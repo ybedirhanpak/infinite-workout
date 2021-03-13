@@ -30,6 +30,12 @@
               {{ trainingRecord.date }}
             </span>
           </div>
+
+          <div class="top-right">
+            <ion-button class="delete-button" fill="clear" color="danger" (click)="deleteTrainingRecord(trainingRecord)">
+              <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+          </div>
         </ion-card>
       </ion-virtual-scroll>
     </div>
