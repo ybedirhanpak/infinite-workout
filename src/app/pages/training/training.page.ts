@@ -7,7 +7,7 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonSlides } from '@ionic/angular';
+import { IonSlides, ToastController } from '@ionic/angular';
 
 // Model
 import {
@@ -144,6 +144,7 @@ export class TrainingPage implements OnInit {
     private dateService: DateService,
     private workoutService: WorkoutService,
     private trainingService: TrainingService,
+    private toastController: ToastController,
     private router: Router
   ) {}
 
@@ -389,14 +390,31 @@ export class TrainingPage implements OnInit {
   finishTraining() {
     this.router.navigate(['/home/']);
 
-    if(this.trainingStarted) {
+    if (this.trainingStarted) {
       // Save this training to training records
 
-      this.trainingService.saveTrainingRecord(
-        this.workout,
-        new Date(),
-        this.totalTimeString
-      );
+      let message = '';
+
+      this.trainingService
+        .saveTrainingRecord(this.workout, new Date(), this.totalTimeString)
+        .then(() => {
+          message = 'Training saved into records.';
+        })
+        .catch((error) => {
+          message =
+            error ?? 'An error occured while saving the training.';
+        })
+        .finally(() => {
+          this.toastController
+            .create({
+              message,
+              position: 'top',
+              duration: 2000,
+            })
+            .then((toastEl) => {
+              toastEl.present();
+            });
+        });
     }
   }
 
@@ -451,7 +469,7 @@ export class TrainingPage implements OnInit {
    * Find clock on id and start it
    */
   startClock(id: number) {
-    console.log("Start Clock", id);
+    console.log('Start Clock', id);
     this.clocks.forEach((clock) => {
       if (id === clock.id) {
         console.log(clock);
