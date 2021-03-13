@@ -14,26 +14,24 @@
       <ion-button routerLink="/home/my-library/" fill="clear">Do your first training now!</ion-button>
     </div>
     <div class="training-list" *ngIf="!isLoading && trainingRecordList && trainingRecordList.length > 0">
-      <div class="training-list-header">
-        <h3>Date</h3>
-        <h3>Total Time</h3>
-      </div>
-      <ion-list class="training-list-content ion-no-padding">
-        <ion-item-sliding *ngFor="let trainingRecord of trainingRecordList" class="ion-no-padding">
-          <ion-item [routerLink]="['/','home','training-history','detail', trainingRecord.id]" button detail
-            class="ion-no-padding">
-            <div class="item-content">
-              <p>{{trainingRecord.date | date }}</p>
-              <p>{{trainingRecord.totalTime}}</p>
-            </div>
-          </ion-item>
-          <ion-item-options side="end">
-            <ion-item-option color="danger" (click)="deleteTrainingRecord(trainingRecord)">
-              <ion-icon name="trash" slot="icon-only" size="small"></ion-icon>
-            </ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
-      </ion-list>
+      <ion-virtual-scroll [items]="trainingRecordList" approxItemHeight="200px">
+        <ion-card *virtualItem="let trainingRecord" class="training-history-card" mode="ios">
+          <div class="history-img-wrapper">
+            <img [src]="trainingRecord.workout.imageUrl">
+          </div>
+          <div class="bottom-left">
+            <span class="title">
+              {{ trainingRecord.workout.name }}
+            </span>
+            <span class="text">
+              {{ trainingRecord.duration }}
+            </span>
+            <span class="text">
+              {{ trainingRecord.date }}
+            </span>
+          </div>
+        </ion-card>
+      </ion-virtual-scroll>
     </div>
   </app-page-layout>
 </ion-content>

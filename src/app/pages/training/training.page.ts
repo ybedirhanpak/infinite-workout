@@ -388,6 +388,11 @@ export class TrainingPage implements OnInit {
 
   finishTraining() {
     this.router.navigate(['/home/']);
+    this.trainingService.saveTrainingRecord(
+      this.workout,
+      new Date(),
+      this.totalTimeString
+    );
   }
 
   /** Slide Controllers */
