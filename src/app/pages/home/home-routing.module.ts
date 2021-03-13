@@ -9,21 +9,9 @@ const routes: Routes = [
     component: HomePage,
     children: [
       {
-        path: 'progress',
-        loadChildren: () =>
-          import('../progress/progress.module').then(
-            (m) => m.ProgressPageModule
-          ),
-      },
-      {
         path: 'explore',
         loadChildren: () =>
           import('../explore/explore.module').then((m) => m.ExplorePageModule),
-      },
-      {
-        path: 'profile',
-        loadChildren: () =>
-          import('../profile/profile.module').then((m) => m.ProfilePageModule),
       },
       {
         path: 'my-library',
@@ -31,6 +19,18 @@ const routes: Routes = [
           import('../../pages/my-library/my-library.module').then(
             (m) => m.MyLibraryPageModule
           ),
+      },
+      {
+        path: 'training-history',
+        loadChildren: () =>
+          import('../../pages/training-history/training-history.module').then(
+            (m) => m.TrainingHistoryPageModule
+          ),
+      },
+      {
+        path: 'profile',
+        loadChildren: () =>
+          import('../profile/profile.module').then((m) => m.ProfilePageModule),
       },
       {
         path: '',
