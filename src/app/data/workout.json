@@ -3,7 +3,7 @@
         "id": 1,
         "name": "Gym Perfection",
         "category": "Hypertrophy",
-        "imageUrl": "https://images.pexels.com/photos/3490348/pexels-photo-3490348.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        "imageUrl": "assets/img/workout/man-sitting-with-dumbbells.jpg",
         "duration": {
             "type": "time",
             "opts": {
@@ -16,7 +16,7 @@
             {
                 "id": 1,
                 "name": "Biceps Curl",
-                "imageUrl": "https://images.unsplash.com/photo-1543975200-8e313fb04fc7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80",
+                "imageUrl": "assets/img/exercise/biceps-curl.jpg",
                 "load": {
                     "type": "weight",
                     "opts": {
@@ -53,7 +53,7 @@
         "id": 2,
         "name": "Beautiful Morning",
         "category": "Cardio",
-        "imageUrl": "https://images.pexels.com/photos/35009/runner-marathon-military-afghanistan.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        "imageUrl": "assets/img/workout/morning.jpg",
         "duration": {
             "type": "time",
             "opts": {
@@ -66,7 +66,7 @@
             {
                 "id": 2,
                 "name": "Running",
-                "imageUrl": "https://images.pexels.com/photos/936094/pexels-photo-936094.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                "imageUrl": "assets/img/exercise/running.jpg",
                 "load": {
                     "type": "distance",
                     "opts": {
@@ -88,7 +88,7 @@
         "id": 3,
         "name": "Superman",
         "category": "Strength",
-        "imageUrl": "https://images.pexels.com/photos/17840/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        "imageUrl": "assets/img/workout/man-lifting-barbell.jpg",
         "duration": {
             "type": "time",
             "opts": {
@@ -101,7 +101,7 @@
             {
                 "id": 3,
                 "name": "Deadlift",
-                "imageUrl": "https://images.unsplash.com/photo-1584863231364-2edc166de576?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1650&q=80",
+                "imageUrl": "assets/img/exercise/deadlift.jpg",
                 "load": {
                     "type": "weight",
                     "opts": {
@@ -145,7 +145,7 @@
             {
                 "id": 4,
                 "name": "Shoulder Press",
-                "imageUrl": "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1649&q=80",
+                "imageUrl": "assets/img/exercise/shoulder-press.jpg",
                 "load": {
                     "type": "weight",
                     "opts": {
@@ -184,7 +184,7 @@
             {
                 "id": 1,
                 "name": "Biceps Curl",
-                "imageUrl": "https://images.unsplash.com/photo-1543975200-8e313fb04fc7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80",
+                "imageUrl": "assets/img/exercise/biceps-curl.jpg",
                 "load": {
                     "type": "weight",
                     "opts": {
@@ -226,7 +226,7 @@
         "id": 4,
         "name": "Full Body",
         "category": "Hypertrophy & Strength",
-        "imageUrl": "https://images.pexels.com/photos/28080/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        "imageUrl": "assets/img/workout/woman-holding-ropes.jpg",
         "duration": {
             "type": "time",
             "opts": {
@@ -239,7 +239,7 @@
             {
                 "id": 1,
                 "name": "Biceps Curl",
-                "imageUrl": "https://images.unsplash.com/photo-1543975200-8e313fb04fc7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80",
+                "imageUrl": "assets/img/exercise/biceps-curl.jpg",
                 "load": {
                     "type": "weight",
                     "opts": {
@@ -273,7 +273,7 @@
             {
                 "id": 4,
                 "name": "Shoulder Press",
-                "imageUrl": "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1649&q=80",
+                "imageUrl": "assets/img/exercise/shoulder-press.jpg",
                 "load": {
                     "type": "weight",
                     "opts": {
@@ -314,7 +314,7 @@
             {
                 "id": 5,
                 "name": "Pull Up",
-                "imageUrl": "https://images.unsplash.com/photo-1597347316205-36f6c451902a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
+                "imageUrl": "assets/img/exercise/pull-up.jpg",
                 "load": {
                     "type": "bodyWeight"
                 },
@@ -349,7 +349,7 @@
             {
                 "id": 3,
                 "name": "Deadlift",
-                "imageUrl": "https://images.unsplash.com/photo-1584863231364-2edc166de576?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1650&q=80",
+                "imageUrl": "assets/img/exercise/deadlift.jpg",
                 "load": {
                     "type": "weight",
                     "opts": {
@@ -391,7 +391,7 @@
         "id": 5,
         "name": "Home Workout",
         "category": "Calisthenics",
-        "imageUrl": "https://images.pexels.com/photos/1191804/pexels-photo-1191804.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+        "imageUrl": "assets/img/workout/man-hand-stand.jpg",
         "duration": {
             "type": "time",
             "opts": {
@@ -404,7 +404,7 @@
             {
                 "id": 5,
                 "name": "Pull Up",
-                "imageUrl": "https://images.unsplash.com/photo-1597347316205-36f6c451902a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
+                "imageUrl": "assets/img/exercise/pull-up.jpg",
                 "load": {
                     "type": "bodyWeight"
                 },
@@ -439,7 +439,7 @@
             {
                 "id": 6,
                 "name": "Push Up",
-                "imageUrl": "https://images.unsplash.com/photo-1566351566999-d975d35c3325?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1651&q=80",
+                "imageUrl": "assets/img/exercise/push-up.jpg",
                 "load": {
                     "type": "bodyWeight"
                 },
@@ -474,7 +474,7 @@
             {
                 "id": 7,
                 "name": "Squat",
-                "imageUrl": "https://images.unsplash.com/photo-1536922246289-88c42f957773?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1980&q=80",
+                "imageUrl": "assets/img/exercise/squat-body-weight.jpg",
                 "load": {
                     "type": "bodyWeight"
                 },
@@ -509,7 +509,7 @@
             {
                 "id": 8,
                 "name": "Plank",
-                "imageUrl": "https://images.pexels.com/photos/2294354/pexels-photo-2294354.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                "imageUrl": "assets/img/exercise/plank.jpg",
                 "load": {
                     "type": "bodyWeight"
                 },
@@ -551,7 +551,7 @@
             {
                 "id": 9,
                 "name": "Leg Raise",
-                "imageUrl": "https://images.unsplash.com/photo-1520787497953-1985ca467702?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1550&q=80",
+                "imageUrl": "assets/img/exercise/leg-raise.jpg",
                 "load": {
                     "type": "bodyWeight"
                 },
@@ -581,7 +581,7 @@
             {
                 "id": 10,
                 "name": "Dips",
-                "imageUrl": "https://images.unsplash.com/photo-1598267416809-5c73f1b24404?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=977&q=80",
+                "imageUrl": "assets/img/exercise/dips.jpg",
                 "load": {
                     "type": "bodyWeight"
                 },
@@ -614,7 +614,7 @@
         "id": 5,
         "name": "Mix Workout",
         "category": "Calisthenics & Weight & Cardio",
-        "imageUrl": "https://images.unsplash.com/photo-1581009137042-c552e485697a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
+        "imageUrl": "assets/img/workout/mix-workout.jpg",
         "duration": {
             "type": "time",
             "opts": {
@@ -627,7 +627,7 @@
             {
                 "id": 8,
                 "name": "Plank",
-                "imageUrl": "https://images.pexels.com/photos/2294354/pexels-photo-2294354.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                "imageUrl": "assets/img/exercise/plank.jpg",
                 "load": {
                     "type": "bodyWeight"
                 },
@@ -662,7 +662,7 @@
             {
                 "id": 5,
                 "name": "Pull Up",
-                "imageUrl": "https://images.unsplash.com/photo-1597347316205-36f6c451902a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
+                "imageUrl": "assets/img/exercise/pull-up.jpg",
                 "load": {
                     "type": "bodyWeight"
                 },
@@ -702,7 +702,7 @@
             {
                 "id": 2,
                 "name": "Running",
-                "imageUrl": "https://images.pexels.com/photos/936094/pexels-photo-936094.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                "imageUrl": "assets/img/exercise/running.jpg",
                 "load": {
                     "type": "distance",
                     "opts": {
@@ -721,7 +721,7 @@
             {
                 "id": 4,
                 "name": "Shoulder Press",
-                "imageUrl": "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1649&q=80",
+                "imageUrl": "assets/img/exercise/shoulder-press.jpg",
                 "load": {
                     "type": "weight",
                     "opts": {
