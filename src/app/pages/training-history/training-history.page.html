@@ -1,12 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home/profile"></ion-back-button>
-    </ion-buttons>
     <ion-title>Training History</ion-title>
-    <ion-buttons slot="end">
-      <ion-button fill="clear" [disabled]="true"></ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -26,7 +20,7 @@
       </div>
       <ion-list class="training-list-content ion-no-padding">
         <ion-item-sliding *ngFor="let trainingRecord of trainingRecordList" class="ion-no-padding">
-          <ion-item [routerLink]="['/','home','profile','detail', trainingRecord.id]" button detail
+          <ion-item [routerLink]="['/','home','training-history','detail', trainingRecord.id]" button detail
             class="ion-no-padding">
             <div class="item-content">
               <p>{{trainingRecord.date | date }}</p>

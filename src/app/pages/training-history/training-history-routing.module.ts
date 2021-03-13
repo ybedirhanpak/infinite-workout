@@ -7,7 +7,14 @@ const routes: Routes = [
   {
     path: '',
     component: TrainingHistoryPage
-  }
+  },
+  {
+    path: 'record/:id',
+    loadChildren: () =>
+      import('./training-record/training-record.module').then(
+        (m) => m.TrainingRecordPageModule
+      ),
+  },
 ];
 
 @NgModule({
