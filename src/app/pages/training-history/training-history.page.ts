@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { LoadingController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 
 // Model
 import { TrainingRecord } from '@models/training.model';
@@ -20,7 +20,7 @@ export class TrainingHistoryPage implements OnInit, OnDestroy {
 
   constructor(
     private trainingService: TrainingService,
-    private loadingController: LoadingController
+    private toastController: ToastController
   ) {}
 
   ngOnInit() {
@@ -45,19 +45,25 @@ export class TrainingHistoryPage implements OnInit, OnDestroy {
   }
 
   deleteTrainingRecord(trainingRecord: TrainingRecord) {
-    this.loadingController
-      .create({
-        message: 'Deleting...',
+    let message = '';
+
+    this.trainingService
+      .deleteTrainingRecord(trainingRecord.id)
+      .then(() => {
+        message = 'Training record deleted successfully.';
       })
-      .then((loadingEl) => {
-        loadingEl.present();
-        this.trainingService
-          .deleteTrainingRecord(trainingRecord.id)
-          .then(() => {
-            loadingEl.dismiss();
+      .catch((error) => {
+        message = error || 'An error occured while deleting the training record.';
+      })
+      .finally(() => {
+        this.toastController
+          .create({
+            message,
+            position: 'top',
+            duration: 1000
           })
-          .catch(() => {
-            // TODO: Display error message
+          .then((toastEl) => {
+            toastEl.present();
           });
       });
   }
