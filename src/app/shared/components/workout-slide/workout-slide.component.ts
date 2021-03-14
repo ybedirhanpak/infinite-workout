@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 // Model
@@ -16,6 +16,8 @@ export class WorkoutSlideComponent implements OnInit {
   @Input() workouts: Workout[] = [];
   @Input() filter: string = 'red-turquoise';
 
+  @Output() onClick = new EventEmitter<Workout>();
+
   slideOptions = {
     initialSlide: 0,
     speed: 500,
@@ -25,7 +27,7 @@ export class WorkoutSlideComponent implements OnInit {
   constructor(private workoutService: WorkoutService, private router: Router) {}
 
   ngOnInit() {
-    if(this.workouts.length > 1) {
+    if (this.workouts.length > 1) {
       this.slideOptions.slidesPerView = 2.2;
     } else {
       this.slideOptions.slidesPerView = 1.2;
@@ -33,7 +35,6 @@ export class WorkoutSlideComponent implements OnInit {
   }
 
   onWorkoutClick(workout: Workout) {
-    this.workoutService.setWorkoutDetail(workout);
-    this.router.navigateByUrl("/home/my-library/workout-detail")
+    this.onClick.emit(workout);
   }
 }

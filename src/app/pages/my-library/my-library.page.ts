@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TrainingRecord } from '@models/training.model';
 
 // Model
@@ -17,7 +18,8 @@ export class MyLibraryPage implements OnInit {
 
   constructor(
     private workoutService: WorkoutService,
-    private trainingService: TrainingService
+    private trainingService: TrainingService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -38,4 +40,9 @@ export class MyLibraryPage implements OnInit {
   }
 
   getDuration = getWorkoutDuration;
+
+  onWorkoutClick(workout: Workout) {
+    this.workoutService.setWorkoutDetail(workout);
+    this.router.navigateByUrl('/home/my-library/workout-detail');
+  }
 }

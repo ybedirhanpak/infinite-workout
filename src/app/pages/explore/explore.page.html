@@ -21,19 +21,19 @@
       <h3 class="ion-text-center">
         Gym & Fitness
       </h3>
-      <app-workout-slide [workouts]="myWorkouts"></app-workout-slide>
+      <app-workout-slide [workouts]="myWorkouts" (onClick)="onWorkoutClick($event)"></app-workout-slide>
     </section>
     <section>
       <h3 class="ion-text-center" style="margin-top: 0;">
         Calisthenics
       </h3>
-      <app-workout-slide [workouts]="myWorkouts"></app-workout-slide>
+      <app-workout-slide [workouts]="myWorkouts" (onClick)="onWorkoutClick($event)"></app-workout-slide>
     </section>
     <section>
       <h3 class="ion-text-center" style="margin-top: 0;">
         Beginner Workouts
       </h3>
-      <app-workout-slide [workouts]="myWorkouts"></app-workout-slide>
+      <app-workout-slide [workouts]="myWorkouts" (onClick)="onWorkoutClick($event)"></app-workout-slide>
     </section>
   </app-page-layout>
 </ion-content>
