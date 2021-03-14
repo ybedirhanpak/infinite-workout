@@ -469,10 +469,8 @@ export class TrainingPage implements OnInit {
    * Find clock on id and start it
    */
   startClock(id: number) {
-    console.log('Start Clock', id);
     this.clocks.forEach((clock) => {
       if (id === clock.id) {
-        console.log(clock);
         clock.start();
       }
     });
