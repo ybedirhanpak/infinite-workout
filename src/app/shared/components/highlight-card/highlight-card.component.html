@@ -1,0 +1,24 @@
+<app-clickable>
+  <ion-card class="highlight-card" mode="ios">
+    <div [ngClass]="['img-wrapper', 'filter', filter]">
+      <img class="cover" [src]="imageUrl">
+    </div>
+    <div class="bottom-left">
+      <span *ngIf="subtitle" class="subtitle">
+        {{ subtitle }}
+      </span>
+      <span class="title">
+        {{ title }}
+      </span>
+      <span class="text" *ngFor="let text of textList">
+        {{ text }}
+      </span>
+    </div>
+
+    <div class="top-right" *ngIf="actionButton">
+      <ion-button class="action-button" fill="clear" [color]="actionButton.color">
+        <ion-icon [name]="actionButton.icon" slot="icon-only"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-card>
+</app-clickable>

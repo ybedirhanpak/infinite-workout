@@ -10,6 +10,8 @@ import { WorkoutSlideComponent } from './components/workout-slide/workout-slide.
 import { ClickableComponent } from './components/clickable/clickable.component';
 import { ClockCircleComponent } from './components/clock-circle/clock-circle.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { HighlightCardComponent } from './components/highlight-card/highlight-card.component';
+import { HighlightWorkoutSlideComponent } from './components/highlight-workout-slide/highlight-workout-slide.component';
 
 
 
@@ -21,7 +23,9 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
     WorkoutCardComponent,
     WorkoutSlideComponent,
     ClickableComponent,
-    ClockCircleComponent
+    ClockCircleComponent,
+    HighlightCardComponent,
+    HighlightWorkoutSlideComponent
   ],
   imports: [
     CommonModule,
@@ -53,7 +57,9 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
     WorkoutCardComponent,
     WorkoutSlideComponent,
     ClickableComponent,
-    ClockCircleComponent
+    ClockCircleComponent,
+    HighlightCardComponent,
+    HighlightWorkoutSlideComponent
   ],
 })
 export class SharedModule {}

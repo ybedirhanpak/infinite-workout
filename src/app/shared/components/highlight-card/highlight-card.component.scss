@@ -1,0 +1,47 @@
+.highlight-card {
+    margin: 0;
+    color: white;
+    text-align: start;
+
+    .img-wrapper {
+        height: 200px;
+    }
+
+    .bottom-left {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    .top-right {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+        text-transform: uppercase;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .text {
+        font-size: 1rem;
+    }
+
+    .action-button {
+        ion-icon {
+            width: 16px;
+            height: 16px;
+        }
+    }
+}
