@@ -29,8 +29,7 @@ export class MyLibraryPage implements OnInit {
 
     this.trainingService.trainingRecordList.subscribe((trainingRecordList) => {
       const length = trainingRecordList.length;
-      this.lastTraining =
-        length > 0 ? trainingRecordList[length - 1] : undefined;
+      this.lastTraining = length > 0 ? trainingRecordList[0] : undefined;
     });
   }
 
