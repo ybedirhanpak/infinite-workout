@@ -54,14 +54,15 @@ export class TrainingHistoryPage implements OnInit, OnDestroy {
         message = 'Training record deleted successfully.';
       })
       .catch((error) => {
-        message = error ?? 'An error occured while deleting the training record.';
+        message =
+          error ?? 'An error occured while deleting the training record.';
       })
       .finally(() => {
         this.toastController
           .create({
             message,
             position: 'top',
-            duration: 1000
+            duration: 1000,
           })
           .then((toastEl) => {
             toastEl.present();

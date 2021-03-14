@@ -7,8 +7,9 @@
 <ion-content>
   <app-page-layout>
     <div *ngIf="!isLoading && !(trainingRecordList && trainingRecordList.length > 0)" class="ion-text-center">
+      <h3>Last trainings</h3>
       <p>There are no training history to show.</p>
-      <ion-button routerLink="/home/my-library/" fill="clear">Do your first training now!</ion-button>
+      <ion-button routerLink="/home/explore/">Explore</ion-button>
     </div>
     <ion-virtual-scroll [items]="trainingRecordList" [trackBy]="recordIdentifier" approxItemHeight="224px">
       <ion-card *virtualItem="let trainingRecord" class="training-history-card" mode="ios">
