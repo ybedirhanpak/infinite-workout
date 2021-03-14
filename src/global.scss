@@ -178,3 +178,41 @@ ion-reorder.wide-reorder {
 .hidden {
   display: none;
 }
+
+img.cover {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+// Image filters
+
+.filter {
+  &.purple-blue {
+    background-color: #564058;
+    background-image: linear-gradient(315deg, #564058 0%, #081f30 74%);
+
+    img {
+      mix-blend-mode: soft-light;
+    }
+  }
+
+  &.yellow-blue {
+    background-color: #735b00b0;
+    background-image: linear-gradient(315deg, #92834ab0 0%, #19352fc7 74%);
+
+    img {
+      mix-blend-mode: soft-light;
+    }
+  }
+
+  &.red-turquoise {
+    background-color: #ce150094;
+    background-image: linear-gradient(315deg, #c55d52 0%, #0a5647d1 74%);
+
+    img {
+      mix-blend-mode: hard-light;
+    }
+  }
+}

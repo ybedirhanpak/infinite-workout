@@ -1,6 +1,8 @@
 <app-clickable>
   <ion-card class="workout-card" mode="ios">
-    <img class="center-cropped" [src]="imageUrl">
+    <div [ngClass]="['img-wrapper', 'filter', filter]">
+      <img class="cover" [src]="imageUrl">
+    </div>
     <ion-card-header>
       <ion-card-subtitle>{{ category }}</ion-card-subtitle>
       <ion-card-title style="font-size: 16px;">{{ name }}</ion-card-title>

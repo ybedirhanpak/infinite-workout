@@ -14,6 +14,7 @@ import { WorkoutService } from '@services/workout.service';
 })
 export class WorkoutSlideComponent implements OnInit {
   @Input() workouts: Workout[] = [];
+  @Input() filter: string = 'red-turquoise';
 
   slideOptions = {
     initialSlide: 0,

@@ -7,6 +7,7 @@ import { Time } from '@models/workout.model';
   styleUrls: ['./workout-card.component.scss'],
 })
 export class WorkoutCardComponent implements OnInit {
+  @Input() filter: string = 'red-turquoise';
   @Input() name: string = 'Name';
   @Input() category: string = 'Category';
   @Input() imageUrl: string = 'assets/img/light-theme.png';
