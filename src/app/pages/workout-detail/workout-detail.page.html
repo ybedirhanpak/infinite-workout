@@ -1,9 +1,14 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home/my-library"></ion-back-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Workout Detail</ion-title>
+    <ion-buttons slot="end" *ngIf="explore">
+      <ion-button>
+        <ion-icon name="heart-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

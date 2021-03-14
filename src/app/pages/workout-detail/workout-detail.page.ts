@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 // Model
 import { getLoadString, getRepString, Workout } from '@models/workout.model';
@@ -18,13 +18,17 @@ export class WorkoutDetailPage implements OnInit {
 
   duration = '';
   exercises = [];
+  explore = false;
+  favorited = false;
 
   constructor(
     private workoutService: WorkoutService,
     private router: Router
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.explore = this.router.url.includes("explore");
+  }
 
   ionViewWillEnter() {
     this.workoutService.workoutDetail.subscribe((workout) => {
@@ -32,6 +36,7 @@ export class WorkoutDetailPage implements OnInit {
       const { time, unit } = this.workout.duration.opts;
       this.duration = `${time} ${unit}`;
 
+      // Prepare exercises
       this.exercises = this.workout.exercises.map((exercise) => {
         let load = getLoadString(exercise);
         let rep = getRepString(exercise);
@@ -43,6 +48,9 @@ export class WorkoutDetailPage implements OnInit {
           load,
         };
       });
+
+      // Check if it's favorited or not
+      
     });
   }
 
