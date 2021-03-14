@@ -7,14 +7,23 @@
 <ion-content>
   <app-page-layout>
     <section>
-      <h3 class="ion-text-center">
-        My Workouts
-      </h3>
-      <app-workout-slide [workouts]="myWorkouts"></app-workout-slide>
+      <div style="margin: 16px;" *ngIf="lastTraining">
+        <h3 class="ion-text-center">Last Workout</h3>
+        <app-highlight-card [imageUrl]="lastTraining.workout.imageUrl" [title]="lastTraining.workout.name"
+          [subtitle]="lastTraining.workout.category" [textList]="[getDuration(lastTraining.workout)]">
+        </app-highlight-card>
+      </div>
     </section>
-    <section *ngIf="favorites && favorites.length > 0">
-      <h3 class="ion-text-center" style="margin-top: 0;">Favorites</h3>
-      <app-workout-slide [workouts]="favorites"></app-workout-slide>
+    <section>
+      <h3 class="ion-text-center">Favorites</h3>
+      <div *ngIf="favorites && favorites.length > 0">
+        <app-workout-slide [workouts]="favorites"></app-workout-slide>
+      </div>
+      <div *ngIf="!(favorites && favorites.length > 0)"
+        style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <p>Find out some workouts and they will be here.</p>
+        <ion-button routerLink="/home/explore">Explore</ion-button>
+      </div>
     </section>
   </app-page-layout>
 </ion-content>

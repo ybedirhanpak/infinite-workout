@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { TrainingRecord } from '@models/training.model';
 
 // Model
-import { Workout } from '@models/workout.model';
+import { Workout, getWorkoutDuration } from '@models/workout.model';
+import { TrainingService } from '@services/training.service';
 import { WorkoutService } from '@services/workout.service';
-
-// Data
-import WORKOUT from '../../data/workout.json';
 
 @Component({
   selector: 'app-my-library',
@@ -13,19 +12,30 @@ import WORKOUT from '../../data/workout.json';
   styleUrls: ['./my-library.page.scss'],
 })
 export class MyLibraryPage implements OnInit {
-  myWorkouts = WORKOUT as Workout[];
-
   favorites: Workout[] = [];
+  lastTraining: TrainingRecord;
 
-  constructor(private workoutService: WorkoutService) {}
+  constructor(
+    private workoutService: WorkoutService,
+    private trainingService: TrainingService
+  ) {}
 
   ngOnInit() {
     this.workoutService.favorites.subscribe((favorites) => {
       this.favorites = favorites;
-    })
+    });
+
+    this.trainingService.trainingRecordList.subscribe((trainingRecordList) => {
+      const length = trainingRecordList.length;
+      this.lastTraining =
+        length > 0 ? trainingRecordList[length - 1] : undefined;
+    });
   }
 
   ionViewWillEnter() {
     this.workoutService.fetchFavorites();
+    this.trainingService.fetchTrainingRecordList();
   }
+
+  getDuration = getWorkoutDuration;
 }
