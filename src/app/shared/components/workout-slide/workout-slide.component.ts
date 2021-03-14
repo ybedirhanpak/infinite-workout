@@ -28,7 +28,7 @@ export class WorkoutSlideComponent implements OnInit {
     if(this.workouts.length > 1) {
       this.slideOptions.slidesPerView = 2.2;
     } else {
-      this.slideOptions.slidesPerView = 1;
+      this.slideOptions.slidesPerView = 1.2;
     }
   }
 
