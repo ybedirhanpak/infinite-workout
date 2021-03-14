@@ -122,3 +122,8 @@ export interface Workout {
   imageUrl?: string;
   exercises: Exercise[];
 }
+
+
+export const getWorkoutDuration = (workout: Workout) => {
+  return `${workout.duration.opts.time} ${workout.duration.opts.unit}`;
+}
