@@ -19,9 +19,8 @@
       <div *ngIf="favorites && favorites.length > 0">
         <app-workout-slide [workouts]="favorites"></app-workout-slide>
       </div>
-      <div *ngIf="!(favorites && favorites.length > 0)"
-        style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-        <p>Find out some workouts and they will be here.</p>
+      <div *ngIf="!(favorites && favorites.length > 0)" class="ion-text-center ion-padding-horizontal">
+        <p>Your favorite workouts will be here. Explore some workouts and add them into your favorites.</p>
         <ion-button routerLink="/home/explore">Explore</ion-button>
       </div>
     </section>
