@@ -32,6 +32,7 @@ export class TrainingHistoryPage implements OnInit, OnDestroy {
   }
 
   ionViewWillEnter() {
+    // Fetch training records from data source
     this.isLoading = true;
     this.trainingService.fetchTrainingRecordList().then(() => {
       this.isLoading = false;
@@ -66,5 +67,9 @@ export class TrainingHistoryPage implements OnInit, OnDestroy {
             toastEl.present();
           });
       });
+  }
+
+  recordIdentifier(index: number, item: TrainingRecord) {
+    return item ? item.id : index;
   }
 }
