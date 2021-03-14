@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Time } from '@models/workout.model';
 
 @Component({
@@ -6,17 +6,15 @@ import { Time } from '@models/workout.model';
   templateUrl: './workout-card.component.html',
   styleUrls: ['./workout-card.component.scss'],
 })
-export class WorkoutCardComponent {
+export class WorkoutCardComponent implements OnInit {
   @Input() name: string = 'Name';
   @Input() category: string = 'Category';
   @Input() imageUrl: string = 'assets/img/light-theme.png';
-  @Input() duration: Time = {
-    type: 'time',
-    opts: {
-      time: 10,
-      unit: 'min',
-    },
-  };
+  @Input() duration: Time;
 
-  durationString = `${this.duration.opts.time} ${this.duration.opts.unit}`
+  durationString = '';
+
+  ngOnInit() {
+    this.durationString = `${this.duration.opts.time} ${this.duration.opts.unit}`;
+  }
 }
