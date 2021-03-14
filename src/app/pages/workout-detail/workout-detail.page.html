@@ -9,7 +9,9 @@
 
 <ion-content>
   <div class="workout-detail" *ngIf="workout">
-    <img class="cover-image" [src]="workout.imageUrl" [alt]="workout.name">
+    <div class="img-wrapper filter red-turquoise">
+      <img class="cover" [src]="workout.imageUrl" [alt]="workout.name">
+    </div>
     <h1 class="ion-padding-horizontal" style="font-weight: bold;">{{ workout.name }}</h1>
     <ion-list lines="none">
       <ion-item>
