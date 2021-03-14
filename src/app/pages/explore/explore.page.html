@@ -11,52 +11,29 @@
 </ion-header>
 <ion-content>
   <app-page-layout>
-    <!-- Loading Spinner -->
-    <div *ngIf="isLoading" class="ion-text-center">
-      <ion-spinner name="crescent"></ion-spinner>
-    </div>
-    <!-- Empty list message -->
-    <div
-      *ngIf="!isLoading && !(progressList && progressList.length > 0)"
-      class="ion-text-center"
-    >
-      <p>There are no progresses to show.</p>
-    </div>
-    <!-- Progress list -->
-    <div *ngIf="!isLoading && progressList && progressList.length > 0">
-      <ion-list class="ion-no-padding">
-        <ion-item
-          *ngFor="let progress of progressList"
-          (click)="openProgressDetail(progress)"
-          class="progress-item ion-no-padding"
-        >
-          <div class="progress-item-content">
-            <div class="rep-set">
-              <p class="ion-no-margin">{{progress.sets}} x {{progress.reps}}</p>
-              <p class="ion-no-margin">{{progress.repType}}</p>
-            </div>
-            <div class="exercise">
-              <div *ngIf="progress.currentExercise">
-                <p
-                  class="ion-no-margin progress-name"
-                  style="font-weight: bold"
-                >
-                  {{progress.currentExercise.name}}
-                </p>
-                <p class="ion-no-margin">{{progress.name}}</p>
-              </div>
-              <div *ngIf="!progress.currentExercise">
-                <p
-                  class="ion-no-margin progress-name"
-                  style="font-weight: bold"
-                >
-                  {{progress.name}}
-                </p>
-              </div>
-            </div>
-          </div>
-        </ion-item>
-      </ion-list>
-    </div>
+    <section>
+      <h3 class="ion-text-center">
+        Highlights
+      </h3>
+      <app-highlight-workout-slide [workouts]="myWorkouts" (onClick)="onWorkoutClick($event)"></app-highlight-workout-slide>
+    </section>
+    <section>
+      <h3 class="ion-text-center">
+        Gym & Fitness
+      </h3>
+      <app-workout-slide [workouts]="myWorkouts"></app-workout-slide>
+    </section>
+    <section>
+      <h3 class="ion-text-center" style="margin-top: 0;">
+        Calisthenics
+      </h3>
+      <app-workout-slide [workouts]="myWorkouts"></app-workout-slide>
+    </section>
+    <section>
+      <h3 class="ion-text-center" style="margin-top: 0;">
+        Beginner Workouts
+      </h3>
+      <app-workout-slide [workouts]="myWorkouts"></app-workout-slide>
+    </section>
   </app-page-layout>
 </ion-content>

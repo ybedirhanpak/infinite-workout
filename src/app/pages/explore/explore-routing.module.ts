@@ -9,11 +9,8 @@ const routes: Routes = [
     component: ExplorePage,
   },
   {
-    path: 'progress/:progressId',
-    loadChildren: () =>
-      import('./progress-detail/progress-detail.module').then(
-        (m) => m.ProgressDetailPageModule
-      ),
+    path: 'workout-detail',
+    loadChildren: () => import('../workout-detail/workout-detail.module').then( m => m.WorkoutDetailPageModule)
   },
 ];
 
