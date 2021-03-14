@@ -24,7 +24,13 @@ export class WorkoutSlideComponent implements OnInit {
 
   constructor(private workoutService: WorkoutService, private router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if(this.workouts.length > 1) {
+      this.slideOptions.slidesPerView = 2.2;
+    } else {
+      this.slideOptions.slidesPerView = 1;
+    }
+  }
 
   onWorkoutClick(workout: Workout) {
     this.workoutService.setWorkoutDetail(workout);
