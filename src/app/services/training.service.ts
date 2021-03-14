@@ -49,22 +49,19 @@ export class TrainingService {
     this.TRAINING_RECORD_LIST.next(trainingRecordList);
   }
 
-  async saveTrainingRecord(
-    workout: Workout,
-    date: Date,
-    duration: string,
-  ) {
+  async saveTrainingRecord(workout: Workout, date: Date, duration: string) {
     const trainingRecordList = this.adjustTrainingRecordList(
       await this.storage.get(TRAINING_RECORDS_KEY)
     );
-    const lastTrainingRecord = trainingRecordList.length > 0 ? trainingRecordList[0] : undefined;
+    const lastTrainingRecord =
+      trainingRecordList.length > 0 ? trainingRecordList[0] : undefined;
     const id = lastTrainingRecord ? lastTrainingRecord.id + 1 : 0;
 
     const newTrainingRecord: TrainingRecord = {
       id,
       workout,
       date: date.toLocaleDateString(),
-      duration
+      duration,
     };
 
     const updatedList = [newTrainingRecord].concat(trainingRecordList);
