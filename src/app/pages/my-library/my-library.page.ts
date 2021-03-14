@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 // Model
 import { Workout } from '@models/workout.model';
+import { WorkoutService } from '@services/workout.service';
 
 // Data
 import WORKOUT from '../../data/workout.json';
@@ -13,9 +14,18 @@ import WORKOUT from '../../data/workout.json';
 })
 export class MyLibraryPage implements OnInit {
   myWorkouts = WORKOUT as Workout[];
-  favoriteWorkouts = WORKOUT as Workout[];
 
-  constructor() {}
+  favorites: Workout[] = [];
 
-  ngOnInit() {}
+  constructor(private workoutService: WorkoutService) {}
+
+  ngOnInit() {
+    this.workoutService.favorites.subscribe((favorites) => {
+      this.favorites = favorites;
+    })
+  }
+
+  ionViewWillEnter() {
+    this.workoutService.fetchFavorites();
+  }
 }

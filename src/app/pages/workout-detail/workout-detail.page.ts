@@ -31,8 +31,10 @@ export class WorkoutDetailPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.workoutService.workoutDetail.subscribe((workout) => {
+    this.workoutService.workoutDetail.subscribe(async (workout) => {
       this.workout = workout;
+      this.favorited = await this.workoutService.isFavorite(workout);
+
       const { time, unit } = this.workout.duration.opts;
       this.duration = `${time} ${unit}`;
 
@@ -57,5 +59,14 @@ export class WorkoutDetailPage implements OnInit {
   startWorkout() {
     this.router.navigateByUrl('/training');
     this.workoutService.setWorkoutDetail(this.workout);
+  }
+
+  async onFavoriteClick() {
+    if(!this.favorited) {
+      await this.workoutService.addToFavorites(this.workout);
+    } else {
+      await this.workoutService.deleteFromFavorites(this.workout);
+    }
+    this.favorited = await this.workoutService.isFavorite(this.workout);
   }
 }

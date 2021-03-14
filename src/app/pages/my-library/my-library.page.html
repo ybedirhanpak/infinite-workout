@@ -12,9 +12,9 @@
       </h3>
       <app-workout-slide [workouts]="myWorkouts"></app-workout-slide>
     </section>
-    <section>
+    <section *ngIf="favorites && favorites.length > 0">
       <h3 class="ion-text-center" style="margin-top: 0;">Favorites</h3>
-      <app-workout-slide [workouts]="myWorkouts"></app-workout-slide>
+      <app-workout-slide [workouts]="favorites"></app-workout-slide>
     </section>
   </app-page-layout>
 </ion-content>

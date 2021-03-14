@@ -4,9 +4,9 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Workout Detail</ion-title>
-    <ion-buttons slot="end" *ngIf="explore">
-      <ion-button>
-        <ion-icon name="heart-outline"></ion-icon>
+    <ion-buttons slot="end">
+      <ion-button (click)="onFavoriteClick()" color="danger">
+        <ion-icon [name]="favorited ? 'heart' : 'heart-outline'"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
