@@ -22,6 +22,7 @@ export class WorkoutSlideComponent implements OnInit {
     initialSlide: 0,
     speed: 500,
     slidesPerView: 2.2,
+    spaceBetween: 8,
   };
 
   constructor(private workoutService: WorkoutService, private router: Router) {}
