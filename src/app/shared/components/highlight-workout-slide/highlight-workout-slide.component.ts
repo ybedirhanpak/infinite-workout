@@ -21,6 +21,7 @@ export class HighlightWorkoutSlideComponent implements OnInit {
     speed: 500,
     slidesPerView: 1.1,
     centerSlide: true,
+    spaceBetween: 8,
   };
 
   constructor(
