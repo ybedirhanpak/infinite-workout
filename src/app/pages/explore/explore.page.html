@@ -12,28 +12,26 @@
 <ion-content>
   <app-page-layout>
     <section>
-      <h3 class="ion-text-center">
-        Highlights
-      </h3>
-      <app-highlight-workout-slide [workouts]="myWorkouts" (onClick)="onWorkoutClick($event)"></app-highlight-workout-slide>
+      <div style="margin: 12px;">
+        <app-highlight-card
+          [imageUrl]="'https://images.pexels.com/photos/1431282/pexels-photo-1431282.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'"
+          [title]="'Workouts'"
+          [filter]="'red-turquoise'"
+          [textList]="['See all workouts']"
+          (click)="onWorkoutsClick()">
+        </app-highlight-card>
+      </div>
     </section>
     <section>
-      <h3 class="ion-text-center">
-        Gym & Fitness
-      </h3>
-      <app-workout-slide [workouts]="myWorkouts" (onClick)="onWorkoutClick($event)"></app-workout-slide>
-    </section>
-    <section>
-      <h3 class="ion-text-center" style="margin-top: 0;">
-        Calisthenics
-      </h3>
-      <app-workout-slide [workouts]="myWorkouts" (onClick)="onWorkoutClick($event)"></app-workout-slide>
-    </section>
-    <section>
-      <h3 class="ion-text-center" style="margin-top: 0;">
-        Beginner Workouts
-      </h3>
-      <app-workout-slide [workouts]="myWorkouts" (onClick)="onWorkoutClick($event)"></app-workout-slide>
+      <div style="margin: 12px;">
+        <app-highlight-card
+          [imageUrl]="'https://images.pexels.com/photos/841131/pexels-photo-841131.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'"
+          [title]="'Exercises'"
+          [filter]="'red-turquoise'"
+          [textList]="['See all exercises']"
+          (click)="onExercisesClick()">
+        </app-highlight-card>
+      </div>
     </section>
   </app-page-layout>
 </ion-content>

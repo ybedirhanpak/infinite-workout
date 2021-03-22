@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home/explore"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Workouts</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-page-layout>
+    <section>
+      <h3 class="ion-text-center">
+        Highlights
+      </h3>
+      <app-highlight-workout-slide [workouts]="myWorkouts" (onClick)="onWorkoutClick($event)"></app-highlight-workout-slide>
+    </section>
+    <section>
+      <h3 class="ion-text-center">
+        Gym & Fitness
+      </h3>
+      <app-workout-slide [workouts]="myWorkouts" (onClick)="onWorkoutClick($event)"></app-workout-slide>
+    </section>
+    <section>
+      <h3 class="ion-text-center" style="margin-top: 0;">
+        Calisthenics
+      </h3>
+      <app-workout-slide [workouts]="myWorkouts" (onClick)="onWorkoutClick($event)"></app-workout-slide>
+    </section>
+    <section>
+      <h3 class="ion-text-center" style="margin-top: 0;">
+        Beginner Workouts
+      </h3>
+      <app-workout-slide [workouts]="myWorkouts" (onClick)="onWorkoutClick($event)"></app-workout-slide>
+    </section>
+  </app-page-layout>
+</ion-content>

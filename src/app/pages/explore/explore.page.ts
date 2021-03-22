@@ -19,8 +19,12 @@ export class ExplorePage {
 
   constructor(private workoutService: WorkoutService, private router: Router) {}
 
-  onWorkoutClick(workout: Workout) {
-    this.workoutService.setWorkoutDetail(workout);
-    this.router.navigateByUrl('/home/explore/workout-detail');
+  onWorkoutsClick() {
+    this.router.navigateByUrl('/home/explore/workouts');
+    console.log("clicked");
+  }
+
+  onExercisesClick() {
+    this.router.navigateByUrl('/home/explore/exercises');
   }
 }
