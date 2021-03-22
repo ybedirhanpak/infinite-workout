@@ -21,13 +21,8 @@ export class HighlightWorkoutSlideComponent implements OnInit {
     speed: 500,
     slidesPerView: 1.1,
     centerSlide: true,
-    spaceBetween: 8,
+    spaceBetween: 12,
   };
-
-  constructor(
-    private workoutService: WorkoutService,
-    private router: Router
-  ) {}
 
   ngOnInit() {}
 
