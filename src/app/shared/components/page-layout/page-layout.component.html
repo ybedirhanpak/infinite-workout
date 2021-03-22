@@ -1,6 +1,6 @@
-<ion-grid class="ion-no-padding">
-  <ion-row class="ion-no-padding">
-    <ion-col size-md="8" offset-md="2" class="ion-no-padding">
+<ion-grid class="ion-no-padding" [class.full-height]="fullScreen">
+  <ion-row class="ion-no-padding" [class.full-height]="fullScreen">
+    <ion-col size-md="8" offset-md="2" class="ion-no-padding" [class.full-height]="fullScreen">
       <ng-content></ng-content>
     </ion-col>
   </ion-row>

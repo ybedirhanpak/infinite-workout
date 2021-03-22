@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-page-layout',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./page-layout.component.scss'],
 })
 export class PageLayoutComponent implements OnInit {
+  @Input() fullScreen: boolean;
 
   constructor() { }
 

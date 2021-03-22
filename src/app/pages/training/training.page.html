@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content scroll-y="false">
-  <app-page-layout>
+  <app-page-layout [fullScreen]="true">
     <div class="training-page-body">
       <ion-slides [options]="slideOptions" (ionSlideWillChange)="onSlideChange($event)"
         (ionSlidesDidLoad)="onSlideLoad($event)">
