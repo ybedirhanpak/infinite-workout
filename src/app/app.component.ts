@@ -23,7 +23,6 @@ export class AppComponent implements OnInit {
     private trainingService: TrainingService
   ) {
     this.initializeApp();
-    this.themeService.fetchTheme();
   }
 
   initializeApp() {
@@ -33,6 +32,8 @@ export class AppComponent implements OnInit {
       if (this.platform.is('cordova') || this.platform.is('capacitor')) {
         this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
       }
+      // Fetch values from storage
+      this.themeService.fetchTheme();
       this.trainingService.fetchRestTime();
     });
   }
