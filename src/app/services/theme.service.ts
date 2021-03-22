@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { BehaviorSubject } from 'rxjs';
 
-const THEME_STORAGE_KEY = 'THEME_STORAGE_KEY';
 
 export enum Theme {
   light = 'light',
   dark = 'dark',
   system = 'system',
 }
+
+const THEME_STORAGE_KEY = 'THEME_STORAGE_KEY';
+const THEME_DEFAULT = Theme.dark;
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +22,7 @@ export class ThemeService {
   public BLACK = 'var(--ion-color-dark, black)';
   public RED = 'var(--ion-color-danger, red)';
 
-  private THEME_VALUE = new BehaviorSubject<Theme>(Theme.light);
+  private THEME_VALUE = new BehaviorSubject<Theme>(THEME_DEFAULT);
 
   get themeValue() {
     return this.THEME_VALUE.asObservable();
@@ -47,7 +49,11 @@ export class ThemeService {
    * Retrevies theme value from storage and updates behavior subject
    */
   async fetchTheme() {
-    const theme = await this.storage.get(THEME_STORAGE_KEY);
+    let theme = await this.storage.get(THEME_STORAGE_KEY);
+    if(!theme) {
+      theme = THEME_DEFAULT;
+      await this.storage.set(THEME_STORAGE_KEY, theme);
+    }
     this.updateBodyTheme(theme);
     this.THEME_VALUE.next(theme);
   }
