@@ -6,6 +6,7 @@ import { Workout } from '@models/workout.model';
 
 // Service
 import { WorkoutService } from '@services/workout.service';
+import { plainToClass } from 'class-transformer';
 
 // Data
 import WORKOUT from '../../../data/workout.json';
@@ -17,8 +18,8 @@ import WORKOUT from '../../../data/workout.json';
 })
 export class WorkoutsPage {
 
-  myWorkouts = WORKOUT as Workout[];
-  favoriteWorkouts = WORKOUT as Workout[];
+  myWorkouts = plainToClass(Workout, WORKOUT);
+  favoriteWorkouts = plainToClass(Workout, WORKOUT);
 
   constructor(private workoutService: WorkoutService, private router: Router) {}
 

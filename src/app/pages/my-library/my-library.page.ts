@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TrainingRecord } from '@models/training.model';
 
 // Model
-import { Workout, getWorkoutDuration } from '@models/workout.model';
+import { TrainingRecord } from '@models/training.model';
+import { Workout } from '@models/workout.model';
 import { TrainingService } from '@services/training.service';
 import { WorkoutService } from '@services/workout.service';
+import { plainToClass } from 'class-transformer';
 
 @Component({
   selector: 'app-my-library',
@@ -15,6 +16,7 @@ import { WorkoutService } from '@services/workout.service';
 export class MyLibraryPage implements OnInit {
   favorites: Workout[] = [];
   lastTraining: TrainingRecord;
+  lastWorkout: Workout;
 
   constructor(
     private workoutService: WorkoutService,
@@ -24,12 +26,14 @@ export class MyLibraryPage implements OnInit {
 
   ngOnInit() {
     this.workoutService.favorites.subscribe((favorites) => {
-      this.favorites = favorites;
+      this.favorites = plainToClass(Workout, favorites);;
     });
 
     this.trainingService.trainingRecordList.subscribe((trainingRecordList) => {
-      const length = trainingRecordList.length;
-      this.lastTraining = length > 0 ? trainingRecordList[0] : undefined;
+      if(trainingRecordList.length > 0) {
+        this.lastTraining = trainingRecordList[0];
+        this.lastWorkout = plainToClass(Workout, this.lastTraining.workout);
+      }
     });
   }
 
@@ -37,8 +41,6 @@ export class MyLibraryPage implements OnInit {
     this.workoutService.fetchFavorites();
     this.trainingService.fetchTrainingRecordList();
   }
-
-  getDuration = getWorkoutDuration;
 
   onWorkoutClick(workout: Workout) {
     this.workoutService.setWorkoutDetail(workout);

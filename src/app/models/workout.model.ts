@@ -112,18 +112,17 @@ export const getRepString = (exercise: WorkoutExercise) => {
   return rep;
 };
 
-export interface Workout {
+export class Workout {
   id: number;
   name: string;
-  duration: Time;
+  duration?: Time;
   equipments: Equipment[];
   description?: string;
   category?: string;
   imageUrl?: string;
   exercises: WorkoutExercise[];
-}
 
-
-export const getWorkoutDuration = (workout: Workout) => {
-  return `${workout.duration.opts.time} ${workout.duration.opts.unit}`;
+  getDurationString = () => {
+    return `${this.duration?.opts.time} ${this.duration?.opts.unit}`;
+  }
 }
