@@ -1,0 +1,163 @@
+[
+  {
+    "category": "Biceps",
+    "exercises": [
+      {
+        "id": 1,
+        "name": "Dumbbell Biceps Curl",
+        "imageUrl": "assets/img/exercise/biceps-curl.jpg",
+        "type": "Single Handed"
+      },
+      {
+        "id": 9,
+        "name": "Dumbbell Biceps Curl",
+        "imageUrl": "https://images.pexels.com/photos/4793224/pexels-photo-4793224.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
+        "type": "Two Handed"
+      },
+      {
+        "id": 9,
+        "name": "Bar Biceps Curl",
+        "imageUrl": "https://images.pexels.com/photos/5769133/pexels-photo-5769133.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        "type": "Two Handed"
+      },
+      {
+        "id": 12,
+        "name": "Cable Biceps Curl",
+        "imageUrl": "https://images.pexels.com/photos/4162484/pexels-photo-4162484.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        "type": "Cable Rope"
+      }
+    ]
+  },
+  {
+    "category": "Cardio",
+    "exercises": [
+      {
+        "id": 2,
+        "name": "Running",
+        "imageUrl": "assets/img/exercise/running.jpg",
+        "type": "Outdoor"
+      },
+      {
+        "id": 10,
+        "name": "Running",
+        "imageUrl": "https://images.pexels.com/photos/3768916/pexels-photo-3768916.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        "type": "Treadmill"
+      },
+      {
+        "id": 11,
+        "name": "Cycling",
+        "imageUrl": "https://images.pexels.com/photos/93776/pexels-photo-93776.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        "type": "Outdoor"
+      }
+    ]
+  },
+  {
+    "category": "Lower Back",
+    "exercises": [
+      {
+        "id": 3,
+        "name": "Deadlift",
+        "imageUrl": "assets/img/exercise/deadlift.jpg",
+        "type": "Bar"
+      },
+      {
+        "id": 13,
+        "name": "Kettlebell Swing",
+        "imageUrl": "https://images.pexels.com/photos/2417517/pexels-photo-2417517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        "type": "Kettlebell"
+      }
+    ]
+  },
+  {
+    "category": "Lats",
+    "exercises": [
+      {
+        "id": 5,
+        "name": "Pull Up",
+        "imageUrl": "assets/img/exercise/pull-up.jpg",
+        "type": "Bodyweight"
+      },
+      {
+        "id": 14,
+        "name": "Kettlebell Row",
+        "imageUrl": "https://images.unsplash.com/photo-1566241142364-df7f478ce55f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
+        "type": "Kettlebell"
+      }
+    ]
+  },
+  {
+    "category": "Chest",
+    "exercises": [
+      {
+        "id": 6,
+        "name": "Bench Press",
+        "imageUrl": "https://images.pexels.com/photos/3837781/pexels-photo-3837781.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        "type": "Bar"
+      },
+      {
+        "id": 15,
+        "name": "Push Up",
+        "imageUrl": "assets/img/exercise/push-up.jpg",
+        "type": "Bodyweight"
+      },
+      {
+        "id": 16,
+        "name": "Cable Standing Press",
+        "imageUrl": "https://images.unsplash.com/photo-1604480133435-25b86862d276?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80",
+        "type": "Cable"
+      }
+    ]
+  },
+  {
+    "category": "Abs",
+    "exercises": [
+      {
+        "id": 8,
+        "name": "Low Plank",
+        "imageUrl": "assets/img/exercise/plank.jpg",
+        "type": "Core"
+      },
+      {
+        "id": 17,
+        "name": "Crunch",
+        "imageUrl": "https://images.pexels.com/photos/5262853/pexels-photo-5262853.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        "type": "Core"
+      },
+      {
+        "id": 18,
+        "name": "Side Plank",
+        "imageUrl": "https://images.pexels.com/photos/2294363/pexels-photo-2294363.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        "type": "Core"
+      }
+    ]
+  },
+  {
+    "category": "Quads",
+    "exercises": [
+      {
+        "id": 7,
+        "name": "Squat",
+        "imageUrl": "assets/img/exercise/squat-body-weight.jpg",
+        "type": "Bodyweight"
+      },
+      {
+        "id": 19,
+        "name": "Bar Squat",
+        "imageUrl": "https://images.pexels.com/photos/371049/pexels-photo-371049.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        "type": "Bar"
+      },
+      {
+        "id": 20,
+        "name": "Leg Press",
+        "imageUrl": "https://images.unsplash.com/photo-1434682772747-f16d3ea162c3?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1953&q=80",
+        "type": "Press Machine"
+      },
+      {
+        "id": 20,
+        "name": "Dumbbell Squat",
+        "imageUrl": "https://images.unsplash.com/flagged/photo-1566064352554-f36ef0ef23b2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80",
+        "type": "Dumbbell"
+      }
+    ]
+  }
+]
