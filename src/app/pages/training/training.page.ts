@@ -24,9 +24,6 @@ import { TrainingService } from '@services/training.service';
 import { WorkoutService } from '@services/workout.service';
 import { ClockCircleComponent } from 'src/app/shared/components/clock-circle/clock-circle.component';
 
-// Date
-import WORKOUTS from '../../data/workout.json';
-
 // Exercise card types
 
 interface CSetRep extends SetRep {

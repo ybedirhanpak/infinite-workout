@@ -62,7 +62,7 @@ export interface SetTime {
   };
 }
 
-interface Exercise {
+interface WorkoutExercise {
   id: number;
   name: string;
   duration: string;
@@ -72,7 +72,7 @@ interface Exercise {
   rep: SetRep | Time | SetTime;
 }
 
-export const getLoadString = (exercise: Exercise) => {
+export const getLoadString = (exercise: WorkoutExercise) => {
   let load = '';
 
   switch (exercise.load.type) {
@@ -92,7 +92,7 @@ export const getLoadString = (exercise: Exercise) => {
   return load;
 };
 
-export const getRepString = (exercise: Exercise) => {
+export const getRepString = (exercise: WorkoutExercise) => {
   let rep = '';
 
   switch (exercise.rep.type) {
@@ -120,7 +120,7 @@ export interface Workout {
   description?: string;
   category?: string;
   imageUrl?: string;
-  exercises: Exercise[];
+  exercises: WorkoutExercise[];
 }
 
 
