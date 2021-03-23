@@ -1,0 +1,12 @@
+<ion-slides style="padding: 0 12px 24px" [options]="slideOptions">
+  <ion-slide *ngFor="let exercise of exercises">
+    <app-regular-card 
+      [title]="exercise.name" 
+      [subtitle]="category" 
+      [imageUrl]="exercise.imageUrl"
+      [smallText]="exercise.type"
+      (click)="onExerciseClick(exercise)"
+    >
+    </app-regular-card>
+  </ion-slide>
+</ion-slides>

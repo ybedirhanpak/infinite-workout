@@ -5,13 +5,14 @@ import { IonicModule } from '@ionic/angular';
 import { DarkModeToggleComponent } from './components/dark-mode-toggle/dark-mode-toggle.component';
 import { PageLayoutComponent } from './components/page-layout/page-layout.component';
 import { RestTimePickerComponent } from './components/rest-time-picker/rest-time-picker.component';
-import { WorkoutCardComponent } from './components/workout-card/workout-card.component';
+import { RegularCardComponent } from './components/regular-card/regular-card.component';
 import { WorkoutSlideComponent } from './components/workout-slide/workout-slide.component';
 import { ClickableComponent } from './components/clickable/clickable.component';
 import { ClockCircleComponent } from './components/clock-circle/clock-circle.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { HighlightCardComponent } from './components/highlight-card/highlight-card.component';
 import { HighlightWorkoutSlideComponent } from './components/highlight-workout-slide/highlight-workout-slide.component';
+import { ExerciseSlideComponent } from './components/exercise-slide/exercise-slide.component';
 
 
 
@@ -20,12 +21,13 @@ import { HighlightWorkoutSlideComponent } from './components/highlight-workout-s
     PageLayoutComponent,
     DarkModeToggleComponent,
     RestTimePickerComponent,
-    WorkoutCardComponent,
+    RegularCardComponent,
     WorkoutSlideComponent,
     ClickableComponent,
     ClockCircleComponent,
     HighlightCardComponent,
-    HighlightWorkoutSlideComponent
+    HighlightWorkoutSlideComponent,
+    ExerciseSlideComponent
   ],
   imports: [
     CommonModule,
@@ -54,12 +56,13 @@ import { HighlightWorkoutSlideComponent } from './components/highlight-workout-s
     PageLayoutComponent,
     DarkModeToggleComponent,
     RestTimePickerComponent,
-    WorkoutCardComponent,
+    RegularCardComponent,
     WorkoutSlideComponent,
     ClickableComponent,
     ClockCircleComponent,
     HighlightCardComponent,
-    HighlightWorkoutSlideComponent
+    HighlightWorkoutSlideComponent,
+    ExerciseSlideComponent
   ],
 })
 export class SharedModule {}

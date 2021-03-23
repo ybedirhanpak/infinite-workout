@@ -9,5 +9,11 @@
 
 <ion-content>
   <app-page-layout>
+    <section *ngFor="let category of exerciseCategories">
+      <h3 class="ion-text-center">
+        {{ category.category }}
+      </h3>
+      <app-exercise-slide [category]="category.category" [exercises]="category.exercises" (onClick)="onExerciseClick($event)"></app-exercise-slide>
+    </section>
   </app-page-layout>
 </ion-content>
