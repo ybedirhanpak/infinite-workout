@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+
+// Components
 import { DarkModeToggleComponent } from './components/dark-mode-toggle/dark-mode-toggle.component';
 import { PageLayoutComponent } from './components/page-layout/page-layout.component';
 import { RestTimePickerComponent } from './components/rest-time-picker/rest-time-picker.component';
@@ -14,7 +16,8 @@ import { HighlightCardComponent } from './components/highlight-card/highlight-ca
 import { HighlightWorkoutSlideComponent } from './components/highlight-workout-slide/highlight-workout-slide.component';
 import { ExerciseSlideComponent } from './components/exercise-slide/exercise-slide.component';
 
-
+// Directives
+import { SelectAllDirective } from './directives/select-all.directive';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,8 @@ import { ExerciseSlideComponent } from './components/exercise-slide/exercise-sli
     ClockCircleComponent,
     HighlightCardComponent,
     HighlightWorkoutSlideComponent,
-    ExerciseSlideComponent
+    ExerciseSlideComponent,
+    SelectAllDirective,
   ],
   imports: [
     CommonModule,
@@ -49,7 +53,7 @@ import { ExerciseSlideComponent } from './components/exercise-slide/exercise-sli
       showUnits: false,
       titleFontSize: '2.5rem',
       titleColor: 'var(--ion-text-color, black)',
-      titleFontWeight: 'bold'
+      titleFontWeight: 'bold',
     }),
   ],
   exports: [
@@ -62,7 +66,8 @@ import { ExerciseSlideComponent } from './components/exercise-slide/exercise-sli
     ClockCircleComponent,
     HighlightCardComponent,
     HighlightWorkoutSlideComponent,
-    ExerciseSlideComponent
+    ExerciseSlideComponent,
+    SelectAllDirective,
   ],
 })
 export class SharedModule {}
