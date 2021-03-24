@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Exercise, ExerciseCategory } from '@models/exercise.model';
 
 // Data
-import EXERCISE_CATEGORIES from '../../../data/exercise.json';
+import EXERCISE_CATEGORIES from '../../data/exercise.json';
 
 @Component({
   selector: 'app-exercises',
