@@ -26,6 +26,8 @@ export class ExerciseDetailPage {
   }
 
   onSelectClick() {
-    console.log("Select:", this.exercise);
+    this.exerciseService.setExerciseDetail(this.exercise);
+    const navigateUrl = `${this.router.url}/exercise-edit`;
+    this.router.navigateByUrl(navigateUrl);
   }
 }

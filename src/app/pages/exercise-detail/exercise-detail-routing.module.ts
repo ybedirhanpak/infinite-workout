@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: ExerciseDetailPage
+  },
+  {
+    path: 'exercise-edit',
+    loadChildren: () => import('./exercise-edit/exercise-edit.module').then( m => m.ExerciseEditPageModule)
   }
 ];
 

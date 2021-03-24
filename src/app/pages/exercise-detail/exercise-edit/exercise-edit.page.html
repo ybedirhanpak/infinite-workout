@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit Exercise</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-page-layout>
+    <ion-card class="exercise-card" mode="ios" *ngIf="exercise">
+      <div class="img-wrapper filter red-turquoise">
+        <img class="cover" [src]="exercise.imageUrl">
+      </div>
+      <ion-card-header>
+        <ion-card-subtitle>
+          {{ exercise.type }}
+        </ion-card-subtitle>
+        <ion-card-title>
+          {{ exercise.name }}
+        </ion-card-title>
+      </ion-card-header>
+    </ion-card>
+
+    <div class="set-list">
+      <div class="set-item">
+        <ion-card mode="ios" class="set-card">
+          <div class="set" lines="none">
+            <div class="block">
+              <ion-input class="ion-no-padding" type="number" placeholder="--"></ion-input>
+              <span class="label">kg</span>
+            </div>
+            <div class="block">
+              <ion-input class="ion-no-padding" type="number" placeholder="--"></ion-input>
+              <span class="label">reps</span>
+            </div>
+          </div>
+        </ion-card>
+        <div class="action-button">
+          <ion-chip class="icon-button" color="primary">
+            <ion-icon name="trash"></ion-icon>
+          </ion-chip>
+        </div>
+      </div>
+      <div class="set-item">
+        <ion-card mode="ios" class="set-card">
+          <div class="set" lines="none">
+            <div class="block">
+              <ion-input class="ion-no-padding" type="number" placeholder="--"></ion-input>
+              <span class="label">kg</span>
+            </div>
+            <div class="block">
+              <ion-input class="ion-no-padding" type="number" placeholder="--"></ion-input>
+              <span class="label">reps</span>
+            </div>
+          </div>
+        </ion-card>
+        <div class="action-button">
+          <ion-chip class="icon-button" color="primary">
+            <ion-icon name="trash"></ion-icon>
+          </ion-chip>
+        </div>
+      </div>
+      <div class="set-item">
+        <ion-card mode="ios" class="set-card">
+          <div class="set" lines="none">
+            <div class="block">
+              <ion-input class="ion-no-padding" type="number" placeholder="--"></ion-input>
+              <span class="label">kg</span>
+            </div>
+            <div class="block">
+              <ion-input class="ion-no-padding" type="number" placeholder="--"></ion-input>
+              <span class="label">reps</span>
+            </div>
+          </div>
+        </ion-card>
+        <div class="action-button">
+          <ion-chip class="icon-button" color="primary">
+            <ion-icon name="trash"></ion-icon>
+          </ion-chip>
+        </div>
+      </div>
+      <div class="set-item button-only">
+        <div class="action-button">
+          <ion-chip class="icon-button" color="primary">
+            <ion-icon name="add"></ion-icon>
+          </ion-chip>
+        </div>
+      </div>
+    </div>
+  </app-page-layout>
+</ion-content>
+
+<ion-footer>
+  <ion-button expand="block">
+    Save
+  </ion-button>
+</ion-footer>
