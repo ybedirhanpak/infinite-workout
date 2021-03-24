@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Exercise Detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-page-layout>
+    <div class="exercise-detail" *ngIf="exercise">
+      <div class="img-wrapper filter red-turquoise">
+        <img class="cover" [src]="exercise.imageUrl" [alt]="exercise.name">
+      </div>
+      <h1 class="ion-padding-horizontal" style="font-weight: bold;">{{ exercise.name }}</h1>
+      <ion-list lines="none">
+        <ion-item>
+          <ion-icon name="barbell-outline" slot="start"></ion-icon>{{ exercise.type }}
+        </ion-item>
+      </ion-list>
+    </div>
+  </app-page-layout>
+</ion-content>
+
+<ion-footer *ngIf="selectable">
+  <ion-button expand="full" (click)="onSelectClick()">
+    Select
+  </ion-button>
+</ion-footer>
