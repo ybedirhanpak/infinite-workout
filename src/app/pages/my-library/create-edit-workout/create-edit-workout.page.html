@@ -40,28 +40,16 @@
         </div>
       </div>
       <ion-list class="exercises-list">
-        <ion-item class="exercise" lines="none">
+        <ion-item class="exercise" lines="none" *ngFor="let exercise of exercises">
           <ion-avatar slot="start">
-            <img [src]="'/assets/img/exercise/deadlift.jpg'" [alt]="">
+            <img [src]="exercise.imageUrl" [alt]="">
           </ion-avatar>
           <ion-label class="ion-no-margin">
-            <h2>Deadlift</h2>
+            <h2>{{ exercise.name }}</h2>
             <div class="exercise-details">
-              <div class="rep-item">
-                <p>12</p>
-                <p>80</p>
-              </div>
-              <div class="rep-item">
-                <p>12</p>
-                <p>80</p>
-              </div>
-              <div class="rep-item">
-                <p>12</p>
-                <p>80</p>
-              </div>
-              <div class="rep-item">
-                <p>12</p>
-                <p>80</p>
+              <div class="rep-item" *ngFor="let set of exercise.rep.opts.sets">
+                <p>{{set.rep}}</p>
+                <p>{{set.weight}}</p>
               </div>
               <div class="rep-item">
                 <p>reps</p>
@@ -73,7 +61,7 @@
             <ion-icon name="pencil"></ion-icon>
           </ion-chip>
         </ion-item>
-        <ion-item class="exercise" lines="none">
+        <!-- <ion-item class="exercise" lines="none">
           <ion-avatar slot="start">
             <img [src]="'/assets/img/exercise/push-up.jpg'" [alt]="">
           </ion-avatar>
@@ -89,7 +77,7 @@
           <ion-chip class="icon-button" slot="end" color="primary">
             <ion-icon name="pencil"></ion-icon>
           </ion-chip>
-        </ion-item>
+        </ion-item> -->
       </ion-list>
     </div>
   </app-page-layout>

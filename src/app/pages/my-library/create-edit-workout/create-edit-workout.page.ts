@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Workout } from '@models/workout.model';
+import { Workout, WorkoutExercise } from '@models/workout.model';
+import { ExerciseService } from '@services/exercise.service';
 
 @Component({
   selector: 'app-create-edit-workout',
@@ -13,7 +14,9 @@ export class CreateEditWorkoutPage implements OnInit {
   title = 'Create Workout';
   workout: Workout;
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  exercises: WorkoutExercise[] = [];
+
+  constructor(private route: ActivatedRoute, private router: Router, private exerciseService: ExerciseService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
@@ -22,6 +25,14 @@ export class CreateEditWorkoutPage implements OnInit {
         this.title = 'Edit Workout';
       } else {
         // Create Mode
+      }
+    });
+  }
+
+  ionViewWillEnter() {
+    this.exerciseService.editedExercise.subscribe((exercise) => {
+      if(exercise && !this.exercises.find(e => e.id === exercise.id)) {
+        this.exercises.push(exercise);
       }
     });
   }

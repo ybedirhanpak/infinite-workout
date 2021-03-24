@@ -24,65 +24,31 @@
     </ion-card>
 
     <div class="set-list">
-      <div class="set-item">
-        <ion-card mode="ios" class="set-card">
-          <div class="set" lines="none">
-            <div class="block">
-              <ion-input class="ion-no-padding" type="text" inputmode="numeric" placeholder="--" select-all></ion-input>
-              <span class="label">kg</span>
+      <div *ngFor="let set of sets; index as i;">
+        <div class="set-item">
+          <ion-card mode="ios" class="set-card">
+            <div class="set" lines="none">
+              <div class="block">
+                <ion-input [(ngModel)]="set.weight" (ionBlur)="onWeightBlur($event)" class="ion-no-padding" type="text"
+                  inputmode="numeric" placeholder="--" select-all></ion-input>
+                <span class="label">kg</span>
+              </div>
+              <div class="block">
+                <ion-input [(ngModel)]="set.rep" class="ion-no-padding" type="text"
+                  inputmode="numeric" placeholder="--" select-all></ion-input>
+                <span class="label">reps</span>
+              </div>
             </div>
-            <div class="block">
-              <ion-input class="ion-no-padding" type="text" inputmode="numeric" placeholder="--" select-all></ion-input>
-              <span class="label">reps</span>
-            </div>
+          </ion-card>
+          <div class="action-button" (click)="onDeleteClick(i)">
+            <ion-chip class="icon-button" color="primary">
+              <ion-icon name="trash"></ion-icon>
+            </ion-chip>
           </div>
-        </ion-card>
-        <div class="action-button">
-          <ion-chip class="icon-button" color="primary">
-            <ion-icon name="trash"></ion-icon>
-          </ion-chip>
-        </div>
-      </div>
-      <div class="set-item">
-        <ion-card mode="ios" class="set-card">
-          <div class="set" lines="none">
-            <div class="block">
-              <ion-input class="ion-no-padding" type="text" inputmode="numeric" placeholder="--" select-all></ion-input>
-              <span class="label">kg</span>
-            </div>
-            <div class="block">
-              <ion-input class="ion-no-padding" type="text" inputmode="numeric" placeholder="--" select-all></ion-input>
-              <span class="label">reps</span>
-            </div>
-          </div>
-        </ion-card>
-        <div class="action-button">
-          <ion-chip class="icon-button" color="primary">
-            <ion-icon name="trash"></ion-icon>
-          </ion-chip>
-        </div>
-      </div>
-      <div class="set-item">
-        <ion-card mode="ios" class="set-card">
-          <div class="set" lines="none">
-            <div class="block">
-              <ion-input class="ion-no-padding" type="text" inputmode="numeric" placeholder="--" select-all></ion-input>
-              <span class="label">kg</span>
-            </div>
-            <div class="block">
-              <ion-input class="ion-no-padding" type="text" inputmode="numeric" placeholder="--" select-all></ion-input>
-              <span class="label">reps</span>
-            </div>
-          </div>
-        </ion-card>
-        <div class="action-button">
-          <ion-chip class="icon-button" color="primary">
-            <ion-icon name="trash"></ion-icon>
-          </ion-chip>
         </div>
       </div>
       <div class="set-item button-only">
-        <div class="action-button">
+        <div class="action-button" (click)="onAddClick()">
           <ion-chip class="icon-button" color="primary">
             <ion-icon name="add"></ion-icon>
           </ion-chip>
@@ -93,7 +59,7 @@
 </ion-content>
 
 <ion-footer>
-  <ion-button expand="block">
+  <ion-button expand="block" (click)="onSaveClick()">
     Save
   </ion-button>
 </ion-footer>
