@@ -12,6 +12,14 @@ const routes: Routes = [
     path: 'workout-detail',
     loadChildren: () => import('../workout-detail/workout-detail.module').then( m => m.WorkoutDetailPageModule)
   },
+  {
+    path: 'create-workout',
+    loadChildren: () => import('./create-edit-workout/create-edit-workout.module').then( m => m.CreateEditWorkoutPageModule)
+  },
+  {
+    path: 'edit-workout/:id',
+    loadChildren: () => import('./create-edit-workout/create-edit-workout.module').then( m => m.CreateEditWorkoutPageModule)
+  },
 ];
 
 @NgModule({

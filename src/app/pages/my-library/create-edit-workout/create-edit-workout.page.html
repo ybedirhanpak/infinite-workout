@@ -1,0 +1,96 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home/my-library"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-page-layout>
+    <div class="create-edit-workout">
+      <div class="img-wrapper filter red-turquoise">
+        <img class="cover" [src]="'/assets/img/workout/mix-workout.jpg'" [alt]="">
+      </div>
+      <h1 class="ion-padding-horizontal" style="font-weight: bold;">
+        <ion-input class="ion-no-padding" type="text" placeholder="Name"></ion-input>
+      </h1>
+      <ion-list lines="none">
+        <ion-item>
+          <ion-icon name="time-outline" slot="start"></ion-icon>
+          <ion-input type="text" placeholder="Estimated Duration"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="trophy-outline" slot="start"></ion-icon>
+          <ion-input type="text" placeholder="Category"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="barbell-outline" slot="start"></ion-icon>
+          <ion-input type="text" placeholder="Equipments"></ion-input>
+        </ion-item>
+      </ion-list>
+      <div class="exercises-header">
+        <h2 class="ion-padding-horizontal">Exercises</h2>
+        <div class="control-buttons">
+          <ion-chip color="primary" (click)="onAddExerciseClick()">
+            <ion-icon name="add"></ion-icon>
+            <ion-label>Add Exercise</ion-label>
+          </ion-chip>
+        </div>
+      </div>
+      <ion-list class="exercises-list">
+        <ion-item class="exercise" lines="none">
+          <ion-avatar slot="start">
+            <img [src]="'/assets/img/exercise/deadlift.jpg'" [alt]="">
+          </ion-avatar>
+          <ion-label class="ion-no-margin">
+            <h2>Deadlift</h2>
+            <div class="exercise-details">
+              <div class="rep-item">
+                <p>12</p>
+                <p>80</p>
+              </div>
+              <div class="rep-item">
+                <p>12</p>
+                <p>80</p>
+              </div>
+              <div class="rep-item">
+                <p>12</p>
+                <p>80</p>
+              </div>
+              <div class="rep-item">
+                <p>12</p>
+                <p>80</p>
+              </div>
+              <div class="rep-item">
+                <p>reps</p>
+                <p>kg</p>
+              </div>
+            </div>
+          </ion-label>
+          <ion-chip slot="end" color="primary" style="padding: 8px; transition: 0.1s ease-in-out;">
+            <ion-icon name="pencil" style="margin: 0;"></ion-icon>
+          </ion-chip>
+        </ion-item>
+        <ion-item class="exercise" lines="none">
+          <ion-avatar slot="start">
+            <img [src]="'/assets/img/exercise/push-up.jpg'" [alt]="">
+          </ion-avatar>
+          <ion-label class="ion-no-margin">
+            <h2>Pushup</h2>
+            <div class="exercise-details">
+              <div class="uniform-rep">
+                <p>3 sets 10 reps</p>
+                <p>Bodyweight</p>
+              </div>
+            </div>
+          </ion-label>
+          <ion-chip slot="end" color="primary" style="padding: 8px; transition: 0.1s ease-in-out;">
+            <ion-icon name="pencil" style="margin: 0;"></ion-icon>
+          </ion-chip>
+        </ion-item>
+      </ion-list>
+    </div>
+  </app-page-layout>
+</ion-content>
