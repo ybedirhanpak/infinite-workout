@@ -62,7 +62,7 @@ export interface SetTime {
   };
 }
 
-interface WorkoutExercise {
+export interface WorkoutExercise {
   id: number;
   name: string;
   duration: string;
