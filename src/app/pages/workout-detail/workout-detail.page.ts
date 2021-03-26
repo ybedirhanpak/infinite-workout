@@ -1,12 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 // Model
-import { getLoadString, getRepString, Workout } from '@models/workout.model';
+import { Workout } from '@models/workout.model';
 
 // Service
 import { WorkoutService } from '@services/workout.service';
-
+import { plainToClass } from 'class-transformer';
 
 @Component({
   selector: 'app-workout-detail',
@@ -17,56 +18,51 @@ export class WorkoutDetailPage implements OnInit {
   @Input() workout: Workout;
 
   duration = '';
-  exercises = [];
   explore = false;
   favorited = false;
+  created = false;
 
   constructor(
     private workoutService: WorkoutService,
-    private router: Router
+    private router: Router,
+    private navCtrl: NavController
   ) {}
 
   ngOnInit() {
-    this.explore = this.router.url.includes("explore");
+    this.explore = this.router.url.includes('explore');
   }
 
   ionViewWillEnter() {
-    this.workoutService.workoutDetail.subscribe(async (workout) => {
-      this.workout = workout;
-      this.favorited = await this.workoutService.isFavorite(workout);
-
-      const { time, unit } = this.workout.duration.opts;
-      this.duration = `${time} ${unit}`;
-
-      // Prepare exercises
-      this.exercises = this.workout.exercises.map((exercise) => {
-        let load = getLoadString(exercise);
-        let rep = getRepString(exercise);
-
-        return {
-          name: exercise.name,
-          imageUrl: exercise.imageUrl,
-          rep,
-          load,
-        };
-      });
-
-      // Check if it's favorited or not
-      
+    this.workoutService.workoutDetail.get().subscribe(async (workout) => {
+      this.workout = plainToClass(Workout, workout);
+      this.favorited = await this.workoutService.favoriteWorkouts.contains(
+        this.workout
+      );
+      this.created = await this.workoutService.createdWorkouts.contains(
+        this.workout
+      );
     });
   }
 
   startWorkout() {
     this.router.navigateByUrl('/training');
-    this.workoutService.setWorkoutDetail(this.workout);
+    this.workoutService.workoutDetail.set(this.workout);
   }
 
   async onFavoriteClick() {
-    if(!this.favorited) {
-      await this.workoutService.addToFavorites(this.workout);
+    if (!this.favorited) {
+      await this.workoutService.favoriteWorkouts.create(this.workout);
     } else {
-      await this.workoutService.deleteFromFavorites(this.workout);
+      await this.workoutService.favoriteWorkouts.remove(this.workout);
     }
-    this.favorited = await this.workoutService.isFavorite(this.workout);
+    this.favorited = await this.workoutService.favoriteWorkouts.contains(
+      this.workout
+    );
+  }
+
+  async onEditClick() {
+    this.router.navigateByUrl(
+      `/home/my-library/edit-workout/${this.workout.id}`
+    );
   }
 }

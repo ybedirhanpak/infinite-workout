@@ -1,11 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 
 // Model
-import { Exercise } from '@models/exercise.model';
-import { SetRep, WorkoutExercise } from '@models/workout.model';
+import { Exercise, Set, SetDetail } from '@models/exercise.model';
+
+// Service
 import { ExerciseService } from '@services/exercise.service';
+
+// Utils
+import { getSetDetail, getDefaultSet } from '@utils/exercise.util';
 
 @Component({
   selector: 'app-exercise-edit',
@@ -13,48 +17,42 @@ import { ExerciseService } from '@services/exercise.service';
   styleUrls: ['./exercise-edit.page.scss'],
 })
 export class ExerciseEditPage implements OnInit {
+  @Input() fromEdit = false;
+
   exercise: Exercise;
+  sets: Set[];
+  suggestedSet: Set = { load: undefined, rep: undefined };
+  setDetail: SetDetail;
 
-  defaultRep = 10;
-  suggestedWeight: number;
-
-  sets = [
-    {
-      rep: this.defaultRep,
-      weight: undefined,
-      unit: 'kg',
-    },
-    {
-      rep: this.defaultRep,
-      weight: undefined,
-      unit: 'kg',
-    },
-    {
-      rep: this.defaultRep,
-      weight: undefined,
-      unit: 'kg',
-    },
-  ];
-
-  constructor(private exerciseService: ExerciseService, private navCtrl: NavController, private router: Router) {}
+  constructor(
+    private exerciseService: ExerciseService,
+    private navCtrl: NavController,
+    private router: Router
+  ) {}
 
   ngOnInit() {}
 
   ionViewWillEnter() {
     this.exerciseService.exerciseDetail.subscribe((exercise) => {
       this.exercise = exercise;
+      this.setDetail = getSetDetail(exercise);
+      this.sets = this.exercise.set.sets;
     });
   }
 
   onAddClick() {
-    const lastElement =
+    const lastSet =
       this.sets.length > 0 ? this.sets[this.sets.length - 1] : undefined;
 
-    this.sets.push({
-      rep: lastElement?.rep ?? this.defaultRep,
-      weight: lastElement?.weight,
-      unit: 'kg',
-    });
+    if (lastSet) {
+      this.sets.push(lastSet);
+    } else {
+      const defaultSet = getDefaultSet(this.exercise);
+      this.sets.push({
+        load: defaultSet[this.setDetail.load],
+        rep: defaultSet[this.setDetail.rep],
+      });
+    }
   }
 
   onDeleteClick(i: number) {
@@ -62,42 +60,31 @@ export class ExerciseEditPage implements OnInit {
   }
 
   onSaveClick() {
-    console.log(this.sets);
+    this.exercise.set.sets = this.sets;
+    this.exerciseService.setEditedExercise(this.exercise);
 
-    const workoutExercise: WorkoutExercise = {
-      ...this.exercise,
-      duration: '',
-      load: {
-        type: 'weight',
-        opts: {
-          weight: this.sets[0].weight,
-          unit: "kg"
-        }
-      },
-      rep: {
-        type: 'setRep',
-        opts: {
-          sets: this.sets as any
-        }
-      }
+    if (this.router.url.includes('edit-workout')) {
+      this.navCtrl.back();
     }
 
-    console.log(workoutExercise);
-    this.exerciseService.setEditedExercise(workoutExercise);
-
-    this.navCtrl.navigateBack("/home/my-library/create-workout");
+    if (this.router.url.includes('create-workout')) {
+      this.navCtrl.navigateBack('/home/my-library/create-workout');
+    }
   }
 
-  onWeightBlur(event: any) {
-    const weight = event.target.value;
-    if (this.suggestedWeight === undefined && weight !== undefined) {
-      this.suggestedWeight = weight;
+  onBlur(event: any, key: 'load' | 'rep') {
+    const val = event.target.value;
+    const suggestedVal = this.suggestedSet[key];
 
+    if (suggestedVal === undefined && val !== undefined) {
       this.sets.forEach((set) => {
-        if (set.weight === undefined) {
-          set.weight = weight;
+        if (set[key] === undefined) {
+          set[key] = val;
         }
       });
+
+      // Update suggested
+      this.suggestedSet[key] = val;
     }
   }
 }

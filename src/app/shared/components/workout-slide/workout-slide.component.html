@@ -3,7 +3,7 @@
     <app-regular-card 
       [title]="workout.name" 
       [subtitle]="workout.category" 
-      [smallText]="workout.getDurationString()"
+      [smallText]="workout.duration"
       [imageUrl]="workout.imageUrl"
       (click)="onWorkoutClick(workout)"
     >

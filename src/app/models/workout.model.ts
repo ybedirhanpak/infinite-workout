@@ -1,9 +1,4 @@
-enum Equipment {
-  bodyWeight = 'Body Weight',
-  barbell = 'Barbell',
-  dumbbell = 'Dumbbell',
-  kettlebell = 'Kettlebell',
-}
+import { Exercise } from "./exercise.model";
 
 interface Weight {
   type: 'weight';
@@ -48,6 +43,11 @@ export interface Time {
     time: number;
     unit: 'min' | 'sec';
   };
+}
+
+interface Time_ {
+  time: number;
+  unit: 'min' | 'sec';
 }
 
 export interface SetTime {
@@ -113,16 +113,13 @@ export const getRepString = (exercise: WorkoutExercise) => {
 };
 
 export class Workout {
-  id: number;
-  name: string;
-  duration?: Time;
-  equipments: Equipment[];
-  description?: string;
-  category?: string;
-  imageUrl?: string;
-  exercises: WorkoutExercise[];
-
-  getDurationString = () => {
-    return `${this.duration?.opts.time} ${this.duration?.opts.unit}`;
-  }
+  constructor(
+    public id: number,
+    public name?: string,
+    public duration?: string,
+    public equipments?: string,
+    public category?: string,
+    public imageUrl?: string,
+    public exercises?: Exercise[],
+  ) {}
 }

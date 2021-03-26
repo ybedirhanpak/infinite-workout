@@ -15,14 +15,14 @@
         <ion-slide *ngFor="let exercise of exerciseClocks; index as i;">
           <div class="exercise" [class.next]="i > currentIndex" [class.prev]="i < currentIndex">
             <ion-card class="exercise-card" mode="ios">
-              <img class="cover-image" [src]="exercise.imageUrl">
+              <img class="cover-image" [src]="exercise.exercise.imageUrl">
               <ion-card-header>
                 <ion-card-subtitle>
                   <ion-icon name="barbell-outline"></ion-icon>
-                  {{ exercise.load }}
+                  {{ exercise.exercise.equipment }}
                 </ion-card-subtitle>
                 <ion-card-title>
-                  {{ exercise.name }}
+                  {{ exercise.exercise.name }}
                 </ion-card-title>
                 <div *ngIf="exercise.rep.type === 'setRep'">
                   <ion-text>{{ exercise.rep.opts.set }} sets</ion-text>

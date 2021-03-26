@@ -3,33 +3,43 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home/my-library"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{ title }}</ion-title>
+    <ion-title>{{ getTitle() }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onDeleteClick()" *ngIf="mode === 'edit'">
+        <ion-icon [name]="'trash-outline'"></ion-icon>
+      </ion-button>
+      <ion-button (click)="onSaveClick()">
+        <ion-icon slot="icon-only" name="checkmark-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <app-page-layout>
-    <div class="create-edit-workout">
+    <div class="create-edit-workout" *ngIf="workout">
       <div class="img-wrapper filter red-turquoise">
         <img class="cover" [src]="'/assets/img/workout/mix-workout.jpg'" [alt]="">
       </div>
-      <h1 class="ion-padding-horizontal" style="font-weight: bold;">
-        <ion-input class="ion-no-padding" type="text" placeholder="Name"></ion-input>
-      </h1>
-      <ion-list lines="none">
-        <ion-item>
-          <ion-icon name="time-outline" slot="start"></ion-icon>
-          <ion-input type="text" placeholder="Estimated Duration"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-icon name="trophy-outline" slot="start"></ion-icon>
-          <ion-input type="text" placeholder="Category"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-icon name="barbell-outline" slot="start"></ion-icon>
-          <ion-input type="text" placeholder="Equipments"></ion-input>
-        </ion-item>
-      </ion-list>
+      <form [formGroup]="formGroup">
+        <h1 class="ion-padding-horizontal" style="font-weight: bold;">
+          <ion-input formControlName="name" class="ion-no-padding" type="text" placeholder="Name"></ion-input>
+        </h1>
+        <ion-list lines="none">
+          <ion-item>
+            <ion-icon name="time-outline" slot="start"></ion-icon>
+            <ion-input formControlName="duration" type="text" placeholder="Estimated Duration"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="trophy-outline" slot="start"></ion-icon>
+            <ion-input formControlName="category" type="text" placeholder="Category"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="barbell-outline" slot="start"></ion-icon>
+            <ion-input formControlName="equipments" type="text" placeholder="Equipments"></ion-input>
+          </ion-item>
+        </ion-list>
+      </form>
       <div class="exercises-header">
         <h2 class="ion-padding-horizontal">Exercises</h2>
         <div class="control-buttons">
@@ -39,45 +49,10 @@
           </ion-chip>
         </div>
       </div>
-      <ion-list class="exercises-list">
-        <ion-item class="exercise" lines="none" *ngFor="let exercise of exercises">
-          <ion-avatar slot="start">
-            <img [src]="exercise.imageUrl" [alt]="">
-          </ion-avatar>
-          <ion-label class="ion-no-margin">
-            <h2>{{ exercise.name }}</h2>
-            <div class="exercise-details">
-              <div class="rep-item" *ngFor="let set of exercise.rep.opts.sets">
-                <p>{{set.rep}}</p>
-                <p>{{set.weight}}</p>
-              </div>
-              <div class="rep-item">
-                <p>reps</p>
-                <p>kg</p>
-              </div>
-            </div>
-          </ion-label>
-          <ion-chip class="icon-button edit-button" slot="end" color="primary">
-            <ion-icon name="pencil"></ion-icon>
-          </ion-chip>
-        </ion-item>
-        <!-- <ion-item class="exercise" lines="none">
-          <ion-avatar slot="start">
-            <img [src]="'/assets/img/exercise/push-up.jpg'" [alt]="">
-          </ion-avatar>
-          <ion-label class="ion-no-margin">
-            <h2>Pushup</h2>
-            <div class="exercise-details">
-              <div class="uniform-rep">
-                <p>3 sets 10 reps</p>
-                <p>Bodyweight</p>
-              </div>
-            </div>
-          </ion-label>
-          <ion-chip class="icon-button" slot="end" color="primary">
-            <ion-icon name="pencil"></ion-icon>
-          </ion-chip>
-        </ion-item> -->
+      <ion-list class="exercises-list" *ngIf="workout.exercises && workout.exercises.length > 0">
+        <app-exercise-list-item *ngFor="let exercise of workout.exercises" [exercise]="exercise" [editable]="true"
+          (onEditClick)="onEditExerciseClick($event)">
+        </app-exercise-list-item>
       </ion-list>
     </div>
   </app-page-layout>

@@ -16,7 +16,10 @@
       <h1 class="ion-padding-horizontal" style="font-weight: bold;">{{ exercise.name }}</h1>
       <ion-list lines="none">
         <ion-item>
-          <ion-icon name="barbell-outline" slot="start"></ion-icon>{{ exercise.type }}
+          <ion-icon name="body-outline" slot="start"></ion-icon>{{ exercise.category }}
+        </ion-item>
+        <ion-item>
+          <ion-icon name="barbell-outline" slot="start"></ion-icon>{{ exercise.equipment }}
         </ion-item>
       </ion-list>
     </div>

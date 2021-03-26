@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 // Model
@@ -17,14 +17,13 @@ import WORKOUT from '../../../data/workout.json';
   styleUrls: ['./workouts.page.scss'],
 })
 export class WorkoutsPage {
-
   myWorkouts = plainToClass(Workout, WORKOUT);
   favoriteWorkouts = plainToClass(Workout, WORKOUT);
 
   constructor(private workoutService: WorkoutService, private router: Router) {}
 
   onWorkoutClick(workout: Workout) {
-    this.workoutService.setWorkoutDetail(workout);
+    this.workoutService.workoutDetail.set(workout);
     this.router.navigateByUrl('/home/explore/workout-detail');
   }
 }

@@ -1,7 +1,7 @@
 <ion-slides style="padding: 0 12px 24px" [options]="slideOptions">
   <ion-slide *ngFor="let workout of workouts">
     <app-highlight-card [imageUrl]="workout.imageUrl" [title]="workout.name" [subtitle]="workout.category"
-      [textList]="[getWorkoutDuration(workout)]" [filter]="filter" (click)="onWorkoutClick(workout)">
+      [textList]="[workout.duration]" [filter]="filter" (click)="onWorkoutClick(workout)">
     </app-highlight-card>
   </ion-slide>
 </ion-slides>

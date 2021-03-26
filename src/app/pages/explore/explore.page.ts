@@ -12,7 +12,6 @@ export class ExplorePage {
 
   onWorkoutsClick() {
     this.router.navigateByUrl('/home/explore/workouts');
-    console.log("clicked");
   }
 
   onExercisesClick() {

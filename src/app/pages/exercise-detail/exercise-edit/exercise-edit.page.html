@@ -15,7 +15,7 @@
       </div>
       <ion-card-header>
         <ion-card-subtitle>
-          {{ exercise.type }}
+          {{ exercise.category }}
         </ion-card-subtitle>
         <ion-card-title>
           {{ exercise.name }}
@@ -29,14 +29,14 @@
           <ion-card mode="ios" class="set-card">
             <div class="set" lines="none">
               <div class="block">
-                <ion-input [(ngModel)]="set.weight" (ionBlur)="onWeightBlur($event)" class="ion-no-padding" type="text"
+                <ion-input [(ngModel)]="set.load" (ionBlur)="onBlur($event, 'load')" class="ion-no-padding" type="text"
                   inputmode="numeric" placeholder="--" select-all></ion-input>
-                <span class="label">kg</span>
+                <span class="label">{{ setDetail.loadUnit }}</span>
               </div>
               <div class="block">
-                <ion-input [(ngModel)]="set.rep" class="ion-no-padding" type="text"
+                <ion-input [(ngModel)]="set.rep" (ionBlur)="onBlur($event, 'rep')" class="ion-no-padding" type="text"
                   inputmode="numeric" placeholder="--" select-all></ion-input>
-                <span class="label">reps</span>
+                <span class="label">{{ setDetail.repUnit }}</span>
               </div>
             </div>
           </ion-card>

@@ -1,9 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
 
 // Model
 import { Workout } from '@models/workout.model';
-import { WorkoutService } from '@services/workout.service';
 
 @Component({
   selector: 'app-highlight-workout-slide',
@@ -26,10 +24,6 @@ export class HighlightWorkoutSlideComponent implements OnInit {
 
   ngOnInit() {}
 
-  getWorkoutDuration(workout: Workout) {
-    return `${workout.duration.opts.time} ${workout.duration.opts.unit}`;
-  }
-  
   onWorkoutClick(workout: Workout) {
     this.onClick.emit(workout);
   }

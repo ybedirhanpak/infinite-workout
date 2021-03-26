@@ -1,51 +1,27 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import { Storage } from '@ionic/storage';
 
 // Model
 import { Workout } from '@models/workout.model';
-import { LocalListData } from '../utils/local-list-data';
+import { LocalList } from '../utils/local-list.util';
+import { State } from '@utils/state.util';
 
 // Storage Keys
 const FAVORITE_WORKOUTS_KEY = 'FAVORITE_WORKOUTS';
+const CREATED_WORKOUTS_KEY = 'CREATED_WORKOUTS';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class WorkoutService {
-  private _workoutDetail = new BehaviorSubject<Workout>(null);
+  public workoutDetail = new State<Workout>(null);
 
-  private favoriteWorkouts: LocalListData<Workout[]>;
+  public favoriteWorkouts: LocalList<Workout[]>;
+  public createdWorkouts: LocalList<Workout[]>;
 
   constructor(storage: Storage) {
-    this.favoriteWorkouts = new LocalListData(storage, FAVORITE_WORKOUTS_KEY);
-  }
-
-  get favorites() {
-    return this.favoriteWorkouts.data;
-  }
-
-  public fetchFavorites() {
-    return this.favoriteWorkouts.fetchData();
-  }
-
-  public addToFavorites(workout: Workout) {
-    return this.favoriteWorkouts.addToList(workout);
-  }
-
-  public isFavorite(workout: Workout) {
-    return this.favoriteWorkouts.contains(workout);
-  }
-
-  public deleteFromFavorites(workout: Workout) {
-    return this.favoriteWorkouts.deleteFromList(workout);
-  }
-
-  get workoutDetail() {
-    return this._workoutDetail.asObservable();
-  }
-
-  public setWorkoutDetail(workout: Workout) {
-    this._workoutDetail.next(workout);
+    this.favoriteWorkouts = new LocalList(storage, FAVORITE_WORKOUTS_KEY);
+    this.createdWorkouts = new LocalList(storage, CREATED_WORKOUTS_KEY);
   }
 }

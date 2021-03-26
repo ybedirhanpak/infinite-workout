@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Exercise } from '@models/exercise.model';
-import { WorkoutExercise } from '@models/workout.model';
 import { BehaviorSubject } from 'rxjs';
 
+// Model
+import { Exercise } from '@models/exercise.model';
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ExerciseService {
   private _exerciseDetail = new BehaviorSubject<Exercise>(null);
@@ -17,13 +18,13 @@ export class ExerciseService {
     this._exerciseDetail.next(exercise);
   }
 
-  private _editedExercise = new BehaviorSubject<WorkoutExercise>(null);
+  private _editedExercise = new BehaviorSubject<Exercise>(null);
 
   get editedExercise() {
     return this._editedExercise.asObservable();
   }
 
-  public setEditedExercise(exercise: WorkoutExercise) {
+  public setEditedExercise(exercise: Exercise) {
     this._editedExercise.next(exercise);
   }
 }
