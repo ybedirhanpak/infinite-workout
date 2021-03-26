@@ -17,13 +17,15 @@
     ],
     "paths": {
       "@services/*": ["./src/app/services/*"],
-      "@models/*": ["./src/app/models/*"]
+      "@models/*": ["./src/app/models/*"],
+      "@utils/*": ["./src/app/utils/*"],
     },
     "resolveJsonModule": true,
     "esModuleInterop": true,
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
+    "strictInjectionParameters": true,
+    "strictTemplates": true,
   }
 }
