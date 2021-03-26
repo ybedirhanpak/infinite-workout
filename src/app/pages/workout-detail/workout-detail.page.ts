@@ -1,12 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { Exercise } from '@models/exercise.model';
 
 // Model
 import { Workout } from '@models/workout.model';
+import { ExerciseService } from '@services/exercise.service';
 
 // Service
 import { WorkoutService } from '@services/workout.service';
+import { copyFrom } from '@utils/object.util';
 import { plainToClass } from 'class-transformer';
 
 @Component({
@@ -25,7 +28,7 @@ export class WorkoutDetailPage implements OnInit {
   constructor(
     private workoutService: WorkoutService,
     private router: Router,
-    private navCtrl: NavController
+    private exerciseService: ExerciseService
   ) {}
 
   ngOnInit() {
@@ -42,6 +45,24 @@ export class WorkoutDetailPage implements OnInit {
         this.workout
       );
     });
+
+    if(this.workout) {
+      this.exerciseService.editedExercise.subscribe((exercise) => {
+        if (exercise) {
+          const oldExercise = this.workout.exercises.find(
+            (e) => e.id === exercise.id
+          );
+          if (oldExercise) {
+            copyFrom(exercise, oldExercise);
+          } else {
+            this.workout.exercises.push(exercise);
+          }
+
+          // Save workout into storage
+          this.workoutService.favoriteWorkouts.update(this.workout);
+        }
+      });
+    }
   }
 
   startWorkout() {
@@ -64,5 +85,11 @@ export class WorkoutDetailPage implements OnInit {
     this.router.navigateByUrl(
       `/home/my-library/edit-workout/${this.workout.id}`
     );
+  }
+
+  onEditExerciseClick(exercise: Exercise) {
+    this.exerciseService.setExerciseDetail(exercise);
+    const navigateUrl = `${this.router.url}/exercise-edit`;
+    this.router.navigateByUrl(navigateUrl);
   }
 }

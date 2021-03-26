@@ -70,6 +70,10 @@ export class ExerciseEditPage implements OnInit {
     if (this.router.url.includes('create-workout')) {
       this.navCtrl.navigateBack('/home/my-library/create-workout');
     }
+
+    if (this.router.url.includes('workout-detail')) {
+      this.navCtrl.back();
+    }
   }
 
   onBlur(event: any, key: 'load' | 'rep') {
