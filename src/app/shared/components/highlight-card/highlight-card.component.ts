@@ -15,7 +15,7 @@ export class HighlightCardComponent implements OnInit {
     color: string;
   };
 
-  @Input() filter: string = 'yellow-blue';
+  @Input() filter: string = 'dark';
 
   constructor() {}
 

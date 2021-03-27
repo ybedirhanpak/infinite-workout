@@ -1,5 +1,5 @@
 <app-clickable>
-  <ion-card class="workout-card" mode="ios">
+  <div class="workout-card" mode="ios">
     <div [ngClass]="['img-wrapper', 'filter', filter]">
       <img class="cover" [src]="imageUrl">
     </div>
@@ -8,5 +8,5 @@
       <ion-card-title style="font-size: 16px;">{{ title }}</ion-card-title>
       <ion-text>{{ smallText }}</ion-text>
     </ion-card-header>
-  </ion-card>
+  </div>
 </app-clickable>

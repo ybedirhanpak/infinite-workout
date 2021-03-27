@@ -10,7 +10,7 @@ import { Workout } from '@models/workout.model';
 })
 export class HighlightWorkoutSlideComponent implements OnInit {
   @Input() workouts: Workout[] = [];
-  @Input() filter: string = 'yellow-blue';
+  @Input() filter: string = 'dark';
 
   @Output() onClick = new EventEmitter<Workout>();
 

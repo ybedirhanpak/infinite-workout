@@ -1,9 +1,9 @@
 <app-clickable>
-  <ion-card class="highlight-card" mode="ios">
+  <div class="highlight-card" mode="ios">
     <div [ngClass]="['img-wrapper', 'filter', filter]">
       <img class="cover" [src]="imageUrl">
     </div>
-    <div class="bottom-left">
+    <div [ngClass]="['bottom-left', filter]">
       <span *ngIf="subtitle" class="subtitle">
         {{ subtitle }}
       </span>
@@ -20,5 +20,5 @@
         <ion-icon [name]="actionButton.icon" slot="icon-only"></ion-icon>
       </ion-button>
     </div>
-  </ion-card>
+  </div>
 </app-clickable>

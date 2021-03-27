@@ -1,10 +1,14 @@
 .highlight-card {
+    display: block;
+    position: relative;
     margin: 0;
     color: white;
     text-align: start;
 
     .img-wrapper {
         height: 200px;
+        border-radius: 6px;
+        overflow: hidden;
     }
 
     .bottom-left {
@@ -14,6 +18,14 @@
 
         display: flex;
         flex-direction: column;
+
+        &.light {
+            color: black;
+        }
+
+        &.dark {
+            color: white;
+        }
     }
 
     .top-right {

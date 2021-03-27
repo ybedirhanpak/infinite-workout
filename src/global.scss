@@ -212,10 +212,26 @@ img.cover {
   // This is used for workout cards
   &.red-turquoise {
     background-color: #ce150094;
-    background-image: linear-gradient(315deg, #c55d52 0%, #0a5647d1 74%);
+    background-image: linear-gradient(320deg, #945644 0%, #0a5647d1 74%);
 
     img {
       mix-blend-mode: hard-light;
+    }
+  }
+
+  &.dark {
+    background-image: linear-gradient(186deg, #ffe49ab0 20%, #000a08 90%);
+
+    img {
+      mix-blend-mode: multiply;
+    }
+  }
+
+  &.light {
+    background-image: linear-gradient(185deg, #3d3735ad 20%, #ececec 70%);
+
+    img {
+      mix-blend-mode: soft-light;
     }
   }
 }
@@ -225,7 +241,7 @@ ion-chip {
 
   &.icon-button {
     padding: 8px;
-  
+
     ion-icon {
       margin: 0;
     }
@@ -242,5 +258,13 @@ ion-chip {
     color: white;
     font-size: 1rem;
     font-weight: bold;
+  }
+}
+
+section {
+  margin-bottom: 16px;
+
+  h1, h2, h3, h4 {
+    margin-bottom: 16px;
   }
 }

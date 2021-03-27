@@ -1,4 +1,4 @@
-<ion-slides style="padding: 0 12px 24px" [options]="slideOptions">
+<ion-slides style="padding: 0 12px" [options]="slideOptions">
   <ion-slide *ngFor="let workout of workouts">
     <app-regular-card 
       [title]="workout.name" 
@@ -6,6 +6,7 @@
       [smallText]="workout.duration"
       [imageUrl]="workout.imageUrl"
       (click)="onWorkoutClick(workout)"
+      [filter]="filter"
     >
     </app-regular-card>
   </ion-slide>
