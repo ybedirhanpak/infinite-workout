@@ -14,11 +14,11 @@ const routes: Routes = [
   },
   {
     path: 'create-workout',
-    loadChildren: () => import('./create-edit-workout/create-edit-workout.module').then( m => m.CreateEditWorkoutPageModule)
+    loadChildren: () => import('../create-edit-workout/create-edit-workout.module').then( m => m.CreateEditWorkoutPageModule)
   },
   {
     path: 'edit-workout/:id',
-    loadChildren: () => import('./create-edit-workout/create-edit-workout.module').then( m => m.CreateEditWorkoutPageModule)
+    loadChildren: () => import('../create-edit-workout/create-edit-workout.module').then( m => m.CreateEditWorkoutPageModule)
   },
 ];
 
