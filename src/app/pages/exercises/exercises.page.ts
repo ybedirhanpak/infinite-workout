@@ -38,7 +38,7 @@ export class ExercisesPage {
   }
 
   onExerciseClick(exercise: Exercise) {
-    this.exerciseService.setExerciseDetail(exercise);
+    this.exerciseService.exerciseDetail.set(exercise);
     const navigateUrl = `${this.router.url}/exercise-detail`;
     this.router.navigateByUrl(navigateUrl);
   }

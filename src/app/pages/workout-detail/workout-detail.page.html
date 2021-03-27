@@ -23,12 +23,6 @@
       </div>
       <div class="header">
         <h1 class="ion-padding-horizontal" style="font-weight: bold;">{{ workout.name }}</h1>
-        <div class="control-buttons">
-          <ion-chip color="primary" *ngIf="customized">
-            <ion-icon name="sparkles-outline"></ion-icon>
-            <ion-label>Customized</ion-label>
-          </ion-chip>
-        </div>
       </div>
       <ion-list lines="none">
         <ion-item>
@@ -41,7 +35,15 @@
           <ion-icon name="barbell-outline" slot="start"></ion-icon>{{ workout.equipments }}
         </ion-item>
       </ion-list>
-      <h2 class="ion-padding-horizontal" style="font-weight: bold;">Exercises</h2>
+      <div class="header">
+        <h2 class="ion-padding-horizontal" style="font-weight: bold;">Exercises</h2>
+        <div class="control-buttons">
+          <ion-chip color="primary" *ngIf="customized">
+            <ion-icon name="sparkles-outline"></ion-icon>
+            <ion-label>Customized</ion-label>
+          </ion-chip>
+        </div>
+      </div>
       <ion-list *ngIf="workout.exercises && workout.exercises.length > 0">
         <app-exercise-list-item *ngFor="let exercise of workout.exercises" [exercise]="exercise">
         </app-exercise-list-item>

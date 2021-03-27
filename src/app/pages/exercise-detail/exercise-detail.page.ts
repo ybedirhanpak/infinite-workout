@@ -16,7 +16,7 @@ export class ExerciseDetailPage {
   constructor(private exerciseService: ExerciseService, private router: Router) { }
 
   ionViewWillEnter() {
-    this.exerciseService.exerciseDetail.subscribe(async (exercise) => {
+    this.exerciseService.exerciseDetail.get().subscribe(async (exercise) => {
       this.exercise = exercise;      
     });
 
@@ -26,7 +26,7 @@ export class ExerciseDetailPage {
   }
 
   onSelectClick() {
-    this.exerciseService.setExerciseDetail(this.exercise);
+    this.exerciseService.exerciseDetail.set(this.exercise);
     const navigateUrl = `${this.router.url}/exercise-edit`;
     this.router.navigateByUrl(navigateUrl);
   }

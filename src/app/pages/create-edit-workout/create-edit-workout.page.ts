@@ -78,7 +78,7 @@ export class CreateEditWorkoutPage implements OnInit {
 
   ionViewWillEnter() {
     if (this.workout) {
-      this.exerciseService.editedExercise.subscribe((exercise) => {
+      this.exerciseService.editedExercise.get().subscribe((exercise) => {
         if (exercise) {
           const oldExercise = this.workout.exercises.find(
             (e) => e.id === exercise.id
@@ -99,7 +99,7 @@ export class CreateEditWorkoutPage implements OnInit {
   }
 
   onEditExerciseClick(exercise: Exercise) {
-    this.exerciseService.setExerciseDetail(exercise);
+    this.exerciseService.exerciseDetail.set(exercise);
     const navigateUrl = `${this.router.url}/exercise-edit`;
     this.router.navigateByUrl(navigateUrl);
   }
@@ -125,6 +125,9 @@ export class CreateEditWorkoutPage implements OnInit {
       this.workoutService.workoutDetail.set(workoutToSave);
       this.navCtrl.navigateBack('/workout-detail');
     }
+
+    // Clear edited exercise
+    this.exerciseService.editedExercise.set(null);
 
     // TODO: Display toast message
   }

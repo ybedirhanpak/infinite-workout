@@ -8,11 +8,18 @@
   .header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
 
-    .control-buttons {
-      display: flex;
+    h1, h2 {
+      font-weight: bold;
+
+      margin: 16px 0;
     }
+  }
+
+  .control-buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
   }
 
   .exercise {

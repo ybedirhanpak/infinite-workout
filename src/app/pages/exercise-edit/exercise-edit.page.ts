@@ -33,7 +33,7 @@ export class ExerciseEditPage implements OnInit {
   ngOnInit() {}
 
   ionViewWillEnter() {
-    this.exerciseService.exerciseDetail.subscribe((exercise) => {
+    this.exerciseService.exerciseDetail.get().subscribe((exercise) => {
       this.exercise = exercise;
       this.setDetail = getSetDetail(exercise);
       this.sets = this.exercise.set.sets;
@@ -62,7 +62,7 @@ export class ExerciseEditPage implements OnInit {
   onSaveClick() {
     const editWorkout = this.router.url.includes('edit-workout');
     this.exercise.set.sets = this.sets;
-    this.exerciseService.setEditedExercise(this.exercise);
+    this.exerciseService.editedExercise.set(this.exercise);
     if(editWorkout) {
       this.navCtrl.navigateBack("/workout-detail/edit-workout");
     } else {
