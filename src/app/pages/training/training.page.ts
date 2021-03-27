@@ -449,6 +449,19 @@ export class TrainingPage implements OnInit {
     }
   }
 
+  onNextClick(exercise: ExerciseClock) {
+    const { type, clock } = exercise;
+    if(type === 'weightRep') {
+      this.onRestSkip(exercise);
+    } else if (type === 'weightTime' || type === 'distanceTime') {
+      if(clock.rest) {
+        this.onRestSkip(exercise);
+      } else {
+        this.onNextSet(exercise);
+      }
+    }
+  }
+
   /** Set-Time Controllers */
   onPreviousSet(exercise: ExerciseClock) {
     const prevSet = Math.max(exercise.currentSet - 1, 0);
@@ -510,27 +523,6 @@ export class TrainingPage implements OnInit {
         this.updateClockMax(exercise.clock.id, clockTime);
 
     }
-
-    // switch (exercise.type) {
-    //   case 'weightRep':
-
-    //     break;
-    //   case 'weightTime':
-
-    //     break;
-    //   case 'distanceTime':
-    //     this.stopClock(exercise.clock.id);
-    //     // Switch to set
-    //     this.updateClockRest(exercise.clock, false);
-    //     // Update clock to set time
-    //     this.updateClockMax(exercise.clock.id, clockTime);
-    //     // Slide next exercise
-    //     this.slides.slideNext();
-    //     break;
-    //   default:
-    //     break;
-    // }
-
   }
 
   onClockFinish(clockFinish: boolean, exercise: ExerciseClock) {
@@ -558,5 +550,9 @@ export class TrainingPage implements OnInit {
 
   getChipColorUI(exercise: ExerciseClock) {
     return exercise.clock.rest ? 'secondary' : 'primary';
+  }
+
+  getNextTextUI(exercise: ExerciseClock) {
+    return exercise.clock.rest ? 'Skip' : 'Next';
   }
 }

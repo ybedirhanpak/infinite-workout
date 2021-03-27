@@ -109,16 +109,10 @@
                       <ion-text> Reset </ion-text>
                     </div>
                   </ion-chip>
-                  <ion-chip [color]="getChipColorUI(exercise)" *ngIf="!exercise.clock.rest">
-                    <div class="chip-container" (click)="onNextSet(exercise)">
+                  <ion-chip [color]="getChipColorUI(exercise)">
+                    <div class="chip-container" (click)="onNextClick(exercise)">
                       <ion-icon name="arrow-forward-circle"></ion-icon>
-                      <ion-text> Next </ion-text>
-                    </div>
-                  </ion-chip>
-                  <ion-chip [color]="getChipColorUI(exercise)" *ngIf="exercise.clock.rest">
-                    <div class="chip-container" (click)="onRestSkip(exercise)">
-                      <ion-icon name="play-forward-circle"></ion-icon>
-                      <ion-text> Skip </ion-text>
+                      <ion-text> {{ getNextTextUI(exercise) }} </ion-text>
                     </div>
                   </ion-chip>
                 </div>
