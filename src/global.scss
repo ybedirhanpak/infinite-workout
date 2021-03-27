@@ -220,11 +220,14 @@ img.cover {
   }
 }
 
-ion-chip.icon-button {
-  padding: 8px;
+ion-chip {
   transition: 0.1s ease-in-out;
 
-  ion-icon {
-    margin: 0;
+  &.icon-button {
+    padding: 8px;
+  
+    ion-icon {
+      margin: 0;
+    }
   }
 }
