@@ -8,9 +8,6 @@
       <ion-button (click)="onDeleteClick()" *ngIf="mode === 'edit' && (created || customized)" color="primary">
         <ion-icon [name]="'trash-outline'"></ion-icon>
       </ion-button>
-      <ion-button (click)="onSaveClick()" color="primary">
-        <ion-icon slot="icon-only" name="checkmark-outline"></ion-icon>
-      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -57,3 +54,11 @@
     </div>
   </app-page-layout>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button class="footer-button" expand="block" (click)="onSaveClick()">
+      <ion-text>Save Workout</ion-text>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
