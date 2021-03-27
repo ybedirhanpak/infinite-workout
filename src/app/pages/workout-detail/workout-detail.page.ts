@@ -1,16 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
-import { Exercise } from '@models/exercise.model';
 
 // Model
 import { Workout } from '@models/workout.model';
-import { ExerciseService } from '@services/exercise.service';
+import { Exercise } from '@models/exercise.model';
 
 // Service
 import { WorkoutService } from '@services/workout.service';
+import { ExerciseService } from '@services/exercise.service';
+
+// Util
 import { copyFrom } from '@utils/object.util';
-import { plainToClass } from 'class-transformer';
 
 @Component({
   selector: 'app-workout-detail',
@@ -26,8 +26,8 @@ export class WorkoutDetailPage implements OnInit {
   created = false;
 
   constructor(
-    private workoutService: WorkoutService,
     private router: Router,
+    private workoutService: WorkoutService,
     private exerciseService: ExerciseService
   ) {}
 
@@ -37,16 +37,18 @@ export class WorkoutDetailPage implements OnInit {
 
   ionViewWillEnter() {
     this.workoutService.workoutDetail.get().subscribe(async (workout) => {
-      this.workout = plainToClass(Workout, workout);
+      this.workout = workout;
+
       this.favorited = await this.workoutService.favoriteWorkouts.contains(
         this.workout
       );
+
       this.created = await this.workoutService.createdWorkouts.contains(
         this.workout
       );
     });
 
-    if(this.workout) {
+    if (this.workout) {
       this.exerciseService.editedExercise.subscribe((exercise) => {
         if (exercise) {
           const oldExercise = this.workout.exercises.find(

@@ -6,10 +6,9 @@ import { Workout } from '@models/workout.model';
 
 // Service
 import { WorkoutService } from '@services/workout.service';
-import { plainToClass } from 'class-transformer';
 
 // Data
-import WORKOUT from '../../../data/workout.json';
+import WORKOUT_LIST from '../../../data/workout.json';
 
 @Component({
   selector: 'app-workouts',
@@ -17,8 +16,7 @@ import WORKOUT from '../../../data/workout.json';
   styleUrls: ['./workouts.page.scss'],
 })
 export class WorkoutsPage {
-  myWorkouts = plainToClass(Workout, WORKOUT);
-  favoriteWorkouts = plainToClass(Workout, WORKOUT);
+  workoutList: Workout[] = WORKOUT_LIST as any;
 
   constructor(private workoutService: WorkoutService, private router: Router) {}
 

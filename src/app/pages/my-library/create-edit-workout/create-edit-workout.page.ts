@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
 import { FormControl, FormGroup } from '@angular/forms';
+import { NavController } from '@ionic/angular';
 
 // Model
 import { Workout } from '@models/workout.model';
@@ -13,6 +13,7 @@ import { WorkoutService } from '@services/workout.service';
 
 // Utils
 import { copyFrom } from '@utils/object.util';
+import { getEmptyWorkout } from '@utils/workout.util';
 
 @Component({
   selector: 'app-create-edit-workout',
@@ -56,7 +57,7 @@ export class CreateEditWorkoutPage implements OnInit {
     } else {
       // Create Mode
       this.mode = 'create';
-      this.workout = new Workout(Date.now());
+      this.workout = getEmptyWorkout(Date.now());
       this.workout.exercises = [];
       this.formGroup = new FormGroup({
         name: new FormControl(''),

@@ -8,7 +8,6 @@ import { Workout } from '@models/workout.model';
 // Service
 import { TrainingService } from '@services/training.service';
 import { WorkoutService } from '@services/workout.service';
-import { plainToClass } from 'class-transformer';
 
 @Component({
   selector: 'app-my-library',
@@ -29,17 +28,17 @@ export class MyLibraryPage implements OnInit {
 
   ngOnInit() {
     this.workoutService.favoriteWorkouts.elements.subscribe((favorites) => {
-      this.favorites = plainToClass(Workout, favorites);
+      this.favorites = favorites;
     });
 
     this.workoutService.createdWorkouts.elements.subscribe((workouts) => {
-      this.myWorkouts = plainToClass(Workout, workouts);
+      this.myWorkouts = workouts;
     });
 
     this.trainingService.trainingRecordList.subscribe((trainingRecordList) => {
       if(trainingRecordList.length > 0) {
         this.lastTraining = trainingRecordList[0];
-        this.lastWorkout = plainToClass(Workout, this.lastTraining.workout);
+        this.lastWorkout = this.lastTraining.workout;
       }
     });
   }
