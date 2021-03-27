@@ -66,7 +66,7 @@ export class ExerciseEditPage implements OnInit {
     if(editWorkout) {
       this.navCtrl.navigateBack("/workout-detail/edit-workout");
     } else {
-      // this.navCtrl.navigateBack("/workout-detail/edit-workout");
+      this.navCtrl.navigateBack("/create-workout");
     }
   }
 

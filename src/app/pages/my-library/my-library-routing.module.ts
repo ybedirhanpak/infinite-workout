@@ -6,15 +6,7 @@ import { MyLibraryPage } from './my-library.page';
 const routes: Routes = [
   {
     path: '',
-    component: MyLibraryPage
-  },
-  {
-    path: 'create-workout',
-    loadChildren: () => import('../create-edit-workout/create-edit-workout.module').then( m => m.CreateEditWorkoutPageModule)
-  },
-  {
-    path: 'edit-workout',
-    loadChildren: () => import('../create-edit-workout/create-edit-workout.module').then( m => m.CreateEditWorkoutPageModule)
+    component: MyLibraryPage,
   },
 ];
 

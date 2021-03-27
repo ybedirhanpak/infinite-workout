@@ -42,6 +42,13 @@ const routes: Routes = [
         (m) => m.ExerciseDetailPageModule
       ),
   },
+  {
+    path: 'create-workout',
+    loadChildren: () =>
+      import('./pages/create-edit-workout/create-edit-workout.module').then(
+        (m) => m.CreateEditWorkoutPageModule
+      ),
+  },
 ];
 @NgModule({
   imports: [

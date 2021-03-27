@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>My Library</ion-title>
     <ion-buttons slot="end">
-      <ion-button routerLink="/home/my-library/create-workout">
+      <ion-button routerLink="/create-workout">
         <ion-icon slot="icon-only" name="add-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -27,7 +27,7 @@
       </div>
       <div *ngIf="!(favoriteWorkouts && favoriteWorkouts.length > 0)" class="ion-text-center ion-padding-horizontal">
         <p>Your favorite workouts will be here. Explore some workouts and add them into your favoriteWorkouts.</p>
-        <ion-button routerLink="/home/explore/workouts">Explore</ion-button>
+        <ion-button routerLink="/workouts">Explore</ion-button>
       </div>
     </section>
     <section>
@@ -37,7 +37,7 @@
       </div>
       <div *ngIf="!(createdWorkouts && createdWorkouts.length > 0)" class="ion-text-center ion-padding-horizontal">
         <p>Workouts that you create will be here. You can create a workout now.</p>
-        <ion-button routerLink="/home/my-library/create-workout">Create</ion-button>
+        <ion-button routerLink="/create-workout">Create</ion-button>
       </div>
     </section>
     <section>
@@ -47,7 +47,7 @@
       </div>
       <div *ngIf="!(customizedWorkouts && customizedWorkouts.length > 0)" class="ion-text-center ion-padding-horizontal">
         <p>Your customized workouts will be here. Enter a detail of a workout and click into <ion-icon name="create-outline"></ion-icon> button</p>
-        <ion-button routerLink="/home/explore/workouts">Explore</ion-button>
+        <ion-button routerLink="/workouts">Explore</ion-button>
       </div>
     </section>
   </app-page-layout>
