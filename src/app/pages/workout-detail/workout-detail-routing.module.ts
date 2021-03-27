@@ -9,10 +9,6 @@ const routes: Routes = [
     component: WorkoutDetailPage
   },
   {
-    path: 'exercise-edit',
-    loadChildren: () => import('../exercise-detail/exercise-edit/exercise-edit.module').then( m => m.ExerciseEditPageModule)
-  },
-  {
     path: 'edit-workout',
     loadChildren: () => import('../create-edit-workout/create-edit-workout.module').then( m => m.CreateEditWorkoutPageModule)
   },

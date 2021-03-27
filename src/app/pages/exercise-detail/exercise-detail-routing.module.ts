@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'exercise-edit',
-    loadChildren: () => import('./exercise-edit/exercise-edit.module').then( m => m.ExerciseEditPageModule)
+    loadChildren: () => import('../exercise-edit/exercise-edit.module').then( m => m.ExerciseEditPageModule)
   }
 ];
 

@@ -60,9 +60,14 @@ export class ExerciseEditPage implements OnInit {
   }
 
   onSaveClick() {
+    const editWorkout = this.router.url.includes('edit-workout');
     this.exercise.set.sets = this.sets;
     this.exerciseService.setEditedExercise(this.exercise);
-    this.navCtrl.back();
+    if(editWorkout) {
+      this.navCtrl.navigateBack("/workout-detail/edit-workout");
+    } else {
+      // this.navCtrl.navigateBack("/workout-detail/edit-workout");
+    }
   }
 
   onBlur(event: any, key: 'load' | 'rep') {

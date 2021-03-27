@@ -113,8 +113,8 @@ export class CreateEditWorkoutPage implements OnInit {
 
     if (this.mode === 'create') {
       this.workoutService.createdWorkouts.create(workoutToSave);
+      this.navCtrl.navigateBack('/home/my-library');
     } else if (this.mode === 'edit') {
-      this.workoutService.workoutDetail.set(workoutToSave);
       if (this.created) {
         this.workoutService.createdWorkouts.update(workoutToSave);
       } else if (this.customized) {
@@ -122,10 +122,11 @@ export class CreateEditWorkoutPage implements OnInit {
       } else {
         this.workoutService.customizedWorkouts.create(workoutToSave);
       }
+      this.workoutService.workoutDetail.set(workoutToSave);
+      this.navCtrl.navigateBack('/workout-detail');
     }
 
     // TODO: Display toast message
-    this.navCtrl.back();
   }
 
   async onDeleteClick() {
