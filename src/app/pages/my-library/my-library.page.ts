@@ -37,6 +37,10 @@ export class MyLibraryPage implements OnInit {
       this.createdWorkouts = workouts;
     });
 
+    this.workoutService.customizedWorkouts.elements.subscribe((workouts) => {
+      this.customizedWorkouts = workouts;
+    });
+
     this.trainingService.trainingRecordList.subscribe((trainingRecordList) => {
       if(trainingRecordList.length > 0) {
         this.lastTraining = trainingRecordList[0];
@@ -58,7 +62,6 @@ export class MyLibraryPage implements OnInit {
   }
 
   onMyWorkoutClick(workout: Workout) {
-    // this.router.navigateByUrl(`/home/my-library/edit-workout/${workout.id}`);
     this.workoutService.workoutDetail.set(workout);
     this.router.navigateByUrl('/home/my-library/workout-detail');
   }

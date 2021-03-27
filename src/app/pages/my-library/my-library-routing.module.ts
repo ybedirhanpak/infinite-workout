@@ -17,7 +17,7 @@ const routes: Routes = [
     loadChildren: () => import('../create-edit-workout/create-edit-workout.module').then( m => m.CreateEditWorkoutPageModule)
   },
   {
-    path: 'edit-workout/:id',
+    path: 'edit-workout',
     loadChildren: () => import('../create-edit-workout/create-edit-workout.module').then( m => m.CreateEditWorkoutPageModule)
   },
 ];

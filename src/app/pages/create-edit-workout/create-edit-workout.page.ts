@@ -23,7 +23,8 @@ import { getEmptyWorkout } from '@utils/workout.util';
 export class CreateEditWorkoutPage implements OnInit {
   mode: 'create' | 'edit' = 'create';
   workout: Workout;
-
+  created = false;
+  customized = false;
   formGroup: FormGroup;
 
   constructor(
@@ -35,25 +36,28 @@ export class CreateEditWorkoutPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    const paramMap = this.route.snapshot.paramMap;
-    if (paramMap.has('id')) {
+    const editMode = this.router.url.includes('edit-workout');
+    if (editMode) {
       // Edit Mode
       this.mode = 'edit';
-      const id = parseInt(paramMap.get('id'));
-      this.workoutService.createdWorkouts
-        .find({ id })
-        .then((workout: Workout) => {
-          this.workout = workout;
-          this.formGroup = new FormGroup({
-            name: new FormControl(workout.name),
-            duration: new FormControl(workout.duration),
-            category: new FormControl(workout.category),
-            equipments: new FormControl(workout.equipments),
-          });
-        })
-        .catch((error) => {
-          // TODO: Handle null workout
+      this.workoutService.workoutEdit.get().subscribe(async (workout) => {
+        this.workout = workout;
+
+        this.formGroup = new FormGroup({
+          name: new FormControl(workout.name),
+          duration: new FormControl(workout.duration),
+          category: new FormControl(workout.category),
+          equipments: new FormControl(workout.equipments),
         });
+
+        this.created = await this.workoutService.createdWorkouts.contains(
+          workout
+        );
+
+        this.customized = await this.workoutService.customizedWorkouts.contains(
+          workout
+        );
+      });
     } else {
       // Create Mode
       this.mode = 'create';
@@ -100,26 +104,45 @@ export class CreateEditWorkoutPage implements OnInit {
     this.router.navigateByUrl(navigateUrl);
   }
 
-  onSaveClick() {
-    this.workout = {
+  async onSaveClick() {
+    const workoutToSave = {
+      imageUrl: '/assets/img/workout/mix-workout.jpg',
       ...this.workout,
       ...this.formGroup.value,
-      imageUrl: '/assets/img/workout/mix-workout.jpg',
     };
 
     if (this.mode === 'create') {
-      this.workoutService.createdWorkouts.create(this.workout);
+      this.workoutService.createdWorkouts.create(workoutToSave);
     } else if (this.mode === 'edit') {
-      this.workoutService.createdWorkouts.update(this.workout);
+      this.workoutService.workoutDetail.set(workoutToSave);
+      if (this.created) {
+        this.workoutService.createdWorkouts.update(workoutToSave);
+      } else if (this.customized) {
+        this.workoutService.customizedWorkouts.update(workoutToSave);
+      } else {
+        this.workoutService.customizedWorkouts.create(workoutToSave);
+      }
     }
 
     // TODO: Display toast message
-    this.navCtrl.navigateBack('/home/my-library');
+    this.navCtrl.back();
   }
 
   async onDeleteClick() {
     // TODO: Ask for permission before delete
-    await this.workoutService.createdWorkouts.remove(this.workout);
+
+    if (this.created) {
+      // Remove created workout
+      await this.workoutService.createdWorkouts.remove(this.workout);
+    } else {
+      // Remove customized workout
+      await this.workoutService.customizedWorkouts.remove(this.workout);
+    }
+
     this.navCtrl.navigateBack('/home/my-library');
+  }
+
+  getWorkoutImageUI() {
+    return this.workout.imageUrl ?? '/assets/img/workout/mix-workout.jpg';
   }
 }

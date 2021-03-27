@@ -62,18 +62,7 @@ export class ExerciseEditPage implements OnInit {
   onSaveClick() {
     this.exercise.set.sets = this.sets;
     this.exerciseService.setEditedExercise(this.exercise);
-
-    if (this.router.url.includes('edit-workout')) {
-      this.navCtrl.back();
-    }
-
-    if (this.router.url.includes('create-workout')) {
-      this.navCtrl.navigateBack('/home/my-library/create-workout');
-    }
-
-    if (this.router.url.includes('workout-detail')) {
-      this.navCtrl.back();
-    }
+    this.navCtrl.back();
   }
 
   onBlur(event: any, key: 'load' | 'rep') {

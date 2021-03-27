@@ -5,10 +5,10 @@
     </ion-buttons>
     <ion-title>{{ getTitle() }}</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="onDeleteClick()" *ngIf="mode === 'edit'">
+      <ion-button (click)="onDeleteClick()" *ngIf="mode === 'edit' && (created || customized)" color="primary">
         <ion-icon [name]="'trash-outline'"></ion-icon>
       </ion-button>
-      <ion-button (click)="onSaveClick()">
+      <ion-button (click)="onSaveClick()" color="primary">
         <ion-icon slot="icon-only" name="checkmark-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -19,7 +19,7 @@
   <app-page-layout>
     <div class="create-edit-workout" *ngIf="workout">
       <div class="img-wrapper filter red-turquoise">
-        <img class="cover" [src]="'/assets/img/workout/mix-workout.jpg'" [alt]="">
+        <img class="cover" [src]="getWorkoutImageUI()" [alt]="">
       </div>
       <form [formGroup]="formGroup">
         <h1 class="ion-padding-horizontal" style="font-weight: bold;">

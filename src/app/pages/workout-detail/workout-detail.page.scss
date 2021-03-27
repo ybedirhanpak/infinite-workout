@@ -5,6 +5,16 @@
     height: 300px;
   }
 
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    .control-buttons {
+      display: flex;
+    }
+  }
+
   .exercise {
     margin-bottom: 16px;
 

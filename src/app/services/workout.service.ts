@@ -11,13 +11,14 @@ import { State } from '@utils/state.util';
 // Storage Keys
 const FAVORITE_WORKOUTS_KEY = 'FAVORITE_WORKOUTS';
 const CREATED_WORKOUTS_KEY = 'CREATED_WORKOUTS';
-const CUSTOMIZED_WORKOUTS_KEY = 'CREATED_WORKOUTS';
+const CUSTOMIZED_WORKOUTS_KEY = 'CUSTOMIZED_WORKOUTS';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WorkoutService {
   public workoutDetail = new State<Workout>(null);
+  public workoutEdit = new State<Workout>(null);
 
   public favoriteWorkouts: LocalList<Workout[]>;
   public createdWorkouts: LocalList<Workout[]>;
