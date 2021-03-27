@@ -9,11 +9,38 @@ const routes: Routes = [
   },
   {
     path: 'training',
-    loadChildren: () => import('./pages/training/training.module').then( m => m.TrainingPageModule)
+    loadChildren: () =>
+      import('./pages/training/training.module').then(
+        (m) => m.TrainingPageModule
+      ),
+  },
+  {
+    path: 'workouts',
+    loadChildren: () =>
+      import('./pages/workouts/workouts.module').then(
+        (m) => m.WorkoutsPageModule
+      ),
+  },
+  {
+    path: 'exercises',
+    loadChildren: () =>
+      import('./pages/exercises/exercises.module').then(
+        (m) => m.ExercisesPageModule
+      ),
+  },
+  {
+    path: 'workout-detail',
+    loadChildren: () =>
+      import('./pages/workout-detail/workout-detail.module').then(
+        (m) => m.WorkoutDetailPageModule
+      ),
   },
   {
     path: 'exercise-detail',
-    loadChildren: () => import('./pages/exercise-detail/exercise-detail.module').then( m => m.ExerciseDetailPageModule)
+    loadChildren: () =>
+      import('./pages/exercise-detail/exercise-detail.module').then(
+        (m) => m.ExerciseDetailPageModule
+      ),
   },
 ];
 @NgModule({

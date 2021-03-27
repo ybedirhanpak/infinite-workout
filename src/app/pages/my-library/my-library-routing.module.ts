@@ -9,10 +9,6 @@ const routes: Routes = [
     component: MyLibraryPage
   },
   {
-    path: 'workout-detail',
-    loadChildren: () => import('../workout-detail/workout-detail.module').then( m => m.WorkoutDetailPageModule)
-  },
-  {
     path: 'create-workout',
     loadChildren: () => import('../create-edit-workout/create-edit-workout.module').then( m => m.CreateEditWorkoutPageModule)
   },

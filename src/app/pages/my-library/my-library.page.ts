@@ -58,11 +58,11 @@ export class MyLibraryPage implements OnInit {
 
   onWorkoutClick(workout: Workout) {
     this.workoutService.workoutDetail.set(workout);
-    this.router.navigateByUrl('/home/my-library/workout-detail');
+    this.router.navigateByUrl('/workout-detail');
   }
 
   onMyWorkoutClick(workout: Workout) {
     this.workoutService.workoutDetail.set(workout);
-    this.router.navigateByUrl('/home/my-library/workout-detail');
+    this.router.navigateByUrl('/workout-detail');
   }
 }

@@ -8,7 +8,7 @@ import { Workout } from '@models/workout.model';
 import { WorkoutService } from '@services/workout.service';
 
 // Data
-import WORKOUT_LIST from '../../../data/workout.json';
+import WORKOUT_LIST from '../../data/workout.json';
 
 @Component({
   selector: 'app-workouts',
@@ -22,6 +22,6 @@ export class WorkoutsPage {
 
   onWorkoutClick(workout: Workout) {
     this.workoutService.workoutDetail.set(workout);
-    this.router.navigateByUrl('/home/explore/workout-detail');
+    this.router.navigateByUrl('/workout-detail');
   }
 }

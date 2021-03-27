@@ -11,10 +11,10 @@ export class ExplorePage {
   constructor(private router: Router) {}
 
   onWorkoutsClick() {
-    this.router.navigateByUrl('/home/explore/workouts');
+    this.router.navigateByUrl('/workouts');
   }
 
   onExercisesClick() {
-    this.router.navigateByUrl('/home/explore/exercises');
+    this.router.navigateByUrl('/exercises');
   }
 }

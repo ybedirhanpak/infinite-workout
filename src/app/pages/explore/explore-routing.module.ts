@@ -8,18 +8,6 @@ const routes: Routes = [
     path: '',
     component: ExplorePage,
   },
-  {
-    path: 'workout-detail',
-    loadChildren: () => import('../workout-detail/workout-detail.module').then( m => m.WorkoutDetailPageModule)
-  },
-  {
-    path: 'exercises',
-    loadChildren: () => import('../exercises/exercises.module').then( m => m.ExercisesPageModule)
-  },
-  {
-    path: 'workouts',
-    loadChildren: () => import('./workouts/workouts.module').then( m => m.WorkoutsPageModule)
-  },
 ];
 
 @NgModule({
