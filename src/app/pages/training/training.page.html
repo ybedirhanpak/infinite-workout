@@ -133,10 +133,8 @@
 
 <ion-footer>
   <ion-toolbar>
-    <app-clickable>
-      <ion-button class="footer-button no-ripple" expand="block" (click)="onFooterButtonClick()">
-        <ion-label slot="end">{{!trainingStarted ? 'Start' : (trainingPaused ? 'Resume' : 'Pause')}}</ion-label>
-      </ion-button>
-    </app-clickable>
+    <ion-button class="footer-button" expand="block" (click)="onFooterButtonClick()">
+      <ion-text slot="end">{{!trainingStarted ? 'Start' : (trainingPaused ? 'Resume' : 'Pause')}}</ion-text>
+    </ion-button>
   </ion-toolbar>
 </ion-footer>

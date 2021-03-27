@@ -231,3 +231,16 @@ ion-chip {
     }
   }
 }
+
+.footer-button {
+  ion-icon {
+    color: white;
+  }
+
+  ion-text {
+    text-transform: uppercase;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+}
