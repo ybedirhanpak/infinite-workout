@@ -2,11 +2,9 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnChanges,
   OnDestroy,
   OnInit,
   Output,
-  SimpleChanges,
 } from '@angular/core';
 import { DateService } from '@services/date.service';
 
@@ -20,6 +18,7 @@ export class ClockCircleComponent implements OnInit, OnDestroy {
   @Input() mode: 'timer' | 'stopwatch' = 'stopwatch';
   @Input() max = 60;
   @Input() current = 0;
+  @Input() color: 'primary' | 'secondary' = 'primary';
 
   @Output() onFinish = new EventEmitter<boolean>();
 
@@ -101,6 +100,10 @@ export class ClockCircleComponent implements OnInit, OnDestroy {
     this.start();
   }
 
+  public updateColor(color: 'primary' | 'secondary') {
+    this.color = color;
+  }
+
   tick() {
     // Timer mode
     if (this.mode === 'timer' && this.current > 0) {
@@ -120,5 +123,9 @@ export class ClockCircleComponent implements OnInit, OnDestroy {
     }
 
     this.updateCircle();
+  }
+
+  getColorUI() {
+    return `var(--ion-color-${this.color}, black)`;
   }
 }
