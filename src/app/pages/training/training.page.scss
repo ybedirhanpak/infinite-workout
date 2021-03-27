@@ -31,7 +31,7 @@
 
     &-card {
       height: 50%;
-      margin: 1rem 0;
+      margin: 8px 0;
 
       img {
         width: 100%;
@@ -119,8 +119,12 @@
           justify-content: center;
           align-items: center;
 
-          ion-button {
-            font-size: 1.2rem;
+          ion-chip {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 1rem;
             height: 100%;
             text-transform: uppercase;
           }

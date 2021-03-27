@@ -27,22 +27,17 @@
                 <div *ngIf="exercise.type === 'weightRep'">
                   <ion-text>{{ exercise.setCount }} sets</ion-text>
                 </div>
-                <div *ngIf="exercise.type === 'weightTime'">
+                <div *ngIf="exercise.type === 'weightTime' || exercise.type === 'distanceTime'">
                   <ion-text>{{ exercise.setCount }} sets</ion-text>
-                </div>
-                <div *ngIf="exercise.type === 'distanceTime'">
-                  <ion-text>{{ 1 }} {{ 2 }}
-                  </ion-text>
                 </div>
               </ion-card-header>
               <ion-card-content class="ion-no-padding">
                 <ion-chip [color]="getChipColorUI(exercise)">
                   <div class="chip-container" *ngIf="!exercise.clock.rest">
                     <ion-icon name="barbell-outline"></ion-icon>
-                    <ion-text *ngIf="exercise.type === 'weightRep' || exercise.type === 'weightTime'">
+                    <ion-text>
                       Set: {{ getCurrentSetUI(exercise) }}
                     </ion-text>
-                    <ion-text *ngIf="exercise.type === 'distanceTime'">Set</ion-text>
                   </div>
                   <div class="chip-container" *ngIf="exercise.clock.rest">
                     <ion-icon name="alarm-outline"></ion-icon>
@@ -93,7 +88,8 @@
                 </ion-content>
               </div>
               <!-- Set-Time Clock -->
-              <div class="clock-control-container" *ngIf="exercise.type === 'weightTime'">
+              <div class="clock-control-container"
+                *ngIf="exercise.type === 'weightTime' || exercise.type === 'distanceTime'">
                 <div class="clock-wrapper">
                   <app-clock-circle [id]="exercise.clock.id" [max]="exercise.clock.max"
                     [current]="exercise.clock.current" [mode]="exercise.clock.mode"
@@ -123,37 +119,6 @@
                     <div class="chip-container" (click)="onRestSkip(exercise)">
                       <ion-icon name="play-forward-circle"></ion-icon>
                       <ion-text> Skip </ion-text>
-                    </div>
-                  </ion-chip>
-                </div>
-              </div>
-              <!-- Time Clock -->
-              <div class="clock-control-container" *ngIf="exercise.type === 'distanceTime'">
-                <div class="clock-wrapper">
-                  <app-clock-circle [id]="exercise.clock.id" [max]="exercise.clock.max"
-                    [current]="exercise.clock.current" [mode]="exercise.clock.mode"
-                    (onFinish)="onClockFinish($event, exercise)">
-                  </app-clock-circle>
-                </div>
-                <div class="clock-control-buttons" *ngIf="exercise.clock.rest">
-                  <ion-chip [color]="getChipColorUI(exercise)">
-                    <div class="chip-container" (click)="onRestReset(exercise)">
-                      <ion-icon name="refresh-circle"></ion-icon>
-                      <ion-text> Reset </ion-text>
-                    </div>
-                  </ion-chip>
-                  <ion-chip [color]="getChipColorUI(exercise)">
-                    <div class="chip-container" (click)="onRestSkip(exercise)">
-                      <ion-icon name="play-forward-circle"></ion-icon>
-                      <ion-text> Skip </ion-text>
-                    </div>
-                  </ion-chip>
-                </div>
-                <div class="clock-control-buttons" *ngIf="!exercise.clock.rest">
-                  <ion-chip [color]="getChipColorUI(exercise)">
-                    <div class="chip-container" (click)="onRestReset(exercise)">
-                      <ion-icon name="refresh-circle"></ion-icon>
-                      <ion-text> Reset </ion-text>
                     </div>
                   </ion-chip>
                 </div>

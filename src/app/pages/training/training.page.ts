@@ -108,7 +108,6 @@ export class TrainingPage implements OnInit {
 
       // Create exercise clocks
       this.workout.exercises.forEach((exercise, index) => {
-        const detail = getSetDetail(exercise);
         const type = exercise.set.type;
 
         const clockSets = exercise.set.sets.map((s) => {
@@ -118,65 +117,34 @@ export class TrainingPage implements OnInit {
           } as ClockSet;
         });
 
-        const set = clockSets[0];
-        const clockTime = this.convertTimeToSec(set.rep, detail.repUnit);
+        let clockTime = 0;
 
         if (type === 'weightRep') {
           // There will be multiple clocks for each set
-          // Each clock will be stopwatch starting from 0 up to 2 mins
-          this.exerciseClocks.push({
-            exercise: exercise,
-            clock: {
-              id: index,
-              rest: false,
-              mode: 'timer',
-              max: this.restTime,
-              current: this.restTime,
-            },
-            sets: clockSets,
-            setCount: clockSets.length,
-            currentSet: 0,
-            type: exercise.set.type,
-          });
-        }
-
-        if (type === 'weightTime') {
+          // Each clock will be stopwatch starting from 0 up to `rest time`
+          clockTime = this.restTime;
+        } else if (type === 'weightTime' || type === 'distanceTime') {
           // There will be multiple clocks for each set
           // Each clock will be timer, starting trom `time` down to 0
-          this.exerciseClocks.push({
-            clock: {
-              id: index,
-              rest: false,
-              mode: 'timer',
-              max: clockTime,
-              current: clockTime,
-            },
-            exercise: exercise,
-            type: type,
-            sets: clockSets,
-            setCount: clockSets.length,
-            currentSet: 0,
-          });
+          const set = clockSets[0];
+          const detail = getSetDetail(exercise);
+          clockTime = this.convertTimeToSec(set.rep, detail.repUnit);
         }
 
-        if (type === 'distanceTime') {
-          // There will be single clock for the time
-          // The clock will be timer
-          this.exerciseClocks.push({
-            clock: {
-              id: index,
-              rest: false,
-              mode: 'timer',
-              max: clockTime,
-              current: clockTime,
-            },
-            exercise: exercise,
-            type: type,
-            sets: clockSets,
-            setCount: clockSets.length,
-            currentSet: 0,
-          });
-        }
+        this.exerciseClocks.push({
+          clock: {
+            id: index,
+            rest: false,
+            mode: 'timer',
+            max: clockTime,
+            current: clockTime,
+          },
+          exercise: exercise,
+          type: type,
+          sets: clockSets,
+          setCount: clockSets.length,
+          currentSet: 0,
+        });
       });
 
       // Add 'next' field of each exercise
@@ -234,22 +202,14 @@ export class TrainingPage implements OnInit {
     // Decide on what to do based on rep type
     const index = await this.slides.getActiveIndex();
     this.currentIndex = index;
-    const currentExercise = this.exerciseClocks[this.currentIndex];
+    const { type, clock } = this.exerciseClocks[this.currentIndex];
 
-    switch (currentExercise.type) {
-      case 'weightRep':
-        if (currentExercise.clock.rest) {
-          this.startClock(currentExercise.clock.id);
-        }
-        break;
-      case 'weightTime':
-        this.startClock(currentExercise.clock.id);
-        break;
-      case 'distanceTime':
-        this.startClock(currentExercise.clock.id);
-        break;
-      default:
-        break;
+    if (type === 'weightRep') {
+      if (clock.rest) {
+        this.startClock(clock.id);
+      }
+    } else if (type === 'weightTime' || type === 'distanceTime') {
+      this.startClock(clock.id);
     }
   }
 
@@ -331,21 +291,13 @@ export class TrainingPage implements OnInit {
       const currentExercise = this.exerciseClocks[this.currentIndex];
       this.pauseClock(currentExercise.clock.id);
 
-      const nextExercise = this.exerciseClocks[nextIndex];
+      const { type, clock } = this.exerciseClocks[nextIndex];
 
       // Decide on what to do according to rep type
-      switch (nextExercise.type) {
-        case 'weightRep':
-          this.updateClockRest(nextExercise.clock, false);
-          break;
-        case 'weightTime':
-          this.startClock(nextExercise.clock.id);
-          break;
-        case 'distanceTime':
-          this.startClock(nextExercise.clock.id);
-          break;
-        default:
-          break;
+      if (type === 'weightRep') {
+        this.updateClockRest(clock, false);
+      } else if (type === 'weightTime' || type === 'distanceTime') {
+        this.startClock(clock.id);
       }
     }
 
@@ -537,13 +489,15 @@ export class TrainingPage implements OnInit {
     const detail = getSetDetail(exercise.exercise);
     const set = exercise.sets[exercise.currentSet];
     const clockTime = this.convertTimeToSec(set?.rep, detail?.repUnit);
-    switch (exercise.type) {
-      case 'weightRep':
-        this.stopClock(exercise.clock.id);
-        this.updateClockRest(exercise.clock, false);
-        this.slideNextIfFinished(exercise);
-        break;
-      case 'weightTime':
+
+    if (exercise.type === 'weightRep') {
+
+      this.stopClock(exercise.clock.id);
+      this.updateClockRest(exercise.clock, false);
+      this.slideNextIfFinished(exercise);
+
+    } else if (exercise.type === 'weightTime' || exercise.type === 'distanceTime') {
+
         // Try to slide next exercise
         const slided = this.slideNextIfFinished(exercise);
         // If slide happened, go back to first set
@@ -554,19 +508,29 @@ export class TrainingPage implements OnInit {
         this.updateClockRest(exercise.clock, false);
         // Update clock to set time
         this.updateClockMax(exercise.clock.id, clockTime);
-        break;
-      case 'distanceTime':
-        this.stopClock(exercise.clock.id);
-        // Switch to set
-        this.updateClockRest(exercise.clock, false);
-        // Update clock to set time
-        this.updateClockMax(exercise.clock.id, clockTime);
-        // Slide next exercise
-        this.slides.slideNext();
-        break;
-      default:
-        break;
+
     }
+
+    // switch (exercise.type) {
+    //   case 'weightRep':
+
+    //     break;
+    //   case 'weightTime':
+
+    //     break;
+    //   case 'distanceTime':
+    //     this.stopClock(exercise.clock.id);
+    //     // Switch to set
+    //     this.updateClockRest(exercise.clock, false);
+    //     // Update clock to set time
+    //     this.updateClockMax(exercise.clock.id, clockTime);
+    //     // Slide next exercise
+    //     this.slides.slideNext();
+    //     break;
+    //   default:
+    //     break;
+    // }
+
   }
 
   onClockFinish(clockFinish: boolean, exercise: ExerciseClock) {
