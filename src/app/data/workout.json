@@ -186,6 +186,22 @@
     "equipments": ["Body Weight"],
     "exercises": [
       {
+        "id": 17,
+        "name": "Side Plank",
+        "imageUrl": "https://images.pexels.com/photos/2294363/pexels-photo-2294363.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        "category": "Abs",
+        "equipment": "Core",
+        "handType": "single-hand",
+        "set": {
+          "type": "weightTime",
+          "sets": [
+            { "rep": 30, "load": 0 },
+            { "rep": 30, "load": 0 },
+            { "rep": 30, "load": 0 }
+          ]
+        }
+      },
+      {
         "id": 10,
         "name": "Pull Up",
         "imageUrl": "assets/img/exercise/pull-up.jpg",
@@ -214,6 +230,22 @@
             { "rep": 10, "load": 12 },
             { "rep": 10, "load": 12 },
             { "rep": 10, "load": 12 }
+          ]
+        }
+      },
+      {
+        "id": 15,
+        "name": "Low Plank",
+        "imageUrl": "assets/img/exercise/plank.jpg",
+        "category": "Abs",
+        "equipment": "Core",
+        "handType": "single-hand",
+        "set": {
+          "type": "weightTime",
+          "sets": [
+            { "rep": 45, "load": 0 },
+            { "rep": 45, "load": 0 },
+            { "rep": 45, "load": 0 }
           ]
         }
       }
