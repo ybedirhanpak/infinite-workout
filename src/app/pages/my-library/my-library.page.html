@@ -15,24 +15,40 @@
       <div style="margin: 12px;" *ngIf="lastTraining">
         <h3 class="ion-text-center">Last Workout</h3>
         <app-highlight-card [imageUrl]="lastTraining.workout.imageUrl" [title]="lastTraining.workout.name"
-          [subtitle]="lastTraining.workout.category" [textList]="[lastWorkout.duration]"
-          filter="purple-blue" (click)="onWorkoutClick(lastTraining.workout)">
+          [subtitle]="lastTraining.workout.category" [textList]="[lastWorkout.duration]" filter="purple-blue"
+          (click)="onWorkoutClick(lastTraining.workout)">
         </app-highlight-card>
       </div>
     </section>
     <section>
-      <h3 class="ion-text-center">Favorites</h3>
-      <div *ngIf="favorites && favorites.length > 0">
-        <app-workout-slide [workouts]="favorites" (onClick)="onWorkoutClick($event)"></app-workout-slide>
+      <h3 class="ion-text-center">Favorite Workouts</h3>
+      <div *ngIf="favoriteWorkouts && favoriteWorkouts.length > 0">
+        <app-workout-slide [workouts]="favoriteWorkouts" (onClick)="onWorkoutClick($event)"></app-workout-slide>
       </div>
-      <div *ngIf="!(favorites && favorites.length > 0)" class="ion-text-center ion-padding-horizontal">
-        <p>Your favorite workouts will be here. Explore some workouts and add them into your favorites.</p>
-        <ion-button routerLink="/home/explore">Explore</ion-button>
+      <div *ngIf="!(favoriteWorkouts && favoriteWorkouts.length > 0)" class="ion-text-center ion-padding-horizontal">
+        <p>Your favorite workouts will be here. Explore some workouts and add them into your favoriteWorkouts.</p>
+        <ion-button routerLink="/home/explore/workouts">Explore</ion-button>
       </div>
     </section>
-    <section *ngIf="myWorkouts && myWorkouts.length > 0">
+    <section>
       <h3 class="ion-text-center">My Workouts</h3>
-      <app-workout-slide [workouts]="myWorkouts" (onClick)="onMyWorkoutClick($event)"></app-workout-slide>
+      <div *ngIf="createdWorkouts && createdWorkouts.length > 0">
+        <app-workout-slide [workouts]="createdWorkouts" (onClick)="onMyWorkoutClick($event)"></app-workout-slide>
+      </div>
+      <div *ngIf="!(createdWorkouts && createdWorkouts.length > 0)" class="ion-text-center ion-padding-horizontal">
+        <p>Workouts that you create will be here. You can create a workout now.</p>
+        <ion-button routerLink="/home/my-library/create-workout">Create</ion-button>
+      </div>
+    </section>
+    <section>
+      <h3 class="ion-text-center">Customized Workouts</h3>
+      <div *ngIf="customizedWorkouts && customizedWorkouts.length > 0">
+        <app-workout-slide [workouts]="customizedWorkouts" (onClick)="onWorkoutClick($event)"></app-workout-slide>
+      </div>
+      <div *ngIf="!(customizedWorkouts && customizedWorkouts.length > 0)" class="ion-text-center ion-padding-horizontal">
+        <p>Your customized workouts will be here. Enter a detail of a workout and click into <ion-icon name="create-outline"></ion-icon> button</p>
+        <ion-button routerLink="/home/explore/workouts">Explore</ion-button>
+      </div>
     </section>
   </app-page-layout>
 </ion-content>

@@ -15,8 +15,10 @@ import { WorkoutService } from '@services/workout.service';
   styleUrls: ['./my-library.page.scss'],
 })
 export class MyLibraryPage implements OnInit {
-  favorites: Workout[] = [];
-  myWorkouts: Workout[] = [];
+  favoriteWorkouts: Workout[] = [];
+  createdWorkouts: Workout[] = [];
+  customizedWorkouts: Workout[] = [];
+
   lastTraining: TrainingRecord;
   lastWorkout: Workout;
 
@@ -28,11 +30,11 @@ export class MyLibraryPage implements OnInit {
 
   ngOnInit() {
     this.workoutService.favoriteWorkouts.elements.subscribe((favorites) => {
-      this.favorites = favorites;
+      this.favoriteWorkouts = favorites;
     });
 
     this.workoutService.createdWorkouts.elements.subscribe((workouts) => {
-      this.myWorkouts = workouts;
+      this.createdWorkouts = workouts;
     });
 
     this.trainingService.trainingRecordList.subscribe((trainingRecordList) => {
@@ -46,6 +48,7 @@ export class MyLibraryPage implements OnInit {
   ionViewWillEnter() {
     this.workoutService.favoriteWorkouts.fetchFromStorage();
     this.workoutService.createdWorkouts.fetchFromStorage();
+    this.workoutService.customizedWorkouts.fetchFromStorage();
     this.trainingService.fetchTrainingRecordList();
   }
 
