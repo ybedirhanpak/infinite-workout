@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title>Workout Detail</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="onEditClick()" *ngIf="created">
+      <ion-button (click)="onEditClick()">
         <ion-icon [name]="'create-outline'"></ion-icon>
       </ion-button>
       <ion-button (click)="onFavoriteClick()" color="danger">
@@ -35,7 +35,7 @@
       </ion-list>
       <h2 class="ion-padding-horizontal" style="font-weight: bold;">Overview</h2>
       <ion-list *ngIf="workout.exercises && workout.exercises.length > 0">
-        <app-exercise-list-item *ngFor="let exercise of workout.exercises" [exercise]="exercise" [editable]="favorited" (onEditClick)="onEditExerciseClick($event)">
+        <app-exercise-list-item *ngFor="let exercise of workout.exercises" [exercise]="exercise">
         </app-exercise-list-item>
       </ion-list>
     </div>

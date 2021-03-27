@@ -88,10 +88,4 @@ export class WorkoutDetailPage implements OnInit {
       `/home/my-library/edit-workout/${this.workout.id}`
     );
   }
-
-  onEditExerciseClick(exercise: Exercise) {
-    this.exerciseService.setExerciseDetail(exercise);
-    const navigateUrl = `${this.router.url}/exercise-edit`;
-    this.router.navigateByUrl(navigateUrl);
-  }
 }
