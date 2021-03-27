@@ -45,12 +45,13 @@ export class ExerciseEditPage implements OnInit {
       this.sets.length > 0 ? this.sets[this.sets.length - 1] : undefined;
 
     if (lastSet) {
-      this.sets.push(lastSet);
+      this.sets.push({
+        ...lastSet,
+      });
     } else {
       const defaultSet = getDefaultSet(this.exercise);
       this.sets.push({
-        load: defaultSet[this.setDetail.load],
-        rep: defaultSet[this.setDetail.rep],
+        ...defaultSet,
       });
     }
   }
@@ -63,10 +64,10 @@ export class ExerciseEditPage implements OnInit {
     const editWorkout = this.router.url.includes('edit-workout');
     this.exercise.set.sets = this.sets;
     this.exerciseService.editedExercise.set(this.exercise);
-    if(editWorkout) {
-      this.navCtrl.navigateBack("/workout-detail/edit-workout");
+    if (editWorkout) {
+      this.navCtrl.navigateBack('/workout-detail/edit-workout');
     } else {
-      this.navCtrl.navigateBack("/create-workout");
+      this.navCtrl.navigateBack('/create-workout');
     }
   }
 
