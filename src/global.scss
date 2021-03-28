@@ -194,6 +194,8 @@ img.cover {
 // Image filters
 
 .filter {
+  overflow: hidden;
+
   // This is used for training history
   &.purple-blue {
     background-color: #564058;
@@ -225,11 +227,13 @@ img.cover {
   }
 
   &.dark {
-    background-image: linear-gradient(186deg, #ffe49ab0 20%, #000a08 90%);
+    background-image: linear-gradient(186deg, #fff7e0b0 20%, #000a08 90%);
 
     img {
       mix-blend-mode: multiply;
     }
+
+    color: white;
   }
 
   &.light {
@@ -238,6 +242,8 @@ img.cover {
     img {
       mix-blend-mode: soft-light;
     }
+
+    color: black;
   }
 }
 
@@ -284,4 +290,18 @@ ion-list.list-md {
     --background: var(--ion-background-color, #fff);
     --border-color: var(--ion-color-step-200, rgba(0, 0, 0, 0.13));
   }
+}
+
+ion-list.transparent {
+  background: transparent;
+
+  ion-item {
+    --background: transparent;
+  }
+}
+
+.bottom-left {
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
