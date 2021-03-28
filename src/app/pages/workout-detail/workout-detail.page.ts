@@ -1,5 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
+import { Animation, AnimationController } from '@ionic/angular';
 
 // Model
 import { Workout } from '@models/workout.model';
@@ -24,7 +32,14 @@ export class WorkoutDetailPage implements OnInit {
   customized = false;
   original: Workout;
 
-  constructor(private router: Router, private workoutService: WorkoutService) {}
+  loadAnim: Animation;
+  @ViewChild('detail', { static: false }) detailEl: ElementRef;
+
+  constructor(
+    private router: Router,
+    private workoutService: WorkoutService,
+    private animationCtrl: AnimationController
+  ) {}
 
   ngOnInit() {
     this.explore = this.router.url.includes('explore');
@@ -32,25 +47,25 @@ export class WorkoutDetailPage implements OnInit {
 
   ionViewWillEnter() {
     this.workoutService.workoutDetail.get().subscribe(async (workout) => {
-      this.favorited = await this.workoutService.favoriteWorkouts.contains(
-        workout
-      );
+      this.workoutService.favoriteWorkouts.contains(workout).then((value) => {
+        this.favorited = value;
+      });
 
-      this.created = await this.workoutService.createdWorkouts.contains(
-        workout
-      );
+      this.workoutService.createdWorkouts.contains(workout).then((value) => {
+        this.created = value;
+      });
 
-      const customized = (await this.workoutService.customizedWorkouts.find(
-        workout
-      )) as Workout;
-
-      if (customized) {
-        this.original = workout;
-        this.workout = customized;
-        this.customized = true;
-      } else {
-        this.workout = workout;
-      }
+      this.workoutService.customizedWorkouts
+        .find(workout)
+        .then((customized: Workout) => {
+          if (customized) {
+            this.original = workout;
+            this.workout = customized;
+            this.customized = true;
+          } else {
+            this.workout = workout;
+          }
+        });
     });
   }
 

@@ -9,18 +9,23 @@ import { ExerciseService } from '@services/exercise.service';
   styleUrls: ['./exercise-detail.page.scss'],
 })
 export class ExerciseDetailPage {
-
   exercise: Exercise;
   selectable = false;
 
-  constructor(private exerciseService: ExerciseService, private router: Router) { }
+  constructor(
+    private exerciseService: ExerciseService,
+    private router: Router
+  ) {}
 
   ionViewWillEnter() {
-    this.exerciseService.exerciseDetail.get().subscribe(async (exercise) => {
-      this.exercise = exercise;      
+    this.exerciseService.exerciseDetail.get().subscribe((exercise) => {
+      this.exercise = exercise;
     });
 
-    if(this.router.url.includes("create-workout") || this.router.url.includes("edit-workout")) {
+    if (
+      this.router.url.includes('create-workout') ||
+      this.router.url.includes('edit-workout')
+    ) {
       this.selectable = true;
     }
   }

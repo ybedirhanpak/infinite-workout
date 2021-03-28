@@ -8,17 +8,21 @@
   .header {
     display: flex;
     justify-content: space-between;
-
-    h1, h2 {
-      font-weight: bold;
-
-      margin: 16px 0;
-    }
   }
 
   .control-buttons {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+  }
+
+  h1, h2, h3 {
+    margin: 16px 0;
+    width: 100%;
+    font-weight: bold;
+
+    ion-skeleton-text {
+      height: 100%;
+    }
   }
 }

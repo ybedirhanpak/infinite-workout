@@ -19,6 +19,7 @@ import { ExerciseSlideComponent } from './components/exercise-slide/exercise-sli
 // Directives
 import { SelectAllDirective } from './directives/select-all.directive';
 import { ExerciseListItemComponent } from './components/exercise-list-item/exercise-list-item.component';
+import { DetailSkeletonComponent } from './components/detail-skeleton/detail-skeleton.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ExerciseListItemComponent } from './components/exercise-list-item/exerc
     HighlightWorkoutSlideComponent,
     ExerciseSlideComponent,
     SelectAllDirective,
-    ExerciseListItemComponent
+    ExerciseListItemComponent,
+    DetailSkeletonComponent
   ],
   imports: [
     CommonModule,
@@ -70,7 +72,8 @@ import { ExerciseListItemComponent } from './components/exercise-list-item/exerc
     HighlightWorkoutSlideComponent,
     ExerciseSlideComponent,
     SelectAllDirective,
-    ExerciseListItemComponent
+    ExerciseListItemComponent,
+    DetailSkeletonComponent
   ],
 })
 export class SharedModule {}
