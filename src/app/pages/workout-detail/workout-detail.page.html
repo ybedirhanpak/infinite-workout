@@ -17,10 +17,7 @@
 
 <ion-content>
   <app-page-layout>
-    <div class="workout-detail" *ngIf="!workout">
-      <app-detail-skeleton></app-detail-skeleton>
-    </div>
-    <div #detail>
+    <div>
       <div class="workout-detail" *ngIf="workout">
         <div class="details filter dark">
           <img class="cover" [src]="workout.imageUrl" [alt]="workout.name">
@@ -50,6 +47,17 @@
           <app-exercise-list-item *ngFor="let exercise of workout.exercises" [exercise]="exercise">
           </app-exercise-list-item>
         </ion-list>
+      </div>
+      <div class="workout-detail" *ngIf="!workout">
+        <div class="details">
+          <ion-thumbnail slot="start" class="cover">
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-thumbnail>
+        </div>
+        <h2 style="height: 16px; margin: 16px 16px 0;">
+          <ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text>
+        </h2>
+        <app-exercise-list-skeleton></app-exercise-list-skeleton>
       </div>
     </div>
   </app-page-layout>

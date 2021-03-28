@@ -2,6 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { NgCircleProgressModule } from 'ng-circle-progress';
+
+// Directives
+import { SelectAllDirective } from './directives/select-all.directive';
 
 // Components
 import { DarkModeToggleComponent } from './components/dark-mode-toggle/dark-mode-toggle.component';
@@ -11,15 +15,11 @@ import { RegularCardComponent } from './components/regular-card/regular-card.com
 import { WorkoutSlideComponent } from './components/workout-slide/workout-slide.component';
 import { ClickableComponent } from './components/clickable/clickable.component';
 import { ClockCircleComponent } from './components/clock-circle/clock-circle.component';
-import { NgCircleProgressModule } from 'ng-circle-progress';
 import { HighlightCardComponent } from './components/highlight-card/highlight-card.component';
 import { HighlightWorkoutSlideComponent } from './components/highlight-workout-slide/highlight-workout-slide.component';
 import { ExerciseSlideComponent } from './components/exercise-slide/exercise-slide.component';
-
-// Directives
-import { SelectAllDirective } from './directives/select-all.directive';
 import { ExerciseListItemComponent } from './components/exercise-list-item/exercise-list-item.component';
-import { DetailSkeletonComponent } from './components/detail-skeleton/detail-skeleton.component';
+import { ExerciseListSkeletonComponent } from './components/exercise-list-skeleton/exercise-list-skeleton.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,7 @@ import { DetailSkeletonComponent } from './components/detail-skeleton/detail-ske
     ExerciseSlideComponent,
     SelectAllDirective,
     ExerciseListItemComponent,
-    DetailSkeletonComponent
+    ExerciseListSkeletonComponent,
   ],
   imports: [
     CommonModule,
@@ -73,7 +73,7 @@ import { DetailSkeletonComponent } from './components/detail-skeleton/detail-ske
     ExerciseSlideComponent,
     SelectAllDirective,
     ExerciseListItemComponent,
-    DetailSkeletonComponent
+    ExerciseListSkeletonComponent,
   ],
 })
 export class SharedModule {}

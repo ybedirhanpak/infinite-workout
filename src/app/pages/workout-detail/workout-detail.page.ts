@@ -32,13 +32,9 @@ export class WorkoutDetailPage implements OnInit {
   customized = false;
   original: Workout;
 
-  loadAnim: Animation;
-  @ViewChild('detail', { static: false }) detailEl: ElementRef;
-
   constructor(
     private router: Router,
     private workoutService: WorkoutService,
-    private animationCtrl: AnimationController
   ) {}
 
   ngOnInit() {
