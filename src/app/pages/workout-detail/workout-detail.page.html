@@ -22,24 +22,22 @@
     </div>
     <div #detail>
       <div class="workout-detail" *ngIf="workout">
-        <div class="img-wrapper">
+        <div class="details filter dark">
           <img class="cover" [src]="workout.imageUrl" [alt]="workout.name">
+          <div class="bottom-left">
+            <h1 class="details-header">{{ workout.name }}</h1>
+            <p class="details-item">
+              <ion-icon name="time-outline"></ion-icon>{{ workout.duration }}
+            </p>
+            <p class="details-item">
+              <ion-icon name="trophy-outline"></ion-icon>{{ workout.category }}
+            </p>
+            <p class="details-item">
+              <ion-icon name="barbell-outline"></ion-icon>{{ workout.equipments }}
+            </p>
+          </div>
         </div>
-        <div class="header">
-          <h1 class="ion-padding-horizontal" style="font-weight: bold;">{{ workout.name }}</h1>
-        </div>
-        <ion-list lines="none">
-          <ion-item>
-            <ion-icon name="time-outline" slot="start"></ion-icon>{{ workout.duration }}
-          </ion-item>
-          <ion-item>
-            <ion-icon name="trophy-outline" slot="start"></ion-icon>{{ workout.category }}
-          </ion-item>
-          <ion-item>
-            <ion-icon name="barbell-outline" slot="start"></ion-icon>{{ workout.equipments }}
-          </ion-item>
-        </ion-list>
-        <div class="header">
+        <div style="display: flex; justify-content: space-between;">
           <h2 class="ion-padding-horizontal" style="font-weight: bold;">Exercises</h2>
           <div class="control-buttons">
             <ion-chip color="primary" *ngIf="customized">
