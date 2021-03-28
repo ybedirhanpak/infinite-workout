@@ -1,3 +1,3 @@
-<div class="clickable" [class.clicked]="clicked" (touchstart)="click(true)" (touchend)="click(false)">
+<div class="clickable" [class.clicked]="clicked" (touchstart)="click()" (touchend)="cancel()" (touchmove)="cancel()">
   <ng-content></ng-content>
 </div>

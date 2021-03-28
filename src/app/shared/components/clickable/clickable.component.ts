@@ -8,7 +8,13 @@ import { Component } from '@angular/core';
 export class ClickableComponent {
   clicked = false;
 
-  click(clicked: boolean) {
-    this.clicked = clicked;
+  click() {
+    setTimeout(() => {
+        this.clicked = true;
+    }, 100);
+  }
+
+  cancel() {
+    this.clicked = false;
   }
 }
