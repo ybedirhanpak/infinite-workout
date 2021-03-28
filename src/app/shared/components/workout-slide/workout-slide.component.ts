@@ -20,7 +20,7 @@ import { WorkoutService } from '@services/workout.service';
   templateUrl: './workout-slide.component.html',
   styleUrls: ['./workout-slide.component.scss'],
 })
-export class WorkoutSlideComponent implements OnChanges {
+export class WorkoutSlideComponent {
   @Input() workouts: Workout[] = [];
   @Input() filter: string = 'none';
 
@@ -29,24 +29,9 @@ export class WorkoutSlideComponent implements OnChanges {
   slideOptions = {
     initialSlide: 0,
     speed: 500,
-    slidesPerView: 2,
+    slidesPerView: 2.1,
     spaceBetween: 12,
   };
-
-  ngOnChanges(changes: SimpleChanges) {
-    const workouts = changes['workouts'];
-    if (workouts) {
-      this.updateSlideOptions(workouts.currentValue);
-    }
-  }
-
-  updateSlideOptions(workouts: Workout[]) {
-    if (workouts.length > 2) {
-      this.slideOptions.slidesPerView = 2.1;
-    } else {
-      this.slideOptions.slidesPerView = 2;
-    }
-  }
 
   onWorkoutClick(workout: Workout) {
     this.onClick.emit(workout);

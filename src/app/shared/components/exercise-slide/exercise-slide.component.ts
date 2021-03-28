@@ -8,7 +8,7 @@ import { Exercise } from '@models/exercise.model';
   templateUrl: './exercise-slide.component.html',
   styleUrls: ['./exercise-slide.component.scss'],
 })
-export class ExerciseSlideComponent implements OnInit {
+export class ExerciseSlideComponent {
   @Input() category: string = 'Category';
   @Input() exercises: Exercise[] = [];
   @Input() filter: string = 'none';
@@ -18,22 +18,10 @@ export class ExerciseSlideComponent implements OnInit {
   slideOptions = {
     initialSlide: 0,
     speed: 500,
-    slidesPerView: 2.2,
+    slidesPerView: 2.1,
     spaceBetween: 12,
     centerSlide: false,
   };
-
-  ngOnInit() {
-    this.updateSlideOptions();
-  }
-
-  updateSlideOptions() {
-    if (this.exercises.length > 2) {
-      this.slideOptions.slidesPerView = 2.1;
-    } else {
-      this.slideOptions.slidesPerView = 2;
-    }
-  }
 
   onExerciseClick(exercise: Exercise) {
     this.onClick.emit(exercise);
