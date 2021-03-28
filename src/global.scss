@@ -264,7 +264,19 @@ ion-chip {
 section {
   margin-bottom: 16px;
 
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     margin-bottom: 16px;
+  }
+}
+
+ion-list.list-md {
+  background: var(--ion-background-color, #fff);
+
+  ion-item {
+    --background: var(--ion-background-color, #fff);
+    --border-color: var(--ion-color-step-200, rgba(0, 0, 0, 0.13));
   }
 }
