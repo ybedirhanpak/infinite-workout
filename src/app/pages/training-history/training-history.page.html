@@ -13,9 +13,9 @@
     </div>
     <div style="padding-bottom: 16px;">
       <ion-virtual-scroll [items]="trainingRecordList" [trackBy]="recordIdentifier" approxItemHeight="224px">
-        <ion-card *virtualItem="let trainingRecord" class="training-history-card" mode="ios">
-          <div class="history-img-wrapper">
-            <img [src]="trainingRecord.workout.imageUrl">
+        <div *virtualItem="let trainingRecord" class="training-history-card" mode="ios">
+          <div class="img-wrapper filter dark">
+            <img class="cover" [src]="trainingRecord.workout.imageUrl">
           </div>
           <div class="bottom-left">
             <span class="title">
@@ -34,7 +34,7 @@
               <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
             </ion-button>
           </div>
-        </ion-card>
+        </div>
       </ion-virtual-scroll>
     </div>
   </app-page-layout>

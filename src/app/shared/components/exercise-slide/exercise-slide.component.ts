@@ -11,7 +11,7 @@ import { Exercise } from '@models/exercise.model';
 export class ExerciseSlideComponent implements OnInit {
   @Input() category: string = 'Category';
   @Input() exercises: Exercise[] = [];
-  @Input() filter: string = 'red-turquoise';
+  @Input() filter: string = 'none';
 
   @Output() onClick = new EventEmitter<Exercise>();
 
@@ -20,16 +20,18 @@ export class ExerciseSlideComponent implements OnInit {
     speed: 500,
     slidesPerView: 2.2,
     spaceBetween: 12,
-    centerSlide: false
+    centerSlide: false,
   };
 
   ngOnInit() {
-    if (this.exercises.length > 1) {
-      this.slideOptions.slidesPerView = 2.2;
-      this.slideOptions.centerSlide = false;
+    this.updateSlideOptions();
+  }
+
+  updateSlideOptions() {
+    if (this.exercises.length > 2) {
+      this.slideOptions.slidesPerView = 2.1;
     } else {
-      this.slideOptions.slidesPerView = 1.2;
-      this.slideOptions.centerSlide = true;
+      this.slideOptions.slidesPerView = 2;
     }
   }
 

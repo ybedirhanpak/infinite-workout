@@ -21,48 +21,4 @@
     justify-content: flex-end;
     align-items: center;
   }
-
-  .exercise {
-    margin-bottom: 16px;
-
-    ion-avatar {
-      margin-top: auto;
-      width: 56px;
-      height: 56px;
-
-      img {
-        border-radius: 8px;
-      }
-    }
-
-    &-details {
-      display: flex;
-      text-align: start;
-      justify-content: space-between;
-
-      p {
-        flex: 1;
-        color: var(--ion-color-step-600, #666666);
-      }
-
-      .rep-item {
-        flex: 1;
-      }
-
-      .uniform-rep {
-        width: 100%;
-
-        p {
-          width: 100%;
-        }
-      }
-
-      .rep-item p,
-      .uniform-rep p {
-        padding: 8px 0;
-        margin: 0;
-        border-bottom: 1px solid var(--border-color, rgba(0, 0, 0, 0.13));
-      }
-    }
-  }
 }

@@ -5,19 +5,12 @@
 .training-history-card {
     color: white;
     margin: 12px;
+    overflow: hidden;
+    border-radius: 6px;
 
-    .history-img-wrapper {
-        background-color: #564058;
-        background-image: linear-gradient(315deg, #564058 0%, #081f30 74%);
+    .img-wrapper {
         height: 200px;
-
-        img {
-            mix-blend-mode: soft-light;
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-            object-position: center;
-        }
+        overflow: hidden;
     }
 
     .bottom-left {
