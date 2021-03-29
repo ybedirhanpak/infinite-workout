@@ -310,6 +310,12 @@ ion-list.transparent {
   left: 0;
 }
 
+.top-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 ion-button.ios {
   --border-radius: 4px;
 }
