@@ -6,6 +6,7 @@ import { Exercise, ExerciseCategory } from '@models/exercise.model';
 
 // Service
 import { ExerciseService } from '@services/exercise.service';
+import { groupBy } from '@utils/object.util';
 
 // Data
 import EXERCISES from '../../data/exercise.json';
@@ -23,18 +24,7 @@ export class ExercisesPage {
     private exerciseService: ExerciseService,
     private router: Router
   ) {
-    const grouped = {};
-    this.exercises.map((exercise) => {
-      if (grouped[exercise.category]) {
-        grouped[exercise.category].exercises.push(exercise);
-      } else {
-        grouped[exercise.category] = {
-          category: exercise.category,
-          exercises: [exercise],
-        };
-      }
-    });
-    this.exerciseCategories = Object.values(grouped);
+    this.exerciseCategories = groupBy(this.exercises, 'exercises', 'category') as any;
   }
 
   onExerciseClick(exercise: Exercise) {
