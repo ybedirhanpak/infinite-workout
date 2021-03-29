@@ -7,10 +7,14 @@ import { Component } from '@angular/core';
 })
 export class ClickableComponent {
   clicked = false;
+  cancelled = false;
 
   click() {
+    this.cancelled = false;
     setTimeout(() => {
-      this.clicked = true;
+      if (!this.cancelled) {
+        this.clicked = true;
+      }
     }, 100);
 
     setTimeout(() => {
@@ -20,5 +24,6 @@ export class ClickableComponent {
 
   cancel() {
     this.clicked = false;
+    this.cancelled = true;
   }
 }
