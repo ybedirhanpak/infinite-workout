@@ -10,8 +10,12 @@ export class ClickableComponent {
 
   click() {
     setTimeout(() => {
-        this.clicked = true;
+      this.clicked = true;
     }, 100);
+
+    setTimeout(() => {
+      this.clicked = false;
+    }, 1000);
   }
 
   cancel() {

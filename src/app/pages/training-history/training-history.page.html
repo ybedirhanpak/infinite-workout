@@ -9,7 +9,7 @@
     <div *ngIf="!isLoading && !(trainingRecordList && trainingRecordList.length > 0)"
       class="ion-text-center ion-padding-horizontal">
       <p>Your training history will be here. Explore some workouts and do your first training.</p>
-      <ion-button routerLink="/home/explore/">Explore</ion-button>
+      <ion-button class="main" routerLink="/workouts/">Explore</ion-button>
     </div>
     <div style="padding-bottom: 16px;">
       <ion-virtual-scroll [items]="trainingRecordList" [trackBy]="recordIdentifier" approxItemHeight="224px">

@@ -19,10 +19,12 @@
         <img class="cover" [src]="getWorkoutImageUI()" [alt]="">
       </div>
       <form [formGroup]="formGroup">
-        <h1 class="ion-padding-horizontal" style="font-weight: bold;">
-          <ion-input formControlName="name" class="ion-no-padding" type="text" placeholder="Name"></ion-input>
-        </h1>
-        <ion-list lines="none">
+        <ion-list>
+          <ion-item>
+            <h1 style="font-weight: bold;">
+              <ion-input formControlName="name" class="ion-no-padding" type="text" placeholder="Name"></ion-input>
+            </h1>
+          </ion-item>
           <ion-item>
             <ion-icon name="time-outline" slot="start"></ion-icon>
             <ion-input formControlName="duration" type="text" placeholder="Estimated Duration"></ion-input>
@@ -58,7 +60,7 @@
 <ion-footer>
   <ion-toolbar>
     <ion-button class="footer-button" expand="block" (click)="onSaveClick()">
-      <ion-text>Save Workout</ion-text>
+      <ion-text>Save</ion-text>
     </ion-button>
   </ion-toolbar>
 </ion-footer>

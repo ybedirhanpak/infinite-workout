@@ -32,10 +32,7 @@ export class WorkoutDetailPage implements OnInit {
   customized = false;
   original: Workout;
 
-  constructor(
-    private router: Router,
-    private workoutService: WorkoutService,
-  ) {}
+  constructor(private router: Router, private workoutService: WorkoutService) {}
 
   ngOnInit() {
     this.explore = this.router.url.includes('explore');
@@ -85,5 +82,9 @@ export class WorkoutDetailPage implements OnInit {
     this.workoutService.workoutEdit.set(this.workout);
     const navigateUrl = `${this.router.url}/edit-workout`;
     this.router.navigateByUrl(navigateUrl);
+  }
+
+  getCustomizeTextUI() {
+    return (this.customized || this.created) ? 'Edit' : 'Customize';
   }
 }

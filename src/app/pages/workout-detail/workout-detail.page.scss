@@ -7,19 +7,19 @@
 
     &-header {
       font-size: 32px;
-      margin: 12px 16px;
+      margin: 16px;
       font-weight: normal;
     }
 
     &-item {
       display: flex;
       align-items: center;
-      margin: 12px 16px;
+      margin: 16px;
       padding: 0;
       font-size: 18px;
 
       ion-icon {
-        margin-right: 8px;
+        margin-right: 16px;
       }
     }
   }

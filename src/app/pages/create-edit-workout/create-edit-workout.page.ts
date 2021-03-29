@@ -112,15 +112,16 @@ export class CreateEditWorkoutPage implements OnInit {
     };
 
     if (this.mode === 'create') {
-      this.workoutService.createdWorkouts.create(workoutToSave);
+      await this.workoutService.createdWorkouts.create(workoutToSave);
       this.navCtrl.navigateBack('/home/my-library');
     } else if (this.mode === 'edit') {
       if (this.created) {
-        this.workoutService.createdWorkouts.update(workoutToSave);
+        await this.workoutService.createdWorkouts.update(workoutToSave);
       } else if (this.customized) {
-        this.workoutService.customizedWorkouts.update(workoutToSave);
+        await this.workoutService.customizedWorkouts.update(workoutToSave);
       } else {
-        this.workoutService.customizedWorkouts.create(workoutToSave);
+        workoutToSave['id'] = Date.now();
+        await this.workoutService.customizedWorkouts.create(workoutToSave);
       }
       this.workoutService.workoutDetail.set(workoutToSave);
       this.navCtrl.navigateBack('/workout-detail');

@@ -4,6 +4,9 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Edit Exercise</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onSaveClick()" color="primary">Save</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -57,11 +60,3 @@
     </div>
   </app-page-layout>
 </ion-content>
-
-<ion-footer>
-  <ion-toolbar>
-    <ion-button class="footer-button" expand="block" (click)="onSaveClick()">
-      <ion-text>Save</ion-text>
-    </ion-button>
-  </ion-toolbar>
-</ion-footer>

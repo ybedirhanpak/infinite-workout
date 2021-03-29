@@ -260,15 +260,19 @@ ion-chip {
 }
 
 .footer-button {
+  margin-left: 24px;
+  margin-right: 24px;
+
   ion-icon {
     color: white;
   }
+
+  --background: linear-gradient(90deg, var(--ion-color-primary), var(--ion-color-tertiary));
 
   ion-text {
     text-transform: uppercase;
     color: white;
     font-size: 1rem;
-    font-weight: bold;
   }
 }
 
@@ -304,4 +308,14 @@ ion-list.transparent {
   position: absolute;
   bottom: 0;
   left: 0;
+}
+
+ion-button.ios {
+  --border-radius: 4px;
+}
+
+ion-button.main {
+  --background: linear-gradient(90deg, var(--ion-color-primary), var(--ion-color-tertiary));
+  text-transform: uppercase;
+  color: white;
 }
