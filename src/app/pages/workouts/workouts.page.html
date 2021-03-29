@@ -15,23 +15,11 @@
       </h3>
       <app-highlight-workout-slide [workouts]="workoutList" (onClick)="onWorkoutClick($event)"></app-highlight-workout-slide>
     </section>
-    <section>
+    <section *ngFor="let category of workoutCategories">
       <h3 class="ion-text-center">
-        Gym & Fitness
+        {{ category.category }}
       </h3>
-      <app-workout-slide [workouts]="workoutList" (onClick)="onWorkoutClick($event)"></app-workout-slide>
-    </section>
-    <section>
-      <h3 class="ion-text-center">
-        Calisthenics
-      </h3>
-      <app-workout-slide [workouts]="workoutList" (onClick)="onWorkoutClick($event)"></app-workout-slide>
-    </section>
-    <section>
-      <h3 class="ion-text-center">
-        Beginner Workouts
-      </h3>
-      <app-workout-slide [workouts]="workoutList" (onClick)="onWorkoutClick($event)"></app-workout-slide>
+      <app-workout-slide [workouts]="category.workouts" (onClick)="onWorkoutClick($event)"></app-workout-slide>
     </section>
   </app-page-layout>
 </ion-content>

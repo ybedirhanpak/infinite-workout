@@ -2,13 +2,11 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 // Model
-import { Workout } from '@models/workout.model';
+import { Workout, WorkoutCategory } from '@models/workout.model';
 
 // Service
 import { WorkoutService } from '@services/workout.service';
-
-// Data
-import WORKOUT_LIST from '../../data/workout.json';
+import { groupBy } from '@utils/object.util';
 
 @Component({
   selector: 'app-workouts',
@@ -16,7 +14,8 @@ import WORKOUT_LIST from '../../data/workout.json';
   styleUrls: ['./workouts.page.scss'],
 })
 export class WorkoutsPage {
-  workoutList: Workout[] = WORKOUT_LIST as any;
+  workoutList: Workout[];
+  workoutCategories: WorkoutCategory[];
 
   constructor(private workoutService: WorkoutService, private router: Router) {}
 
@@ -26,10 +25,18 @@ export class WorkoutsPage {
   }
 
   ionViewWillEnter() {
-    this.workoutService.workouts
-      .loadLocalStates([...WORKOUT_LIST] as any)
-      .then((workouts: Workout[]) => {
-        this.workoutList = workouts;
-      });
+    this.workoutService.fetchWorkouts().then((workouts) => {
+      console.log('Workouts', workouts);
+      this.workoutService.workouts
+        .loadLocalStates(workouts as any)
+        .then((workouts: Workout[]) => {
+          this.workoutList = workouts;
+          this.workoutCategories = groupBy(
+            workouts,
+            'workouts',
+            'category'
+          ) as any;
+        });
+    });
   }
 }

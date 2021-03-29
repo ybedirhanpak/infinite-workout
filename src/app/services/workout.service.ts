@@ -8,9 +8,12 @@ import { Workout } from '@models/workout.model';
 // Utils
 import { LocalList } from '@utils/local-list.util';
 import { State } from '@utils/state.util';
+import { HttpClient } from '@angular/common/http';
 
 // Storage Keys
 const WORKOUTS_KEY = 'WORKOUTS';
+
+const BASE_URL = 'https://infinite-workout-2d736-default-rtdb.firebaseio.com/';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +24,7 @@ export class WorkoutService {
 
   public workouts: LocalList<Workout[]>;
 
-  constructor(storage: Storage) {
+  constructor(storage: Storage, private http: HttpClient) {
     this.workouts = new LocalList(storage, WORKOUTS_KEY);
   }
 
@@ -101,5 +104,28 @@ export class WorkoutService {
 
   async deleteWorkout(workout: Workout) {
     return this.workouts.remove(workout);
+  }
+
+  async fetchWorkouts() {
+    return this.http
+      .get<{[key: string]: Workout}>(`${BASE_URL}/workout.json`)
+      .pipe(
+        map((workout) => {
+          if (workout) {
+            return Object.values(workout);
+          }
+          return [];
+        })
+      )
+      .toPromise();
+  }
+
+  async uploadWorkout(workout: Workout) {
+    workout.state = undefined;
+    workout.id = Date.now();
+
+    return this.http
+      .post<Workout>(`${BASE_URL}/workout.json`, workout)
+      .toPromise();
   }
 }

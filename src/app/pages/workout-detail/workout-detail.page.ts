@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Plugins } from '@capacitor/core';
+const { Share, Filesystem, FilesystemDirectory, FilesystemEncoding } = Plugins;
 
 // Model
 import { Workout } from '@models/workout.model';
@@ -60,6 +62,12 @@ export class WorkoutDetailPage implements OnInit {
     this.workoutService.workoutEdit.set(this.workout);
     const navigateUrl = `${this.router.url}/edit-workout`;
     this.router.navigateByUrl(navigateUrl);
+  }
+
+  async onShareClick() {
+    this.workoutService.uploadWorkout(this.workout).then((workout) => {
+      console.log("Workout uploaded", workout);
+    })
   }
 
   getCustomizeTextUI() {

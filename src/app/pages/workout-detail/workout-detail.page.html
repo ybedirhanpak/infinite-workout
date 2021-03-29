@@ -5,6 +5,9 @@
     </ion-buttons>
     <ion-title>Workout Detail</ion-title>
     <ion-buttons slot="end">
+      <ion-button (click)="onShareClick()" *ngIf="created || customized">
+        <ion-icon name="share-outline" color="primary"></ion-icon>
+      </ion-button>
       <ion-button (click)="onFavoriteClick()" color="danger">
         <ion-icon [name]="favorited ? 'heart' : 'heart-outline'"></ion-icon>
       </ion-button>

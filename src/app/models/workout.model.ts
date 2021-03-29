@@ -15,3 +15,8 @@ export interface Workout extends StateHolder {
     customized?: boolean;
   };
 }
+
+export interface WorkoutCategory {
+  category: string;
+  workouts: Workout[];
+}
