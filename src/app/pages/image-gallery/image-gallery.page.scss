@@ -1,0 +1,16 @@
+.img-gallery {
+  --padding: 6px;
+  --border-radius: var(--card-border-radius, 5px);
+
+  padding-top: var(--padding);
+
+  .img-wrapper {
+    height: 200px;
+    overflow: hidden;
+    padding: 0 0 var(--paddin, 6px) var(--padding, 6px);
+
+    img {
+      border-radius: var(--border-radius, 6px);
+    }
+  }
+}

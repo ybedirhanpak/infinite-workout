@@ -49,6 +49,10 @@ const routes: Routes = [
         (m) => m.CreateEditWorkoutPageModule
       ),
   },
+  {
+    path: 'images',
+    loadChildren: () => import('./pages/image-gallery/image-gallery.module').then( m => m.ImageGalleryPageModule)
+  },
 ];
 @NgModule({
   imports: [

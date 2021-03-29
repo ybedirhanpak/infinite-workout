@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Images</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-page-layout>
+    <ion-grid class="ion-no-padding">
+      <ion-row class="img-gallery">
+        <ion-col class="ion-no-padding" size="6" *ngFor="let image of images">
+          <app-clickable>
+            <div class="img-wrapper" (click)="onImageClick(image)">
+              <img class="cover" [src]="image">
+            </div>
+          </app-clickable>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </app-page-layout>
+</ion-content>

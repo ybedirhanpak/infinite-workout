@@ -15,7 +15,7 @@
 <ion-content>
   <app-page-layout>
     <div class="create-edit-workout" *ngIf="workout">
-      <div class="img-wrapper">
+      <div class="img-wrapper" (click)="selectImage()">
         <img class="cover" [src]="getWorkoutImageUI()" [alt]="">
       </div>
       <form [formGroup]="formGroup">

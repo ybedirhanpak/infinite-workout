@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
-import { NavController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 
 // Model
 import { Workout } from '@models/workout.model';
@@ -14,6 +14,7 @@ import { WorkoutService } from '@services/workout.service';
 // Utils
 import { copyFrom } from '@utils/object.util';
 import { getEmptyWorkout } from '@utils/workout.util';
+import { ImageGalleryPage } from '../image-gallery/image-gallery.page';
 
 @Component({
   selector: 'app-create-edit-workout',
@@ -28,11 +29,11 @@ export class CreateEditWorkoutPage implements OnInit {
   formGroup: FormGroup;
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private exerciseService: ExerciseService,
     private workoutService: WorkoutService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private modalCtrl: ModalController
   ) {}
 
   ngOnInit() {
@@ -133,6 +134,27 @@ export class CreateEditWorkoutPage implements OnInit {
     await this.workoutService.deleteWorkout(this.workout);
 
     this.navCtrl.navigateBack('/home/my-library');
+  }
+
+  async selectImage() {
+    if (this.mode === 'edit') {
+      return;
+    }
+
+    const modal = await this.modalCtrl.create({
+      component: ImageGalleryPage,
+      componentProps: {
+        isModal: true,
+      },
+    });
+
+    modal.onDidDismiss().then((event) => {
+      if (event.data.image) {
+        this.workout.imageUrl = event.data.image;
+      }
+    });
+
+    return await modal.present();
   }
 
   getWorkoutImageUI() {
