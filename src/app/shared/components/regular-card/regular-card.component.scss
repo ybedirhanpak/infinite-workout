@@ -5,6 +5,17 @@
     height: 200px;
     border-radius: 4px;
     overflow: hidden;
+    position: relative;
+  }
+
+  .icon-group {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+
+    & ion-icon:not(:first-child) {
+      margin-top: 8px;
+    }
   }
 
   ion-card-header {
@@ -15,16 +26,16 @@
     ion-card-title {
       line-height: 1.2rem;
     }
-  
+
     ion-card-subtitle {
       line-height: 1rem;
       text-transform: uppercase;
     }
-  
+
     ion-text {
       font-size: 14px;
       line-height: 1rem;
-      color: var(--ion-color-step-800, #eeeeee)
+      color: var(--ion-color-step-800, #eeeeee);
     }
   }
 }

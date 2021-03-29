@@ -1,19 +1,7 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 // Model
 import { Workout } from '@models/workout.model';
-
-// Service
-import { WorkoutService } from '@services/workout.service';
 
 @Component({
   selector: 'app-workout-slide',

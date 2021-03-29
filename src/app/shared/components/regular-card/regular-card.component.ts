@@ -6,6 +6,9 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./regular-card.component.scss'],
 })
 export class RegularCardComponent {
+  @Input() heart: boolean;
+  @Input() star: boolean;
+  @Input() sparkles: boolean;
   @Input() filter: string = 'red-turquoise';
   @Input() title: string = 'Name';
   @Input() subtitle: string = 'Category';

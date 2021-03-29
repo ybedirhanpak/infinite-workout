@@ -2,6 +2,11 @@
   <div class="workout-card" mode="ios">
     <div [ngClass]="['img-wrapper', 'filter', filter]">
       <img class="cover" [src]="imageUrl">
+      <div class="top-right icon-group">
+        <ion-icon name="heart" color="danger" *ngIf="heart"></ion-icon>
+        <ion-icon name="sparkles" color="secondary" *ngIf="sparkles"></ion-icon>
+        <ion-icon name="star" color="secondary" *ngIf="star"></ion-icon>
+      </div>
     </div>
     <ion-card-header>
       <ion-card-subtitle>{{ subtitle }}</ion-card-subtitle>
