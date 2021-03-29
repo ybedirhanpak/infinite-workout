@@ -15,7 +15,7 @@ export class ClickableComponent {
 
     setTimeout(() => {
       this.clicked = false;
-    }, 1000);
+    }, 600);
   }
 
   cancel() {
