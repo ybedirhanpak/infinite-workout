@@ -6,10 +6,11 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonSlides, ToastController } from '@ionic/angular';
+import { IonSlides, ModalController, ToastController } from '@ionic/angular';
 
 // Components
 import { ClockCircleComponent } from 'src/app/shared/components/clock-circle/clock-circle.component';
+import { ExerciseEditPage } from '../exercise-edit/exercise-edit.page';
 
 // Model
 import { Workout } from '@models/workout.model';
@@ -22,6 +23,8 @@ import { WorkoutService } from '@services/workout.service';
 
 // Utils
 import { getSetDetail } from '@utils/exercise.util';
+import { ExerciseService } from '@services/exercise.service';
+import { copyFrom } from '@utils/object.util';
 
 interface ClockSet extends Set {
   checked: boolean;
@@ -79,11 +82,15 @@ export class TrainingPage implements OnInit {
   exerciseClocks: ExerciseClock[];
   currentIndex: number;
 
+  edited = false;
+
   constructor(
     private dateService: DateService,
     private workoutService: WorkoutService,
     private trainingService: TrainingService,
+    private exerciseService: ExerciseService,
     private toastController: ToastController,
+    private modalController: ModalController,
     private router: Router
   ) {}
 
@@ -91,6 +98,46 @@ export class TrainingPage implements OnInit {
     this.trainingService.restTime.subscribe((restTime) => {
       this.restTime = restTime;
     });
+  }
+
+  createExerciseClock(exercise: Exercise, index: number) {
+    const type = exercise.set.type;
+
+    const clockSets = exercise.set.sets.map((s) => {
+      return {
+        ...s,
+        checked: false,
+      } as ClockSet;
+    });
+
+    let clockTime = 0;
+
+    if (type === 'weightRep') {
+      // There will be multiple clocks for each set
+      // Each clock will be stopwatch starting from 0 up to `rest time`
+      clockTime = this.restTime;
+    } else if (type === 'weightTime' || type === 'distanceTime') {
+      // There will be multiple clocks for each set
+      // Each clock will be timer, starting trom `time` down to 0
+      const set = clockSets[0];
+      const detail = getSetDetail(exercise);
+      clockTime = this.convertTimeToSec(set.rep, detail.repUnit);
+    }
+
+    return {
+      clock: {
+        id: index,
+        rest: false,
+        mode: 'timer',
+        max: clockTime,
+        current: clockTime,
+      },
+      exercise: exercise,
+      type: type,
+      sets: clockSets,
+      setCount: clockSets.length,
+      currentSet: 0,
+    } as ExerciseClock;
   }
 
   ionViewWillEnter() {
@@ -108,43 +155,8 @@ export class TrainingPage implements OnInit {
 
       // Create exercise clocks
       this.workout.exercises.forEach((exercise, index) => {
-        const type = exercise.set.type;
-
-        const clockSets = exercise.set.sets.map((s) => {
-          return {
-            ...s,
-            checked: false,
-          } as ClockSet;
-        });
-
-        let clockTime = 0;
-
-        if (type === 'weightRep') {
-          // There will be multiple clocks for each set
-          // Each clock will be stopwatch starting from 0 up to `rest time`
-          clockTime = this.restTime;
-        } else if (type === 'weightTime' || type === 'distanceTime') {
-          // There will be multiple clocks for each set
-          // Each clock will be timer, starting trom `time` down to 0
-          const set = clockSets[0];
-          const detail = getSetDetail(exercise);
-          clockTime = this.convertTimeToSec(set.rep, detail.repUnit);
-        }
-
-        this.exerciseClocks.push({
-          clock: {
-            id: index,
-            rest: false,
-            mode: 'timer',
-            max: clockTime,
-            current: clockTime,
-          },
-          exercise: exercise,
-          type: type,
-          sets: clockSets,
-          setCount: clockSets.length,
-          currentSet: 0,
-        });
+        const exerciseClock = this.createExerciseClock(exercise, index);
+        this.exerciseClocks.push(exerciseClock);
       });
 
       // Add 'next' field of each exercise
@@ -251,10 +263,13 @@ export class TrainingPage implements OnInit {
     this.router.navigate(['/home/']);
 
     if (this.trainingStarted) {
+      // Update workout if edited
+      if(this.edited) {
+        this.workout.exercises = this.exerciseClocks.map((ec) => ec.exercise);
+      }
+
       // Save this training to training records
-
       let message = '';
-
       this.trainingService
         .saveTrainingRecord(this.workout, new Date(), this.totalTimeString)
         .then(() => {
@@ -451,10 +466,10 @@ export class TrainingPage implements OnInit {
 
   onNextClick(exercise: ExerciseClock) {
     const { type, clock } = exercise;
-    if(type === 'weightRep') {
+    if (type === 'weightRep') {
       this.onRestSkip(exercise);
-    } else if (type === 'weightTime' || type === 'distanceTime') {
-      if(clock.rest) {
+    } else if (type === 'weightTime' || type === 'distanceTime') {
+      if (clock.rest) {
         this.onRestSkip(exercise);
       } else {
         this.onNextSet(exercise);
@@ -504,24 +519,23 @@ export class TrainingPage implements OnInit {
     const clockTime = this.convertTimeToSec(set?.rep, detail?.repUnit);
 
     if (exercise.type === 'weightRep') {
-
       this.stopClock(exercise.clock.id);
       this.updateClockRest(exercise.clock, false);
       this.slideNextIfFinished(exercise);
-
-    } else if (exercise.type === 'weightTime' || exercise.type === 'distanceTime') {
-
-        // Try to slide next exercise
-        const slided = this.slideNextIfFinished(exercise);
-        // If slide happened, go back to first set
-        if (slided) {
-          exercise.currentSet = 0;
-        }
-        // Switch to set
-        this.updateClockRest(exercise.clock, false);
-        // Update clock to set time
-        this.updateClockMax(exercise.clock.id, clockTime);
-
+    } else if (
+      exercise.type === 'weightTime' ||
+      exercise.type === 'distanceTime'
+    ) {
+      // Try to slide next exercise
+      const slided = this.slideNextIfFinished(exercise);
+      // If slide happened, go back to first set
+      if (slided) {
+        exercise.currentSet = 0;
+      }
+      // Switch to set
+      this.updateClockRest(exercise.clock, false);
+      // Update clock to set time
+      this.updateClockMax(exercise.clock.id, clockTime);
     }
   }
 
@@ -535,6 +549,32 @@ export class TrainingPage implements OnInit {
         this.onNextSet(exercise);
       }
     }
+  }
+
+  async onEditClick() {
+    const currentEC = this.exerciseClocks[this.currentIndex];
+    this.exerciseService.exerciseDetail.set(currentEC.exercise);
+    const modal = await this.modalController.create({
+      component: ExerciseEditPage,
+      componentProps: {
+        isModal: true,
+      },
+    });
+
+    modal.onDidDismiss().then((event) => {
+      if (event.data.exercise) {
+        const editedEC = this.createExerciseClock(
+          event.data.exercise,
+          this.currentIndex
+        );
+        editedEC.clock.rest = currentEC.clock.rest;
+        copyFrom(editedEC.exercise, currentEC.exercise);
+        copyFrom(editedEC.clock, currentEC.clock);
+        this.edited = true;
+      }
+    });
+
+    return await modal.present();
   }
 
   // UI display

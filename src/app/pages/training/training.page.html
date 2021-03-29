@@ -1,8 +1,11 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="onEditClick()" fill="clear" color="primary"> Edit</ion-button>
+    </ion-buttons>
     <ion-title>{{ totalTimeString }}</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="finishTraining()" fill="clear">Finish</ion-button>
+      <ion-button (click)="finishTraining()" fill="clear" color="primary">Finish</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
