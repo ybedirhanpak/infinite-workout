@@ -2,12 +2,12 @@ import { Storage } from '@ionic/storage';
 import { BehaviorSubject } from 'rxjs';
 
 // Models
-import { IdHolder } from '@models/common.model';
+import { StateHolder } from '@models/common.model';
 
 // Utils
 import { copyFrom } from '@utils/object.util';
 
-export class LocalList<T extends Array<IdHolder>> {
+export class LocalList<T extends Array<StateHolder>> {
   private list$: BehaviorSubject<T>;
 
   constructor(
@@ -30,23 +30,49 @@ export class LocalList<T extends Array<IdHolder>> {
     return list;
   }
 
+  /**
+   * Loads local states of elements
+   */
+  async loadWithState(element: StateHolder) {
+    const local = await this.find(element);
+    if (local && local.state) {
+      element.state = local.state;
+    } else {
+      element.state = undefined;
+    }
+    return element;
+  }
+
+  /**
+   * Loads local states of elements in the list.
+   */
+  async loadLocalStates(list: T) {
+    const promises = list.map(async (element: StateHolder) => {
+      return this.loadWithState(element);
+    });
+
+    return Promise.all(promises).then((workouts) => {
+      return [...workouts] as T;
+    });
+  }
+
   async fetchFromStorage() {
     const list = await this.getList();
     this.list$.next(list);
   }
 
-  async contains(element: IdHolder): Promise<boolean> {
+  async contains(element: StateHolder): Promise<boolean> {
     const list = await this.getList();
     const trainingRecord = list.find((e) => e.id === element.id);
     return !!trainingRecord;
   }
 
-  async find(element: IdHolder): Promise<IdHolder> {
+  async find(element: StateHolder): Promise<StateHolder> {
     const list = await this.getList();
     return list.find((e) => e.id === element.id);
   }
 
-  async create(element: IdHolder, first?: boolean): Promise<void> {
+  async create(element: StateHolder, first?: boolean): Promise<StateHolder> {
     const list = await this.getList();
 
     const updatedList = (first
@@ -54,21 +80,24 @@ export class LocalList<T extends Array<IdHolder>> {
       : list.concat([element])) as T;
     await this.storage.set(this.storageKey, updatedList);
     this.list$.next(updatedList);
+    return element;
   }
 
-  async update(element: IdHolder): Promise<void> {
+  async update(element: StateHolder): Promise<StateHolder> {
     const list = await this.getList();
     const old = list.find((e) => e.id === element.id);
     copyFrom(element, old);
     await this.storage.set(this.storageKey, list);
     this.list$.next(list);
+    return element;
   }
 
-  async remove(element: IdHolder): Promise<void> {
+  async remove(element: StateHolder): Promise<boolean> {
     const list = await this.getList();
     const updatedList = list.filter((e) => e.id !== element.id) as T;
     await this.storage.set(this.storageKey, updatedList);
     this.list$.next(updatedList);
+    return true;
   }
 
   public deleteAllElements() {
