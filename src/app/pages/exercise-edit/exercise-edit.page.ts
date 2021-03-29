@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 
 // Model
 import { Exercise, Set, SetDetail } from '@models/exercise.model';
@@ -17,6 +17,7 @@ import { getSetDetail, getDefaultSet } from '@utils/exercise.util';
   styleUrls: ['./exercise-edit.page.scss'],
 })
 export class ExerciseEditPage implements OnInit {
+  @Input() isModal = false;
   @Input() fromEdit = false;
 
   exercise: Exercise;
@@ -27,6 +28,7 @@ export class ExerciseEditPage implements OnInit {
   constructor(
     private exerciseService: ExerciseService,
     private navCtrl: NavController,
+    private modalCtrl: ModalController,
     private router: Router
   ) {}
 
@@ -61,14 +63,22 @@ export class ExerciseEditPage implements OnInit {
   }
 
   onSaveClick() {
-    const editWorkout = this.router.url.includes('edit-workout');
-    this.exercise.set.sets = this.sets;
-    this.exerciseService.editedExercise.set(this.exercise);
-    if (editWorkout) {
-      this.navCtrl.navigateBack('/workout-detail/edit-workout');
+    if(this.isModal) {
+      this.modalCtrl.dismiss({
+        exercise: this.exercise,
+        role: 'save'
+      });
     } else {
-      this.navCtrl.navigateBack('/create-workout');
+      const editWorkout = this.router.url.includes('edit-workout');
+      this.exercise.set.sets = this.sets;
+      this.exerciseService.editedExercise.set(this.exercise);
+      if (editWorkout) {
+        this.navCtrl.navigateBack('/workout-detail/edit-workout');
+      } else {
+        this.navCtrl.navigateBack('/create-workout');
+      }
     }
+
   }
 
   onBlur(event: any, key: 'load' | 'rep') {
