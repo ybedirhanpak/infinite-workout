@@ -29,15 +29,15 @@ export class MyLibraryPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.workoutService.favoriteWorkouts.elements.subscribe((favorites) => {
+    this.workoutService.favorites$.subscribe((favorites) => {
       this.favoriteWorkouts = favorites;
     });
 
-    this.workoutService.createdWorkouts.elements.subscribe((workouts) => {
+    this.workoutService.createdWorkouts$.subscribe((workouts) => {
       this.createdWorkouts = workouts;
     });
 
-    this.workoutService.customizedWorkouts.elements.subscribe((workouts) => {
+    this.workoutService.customizedWorkouts$.subscribe((workouts) => {
       this.customizedWorkouts = workouts;
     });
 
@@ -50,9 +50,7 @@ export class MyLibraryPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.workoutService.favoriteWorkouts.fetchFromStorage();
-    this.workoutService.createdWorkouts.fetchFromStorage();
-    this.workoutService.customizedWorkouts.fetchFromStorage();
+    this.workoutService.workouts.fetchFromStorage();
     this.trainingService.fetchTrainingRecordList();
   }
 

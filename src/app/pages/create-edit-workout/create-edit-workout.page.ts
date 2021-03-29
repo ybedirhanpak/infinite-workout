@@ -50,13 +50,8 @@ export class CreateEditWorkoutPage implements OnInit {
           equipments: new FormControl(workout.equipments),
         });
 
-        this.created = await this.workoutService.createdWorkouts.contains(
-          workout
-        );
-
-        this.customized = await this.workoutService.customizedWorkouts.contains(
-          workout
-        );
+        this.created = workout.state?.created;
+        this.customized = workout.state?.customized;
       });
     } else {
       // Create Mode
@@ -112,17 +107,16 @@ export class CreateEditWorkoutPage implements OnInit {
     };
 
     if (this.mode === 'create') {
-      await this.workoutService.createdWorkouts.create(workoutToSave);
-      this.navCtrl.navigateBack('/home/my-library');
+      this.workoutService.createWorkout(workoutToSave).then(() => {
+        this.navCtrl.navigateBack('/home/my-library');
+      });
     } else if (this.mode === 'edit') {
-      if (this.created) {
-        await this.workoutService.createdWorkouts.update(workoutToSave);
-      } else if (this.customized) {
-        await this.workoutService.customizedWorkouts.update(workoutToSave);
+      if (this.customized || this.created) {
+        this.workoutService.editWorkout(workoutToSave);
       } else {
-        workoutToSave['id'] = Date.now();
-        await this.workoutService.customizedWorkouts.create(workoutToSave);
+        this.workoutService.customizeWorkout(workoutToSave);
       }
+
       this.workoutService.workoutDetail.set(workoutToSave);
       this.navCtrl.navigateBack('/workout-detail');
     }
@@ -136,13 +130,7 @@ export class CreateEditWorkoutPage implements OnInit {
   async onDeleteClick() {
     // TODO: Ask for permission before delete
 
-    if (this.created) {
-      // Remove created workout
-      await this.workoutService.createdWorkouts.remove(this.workout);
-    } else {
-      // Remove customized workout
-      await this.workoutService.customizedWorkouts.remove(this.workout);
-    }
+    await this.workoutService.deleteWorkout(this.workout);
 
     this.navCtrl.navigateBack('/home/my-library');
   }

@@ -1,13 +1,5 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  Input,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Animation, AnimationController } from '@ionic/angular';
 
 // Model
 import { Workout } from '@models/workout.model';
@@ -40,25 +32,10 @@ export class WorkoutDetailPage implements OnInit {
 
   ionViewWillEnter() {
     this.workoutService.workoutDetail.get().subscribe(async (workout) => {
-      this.workoutService.favoriteWorkouts.contains(workout).then((value) => {
-        this.favorited = value;
-      });
-
-      this.workoutService.createdWorkouts.contains(workout).then((value) => {
-        this.created = value;
-      });
-
-      this.workoutService.customizedWorkouts
-        .find(workout)
-        .then((customized: Workout) => {
-          if (customized) {
-            this.original = workout;
-            this.workout = customized;
-            this.customized = true;
-          } else {
-            this.workout = workout;
-          }
-        });
+      this.favorited = workout.state?.favorited;
+      this.created = workout.state?.created;
+      this.customized = workout.state?.customized;
+      this.workout = workout;
     });
   }
 
@@ -69,13 +46,14 @@ export class WorkoutDetailPage implements OnInit {
 
   async onFavoriteClick() {
     if (!this.favorited) {
-      await this.workoutService.favoriteWorkouts.create(this.workout);
+      this.workoutService.saveFavorite(this.workout).then(() => {
+        this.favorited = true;
+      });
     } else {
-      await this.workoutService.favoriteWorkouts.remove(this.workout);
+      this.workoutService.removeFavorite(this.workout).then(() => {
+        this.favorited = false;
+      });
     }
-    this.favorited = await this.workoutService.favoriteWorkouts.contains(
-      this.workout
-    );
   }
 
   async onEditClick() {
@@ -85,6 +63,6 @@ export class WorkoutDetailPage implements OnInit {
   }
 
   getCustomizeTextUI() {
-    return (this.customized || this.created) ? 'Edit' : 'Customize';
+    return this.customized || this.created ? 'Edit' : 'Customize';
   }
 }

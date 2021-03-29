@@ -24,4 +24,12 @@ export class WorkoutsPage {
     this.workoutService.workoutDetail.set(workout);
     this.router.navigateByUrl('/workout-detail');
   }
+
+  ionViewWillEnter() {
+    this.workoutService.workouts
+      .loadLocalStates([...WORKOUT_LIST] as any)
+      .then((workouts: Workout[]) => {
+        this.workoutList = workouts;
+      });
+  }
 }
