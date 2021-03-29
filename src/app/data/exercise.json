@@ -1,187 +1,91 @@
 [
   {
-    "id": 1616852873378,
-    "name": "Dumbbell Biceps Curl",
-    "imageUrl": "assets/img/exercise/biceps-curl.jpg",
-    "category": "Biceps",
-    "equipment": "Single Handed",
-    "handType": "single-hand",
-    "set": {
-      "type": "weightRep",
-      "sets": [
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 }
-      ]
-    }
-  },
-  {
-    "id": 1616852873391,
-    "name": "Dumbbell Biceps Curl",
-    "imageUrl": "https://images.pexels.com/photos/4793224/pexels-photo-4793224.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-    "category": "Biceps",
-    "equipment": "Two Handed",
-    "handType": "single-hand",
-    "set": {
-      "type": "weightRep",
-      "sets": [
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 }
-      ]
-    }
-  },
-  {
-    "id": 1616852873403,
-    "name": "Bar Biceps Curl",
-    "imageUrl": "https://images.pexels.com/photos/5769133/pexels-photo-5769133.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-    "category": "Biceps",
-    "equipment": "Two Handed",
-    "handType": "single-hand",
-    "set": {
-      "type": "weightRep",
-      "sets": [
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 }
-      ]
-    }
-  },
-  {
-    "id": 1616852873416,
-    "name": "Cable Biceps Curl",
-    "imageUrl": "https://images.pexels.com/photos/4162484/pexels-photo-4162484.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-    "category": "Biceps",
-    "equipment": "Cable Rope",
-    "handType": "single-hand",
-    "set": {
-      "type": "weightRep",
-      "sets": [
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 }
-      ]
-    }
-  },
-  {
-    "id": 1616852873426,
-    "name": "Running",
-    "imageUrl": "assets/img/exercise/running.jpg",
-    "category": "Cardio",
-    "equipment": "Outdoor",
-    "handType": "single-hand",
-    "set": {
-      "type": "distanceTime",
-      "sets": [
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 }
-      ]
-    }
-  },
-  {
-    "id": 1616852873439,
-    "name": "Running",
-    "imageUrl": "https://images.pexels.com/photos/3768916/pexels-photo-3768916.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-    "category": "Cardio",
-    "equipment": "Treadmill",
-    "handType": "single-hand",
-    "set": {
-      "type": "distanceTime",
-      "sets": [
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 }
-      ]
-    }
-  },
-  {
-    "id": 1616852873452,
-    "name": "Cycling",
-    "imageUrl": "https://images.pexels.com/photos/93776/pexels-photo-93776.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-    "category": "Cardio",
-    "equipment": "Outdoor",
-    "handType": "single-hand",
-    "set": {
-      "type": "distanceTime",
-      "sets": [
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 }
-      ]
-    }
-  },
-  {
-    "id": 1616852873464,
-    "name": "Deadlift",
-    "imageUrl": "assets/img/exercise/deadlift.jpg",
-    "category": "Lower Back",
-    "equipment": "Bar",
-    "handType": "single-hand",
-    "set": {
-      "type": "weightRep",
-      "sets": [
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 }
-      ]
-    }
-  },
-  {
-    "id": 1616852873475,
-    "name": "Kettlebell Swing",
-    "imageUrl": "https://images.pexels.com/photos/2417517/pexels-photo-2417517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-    "category": "Lower Back",
-    "equipment": "Kettlebell",
-    "handType": "single-hand",
-    "set": {
-      "type": "weightRep",
-      "sets": [
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 }
-      ]
-    }
-  },
-  {
-    "id": 1616852873485,
-    "name": "Pull Up",
-    "imageUrl": "assets/img/exercise/pull-up.jpg",
-    "category": "Lats",
-    "equipment": "Bodyweight",
-    "handType": "single-hand",
-    "set": {
-      "type": "weightRep",
-      "sets": [
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 }
-      ]
-    }
-  },
-  {
-    "id": 1616852873496,
-    "name": "Kettlebell Row",
-    "imageUrl": "https://images.unsplash.com/photo-1566241142364-df7f478ce55f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
-    "category": "Lats",
-    "equipment": "Kettlebell",
-    "handType": "single-hand",
-    "set": {
-      "type": "weightRep",
-      "sets": [
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 }
-      ]
-    }
-  },
-  {
     "id": 1616852873507,
-    "name": "Bench Press",
-    "imageUrl": "https://images.pexels.com/photos/3837781/pexels-photo-3837781.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+    "name": "Barbell Bench Press",
+    "imageUrl": "assets/img/exercise/chest-barbell-press.jpg",
     "category": "Chest",
-    "equipment": "Bar",
-    "handType": "single-hand",
+    "equipment": "Barbell",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1617028448773,
+    "name": "Dumbbell Bench Press",
+    "imageUrl": "assets/img/exercise/chest-dumbbell-press.jpg",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1617028457997,
+    "name": "Incline Bench Press",
+    "imageUrl": "assets/img/exercise/chest-incline-press.jpg",
+    "category": "Chest",
+    "equipment": "Barbell",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1617028463757,
+    "name": "Cable Standing Press",
+    "imageUrl": "assets/img/exercise/chest-cable-press.jpg",
+    "category": "Chest",
+    "equipment": "Cable",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1617028468167,
+    "name": "Machine Press",
+    "imageUrl": "assets/img/exercise/chest-machine-press.jpg",
+    "category": "Chest",
+    "equipment": "Press Machine",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1617028472503,
+    "name": "Machine Butterfly Press",
+    "imageUrl": "assets/img/exercise/chest-machine-fly.jpg",
+    "category": "Chest",
+    "equipment": "Fly Machine",
+    "handType": "two-hand",
     "set": {
       "type": "weightRep",
       "sets": [
@@ -194,10 +98,10 @@
   {
     "id": 1616852873519,
     "name": "Push Up",
-    "imageUrl": "assets/img/exercise/push-up.jpg",
+    "imageUrl": "assets/img/exercise/chest-push-up.jpg",
     "category": "Chest",
     "equipment": "Bodyweight",
-    "handType": "single-hand",
+    "handType": "two-hand",
     "set": {
       "type": "weightRep",
       "sets": [
@@ -208,11 +112,123 @@
     }
   },
   {
-    "id": 1616852873531,
-    "name": "Cable Standing Press",
-    "imageUrl": "https://images.unsplash.com/photo-1604480133435-25b86862d276?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80",
+    "id": 1617028479729,
+    "name": "Wall Push Up",
+    "imageUrl": "assets/img/exercise/chest-wall-push-up.jpg",
     "category": "Chest",
+    "equipment": "Bodyweight",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1617026240074,
+    "name": "Cable Pull Down",
+    "imageUrl": "assets/img/exercise/lat-cable-pulldown.jpg",
+    "category": "Lats",
     "equipment": "Cable",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1617026243826,
+    "name": "Cable Row",
+    "imageUrl": "assets/img/exercise/lat-cable-row.jpg",
+    "category": "Lats",
+    "equipment": "Cable",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1617026635947,
+    "name": "Barbell Row",
+    "imageUrl": "assets/img/exercise/lat-barbell-row.jpg",
+    "category": "Lats",
+    "equipment": "Barbell",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1616852873485,
+    "name": "Pull Up",
+    "imageUrl": "assets/img/exercise/lat-pull-up.jpg",
+    "category": "Lats",
+    "equipment": "Bodyweight",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1617026677934,
+    "name": "Ring Pull Up",
+    "imageUrl": "assets/img/exercise/lat-ring-pull-up.jpg",
+    "category": "Lats",
+    "equipment": "Bodyweight",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1617026649567,
+    "name": "Incline Row",
+    "imageUrl": "assets/img/exercise/lat-incline-row.jpg",
+    "category": "Lats",
+    "equipment": "Rope",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1616852873496,
+    "name": "Kettlebell Row",
+    "imageUrl": "assets/img/exercise/lat-kettlebell-row.jpg",
+    "category": "Lats",
+    "equipment": "Kettlebell",
     "handType": "single-hand",
     "set": {
       "type": "weightRep",
@@ -224,27 +240,139 @@
     }
   },
   {
-    "id": 1616852873544,
-    "name": "Low Plank",
-    "imageUrl": "assets/img/exercise/plank.jpg",
-    "category": "Abs",
-    "equipment": "Core",
-    "handType": "single-hand",
+    "id": 1617030936133,
+    "name": "Shoulder Barbell Press",
+    "imageUrl": "assets/img/exercise/shoulder-barbell-press.jpg",
+    "category": "Shoulder",
+    "equipment": "Barbell",
+    "handType": "two-hand",
     "set": {
-      "type": "weightTime",
+      "type": "weightRep",
       "sets": [
-        { "rep": 45, "load": 0 },
-        { "rep": 45, "load": 0 },
-        { "rep": 45, "load": 0 }
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
       ]
     }
   },
   {
-    "id": 1616852873557,
-    "name": "Crunch",
-    "imageUrl": "https://images.pexels.com/photos/5262853/pexels-photo-5262853.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-    "category": "Abs",
-    "equipment": "Core",
+    "id": 1617031070823,
+    "name": "Shoulder Dumbbell Press",
+    "imageUrl": "assets/img/exercise/shoulder-dumbbell-press.jpg",
+    "category": "Shoulder",
+    "equipment": "Dumbbell",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1617031077632,
+    "name": "Shoulder Lateral Raise",
+    "imageUrl": "assets/img/exercise/shoulder-lateral-raise.jpg",
+    "category": "Shoulder",
+    "equipment": "Dumbbell",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1617031086617,
+    "name": "Shoulder Clean And Jerk",
+    "imageUrl": "assets/img/exercise/shoulder-barbell-clean-jerk.jpg",
+    "category": "Shoulder",
+    "equipment": "Barbell",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1617031404103,
+    "name": "Triceps Cable Extension",
+    "imageUrl": "assets/img/exercise/triceps-cable-extension.jpg",
+    "category": "Triceps",
+    "equipment": "Cable - Rope",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1617031176861,
+    "name": "Dips",
+    "imageUrl": "assets/img/exercise/triceps-dips.jpg",
+    "category": "Triceps",
+    "equipment": "Bodyweight",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1617031421742,
+    "name": "Bench Dips",
+    "imageUrl": "assets/img/exercise/triceps-bench-dips.jpg",
+    "category": "Triceps",
+    "equipment": "Bodyweight",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1617032212101,
+    "name": "Ring Hold",
+    "imageUrl": "assets/img/exercise/triceps-ring-hold.jpg",
+    "category": "Triceps",
+    "equipment": "Bodyweight",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightTime",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1616852873378,
+    "name": "Dumbbell Curl",
+    "imageUrl": "assets/img/exercise/biceps-dumbbell-curl.jpg",
+    "category": "Biceps",
+    "equipment": "Dumbbell",
     "handType": "single-hand",
     "set": {
       "type": "weightRep",
@@ -256,28 +384,92 @@
     }
   },
   {
-    "id": 1616852873570,
-    "name": "Side Plank",
-    "imageUrl": "https://images.pexels.com/photos/2294363/pexels-photo-2294363.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-    "category": "Abs",
-    "equipment": "Core",
+    "id": 1616852873391,
+    "name": "Double Dumbbell Curl",
+    "imageUrl": "assets/img/exercise/biceps-double-curl.jpg",
+    "category": "Biceps",
+    "equipment": "Dumbbell",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1616852873403,
+    "name": "Barbell Curl",
+    "imageUrl": "assets/img/exercise/biceps-barbell-curl.jpg",
+    "category": "Biceps",
+    "equipment": "Barbell",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1616852873416,
+    "name": "Cable Curl",
+    "imageUrl": "assets/img/exercise/biceps-cable-curl.jpg",
+    "category": "Biceps",
+    "equipment": "Cable Rope",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1617025516906,
+    "name": "Preacher Curl",
+    "imageUrl": "assets/img/exercise/biceps-preacher-curl.jpg",
+    "category": "Biceps",
+    "equipment": "Dumbbell",
     "handType": "single-hand",
     "set": {
-      "type": "weightTime",
+      "type": "weightRep",
       "sets": [
-        { "rep": 30, "load": 0 },
-        { "rep": 30, "load": 0 },
-        { "rep": 30, "load": 0 }
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1617025562746,
+    "name": "On Knee Curl",
+    "imageUrl": "assets/img/exercise/biceps-on-knee-dumbbell-curl.jpg",
+    "category": "Biceps",
+    "equipment": "Dumbbell",
+    "handType": "single-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
       ]
     }
   },
   {
     "id": 1616852873582,
     "name": "Squat",
-    "imageUrl": "assets/img/exercise/squat-body-weight.jpg",
+    "imageUrl": "assets/img/exercise/quad-squat-bodyweight.jpg",
     "category": "Quads",
     "equipment": "Bodyweight",
-    "handType": "single-hand",
+    "handType": "double-foot",
     "set": {
       "type": "weightRep",
       "sets": [
@@ -289,11 +481,43 @@
   },
   {
     "id": 1616852873595,
-    "name": "Bar Squat",
-    "imageUrl": "https://images.pexels.com/photos/371049/pexels-photo-371049.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+    "name": "Barbell Squat",
+    "imageUrl": "assets/img/exercise/quad-squat-weighted.jpg",
     "category": "Quads",
-    "equipment": "Bar",
-    "handType": "single-hand",
+    "equipment": "Barbell",
+    "handType": "double-foot",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1617029517467,
+    "name": "Front Squat",
+    "imageUrl": "assets/img/exercise/quad-squat-front.jpg",
+    "category": "Quads",
+    "equipment": "Barbell",
+    "handType": "double-foot",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1617029512429,
+    "name": "Dumbbell Squat",
+    "imageUrl": "assets/img/exercise/quad-squat-dumbbell.jpg",
+    "category": "Quads",
+    "equipment": "Dumbbell",
+    "handType": "two-hand",
     "set": {
       "type": "weightRep",
       "sets": [
@@ -306,10 +530,10 @@
   {
     "id": 1616852873607,
     "name": "Leg Press",
-    "imageUrl": "https://images.unsplash.com/photo-1434682772747-f16d3ea162c3?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1953&q=80",
+    "imageUrl": "assets/img/exercise/quad-leg-press.jpg",
     "category": "Quads",
     "equipment": "Press Machine",
-    "handType": "single-hand",
+    "handType": "double-foot",
     "set": {
       "type": "weightRep",
       "sets": [
@@ -320,14 +544,238 @@
     }
   },
   {
-    "id": 1616852873620,
-    "name": "Dumbbell Squat",
-    "imageUrl": "https://images.unsplash.com/flagged/photo-1566064352554-f36ef0ef23b2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80",
+    "id": 1617030483237,
+    "name": "Lunges",
+    "imageUrl": "assets/img/exercise/quad-lunges-weighted.jpg",
     "category": "Quads",
-    "equipment": "Dumbbell",
-    "handType": "single-hand",
+    "equipment": "Barbell",
+    "handType": "double-foot",
     "set": {
       "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1617030567314,
+    "name": "Dumbbell Lunges",
+    "imageUrl": "assets/img/exercise/quad-lunges-dumbbell.jpg",
+    "category": "Quads",
+    "equipment": "Dumbbell",
+    "handType": "double-foot",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1616852873464,
+    "name": "Barbell Deadlift",
+    "imageUrl": "assets/img/exercise/lowerback-deadlift.jpg",
+    "category": "Lower Back",
+    "equipment": "Barbell",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1617026039057,
+    "name": "Trapbar Deadlift",
+    "imageUrl": "assets/img/exercise/lowerback-deadlift-trapbar.jpg",
+    "category": "Lower Back",
+    "equipment": "Trapbar",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1617026045685,
+    "name": "Kettlebell Deadlift",
+    "imageUrl": "assets/img/exercise/lowerback-deadlift-kettlebell.jpg",
+    "category": "Lower Back",
+    "equipment": "Kettlebell",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1616852873475,
+    "name": "Kettlebell Swing",
+    "imageUrl": "assets/img/exercise/lowerback-kettlebell-swing.jpg",
+    "category": "Lower Back",
+    "equipment": "Kettlebell",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1616852873557,
+    "name": "Crunch",
+    "imageUrl": "assets/img/exercise/abs-crunch.jpg",
+    "category": "Abs",
+    "equipment": "Bodyweight",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1617028549635,
+    "name": "Sit Up",
+    "imageUrl": "assets/img/exercise/abs-situp.jpg",
+    "category": "Abs",
+    "equipment": "Bodyweight",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1617029381604,
+    "name": "Leg Raise",
+    "imageUrl": "assets/img/exercise/abs-leg-raise.jpg",
+    "category": "Abs",
+    "equipment": "Bodyweight",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1616852873544,
+    "name": "Low Plank",
+    "imageUrl": "assets/img/exercise/abs-plank.jpg",
+    "category": "Abs",
+    "equipment": "Bodyweight",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightTime",
+      "sets": [
+        { "rep": 45, "load": 0 },
+        { "rep": 45, "load": 0 },
+        { "rep": 45, "load": 0 }
+      ]
+    }
+  },
+  {
+    "id": 1616852873570,
+    "name": "Side Plank",
+    "imageUrl": "assets/img/exercise/abs-side-plank.jpg",
+    "category": "Abs",
+    "equipment": "Bodyweight",
+    "handType": "single-hand",
+    "set": {
+      "type": "weightTime",
+      "sets": [
+        { "rep": 30, "load": 0 },
+        { "rep": 30, "load": 0 },
+        { "rep": 30, "load": 0 }
+      ]
+    }
+  },
+  {
+    "id": 1616852873426,
+    "name": "Running",
+    "imageUrl": "assets/img/exercise/running.jpg",
+    "category": "Cardio",
+    "equipment": "Outdoor",
+    "handType": "two-hand",
+    "set": {
+      "type": "distanceTime",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1616852873439,
+    "name": "Treadmill",
+    "imageUrl": "assets/img/exercise/running-treadmill.jpg",
+    "category": "Cardio",
+    "equipment": "Treadmill",
+    "handType": "two-hand",
+    "set": {
+      "type": "distanceTime",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1616852873452,
+    "name": "Cycling",
+    "imageUrl": "assets/img/exercise/bicycle-outdoor.jpg",
+    "category": "Cardio",
+    "equipment": "Outdoor",
+    "handType": "two-hand",
+    "set": {
+      "type": "distanceTime",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1617025887522,
+    "name": "Bicycle Machine",
+    "imageUrl": "assets/img/exercise/bicycle-machine.jpg",
+    "category": "Cardio",
+    "equipment": "Outdoor",
+    "handType": "two-hand",
+    "set": {
+      "type": "distanceTime",
       "sets": [
         { "rep": 10, "load": 12 },
         { "rep": 10, "load": 12 },
