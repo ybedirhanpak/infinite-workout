@@ -26,7 +26,6 @@ export class WorkoutsPage {
 
   ionViewWillEnter() {
     this.workoutService.fetchWorkouts().then((workouts) => {
-      console.log('Workouts', workouts);
       this.workoutService.workouts
         .loadLocalStates(workouts as any)
         .then((workouts: Workout[]) => {

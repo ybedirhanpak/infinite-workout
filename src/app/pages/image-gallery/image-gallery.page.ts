@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 const IMAGES = [];
+const IMAGE_COUNT = 62;
 
-for (let i = 1; i < 36; i++) {
+for (let i = 1; i <= IMAGE_COUNT; i++) {
   IMAGES.push(`assets/img/workout/workout-${i}.jpg`);
 }
 
@@ -23,6 +24,12 @@ export class ImageGalleryPage implements OnInit {
     this.modalCtrl.dismiss({
       image,
       role: 'select',
+    });
+  }
+
+  onCancelClick() {
+    this.modalCtrl.dismiss({
+      role: 'cancel',
     });
   }
 }

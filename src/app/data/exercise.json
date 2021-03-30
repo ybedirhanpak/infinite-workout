@@ -105,9 +105,9 @@
     "set": {
       "type": "weightRep",
       "sets": [
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 }
+        { "rep": 10, "load": 0 },
+        { "rep": 10, "load": 0 },
+        { "rep": 10, "load": 0 }
       ]
     }
   },
@@ -121,9 +121,9 @@
     "set": {
       "type": "weightRep",
       "sets": [
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 }
+        { "rep": 10, "load": 0 },
+        { "rep": 10, "load": 0 },
+        { "rep": 10, "load": 0 }
       ]
     }
   },
@@ -185,9 +185,9 @@
     "set": {
       "type": "weightRep",
       "sets": [
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 }
+        { "rep": 10, "load": 0 },
+        { "rep": 10, "load": 0 },
+        { "rep": 10, "load": 0 }
       ]
     }
   },
@@ -201,9 +201,9 @@
     "set": {
       "type": "weightRep",
       "sets": [
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 }
+        { "rep": 10, "load": 0 },
+        { "rep": 10, "load": 0 },
+        { "rep": 10, "load": 0 }
       ]
     }
   },
@@ -217,9 +217,9 @@
     "set": {
       "type": "weightRep",
       "sets": [
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 }
+        { "rep": 10, "load": 0 },
+        { "rep": 10, "load": 0 },
+        { "rep": 10, "load": 0 }
       ]
     }
   },
@@ -329,9 +329,9 @@
     "set": {
       "type": "weightRep",
       "sets": [
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 }
+        { "rep": 10, "load": 0 },
+        { "rep": 10, "load": 0 },
+        { "rep": 10, "load": 0 }
       ]
     }
   },
@@ -345,9 +345,9 @@
     "set": {
       "type": "weightRep",
       "sets": [
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 }
+        { "rep": 10, "load": 0 },
+        { "rep": 10, "load": 0 },
+        { "rep": 10, "load": 0 }
       ]
     }
   },
@@ -361,9 +361,9 @@
     "set": {
       "type": "weightTime",
       "sets": [
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 }
+        { "rep": 10, "load": 0 },
+        { "rep": 10, "load": 0 },
+        { "rep": 10, "load": 0 }
       ]
     }
   },
@@ -473,9 +473,9 @@
     "set": {
       "type": "weightRep",
       "sets": [
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 }
+        { "rep": 10, "load": 0 },
+        { "rep": 10, "load": 0 },
+        { "rep": 10, "load": 0 }
       ]
     }
   },
@@ -649,9 +649,9 @@
     "set": {
       "type": "weightRep",
       "sets": [
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 }
+        { "rep": 10, "load": 0 },
+        { "rep": 10, "load": 0 },
+        { "rep": 10, "load": 0 }
       ]
     }
   },
@@ -665,9 +665,9 @@
     "set": {
       "type": "weightRep",
       "sets": [
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 }
+        { "rep": 10, "load": 0 },
+        { "rep": 10, "load": 0 },
+        { "rep": 10, "load": 0 }
       ]
     }
   },
@@ -681,9 +681,9 @@
     "set": {
       "type": "weightRep",
       "sets": [
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 },
-        { "rep": 10, "load": 12 }
+        { "rep": 10, "load": 0 },
+        { "rep": 10, "load": 0 },
+        { "rep": 10, "load": 0 }
       ]
     }
   },
@@ -716,6 +716,22 @@
         { "rep": 30, "load": 0 },
         { "rep": 30, "load": 0 },
         { "rep": 30, "load": 0 }
+      ]
+    }
+  },
+  {
+    "id": 1617098340200,
+    "name": "Roll-Out",
+    "imageUrl": "assets/img/exercise/abs-rollout.jpg",
+    "category": "Abs",
+    "equipment": "Bodyweight",
+    "handType": "single-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 0 },
+        { "rep": 10, "load": 0 },
+        { "rep": 10, "load": 0 }
       ]
     }
   },

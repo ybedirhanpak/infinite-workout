@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ModalController, NavController } from '@ionic/angular';
 
@@ -15,6 +15,8 @@ import { WorkoutService } from '@services/workout.service';
 import { copyFrom } from '@utils/object.util';
 import { getEmptyWorkout } from '@utils/workout.util';
 import { ImageGalleryPage } from '../image-gallery/image-gallery.page';
+
+const DEFAULT_IMAGE = '/assets/img/workout/workout-1.jpg';
 
 @Component({
   selector: 'app-create-edit-workout',
@@ -102,7 +104,7 @@ export class CreateEditWorkoutPage implements OnInit {
 
   async onSaveClick() {
     const workoutToSave = {
-      imageUrl: '/assets/img/workout/mix-workout.jpg',
+      imageUrl: DEFAULT_IMAGE,
       ...this.workout,
       ...this.formGroup.value,
     };
@@ -137,7 +139,7 @@ export class CreateEditWorkoutPage implements OnInit {
   }
 
   async selectImage() {
-    if (this.mode === 'edit') {
+    if (this.mode === 'edit' && !this.workout.state?.created) {
       return;
     }
 
@@ -158,6 +160,6 @@ export class CreateEditWorkoutPage implements OnInit {
   }
 
   getWorkoutImageUI() {
-    return this.workout.imageUrl ?? '/assets/img/workout/mix-workout.jpg';
+    return this.workout.imageUrl ?? DEFAULT_IMAGE;
   }
 }
