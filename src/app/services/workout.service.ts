@@ -19,6 +19,7 @@ const BASE_URL = 'https://infinite-workout-2d736-default-rtdb.firebaseio.com/';
   providedIn: 'root',
 })
 export class WorkoutService {
+  public remoteWorkouts = new State<Workout[]>([]);
   public workoutDetail = new State<Workout>(null);
   public workoutEdit = new State<Workout>(null);
 
@@ -106,9 +107,9 @@ export class WorkoutService {
     return this.workouts.remove(workout);
   }
 
-  async fetchWorkouts() {
+  fetchWorkouts() {
     return this.http
-      .get<{[key: string]: Workout}>(`${BASE_URL}/workout.json`)
+      .get<{ [key: string]: Workout }>(`${BASE_URL}/workout.json`)
       .pipe(
         map((workout) => {
           if (workout) {
@@ -117,7 +118,9 @@ export class WorkoutService {
           return [];
         })
       )
-      .toPromise();
+      .subscribe((workouts) => {
+        this.remoteWorkouts.set(workouts);
+      });
   }
 
   async uploadWorkout(workout: Workout) {

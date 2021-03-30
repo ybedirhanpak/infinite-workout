@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 // Model
@@ -13,7 +13,7 @@ import { groupBy } from '@utils/object.util';
   templateUrl: './workouts.page.html',
   styleUrls: ['./workouts.page.scss'],
 })
-export class WorkoutsPage {
+export class WorkoutsPage implements OnInit {
   workoutList: Workout[];
   workoutCategories: WorkoutCategory[];
 
@@ -24,8 +24,8 @@ export class WorkoutsPage {
     this.router.navigateByUrl('/workout-detail');
   }
 
-  ionViewWillEnter() {
-    this.workoutService.fetchWorkouts().then((workouts) => {
+  ngOnInit() {
+    this.workoutService.remoteWorkouts.get().subscribe((workouts) => {
       this.workoutService.workouts
         .loadLocalStates(workouts as any)
         .then((workouts: Workout[]) => {
@@ -37,5 +37,13 @@ export class WorkoutsPage {
           ) as any;
         });
     });
+  }
+
+  ionViewWillEnter() {
+    this.workoutService.fetchWorkouts();
+  }
+
+  identifyWorkout(index: number, item: Workout) {
+    return item.id ?? index;
   }
 }
