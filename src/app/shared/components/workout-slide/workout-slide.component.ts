@@ -10,7 +10,6 @@ import { Workout } from '@models/workout.model';
 })
 export class WorkoutSlideComponent {
   @Input() workouts: Workout[] = [];
-  @Input() filter: string = 'none';
 
   @Output() onClick = new EventEmitter<Workout>();
 
