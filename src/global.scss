@@ -93,6 +93,18 @@ ion-chip {
     ion-icon {
       margin: 0;
     }
+
+    &.small {
+      ion-icon {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+
+  &.opaque {
+    background: rgba(var(--ion-color-base-rgb), 0.8);
+    color: var(--ion-color-contrast, #fff);
   }
 }
 
@@ -211,6 +223,18 @@ img.cover {
 .cover {
   height: 100%;
   width: 100%;
+}
+
+.img-small {
+  height: 200px;
+}
+
+.img-medium {
+  height: 240px;
+}
+
+.img-large {
+  height: 280px;
 }
 
 .footer-button {
