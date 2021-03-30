@@ -15,13 +15,13 @@
 <ion-content>
   <app-page-layout>
     <div class="create-edit-workout" *ngIf="workout">
-      <div class="img-wrapper" (click)="selectImage()">
+      <div class="img-large" (click)="selectImage()">
         <img class="cover" [src]="getWorkoutImageUI()" [alt]="">
       </div>
       <form [formGroup]="formGroup">
         <ion-list>
           <ion-item>
-            <h1 style="font-weight: bold;">
+            <h1>
               <ion-input formControlName="name" class="ion-no-padding" type="text" placeholder="Name"></ion-input>
             </h1>
           </ion-item>
