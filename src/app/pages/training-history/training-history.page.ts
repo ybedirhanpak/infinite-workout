@@ -45,11 +45,11 @@ export class TrainingHistoryPage implements OnInit, OnDestroy {
     }
   }
 
-  deleteTrainingRecord(trainingRecord: TrainingRecord) {
+  deleteTrainingRecord(id: number) {
     let message = '';
 
     this.trainingService
-      .deleteTrainingRecord(trainingRecord.id)
+      .deleteTrainingRecord(id)
       .then(() => {
         message = 'Training record deleted successfully.';
       })

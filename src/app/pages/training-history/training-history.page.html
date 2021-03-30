@@ -13,27 +13,17 @@
     </div>
     <div style="padding-bottom: 16px;">
       <ion-virtual-scroll [items]="trainingRecordList" [trackBy]="recordIdentifier" approxItemHeight="224px">
-        <div *virtualItem="let trainingRecord" class="training-history-card" mode="ios">
-          <div class="img-wrapper filter dark">
-            <img class="cover" [src]="trainingRecord.workout.imageUrl">
-          </div>
-          <div class="bottom-left">
-            <span class="title">
-              {{ trainingRecord.workout.name }}
-            </span>
-            <span class="text">
-              {{ trainingRecord.duration }}
-            </span>
-            <span class="text">
-              {{ trainingRecord.date }}
-            </span>
-          </div>
-  
-          <div class="top-right">
-            <ion-button class="delete-button" fill="clear" color="danger" (click)="deleteTrainingRecord(trainingRecord)">
-              <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
-            </ion-button>
-          </div>
+        <div *virtualItem="let trainingRecord" class="training-history-card">
+          <app-highlight-card
+          [id]="trainingRecord.id"
+          [imageUrl]="trainingRecord.workout.imageUrl"
+          [title]="trainingRecord.workout.name"
+          [subtitle]="trainingRecord.duration"
+          [textList]="[trainingRecord.date]"
+          [actionButton]="{ icon: 'trash', color: 'primary'}"
+          (onActionClick)="deleteTrainingRecord($event)"
+          >
+          </app-highlight-card>
         </div>
       </ion-virtual-scroll>
     </div>
