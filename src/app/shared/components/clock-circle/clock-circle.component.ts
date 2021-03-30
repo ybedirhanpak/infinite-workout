@@ -18,7 +18,7 @@ export class ClockCircleComponent implements OnInit, OnDestroy {
   @Input() mode: 'timer' | 'stopwatch' = 'stopwatch';
   @Input() max = 60;
   @Input() current = 0;
-  @Input() color: 'primary' | 'secondary' = 'primary';
+  @Input() color: 'primary' | 'secondary' = 'primary';
 
   @Output() onFinish = new EventEmitter<boolean>();
 
@@ -100,7 +100,7 @@ export class ClockCircleComponent implements OnInit, OnDestroy {
     this.start();
   }
 
-  public updateColor(color: 'primary' | 'secondary') {
+  public updateColor(color: 'primary' | 'secondary') {
     this.color = color;
   }
 
