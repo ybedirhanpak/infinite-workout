@@ -11,7 +11,7 @@ import { SelectAllDirective } from './directives/select-all.directive';
 import { DarkModeToggleComponent } from './components/dark-mode-toggle/dark-mode-toggle.component';
 import { PageLayoutComponent } from './components/page-layout/page-layout.component';
 import { RestTimePickerComponent } from './components/rest-time-picker/rest-time-picker.component';
-import { RegularCardComponent } from './components/regular-card/regular-card.component';
+import { CardMediumComponent } from './components/card-medium/card-medium.component';
 import { WorkoutSlideComponent } from './components/workout-slide/workout-slide.component';
 import { ClickableComponent } from './components/clickable/clickable.component';
 import { ClockCircleComponent } from './components/clock-circle/clock-circle.component';
@@ -26,7 +26,7 @@ import { ExerciseListSkeletonComponent } from './components/exercise-list-skelet
     PageLayoutComponent,
     DarkModeToggleComponent,
     RestTimePickerComponent,
-    RegularCardComponent,
+    CardMediumComponent,
     WorkoutSlideComponent,
     ClickableComponent,
     ClockCircleComponent,
@@ -64,7 +64,7 @@ import { ExerciseListSkeletonComponent } from './components/exercise-list-skelet
     PageLayoutComponent,
     DarkModeToggleComponent,
     RestTimePickerComponent,
-    RegularCardComponent,
+    CardMediumComponent,
     WorkoutSlideComponent,
     ClickableComponent,
     ClockCircleComponent,

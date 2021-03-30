@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-regular-card',
-  templateUrl: './regular-card.component.html',
-  styleUrls: ['./regular-card.component.scss'],
+  selector: 'app-card-medium',
+  templateUrl: './card-medium.component.html',
+  styleUrls: ['./card-medium.component.scss'],
 })
-export class RegularCardComponent {
+export class CardMediumComponent {
   @Input() heart: boolean;
   @Input() star: boolean;
   @Input() sparkles: boolean;
