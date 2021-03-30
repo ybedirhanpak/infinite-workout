@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 // Model
 import { Exercise } from '@models/exercise.model';
@@ -9,9 +9,8 @@ import { Exercise } from '@models/exercise.model';
   styleUrls: ['./exercise-slide.component.scss'],
 })
 export class ExerciseSlideComponent {
-  @Input() category: string = 'Category';
+  @Input() category: string;
   @Input() exercises: Exercise[] = [];
-  @Input() filter: string = 'none';
 
   @Output() onClick = new EventEmitter<Exercise>();
 
