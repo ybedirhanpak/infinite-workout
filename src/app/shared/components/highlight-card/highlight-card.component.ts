@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-highlight-card',
@@ -6,6 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./highlight-card.component.scss'],
 })
 export class HighlightCardComponent implements OnInit {
+  @Input() id: string;
   @Input() imageUrl: string;
   @Input() title: string;
   @Input() subtitle: string;
@@ -17,7 +18,13 @@ export class HighlightCardComponent implements OnInit {
 
   @Input() filter: string = 'dark';
 
+  @Output() onActionClick = new EventEmitter<any>();
+
   constructor() {}
 
   ngOnInit() {}
+
+  onActionButtonClick() {
+    this.onActionClick.emit(this.id);
+  }
 }

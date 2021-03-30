@@ -1,24 +1,27 @@
 <app-clickable>
-  <div class="highlight-card" mode="ios">
-    <div [ngClass]="['img-wrapper', 'filter', filter]">
+  <div [ngClass]="['highlight-card', filter]">
+    <div [ngClass]="['img-medium', 'card', 'filter', filter]">
       <img class="cover" [src]="imageUrl">
     </div>
-    <div [ngClass]="['bottom-left', filter]">
-      <span *ngIf="subtitle" class="subtitle">
-        {{ subtitle }}
-      </span>
-      <span class="title">
-        {{ title }}
-      </span>
-      <span class="text" *ngFor="let text of textList">
-        {{ text }}
-      </span>
+    <div class="bottom-left">
+      <div class="content">
+        <span class="subtitle">
+          {{ subtitle }}
+        </span>
+        <span class="title">
+          {{ title }}
+        </span>
+        <span class="text" *ngFor="let text of textList">
+          {{ text }}
+        </span>
+      </div>
     </div>
 
-    <div class="top-right" *ngIf="actionButton">
-      <ion-button class="action-button" fill="clear" [color]="actionButton.color">
-        <ion-icon [name]="actionButton.icon" slot="icon-only"></ion-icon>
-      </ion-button>
+    <div class="top-right">
+      <ion-chip *ngIf="actionButton" class="icon-button opaque small action-button" [color]="actionButton.color"
+      (click)="onActionButtonClick()">
+        <ion-icon [name]="actionButton.icon"></ion-icon>
+      </ion-chip>
     </div>
   </div>
 </app-clickable>

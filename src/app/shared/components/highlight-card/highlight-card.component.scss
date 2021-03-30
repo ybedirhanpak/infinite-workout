@@ -1,64 +1,40 @@
 :host {
-    width: 100%;
+  width: 100%;
 }
 
 .highlight-card {
-    display: block;
-    position: relative;
-    margin: 0;
+  display: block;
+  position: relative;
+
+  &.light {
+    color: black;
+  }
+
+  &.dark {
     color: white;
-    text-align: start;
-    overflow: hidden;
+  }
+}
 
-    .img-wrapper {
-        height: 240px;
-        border-radius: var(--card-border-radius, 20px);
-        overflow: hidden;
-    }
+.content {
+  margin: 16px;
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+}
 
-    .bottom-left {
-        position: absolute;
-        bottom: 16px;
-        left: 16px;
+.subtitle {
+  font-size: 1rem;
+  text-transform: uppercase;
+}
 
-        display: flex;
-        flex-direction: column;
+.title {
+  font-size: 2rem;
+}
 
-        &.light {
-            color: black;
-        }
+.text {
+  font-size: 1rem;
+}
 
-        &.dark {
-            color: white;
-        }
-    }
-
-    .top-right {
-        position: absolute;
-        top: 0;
-        right: 0;
-
-        display: flex;
-        flex-direction: column;
-    }
-
-    .subtitle {
-        font-size: 1rem;
-        text-transform: uppercase;
-    }
-
-    .title {
-        font-size: 2rem;
-    }
-
-    .text {
-        font-size: 1rem;
-    }
-
-    .action-button {
-        ion-icon {
-            width: 16px;
-            height: 16px;
-        }
-    }
+.action-button {
+  margin: 8px;
 }
