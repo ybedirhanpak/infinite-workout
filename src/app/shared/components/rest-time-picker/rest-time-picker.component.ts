@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { TrainingService } from 'src/app/services/training.service';
-import { DateService } from '../../../services/date.service';
+
+// Service
+import { TrainingService } from '@services/training.service';
+import { DateService } from '@services/date.service';
 
 @Component({
   selector: 'app-rest-time-picker',
@@ -19,7 +21,10 @@ export class RestTimePickerComponent implements OnInit {
   ngOnInit() {
     this.trainingService.restTime.subscribe((value) => {
       this.restTime = value;
-      this.restTimeString = this.dateService.secondsToString(this.restTime, true);
+      this.restTimeString = this.dateService.secondsToString(
+        this.restTime,
+        true
+      );
     });
   }
 

@@ -1,10 +1,5 @@
 <ion-item>
-  <ion-label>Rest Time </ion-label>
-  <ion-datetime
-    display-format="HH:mm:ss"
-    picker-format="HH:mm:ss"
-    [value]="restTimeString"
-    name="rest-time"
-    (ionChange)="onRestTimeChange($event)"
-  ></ion-datetime>
+  <ion-label class="label-header">Rest Time</ion-label>
+  <ion-datetime display-format="HH:mm:ss" picker-format="HH:mm:ss" [value]="restTimeString" name="rest-time"
+    (ionChange)="onRestTimeChange($event)"></ion-datetime>
 </ion-item>
