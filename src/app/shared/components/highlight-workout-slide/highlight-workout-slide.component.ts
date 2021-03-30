@@ -27,4 +27,8 @@ export class HighlightWorkoutSlideComponent implements OnInit {
   onWorkoutClick(workout: Workout) {
     this.onClick.emit(workout);
   }
+
+  identifyWorkout(index: number, item: Workout){
+    return item.id ?? index; 
+ }
 }
