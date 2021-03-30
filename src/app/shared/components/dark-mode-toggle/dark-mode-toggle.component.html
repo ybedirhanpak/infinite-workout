@@ -1,12 +1,12 @@
 <ion-list>
   <ion-radio-group [(ngModel)]="selectedTheme" (ionChange)="updateSelectedTheme(selectedTheme)">
     <ion-list-header>
-      <ion-label style="font-size: 1rem;">
+      <h3 class="list-header">
         Theme Options
-      </ion-label>
+      </h3>
     </ion-list-header>
 
-    <ion-item *ngFor="let option of themeOptions" >
+    <ion-item *ngFor="let option of themeOptions">
       <ion-avatar slot="start">
         <img [src]="option.image" />
       </ion-avatar>
