@@ -1,0 +1,21 @@
+.list-header {
+  height: 24px;
+  margin: 16px;
+}
+
+.exercise-header {
+  height: 16px;
+
+  ion-skeleton-text {
+    width: 50%;
+  }
+}
+
+.exercise-detail {
+  margin: 8px 0;
+  height: 14px;
+
+  ion-skeleton-text {
+    width: 50%;
+  }
+}
