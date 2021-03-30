@@ -9,9 +9,8 @@ export class RegularCardComponent {
   @Input() heart: boolean;
   @Input() star: boolean;
   @Input() sparkles: boolean;
-  @Input() filter: string = 'red-turquoise';
-  @Input() title: string = 'Name';
-  @Input() subtitle: string = 'Category';
-  @Input() smallText: string = 'Duration';
-  @Input() imageUrl: string = 'assets/img/light-theme.png';
+  @Input() title: string;
+  @Input() subtitle: string;
+  @Input() text: string;
+  @Input() imageUrl: string;
 }

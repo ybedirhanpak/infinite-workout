@@ -1,41 +1,29 @@
-.workout-card {
-  margin: 0;
+.img-wrapper {
+  height: 240px;
+  border-radius: var(--card-border-radius, 20px);
+  overflow: hidden;
+  position: relative;
+}
 
-  .img-wrapper {
-    height: 240px;
-    border-radius: var(--card-border-radius, 20px);
-    overflow: hidden;
-    position: relative;
+ion-card-header {
+  text-align: start;
+  padding: 8px;
+  height: 6rem;
+
+  ion-card-title {
+    font-size: 16px;
+    line-height: 1.2rem;
+    margin-top: 4px;
   }
 
-  .icon-group {
-    display: flex;
-    flex-direction: column;
-    padding: 16px;
-
-    & ion-icon:not(:first-child) {
-      margin-top: 8px;
-    }
+  ion-card-subtitle {
+    line-height: 1rem;
+    text-transform: uppercase;
   }
 
-  ion-card-header {
-    text-align: start;
-    padding: 8px;
-    height: 6rem;
-
-    ion-card-title {
-      line-height: 1.2rem;
-    }
-
-    ion-card-subtitle {
-      line-height: 1rem;
-      text-transform: uppercase;
-    }
-
-    ion-text {
-      font-size: 14px;
-      line-height: 1rem;
-      color: var(--ion-color-step-800, #eeeeee);
-    }
+  ion-text {
+    font-size: 14px;
+    line-height: 1rem;
+    color: var(--ion-color-step-800, #eeeeee);
   }
 }

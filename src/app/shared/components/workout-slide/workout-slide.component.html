@@ -1,8 +1,8 @@
 <ion-slides style="padding: 0 12px" [options]="slideOptions">
   <ion-slide *ngFor="let workout of workouts">
-    <app-regular-card [title]="workout.name" [subtitle]="workout.category" [smallText]="workout.duration"
-      [imageUrl]="workout.imageUrl" (click)="onWorkoutClick(workout)" [filter]="filter"
-      [heart]="workout.state?.favorited" [sparkles]="workout.state?.customized" [star]="workout.state?.created">
+    <app-regular-card [title]="workout.name" [subtitle]="workout.category" [text]="workout.duration"
+      [imageUrl]="workout.imageUrl" (click)="onWorkoutClick(workout)" [heart]="workout.state?.favorited"
+      [sparkles]="workout.state?.customized" [star]="workout.state?.created">
     </app-regular-card>
   </ion-slide>
 </ion-slides>
