@@ -31,7 +31,7 @@ export class ExerciseListItemComponent implements OnInit {
     this.onEditClick.emit(this.exercise);
   }
 
-  getLoadString(load: number | undefined) {
+  getLoadStringUI(load: number | undefined) {
     return load && load !== 0 ? load : '--';
   }
 }

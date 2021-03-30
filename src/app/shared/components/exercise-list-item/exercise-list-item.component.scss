@@ -1,45 +1,41 @@
 .exercise {
   margin-bottom: 16px;
+}
 
-  ion-avatar {
-    width: 56px;
-    height: 64px;
-    margin-top: auto;
-    margin-bottom: 8px;
+ion-avatar {
+  width: 56px;
+  height: 64px;
+  margin-top: auto;
+  margin-bottom: 8px;
+}
 
-    img {
-      border-radius: var(--card-border-radius, 20px);
+.exercise-details {
+  display: flex;
+  text-align: start;
+  justify-content: space-between;
+  padding-bottom: 8px;
+
+  p {
+    flex: 1;
+    color: var(--ion-color-step-600, #666666);
+  }
+
+  .rep-item {
+    flex: 1;
+  }
+
+  .uniform-rep {
+    width: 100%;
+
+    p {
+      width: 100%;
     }
   }
 
-  &-details {
-    display: flex;
-    text-align: start;
-    justify-content: space-between;
-    padding-bottom: 8px;
-
-    p {
-      flex: 1;
-      color: var(--ion-color-step-600, #666666);
-    }
-
-    .rep-item {
-      flex: 1;
-    }
-
-    .uniform-rep {
-      width: 100%;
-
-      p {
-        width: 100%;
-      }
-    }
-
-    .rep-item p,
-    .uniform-rep p {
-      padding: 8px 0;
-      margin: 0;
-      border-bottom: 1px solid var(--ion-color-step-300, rgba(0, 0, 0, 0.13));
-    }
+  .rep-item p,
+  .uniform-rep p {
+    padding: 8px 0;
+    margin: 0;
+    border-bottom: 1px solid var(--ion-color-step-300, rgba(0, 0, 0, 0.13));
   }
 }
