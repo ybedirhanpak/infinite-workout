@@ -225,3 +225,13 @@ img.cover {
     font-size: 1rem;
   }
 }
+
+.icon-group-col {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+
+  & ion-icon:not(:first-child) {
+    margin-top: 8px;
+  }
+}
