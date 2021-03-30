@@ -96,6 +96,10 @@ ion-chip {
   }
 }
 
+ion-avatar {
+  --border-radius: var(--card-border-radius, 5px);
+}
+
 .no-ripple {
   --ripple-color: transparent;
   --background-activated: transparent;
