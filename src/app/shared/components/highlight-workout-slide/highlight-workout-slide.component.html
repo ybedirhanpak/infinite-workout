@@ -1,4 +1,4 @@
-<ion-slides style="padding: 0 12px" [options]="slideOptions">
+<ion-slides class="catalog" [options]="slideOptions">
   <ion-slide *ngFor="let workout of workouts; trackBy:identifyWorkout">
     <app-highlight-card [imageUrl]="workout.imageUrl" [title]="workout.name" [subtitle]="workout.category"
       [textList]="[workout.duration]" [filter]="filter" (click)="onWorkoutClick(workout)">
