@@ -10,10 +10,10 @@
 <ion-content>
   <app-page-layout>
     <div class="exercise-detail" *ngIf="exercise">
-      <div class="img-wrapper">
+      <div class="img-large">
         <img class="cover" [src]="exercise.imageUrl" [alt]="exercise.name">
       </div>
-      <h1 class="ion-padding-horizontal" style="font-weight: bold;">{{ exercise.name }}</h1>
+      <h1 class="ion-padding-horizontal">{{ exercise.name }}</h1>
       <ion-list lines="none">
         <ion-item>
           <ion-icon name="body-outline" slot="start"></ion-icon>{{ exercise.category }}
