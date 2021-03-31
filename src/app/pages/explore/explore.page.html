@@ -5,27 +5,15 @@
 </ion-header>
 <ion-content>
   <app-page-layout>
-    <section>
-      <div style="margin: 12px;">
-        <app-highlight-card
-          [imageUrl]="'assets/img/workouts.jpg'"
-          [title]="'Workouts'"
-          [filter]="'dark'"
-          [textList]="['See all workouts']"
-          (click)="onWorkoutsClick()">
-        </app-highlight-card>
-      </div>
+    <section class="container">
+      <app-highlight-card [imageUrl]="'assets/img/workouts.jpg'" [title]="'Workouts'" [filter]="'dark'"
+        [textList]="['See all workouts']" (click)="onWorkoutsClick()">
+      </app-highlight-card>
     </section>
-    <section>
-      <div style="margin: 12px;">
-        <app-highlight-card
-          [imageUrl]="'assets/img/exercises.jpg'"
-          [title]="'Exercises'"
-          [filter]="'dark'"
-          [textList]="['See all exercises']"
-          (click)="onExercisesClick()">
-        </app-highlight-card>
-      </div>
+    <section class="container">
+      <app-highlight-card [imageUrl]="'assets/img/exercises.jpg'" [title]="'Exercises'" [filter]="'dark'"
+        [textList]="['See all exercises']" (click)="onExercisesClick()">
+      </app-highlight-card>
     </section>
   </app-page-layout>
 </ion-content>
