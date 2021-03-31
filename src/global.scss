@@ -236,6 +236,10 @@ img.cover {
 
 .img-medium {
   height: 240px;
+
+  @media (max-width: 320px) {
+    height: 200px;
+  }
 }
 
 .img-large {
