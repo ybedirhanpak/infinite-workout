@@ -13,7 +13,12 @@
       <h3 class="ion-text-center">
         Highlights
       </h3>
-      <app-highlight-workout-slide [workouts]="workoutList" (onClick)="onWorkoutClick($event)"></app-highlight-workout-slide>
+      <div *ngIf="loading" style="margin: 12px;">
+        <app-highlight-card [skeleton]="true"></app-highlight-card>
+      </div>
+      <div *ngIf="!loading">
+        <app-highlight-workout-slide [workouts]="workoutList" (onClick)="onWorkoutClick($event)"></app-highlight-workout-slide>
+      </div>
     </section>
     <section *ngFor="let category of workoutCategories">
       <h3 class="ion-text-center">

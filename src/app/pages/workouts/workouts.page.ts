@@ -9,6 +9,9 @@ import { WorkoutService } from '@services/workout.service';
 
 // Util
 import { groupBy } from '@utils/object.util';
+import { getEmptyWorkout } from '@utils/workout.util';
+
+const EMPTY_WORKOUT = getEmptyWorkout(Date.now());
 
 @Component({
   selector: 'app-workouts',
@@ -16,6 +19,7 @@ import { groupBy } from '@utils/object.util';
   styleUrls: ['./workouts.page.scss'],
 })
 export class WorkoutsPage implements OnInit {
+  loading = false;
   workoutList: Workout[];
   workoutCategories: WorkoutCategory[];
 
@@ -27,6 +31,7 @@ export class WorkoutsPage implements OnInit {
   }
 
   ngOnInit() {
+    this.loading = true;
     this.workoutService.remoteWorkouts.get().subscribe((workouts) => {
       this.workoutService.workouts
         .loadLocalStates(workouts as any)
@@ -37,6 +42,9 @@ export class WorkoutsPage implements OnInit {
             'workouts',
             'category'
           ) as any;
+        })
+        .finally(() => {
+          this.loading = false;
         });
     });
   }
