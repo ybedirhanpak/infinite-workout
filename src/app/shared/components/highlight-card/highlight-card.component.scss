@@ -25,16 +25,35 @@
 .subtitle {
   font-size: 1rem;
   text-transform: uppercase;
+
+  ion-skeleton-text {
+    height: 1rem;
+    width: 40%;
+  }
 }
 
 .title {
   font-size: 2rem;
+
+  ion-skeleton-text {
+    height: 2rem;
+    width: 50%;
+  }
 }
 
 .text {
   font-size: 1rem;
+
+  ion-skeleton-text {
+    height: 1rem;
+    width: 30%;
+  }
 }
 
 .action-button {
   margin: 8px;
+}
+
+.skeleton-content-wrapper {
+  width: 100%;
 }

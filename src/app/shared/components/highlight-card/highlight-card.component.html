@@ -1,19 +1,41 @@
 <app-clickable>
   <div [ngClass]="['highlight-card', filter]">
-    <div [ngClass]="['img-medium', 'card', 'filter', filter]">
-      <img class="cover" [src]="imageUrl">
+    <div *ngIf="!skeleton">
+      <div [ngClass]="['img-medium', 'card', 'filter', filter]">
+        <img class="cover" [src]="imageUrl">
+      </div>
+      <div class="bottom-left">
+        <div class="content">
+          <span class="subtitle">
+            {{ subtitle }}
+          </span>
+          <span class="title">
+            {{ title }}
+          </span>
+          <span class="text" *ngFor="let text of textList">
+            {{ text }}
+          </span>
+        </div>
+      </div>
     </div>
-    <div class="bottom-left">
-      <div class="content">
-        <span class="subtitle">
-          {{ subtitle }}
-        </span>
-        <span class="title">
-          {{ title }}
-        </span>
-        <span class="text" *ngFor="let text of textList">
-          {{ text }}
-        </span>
+    <div *ngIf="skeleton">
+      <div class="img-medium card">
+        <ion-avatar class="cover">
+          <ion-skeleton-text></ion-skeleton-text>
+        </ion-avatar>
+      </div>
+      <div class="bottom-left skeleton-content-wrapper">
+        <div class="content">
+          <span class="subtitle">
+            <ion-skeleton-text></ion-skeleton-text>
+          </span>
+          <span class="title">
+            <ion-skeleton-text></ion-skeleton-text>
+          </span>
+          <span class="text">
+            <ion-skeleton-text></ion-skeleton-text>
+          </span>
+        </div>
       </div>
     </div>
 

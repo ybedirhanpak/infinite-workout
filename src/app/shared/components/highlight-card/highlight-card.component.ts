@@ -18,6 +18,8 @@ export class HighlightCardComponent implements OnInit {
 
   @Input() filter: string = 'dark';
 
+  @Input() skeleton: boolean;
+
   @Output() onActionClick = new EventEmitter<any>();
 
   constructor() {}
