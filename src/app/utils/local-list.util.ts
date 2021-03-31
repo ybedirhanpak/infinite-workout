@@ -33,7 +33,7 @@ export class LocalList<T extends Array<StateHolder>> {
   /**
    * Loads local states of elements
    */
-  async loadWithState(element: StateHolder) {
+  async loadLocalState(element: StateHolder) {
     const local = await this.find(element);
     if (local && local.state) {
       element.state = local.state;
@@ -48,7 +48,7 @@ export class LocalList<T extends Array<StateHolder>> {
    */
   async loadLocalStates(list: T) {
     const promises = list.map(async (element: StateHolder) => {
-      return this.loadWithState(element);
+      return this.loadLocalState(element);
     });
 
     return Promise.all(promises).then((workouts) => {
