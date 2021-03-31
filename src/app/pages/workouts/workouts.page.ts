@@ -6,6 +6,8 @@ import { Workout, WorkoutCategory } from '@models/workout.model';
 
 // Service
 import { WorkoutService } from '@services/workout.service';
+
+// Util
 import { groupBy } from '@utils/object.util';
 
 @Component({
