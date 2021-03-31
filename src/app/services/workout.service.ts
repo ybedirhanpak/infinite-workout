@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { from } from 'rxjs';
+import { concatMap, map, tap } from 'rxjs/operators';
 
 // Model
-import { Workout } from '@models/workout.model';
+import { Workout, WorkoutCategory } from '@models/workout.model';
 
 // Utils
 import { LocalList } from '@utils/local-list.util';
 import { State } from '@utils/state.util';
-import { HttpClient } from '@angular/common/http';
+import { groupBy } from '@utils/object.util';
 
 // Storage Keys
 const WORKOUTS_KEY = 'WORKOUTS';
@@ -20,6 +22,8 @@ const BASE_URL = 'https://infinite-workout-2d736-default-rtdb.firebaseio.com/';
 })
 export class WorkoutService {
   public remoteWorkouts = new State<Workout[]>([]);
+  public workoutCategories = new State<WorkoutCategory[]>([]);
+
   public workoutDetail = new State<Workout>(null);
   public workoutEdit = new State<Workout>(null);
 
@@ -111,11 +115,17 @@ export class WorkoutService {
     return this.http
       .get<{ [key: string]: Workout }>(`${BASE_URL}/workout.json`)
       .pipe(
-        map((workout) => {
-          if (workout) {
-            return Object.values(workout);
+        concatMap((workoutsData) => {
+          if (workoutsData) {
+            const workouts = Object.values(workoutsData);
+            return from(this.workouts.loadLocalStates(workouts));
           }
           return [];
+        }),
+        tap((workouts) => {
+          this.workoutCategories.set(
+            groupBy(workouts, 'workouts', 'category') as any
+          );
         })
       )
       .subscribe((workouts) => {

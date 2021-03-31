@@ -23,6 +23,8 @@ export class WorkoutsPage implements OnInit {
   workoutList: Workout[];
   workoutCategories: WorkoutCategory[];
 
+  refresher: any;
+
   constructor(private workoutService: WorkoutService, private router: Router) {}
 
   onWorkoutClick(workout: Workout) {
@@ -31,29 +33,38 @@ export class WorkoutsPage implements OnInit {
   }
 
   ngOnInit() {
+    this.workoutService.fetchWorkouts();
+
     this.loading = true;
     this.workoutService.remoteWorkouts.get().subscribe((workouts) => {
-      this.workoutService.workouts
-        .loadLocalStates(workouts as any)
-        .then((workouts: Workout[]) => {
-          this.workoutList = workouts;
-          this.workoutCategories = groupBy(
-            workouts,
-            'workouts',
-            'category'
-          ) as any;
-        })
-        .finally(() => {
-          this.loading = false;
-        });
+      this.workoutList = workouts;
+      this.loading = false;
+      if (this.refresher) {
+        this.refresher.complete();
+      }
     });
+
+    this.workoutService.workoutCategories
+      .get()
+      .subscribe((workoutCategories) => {
+        this.workoutCategories = workoutCategories;
+      });
   }
 
   ionViewWillEnter() {
+    this.workoutService.workouts.loadLocalStates(this.workoutList);
+  }
+
+  doRefresh(event: any) {
+    this.refresher = event.target;
     this.workoutService.fetchWorkouts();
   }
 
   identifyWorkout(index: number, item: Workout) {
     return item.id ?? index;
+  }
+
+  identifyCategory(index: number, category: WorkoutCategory) {
+    return index + category.category + category.workouts.length;
   }
 }
