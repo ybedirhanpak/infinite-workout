@@ -215,6 +215,7 @@ section {
 
 .card {
   border-radius: var(--card-border-radius, 5px);
+  overflow: hidden;
 }
 
 img.cover {
