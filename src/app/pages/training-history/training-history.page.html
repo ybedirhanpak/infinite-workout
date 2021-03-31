@@ -11,21 +11,16 @@
       <p>Your training history will be here. Explore some workouts and do your first training.</p>
       <ion-button class="primary-button" routerLink="/workouts/">Explore</ion-button>
     </div>
-    <div style="padding-bottom: 16px;">
-      <ion-virtual-scroll [items]="trainingRecordList" [trackBy]="recordIdentifier" approxItemHeight="224px">
+    <section>
+      <ion-virtual-scroll [items]="trainingRecordList" [trackBy]="recordIdentifier" approxItemHeight="254px">
         <div *virtualItem="let trainingRecord" class="training-history-card">
-          <app-highlight-card
-          [id]="trainingRecord.id"
-          [imageUrl]="trainingRecord.workout.imageUrl"
-          [title]="trainingRecord.workout.name"
-          [subtitle]="trainingRecord.duration"
-          [textList]="[trainingRecord.date]"
-          [actionButton]="{ icon: 'trash', color: 'primary'}"
-          (onActionClick)="deleteTrainingRecord($event)"
-          >
+          <app-highlight-card [id]="trainingRecord.id" [imageUrl]="trainingRecord.workout.imageUrl"
+            [title]="trainingRecord.workout.name" [subtitle]="trainingRecord.duration"
+            [textList]="[trainingRecord.date]" [actionButton]="{ icon: 'trash', color: 'primary'}"
+            (onActionClick)="deleteTrainingRecord($event)">
           </app-highlight-card>
         </div>
       </ion-virtual-scroll>
-    </div>
+    </section>
   </app-page-layout>
 </ion-content>
