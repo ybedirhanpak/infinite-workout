@@ -1,9 +1,9 @@
 .exercise-card {
   margin: 12px;
-  background: transparent;
 
-  .img-wrapper {
-    height: 240px;
+  ion-card-header {
+    text-align: start;
+    padding: 0.8rem 1rem;
   }
 }
 
@@ -13,10 +13,15 @@
     margin: 12px;
     align-items: center;
 
+    &.button-only {
+      justify-content: flex-end;
+    }
+
     .set-card {
       flex: 1;
-      padding: 12px 12px 12px 0;
+      padding: 12px 0;
       margin: 0;
+      background: var(--ion-color-step-100);
 
       .set {
         display: flex;
@@ -26,28 +31,44 @@
           flex: 1;
           display: flex;
           align-items: flex-end;
-          text-align: center;
+          text-align: end;
 
           height: 100%;
+          padding-right: 16px;
 
           &:not(:last-child) {
-            padding-right: 24px;
             border-right: 1px solid var(--ion-color-step-600, #666666);
-          }
-
-          &:not(:first-child) {
-            padding-left: 16px;
           }
 
           ion-input {
             font-size: 2rem;
             line-height: 2rem;
+            margin: 0 4px;
+
+            @media (max-width: 480px) {
+              font-size: 1.8rem;
+              line-height: 1.8rem;
+            }
+
+            @media (max-width: 320px) {
+              font-size: 1rem;
+            }
           }
 
           .label {
             font-size: 1rem;
             line-height: 2rem;
             margin-left: 4px;
+
+            @media (max-width: 480px) {
+              font-size: 0.8rem;
+              line-height: 1.3rem;
+            }
+
+            @media (max-width: 320px) {
+              font-size: 0.7rem;
+              line-height: 1.2rem;
+            }
           }
         }
       }
@@ -67,10 +88,6 @@
         padding: 0;
         margin: 0;
       }
-    }
-
-    &.button-only {
-        justify-content: flex-end;
     }
   }
 }

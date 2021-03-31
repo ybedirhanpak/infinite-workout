@@ -12,8 +12,8 @@
 
 <ion-content>
   <app-page-layout>
-    <ion-card class="exercise-card" mode="ios" *ngIf="exercise">
-      <div class="img-wrapper">
+    <div class="card exercise-card" *ngIf="exercise">
+      <div class="img-small">
         <img class="cover" [src]="exercise.imageUrl">
       </div>
       <ion-card-header>
@@ -24,12 +24,12 @@
           {{ exercise.name }}
         </ion-card-title>
       </ion-card-header>
-    </ion-card>
+    </div>
 
     <div class="set-list">
       <div *ngFor="let set of sets; index as i;">
         <div class="set-item">
-          <ion-card mode="ios" class="set-card">
+          <div class="card set-card">
             <div class="set" lines="none">
               <div class="block">
                 <ion-input [(ngModel)]="set.load" (ionBlur)="onBlur($event, 'load')" class="ion-no-padding" type="text"
@@ -42,8 +42,8 @@
                 <span class="label">{{ setDetail.repUnit }}</span>
               </div>
             </div>
-          </ion-card>
-          <div class="action-button" (click)="onDeleteClick(i)">
+          </div>
+          <div class="action-button card" (click)="onDeleteClick(i)">
             <ion-chip class="icon-button" color="primary">
               <ion-icon name="trash"></ion-icon>
             </ion-chip>
