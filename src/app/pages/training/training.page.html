@@ -17,7 +17,7 @@
         (ionSlidesDidLoad)="onSlideLoad($event)">
         <ion-slide *ngFor="let exercise of exerciseClocks; index as i;">
           <div class="exercise" [class.next]="i > currentIndex" [class.prev]="i < currentIndex">
-            <ion-card class="exercise-card" mode="ios">
+            <div class="card exercise-card">
               <img class="cover-image" [src]="exercise.exercise.imageUrl">
               <ion-card-header>
                 <ion-card-subtitle>
@@ -34,22 +34,20 @@
                   <ion-text>{{ exercise.setCount }} sets</ion-text>
                 </div>
               </ion-card-header>
-              <ion-card-content class="ion-no-padding">
-                <ion-chip [color]="getChipColorUI(exercise)">
-                  <div class="chip-container" *ngIf="!exercise.clock.rest">
-                    <ion-icon name="barbell-outline"></ion-icon>
-                    <ion-text>
-                      Set: {{ getCurrentSetUI(exercise) }}
-                    </ion-text>
-                  </div>
-                  <div class="chip-container" *ngIf="exercise.clock.rest">
-                    <ion-icon name="alarm-outline"></ion-icon>
-                    <ion-text> Rest </ion-text>
-                  </div>
-                </ion-chip>
-              </ion-card-content>
-            </ion-card>
+            </div>
             <div class="content">
+              <ion-chip [color]="getChipColorUI(exercise)" class="no-ripple">
+                <div class="chip-container" *ngIf="!exercise.clock.rest">
+                  <ion-icon name="barbell-outline"></ion-icon>
+                  <ion-text>
+                    Set: {{ getCurrentSetUI(exercise) }}
+                  </ion-text>
+                </div>
+                <div class="chip-container" *ngIf="exercise.clock.rest">
+                  <ion-icon name="alarm-outline"></ion-icon>
+                  <ion-text> Rest </ion-text>
+                </div>
+              </ion-chip>
               <div class="set-list-container" *ngIf="exercise.type === 'weightRep'">
                 <!-- Set-Rep Exercise -->
                 <ion-content>

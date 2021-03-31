@@ -20,10 +20,10 @@ import { Exercise, Set } from '@models/exercise.model';
 import { DateService } from '@services/date.service';
 import { TrainingService } from '@services/training.service';
 import { WorkoutService } from '@services/workout.service';
+import { ExerciseService } from '@services/exercise.service';
 
 // Utils
 import { getSetDetail } from '@utils/exercise.util';
-import { ExerciseService } from '@services/exercise.service';
 import { copyFrom } from '@utils/object.util';
 
 interface ClockSet extends Set {
