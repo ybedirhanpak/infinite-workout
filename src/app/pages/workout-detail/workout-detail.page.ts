@@ -1,7 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Plugins } from '@capacitor/core';
-const { Share, Filesystem, FilesystemDirectory, FilesystemEncoding } = Plugins;
 
 // Model
 import { Workout } from '@models/workout.model';
