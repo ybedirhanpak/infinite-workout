@@ -1,12 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-
-const IMAGES = [];
-const IMAGE_COUNT = 62;
-
-for (let i = 1; i <= IMAGE_COUNT; i++) {
-  IMAGES.push(`assets/img/workout/workout-${i}.jpg`);
-}
+import { ImageGalleryService } from '@services/image-gallery.service';
 
 @Component({
   selector: 'app-image-gallery',
@@ -14,11 +8,16 @@ for (let i = 1; i <= IMAGE_COUNT; i++) {
   styleUrls: ['./image-gallery.page.scss'],
 })
 export class ImageGalleryPage implements OnInit {
-  images = IMAGES;
+  images: string[];
 
-  constructor(private modalCtrl: ModalController) {}
+  constructor(
+    private imageGalleryService: ImageGalleryService,
+    private modalCtrl: ModalController
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.images = this.imageGalleryService.IMAGES;
+  }
 
   onImageClick(image: string) {
     this.modalCtrl.dismiss({

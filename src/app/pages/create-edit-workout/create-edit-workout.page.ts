@@ -1,11 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
-import {
-  IonReorderGroup,
-  ModalController,
-  NavController,
-} from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 
 // Model
 import { Workout } from '@models/workout.model';
@@ -19,8 +15,7 @@ import { WorkoutService } from '@services/workout.service';
 import { copyFrom } from '@utils/object.util';
 import { getEmptyWorkout } from '@utils/workout.util';
 import { ImageGalleryPage } from '../image-gallery/image-gallery.page';
-
-const DEFAULT_IMAGE = '/assets/img/workout/workout-1.jpg';
+import { ImageGalleryService } from '@services/image-gallery.service';
 
 @Component({
   selector: 'app-create-edit-workout',
@@ -36,13 +31,18 @@ export class CreateEditWorkoutPage implements OnInit {
   formGroup: FormGroup;
   reorder = false;
 
+  defaultImage = '/assets/img/workout/workout-1.jpg';
+
   constructor(
     private router: Router,
     private exerciseService: ExerciseService,
     private workoutService: WorkoutService,
     private navCtrl: NavController,
-    private modalCtrl: ModalController
-  ) {}
+    private modalCtrl: ModalController,
+    private imageGalleryService: ImageGalleryService
+  ) {
+    this.defaultImage = imageGalleryService.getRandomImage();
+  }
 
   ngOnInit() {
     const editMode = this.router.url.includes('edit-workout');
@@ -107,7 +107,7 @@ export class CreateEditWorkoutPage implements OnInit {
 
   async onSaveClick() {
     const workoutToSave = {
-      imageUrl: DEFAULT_IMAGE,
+      imageUrl: this.defaultImage,
       ...this.workout,
       ...this.formGroup.value,
       exercises: this.exercises,
@@ -188,6 +188,6 @@ export class CreateEditWorkoutPage implements OnInit {
   }
 
   getWorkoutImageUI() {
-    return this.workout.imageUrl ?? DEFAULT_IMAGE;
+    return this.workout.imageUrl ?? this.defaultImage;
   }
 }
