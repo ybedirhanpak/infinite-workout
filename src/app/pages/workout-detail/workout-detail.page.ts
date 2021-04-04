@@ -64,7 +64,7 @@ export class WorkoutDetailPage implements OnInit {
 
   async onShareClick() {
     this.workoutService.uploadWorkout(this.workout).then((workout) => {
-      console.log("Workout uploaded", workout);
+      // TODO: Show Toast Message
     })
   }
 

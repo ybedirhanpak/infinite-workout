@@ -44,15 +44,21 @@
         <div class="control-buttons">
           <ion-chip color="primary" (click)="onAddExerciseClick()">
             <ion-icon name="add"></ion-icon>
-            <ion-label>Add Exercise</ion-label>
+            <ion-label>Add</ion-label>
+          </ion-chip>
+          <ion-chip color="primary" (click)="onReorderClick()" *ngIf="!reorder">
+            <ion-icon name="reorder-three-outline"></ion-icon>
+            <ion-label>Reorder</ion-label>
+          </ion-chip>
+          <ion-chip color="secondary" (click)="onReorderClick()" *ngIf="reorder">
+            <ion-icon name="checkmark-outline"></ion-icon>
+            <ion-label>Reorder</ion-label>
           </ion-chip>
         </div>
       </div>
-      <ion-list class="exercises-list" *ngIf="workout.exercises && workout.exercises.length > 0">
-        <app-exercise-list-item *ngFor="let exercise of workout.exercises" [exercise]="exercise" [editable]="true"
-          (onEditClick)="onEditExerciseClick($event)">
-        </app-exercise-list-item>
-      </ion-list>
+      <app-exercise-list [exercises]="exercises" [reorder]="reorder" [editable]="true"
+        (onEditClick)="onEditExerciseClick($event)" (onReorder)="onReorderExercise($event)">
+      </app-exercise-list>
     </div>
   </app-page-layout>
 </ion-content>

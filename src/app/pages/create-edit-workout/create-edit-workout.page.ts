@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ModalController, NavController } from '@ionic/angular';
+import {
+  IonReorderGroup,
+  ModalController,
+  NavController,
+} from '@ionic/angular';
 
 // Model
 import { Workout } from '@models/workout.model';
@@ -26,9 +30,11 @@ const DEFAULT_IMAGE = '/assets/img/workout/workout-1.jpg';
 export class CreateEditWorkoutPage implements OnInit {
   mode: 'create' | 'edit' = 'create';
   workout: Workout;
+  exercises: Exercise[];
   created = false;
   customized = false;
   formGroup: FormGroup;
+  reorder = false;
 
   constructor(
     private router: Router,
@@ -45,6 +51,7 @@ export class CreateEditWorkoutPage implements OnInit {
       this.mode = 'edit';
       this.workoutService.workoutEdit.get().subscribe(async (workout) => {
         this.workout = workout;
+        this.exercises = workout.exercises;
 
         this.formGroup = new FormGroup({
           name: new FormControl(workout.name),
@@ -60,7 +67,7 @@ export class CreateEditWorkoutPage implements OnInit {
       // Create Mode
       this.mode = 'create';
       this.workout = getEmptyWorkout(Date.now());
-      this.workout.exercises = [];
+      this.exercises = [];
       this.formGroup = new FormGroup({
         name: new FormControl(''),
         duration: new FormControl(''),
@@ -78,13 +85,11 @@ export class CreateEditWorkoutPage implements OnInit {
     if (this.workout) {
       this.exerciseService.editedExercise.get().subscribe((exercise) => {
         if (exercise) {
-          const oldExercise = this.workout.exercises.find(
-            (e) => e.id === exercise.id
-          );
+          const oldExercise = this.exercises.find((e) => e.id === exercise.id);
           if (oldExercise) {
             copyFrom(exercise, oldExercise);
           } else {
-            this.workout.exercises.push(exercise);
+            this.exercises.push(exercise);
           }
         }
       });
@@ -107,6 +112,7 @@ export class CreateEditWorkoutPage implements OnInit {
       imageUrl: DEFAULT_IMAGE,
       ...this.workout,
       ...this.formGroup.value,
+      exercises: this.exercises,
     };
 
     if (this.mode === 'create') {
@@ -130,12 +136,21 @@ export class CreateEditWorkoutPage implements OnInit {
     // TODO: Display toast message
   }
 
+  async onReorderClick() {
+    this.reorder = !this.reorder;
+  }
+
   async onDeleteClick() {
     // TODO: Ask for permission before delete
 
     await this.workoutService.deleteWorkout(this.workout);
-
     this.navCtrl.navigateBack('/home/my-library');
+  }
+
+  async onReorderExercise(event) {
+    const itemMove = this.exercises.splice(event.detail.from, 1)[0];
+    this.exercises.splice(event.detail.to, 0, itemMove);
+    event.detail.complete();
   }
 
   async selectImage() {
@@ -157,6 +172,10 @@ export class CreateEditWorkoutPage implements OnInit {
     });
 
     return await modal.present();
+  }
+
+  getReorderTextUI() {
+    return this.reorder ? 'Done' : 'Reorder';
   }
 
   getWorkoutImageUI() {

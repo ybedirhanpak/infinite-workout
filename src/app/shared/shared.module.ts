@@ -18,8 +18,8 @@ import { ClockCircleComponent } from './components/clock-circle/clock-circle.com
 import { HighlightCardComponent } from './components/highlight-card/highlight-card.component';
 import { HighlightWorkoutSlideComponent } from './components/highlight-workout-slide/highlight-workout-slide.component';
 import { ExerciseSlideComponent } from './components/exercise-slide/exercise-slide.component';
-import { ExerciseListItemComponent } from './components/exercise-list-item/exercise-list-item.component';
 import { ExerciseListSkeletonComponent } from './components/exercise-list-skeleton/exercise-list-skeleton.component';
+import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
 
 @NgModule({
   declarations: [
@@ -34,8 +34,8 @@ import { ExerciseListSkeletonComponent } from './components/exercise-list-skelet
     HighlightWorkoutSlideComponent,
     ExerciseSlideComponent,
     SelectAllDirective,
-    ExerciseListItemComponent,
     ExerciseListSkeletonComponent,
+    ExerciseListComponent
   ],
   imports: [
     CommonModule,
@@ -72,8 +72,8 @@ import { ExerciseListSkeletonComponent } from './components/exercise-list-skelet
     HighlightWorkoutSlideComponent,
     ExerciseSlideComponent,
     SelectAllDirective,
-    ExerciseListItemComponent,
     ExerciseListSkeletonComponent,
+    ExerciseListComponent
   ],
 })
 export class SharedModule {}

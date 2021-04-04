@@ -1,0 +1,33 @@
+<ion-reorder-group [disabled]="false" (ionItemReorder)="onReorderExercise($event)">
+  <ion-item class="exercise" lines="none" *ngFor="let exercise of exercises">
+    <ion-avatar slot="start">
+      <img [src]="exercise.imageUrl" [alt]="">
+    </ion-avatar>
+    <ion-label class="ion-no-margin">
+      <h2>{{ exercise.name }}</h2>
+      <div class="exercise-details">
+        <div class="rep-item" *ngFor="let set of exercise.set.sets">
+          <p>{{set.rep}}</p>
+          <p>{{getLoadStringUI(set.load)}}</p>
+        </div>
+        <div class="rep-item">
+          <p>{{getDetail(exercise).repUnit}}</p>
+          <p>{{getDetail(exercise).loadUnit}}</p>
+        </div>
+      </div>
+    </ion-label>
+    <div class="button-group" *ngIf="!reorder">
+      <ion-chip *ngIf="editable" class="icon-button card" color="primary" (click)="onEditExerciseClick(exercise)">
+        <ion-icon name="pencil"></ion-icon>
+      </ion-chip>
+      <ion-chip *ngIf="editable" class="icon-button card" color="primary" (click)="onDeleteExerciseClick(exercise)">
+        <ion-icon name="trash"></ion-icon>
+      </ion-chip>
+    </div>
+    <div class="button-group" *ngIf="reorder">
+      <ion-reorder>
+        <ion-icon name="reorder-two-outline" size="large"></ion-icon>
+      </ion-reorder>
+    </div>
+  </ion-item>
+</ion-reorder-group>

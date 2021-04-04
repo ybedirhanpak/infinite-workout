@@ -43,10 +43,7 @@
             </ion-chip>
           </div>
         </div>
-        <ion-list *ngIf="workout.exercises && workout.exercises.length > 0">
-          <app-exercise-list-item *ngFor="let exercise of workout.exercises" [exercise]="exercise">
-          </app-exercise-list-item>
-        </ion-list>
+        <app-exercise-list [exercises]="workout.exercises"></app-exercise-list>
       </div>
       <div class="workout-detail" *ngIf="!workout">
         <div class="details">
