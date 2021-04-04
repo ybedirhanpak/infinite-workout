@@ -36,7 +36,15 @@ export class WorkoutService {
   get favorites$() {
     return this.workouts.elements.pipe(
       map((workouts) => {
-        return workouts.filter((workout) => workout.state?.favorited);
+        return workouts
+          .filter((workout) => workout.state?.favorited)
+          .sort((w1, w2) => {
+            if (w1.state?.favoriteDate && w2.state?.favoriteDate) {
+              return w2.state.favoriteDate - w1.state.favoriteDate;
+            }
+
+            return w2.id - w1.id;
+          });
       })
     );
   }
@@ -44,7 +52,9 @@ export class WorkoutService {
   get createdWorkouts$() {
     return this.workouts.elements.pipe(
       map((workouts) => {
-        return workouts.filter((workout) => workout.state?.created);
+        return workouts
+          .filter((workout) => workout.state?.created)
+          .sort((w1, w2) => w2.id - w1.id);
       })
     );
   }
@@ -52,7 +62,9 @@ export class WorkoutService {
   get customizedWorkouts$() {
     return this.workouts.elements.pipe(
       map((workouts) => {
-        return workouts.filter((workout) => workout.state?.customized);
+        return workouts
+          .filter((workout) => workout.state?.customized)
+          .sort((w1, w2) => w2.id - w1.id);
       })
     );
   }
@@ -61,6 +73,7 @@ export class WorkoutService {
     workout.state = {
       ...workout.state,
       favorited: true,
+      favoriteDate: Date.now(),
     };
 
     if (workout.state?.created || workout.state?.customized) {
@@ -74,6 +87,7 @@ export class WorkoutService {
     workout.state = {
       ...workout.state,
       favorited: false,
+      favoriteDate: undefined,
     };
 
     if (workout.state?.created || workout.state?.customized) {

@@ -20,6 +20,7 @@ import { HighlightWorkoutSlideComponent } from './components/highlight-workout-s
 import { ExerciseSlideComponent } from './components/exercise-slide/exercise-slide.component';
 import { ExerciseListSkeletonComponent } from './components/exercise-list-skeleton/exercise-list-skeleton.component';
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
+import { WorkoutListComponent } from './components/workout-list/workout-list.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ExerciseListComponent } from './components/exercise-list/exercise-list.
     ExerciseSlideComponent,
     SelectAllDirective,
     ExerciseListSkeletonComponent,
-    ExerciseListComponent
+    ExerciseListComponent,
+    WorkoutListComponent,
   ],
   imports: [
     CommonModule,
@@ -73,7 +75,8 @@ import { ExerciseListComponent } from './components/exercise-list/exercise-list.
     ExerciseSlideComponent,
     SelectAllDirective,
     ExerciseListSkeletonComponent,
-    ExerciseListComponent
+    ExerciseListComponent,
+    WorkoutListComponent,
   ],
 })
 export class SharedModule {}

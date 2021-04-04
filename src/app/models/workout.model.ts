@@ -11,6 +11,7 @@ export interface Workout extends StateHolder {
   exercises: Exercise[];
   state?: {
     favorited?: boolean;
+    favoriteDate?: number;
     created?: boolean;
     customized?: boolean;
   };
