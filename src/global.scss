@@ -53,9 +53,12 @@ ion-reorder.wide-reorder {
   }
 }
 
-ion-list.list-md {
+ion-list.md {
   background: var(--ion-background-color, #fff);
+}
 
+ion-reorder-group.md,
+ion-list.md {
   ion-item {
     --background: var(--ion-background-color, #fff);
     --border-color: var(--ion-color-step-200, rgba(0, 0, 0, 0.13));
