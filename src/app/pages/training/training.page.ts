@@ -6,7 +6,13 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonSlides, ModalController, ToastController } from '@ionic/angular';
+import {
+  IonSlides,
+  ModalController,
+  ToastController,
+  Platform,
+} from '@ionic/angular';
+import { Insomnia } from '@ionic-native/insomnia/ngx';
 
 // Components
 import { ClockCircleComponent } from 'src/app/shared/components/clock-circle/clock-circle.component';
@@ -91,7 +97,9 @@ export class TrainingPage implements OnInit {
     private exerciseService: ExerciseService,
     private toastController: ToastController,
     private modalController: ModalController,
-    private router: Router
+    private router: Router,
+    private platform: Platform,
+    private insomnia: Insomnia
   ) {}
 
   ngOnInit() {
@@ -243,6 +251,13 @@ export class TrainingPage implements OnInit {
     this.trainingStarted = true;
     this.trainingPaused = false;
     this.startTime();
+
+    if (this.platform.is('capacitor') || this.platform.is('cordova')) {
+      this.insomnia.keepAwake().then(
+        () => console.log('Success on keep awake'),
+        () => console.log('Error on keep awake')
+      );
+    }
   }
 
   stopTraining() {
@@ -264,7 +279,7 @@ export class TrainingPage implements OnInit {
 
     if (this.trainingStarted) {
       // Update workout if edited
-      if(this.edited) {
+      if (this.edited) {
         this.workout.exercises = this.exerciseClocks.map((ec) => ec.exercise);
       }
 
@@ -289,6 +304,13 @@ export class TrainingPage implements OnInit {
               toastEl.present();
             });
         });
+    }
+
+    if (this.platform.is('capacitor') || this.platform.is('cordova')) {
+      this.insomnia.allowSleepAgain().then(
+        () => console.log('Success on sleep again'),
+        () => console.log('Error on sleep again')
+      );
     }
   }
 
