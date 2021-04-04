@@ -50,18 +50,22 @@ export class CreateEditWorkoutPage implements OnInit {
       // Edit Mode
       this.mode = 'edit';
       this.workoutService.workoutEdit.get().subscribe(async (workout) => {
-        this.workout = workout;
-        this.exercises = workout.exercises;
+        this.workout = { ...workout };
+        this.exercises = this.workout.exercises;
+
+        this.created = this.workout.state?.created;
+        this.customized = this.workout.state?.customized;
+
+        if (!this.customized && !this.created) {
+          this.workout.name = `${this.workout.name} (Copy)`;
+        }
 
         this.formGroup = new FormGroup({
-          name: new FormControl(workout.name),
-          duration: new FormControl(workout.duration),
-          category: new FormControl(workout.category),
-          equipments: new FormControl(workout.equipments),
+          name: new FormControl(this.workout.name),
+          duration: new FormControl(this.workout.duration),
+          category: new FormControl(this.workout.category),
+          equipments: new FormControl(this.workout.equipments),
         });
-
-        this.created = workout.state?.created;
-        this.customized = workout.state?.customized;
       });
     } else {
       // Create Mode
@@ -98,12 +102,6 @@ export class CreateEditWorkoutPage implements OnInit {
 
   onAddExerciseClick() {
     const navigateUrl = `${this.router.url}/exercises`;
-    this.router.navigateByUrl(navigateUrl);
-  }
-
-  onEditExerciseClick(exercise: Exercise) {
-    this.exerciseService.exerciseDetail.set(exercise);
-    const navigateUrl = `${this.router.url}/exercise-edit`;
     this.router.navigateByUrl(navigateUrl);
   }
 
@@ -151,6 +149,17 @@ export class CreateEditWorkoutPage implements OnInit {
     const itemMove = this.exercises.splice(event.detail.from, 1)[0];
     this.exercises.splice(event.detail.to, 0, itemMove);
     event.detail.complete();
+  }
+
+  onEditExerciseClick(exercise: Exercise) {
+    this.exerciseService.exerciseDetail.set(exercise);
+    const navigateUrl = `${this.router.url}/exercise-edit`;
+    this.router.navigateByUrl(navigateUrl);
+  }
+
+  onDeleteExerciseClick(exercise: Exercise) {
+    const index = this.exercises.findIndex((e) => e.id === exercise.id);
+    this.exercises.splice(index, 1);
   }
 
   async selectImage() {

@@ -57,7 +57,8 @@
         </div>
       </div>
       <app-exercise-list [exercises]="exercises" [reorder]="reorder" [editable]="true"
-        (onEditClick)="onEditExerciseClick($event)" (onReorder)="onReorderExercise($event)">
+        (onEditClick)="onEditExerciseClick($event)" (onReorder)="onReorderExercise($event)"
+        (onDeleteClick)="onDeleteExerciseClick($event)">
       </app-exercise-list>
     </div>
   </app-page-layout>

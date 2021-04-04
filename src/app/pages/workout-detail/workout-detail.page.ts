@@ -69,6 +69,6 @@ export class WorkoutDetailPage implements OnInit {
   }
 
   getCustomizeTextUI() {
-    return this.customized || this.created ? 'Edit' : 'Customize';
+    return this.customized || this.created ? 'Edit' : 'Create a Copy';
   }
 }
