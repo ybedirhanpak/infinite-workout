@@ -1,0 +1,10 @@
+<ion-grid class="ion-no-padding">
+  <ion-row class="list-wrapper">
+    <ion-col size="6" *ngFor="let workout of workouts">
+      <app-card-medium [title]="workout.name" [subtitle]="workout.category" [text]="workout.duration"
+        [imageUrl]="workout.imageUrl" (click)="onWorkoutClick(workout)" [heart]="workout.state?.favorited"
+        [sparkles]="workout.state?.customized" [star]="workout.state?.created">
+      </app-card-medium>
+    </ion-col>
+  </ion-row>
+</ion-grid>

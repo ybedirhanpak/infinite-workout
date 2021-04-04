@@ -1,0 +1,8 @@
+.list-wrapper {
+  --padding: 12px;
+  padding: var(--padding) 0 0 var(--padding);
+
+  ion-col {
+    padding: 0 var(--padding) var(--padding) 0;
+  }
+}
