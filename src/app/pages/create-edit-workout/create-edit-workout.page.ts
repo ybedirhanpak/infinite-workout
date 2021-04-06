@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ModalController, NavController } from '@ionic/angular';
+import {
+  AlertController,
+  ModalController,
+  NavController,
+  ToastController,
+} from '@ionic/angular';
 
 // Model
 import { Workout } from '@models/workout.model';
@@ -10,12 +15,12 @@ import { Exercise } from '@models/exercise.model';
 // Service
 import { ExerciseService } from '@services/exercise.service';
 import { WorkoutService } from '@services/workout.service';
+import { ImageGalleryService } from '@services/image-gallery.service';
 
 // Utils
 import { copyFrom } from '@utils/object.util';
 import { getEmptyWorkout } from '@utils/workout.util';
 import { ImageGalleryPage } from '../image-gallery/image-gallery.page';
-import { ImageGalleryService } from '@services/image-gallery.service';
 
 @Component({
   selector: 'app-create-edit-workout',
@@ -39,7 +44,9 @@ export class CreateEditWorkoutPage implements OnInit {
     private workoutService: WorkoutService,
     private navCtrl: NavController,
     private modalCtrl: ModalController,
-    private imageGalleryService: ImageGalleryService
+    imageGalleryService: ImageGalleryService,
+    private toastController: ToastController,
+    private alertController: AlertController
   ) {
     this.defaultImage = imageGalleryService.getRandomImage();
   }
@@ -130,8 +137,6 @@ export class CreateEditWorkoutPage implements OnInit {
 
     // Clear edited exercise
     this.exerciseService.editedExercise.set(null);
-
-    // TODO: Display toast message
   }
 
   async onReorderClick() {
@@ -139,10 +144,31 @@ export class CreateEditWorkoutPage implements OnInit {
   }
 
   async onDeleteClick() {
-    // TODO: Ask for permission before delete
+    const deleteWorkout = async () => {
+      await this.workoutService.deleteWorkout(this.workout);
+      this.navCtrl.navigateBack('/home/my-library');
+    };
 
-    await this.workoutService.deleteWorkout(this.workout);
-    this.navCtrl.navigateBack('/home/my-library');
+    // Ask for permission before delete
+    this.alertController
+      .create({
+        header: 'Delete this workout?',
+        message:
+          'All workout information and exercise details will be deleted.',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+          },
+          {
+            text: 'Delete',
+            handler: deleteWorkout,
+          },
+        ],
+      })
+      .then((alertEl) => {
+        alertEl.present();
+      });
   }
 
   async onReorderExercise(event) {
@@ -158,8 +184,30 @@ export class CreateEditWorkoutPage implements OnInit {
   }
 
   onDeleteExerciseClick(exercise: Exercise) {
-    const index = this.exercises.findIndex((e) => e.id === exercise.id);
-    this.exercises.splice(index, 1);
+    const deleteExercise = () => {
+      const index = this.exercises.findIndex((e) => e.id === exercise.id);
+      this.exercises.splice(index, 1);
+    };
+    // Ask for permission before delete
+    this.alertController
+      .create({
+        header: 'Remove this exercise?',
+        message:
+          'All information regarding this exercise will be deleted.',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+          },
+          {
+            text: 'Delete',
+            handler: deleteExercise,
+          },
+        ],
+      })
+      .then((alertEl) => {
+        alertEl.present();
+      });
   }
 
   async selectImage() {
