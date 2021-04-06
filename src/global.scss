@@ -35,6 +35,11 @@
     'Helvetica Neue', 'Roboto', sans-serif;
 
   --card-border-radius: 5px;
+  --main-button-background: linear-gradient(
+    90deg,
+    var(--ion-color-primary),
+    var(--ion-color-tertiary)
+  );
 }
 
 // Ionic Customizations
@@ -78,11 +83,7 @@ ion-button.ios {
 }
 
 ion-button.primary-button {
-  --background: linear-gradient(
-    90deg,
-    var(--ion-color-primary),
-    var(--ion-color-tertiary)
-  );
+  --background: var(--main-button-background);
   text-transform: uppercase;
   color: white;
 }
@@ -123,6 +124,28 @@ ion-avatar {
 
 ion-slides.catalog {
   padding: 0 12px;
+}
+
+ion-alert {
+  &.md {
+    --alert-border-radius: var(--card-border-radius);
+
+    .alert-button-group {
+      .primary {
+        background: var(--main-button-background);
+        color: var(--ion-color-primary-contrast);
+        border-radius: var(--alert-border-radius);
+      }
+    }
+  }
+
+  &.ios {
+    .alert-button-group {
+      button {
+        border-right: 0px;
+      }
+    }
+  }
 }
 
 // Structural Classes
