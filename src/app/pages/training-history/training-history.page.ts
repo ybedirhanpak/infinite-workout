@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ToastController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 
 // Model
 import { TrainingRecord } from '@models/training.model';
@@ -14,18 +14,20 @@ import { TrainingService } from '@services/training.service';
   styleUrls: ['./training-history.page.scss'],
 })
 export class TrainingHistoryPage implements OnInit, OnDestroy {
-  trainingRecordList: TrainingRecord[] = [];
+  trainingRecordList: TrainingRecord[];
   trainingRecordSub: Subscription;
   isLoading = false;
 
   constructor(
     private trainingService: TrainingService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private alertController: AlertController
   ) {}
 
   ngOnInit() {
     this.trainingRecordSub = this.trainingService.trainingRecordList.subscribe(
       (trainingRecordList) => {
+        console.log('List', trainingRecordList);
         this.trainingRecordList = trainingRecordList;
       }
     );
@@ -46,27 +48,50 @@ export class TrainingHistoryPage implements OnInit, OnDestroy {
   }
 
   deleteTrainingRecord(id: number) {
-    let message = '';
+    const deleteRecord = () => {
+      let message = '';
 
-    this.trainingService
-      .deleteTrainingRecord(id)
-      .then(() => {
-        message = 'Training record deleted successfully.';
+      this.trainingService
+        .deleteTrainingRecord(id)
+        .then(() => {
+          message = 'Training record deleted successfully.';
+        })
+        .catch((error) => {
+          message =
+            error ?? 'An error occured while deleting the training record.';
+        })
+        .finally(() => {
+          this.toastController
+            .create({
+              message,
+              position: 'top',
+              duration: 500,
+            })
+            .then((toastEl) => {
+              toastEl.present();
+            });
+        });
+    };
+
+    // Ask for permission before delete
+    this.alertController
+      .create({
+        header: 'Delete this record?',
+        message:
+          'All training information and exercise statistics will be deleted.',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+          },
+          {
+            text: 'Delete',
+            handler: deleteRecord,
+          },
+        ],
       })
-      .catch((error) => {
-        message =
-          error ?? 'An error occured while deleting the training record.';
-      })
-      .finally(() => {
-        this.toastController
-          .create({
-            message,
-            position: 'top',
-            duration: 1000,
-          })
-          .then((toastEl) => {
-            toastEl.present();
-          });
+      .then((alertEl) => {
+        alertEl.present();
       });
   }
 
