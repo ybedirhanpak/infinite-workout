@@ -11,6 +11,7 @@ import {
   ModalController,
   ToastController,
   Platform,
+  AlertController,
 } from '@ionic/angular';
 import { Insomnia } from '@ionic-native/insomnia/ngx';
 
@@ -97,6 +98,7 @@ export class TrainingPage implements OnInit {
     private exerciseService: ExerciseService,
     private toastController: ToastController,
     private modalController: ModalController,
+    private alertController: AlertController,
     private router: Router,
     private platform: Platform,
     private insomnia: Insomnia
@@ -275,9 +277,16 @@ export class TrainingPage implements OnInit {
   }
 
   finishTraining() {
-    this.router.navigate(['/home/']);
+    const allowSleep = () => {
+      if (this.platform.is('capacitor') || this.platform.is('cordova')) {
+        this.insomnia.allowSleepAgain().then(
+          () => console.log('Success on sleep again'),
+          () => console.log('Error on sleep again')
+        );
+      }
+    };
 
-    if (this.trainingStarted) {
+    const finish = () => {
       // Update workout if edited
       if (this.edited) {
         this.workout.exercises = this.exerciseClocks.map((ec) => ec.exercise);
@@ -304,14 +313,37 @@ export class TrainingPage implements OnInit {
               toastEl.present();
             });
         });
-    }
+      this.router.navigate(['/home/']);
+      allowSleep();
+    };
 
-    if (this.platform.is('capacitor') || this.platform.is('cordova')) {
-      this.insomnia.allowSleepAgain().then(
-        () => console.log('Success on sleep again'),
-        () => console.log('Error on sleep again')
-      );
-    }
+    const discard = () => {
+      this.router.navigate(['/home/']);
+      allowSleep();
+    };
+
+    this.alertController
+      .create({
+        header: 'Finish training?',
+        message: 'Do you want to finish and save this training?',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+          },
+          {
+            text: 'Finish without saving',
+            handler: discard,
+          },
+          {
+            text: 'Save and Finish',
+            handler: finish,
+          },
+        ],
+      })
+      .then((alertEl) => {
+        alertEl.present();
+      });
   }
 
   /** Slide Controllers */
