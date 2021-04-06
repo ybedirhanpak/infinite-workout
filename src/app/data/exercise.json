@@ -48,6 +48,22 @@
     }
   },
   {
+    "id": 1617028457997,
+    "name": "Incline Dumbbell Press",
+    "imageUrl": "assets/img/exercise/chest-dumbbell-incline-press.jpg",
+    "category": "Chest",
+    "equipment": "Dumbbell",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
     "id": 1617028463757,
     "name": "Cable Standing Press",
     "imageUrl": "assets/img/exercise/chest-cable-press.jpg",
@@ -224,6 +240,22 @@
     }
   },
   {
+    "id": 1617716388551,
+    "name": "Dumbbell Row",
+    "imageUrl": "assets/img/exercise/lat-dumbbell-row.jpg",
+    "category": "Lats",
+    "equipment": "Dumbbell",
+    "handType": "single-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
     "id": 1616852873496,
     "name": "Kettlebell Row",
     "imageUrl": "assets/img/exercise/lat-kettlebell-row.jpg",
@@ -304,12 +336,60 @@
     }
   },
   {
+    "id": 1617717378026,
+    "name": "Shoulder Bent Over Raise",
+    "imageUrl": "assets/img/exercise/shoulder-bent-over-raise.jpeg",
+    "category": "Shoulder",
+    "equipment": "Dumbbell",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
     "id": 1617031404103,
     "name": "Triceps Cable Extension",
     "imageUrl": "assets/img/exercise/triceps-cable-extension.jpg",
     "category": "Triceps",
     "equipment": "Cable - Rope",
     "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1617716448011,
+    "name": "Triceps Dumbbell Extension",
+    "imageUrl": "assets/img/exercise/triceps-dumbbell-extension.jpg",
+    "category": "Triceps",
+    "equipment": "Dumbbell",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1617716456352,
+    "name": "Triceps Dumbbell Kickback",
+    "imageUrl": "assets/img/exercise/triceps-dumbbell-kickback.jpg",
+    "category": "Triceps",
+    "equipment": "Dumbbell",
+    "handType": "single-hand",
     "set": {
       "type": "weightRep",
       "sets": [
@@ -364,6 +444,22 @@
         { "rep": 10, "load": 0 },
         { "rep": 10, "load": 0 },
         { "rep": 10, "load": 0 }
+      ]
+    }
+  },
+  {
+    "id": 1617718024631,
+    "name": "Skull Crusher",
+    "imageUrl": "assets/img/exercise/triceps-skull-crusher.jpg",
+    "category": "Triceps",
+    "equipment": "Barbell",
+    "handType": "two-hand",
+    "set": {
+      "type": "weightTime",
+      "sets": [
+        { "rep": 10, "load": 20 },
+        { "rep": 10, "load": 20 },
+        { "rep": 10, "load": 20 }
       ]
     }
   },
@@ -454,6 +550,22 @@
     "category": "Biceps",
     "equipment": "Dumbbell",
     "handType": "single-hand",
+    "set": {
+      "type": "weightRep",
+      "sets": [
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 },
+        { "rep": 10, "load": 12 }
+      ]
+    }
+  },
+  {
+    "id": 1617716342395,
+    "name": "Hammer Curl",
+    "imageUrl": "assets/img/exercise/biceps-hammer-curl.jpg",
+    "category": "Biceps",
+    "equipment": "Dumbbell",
+    "handType": "two-hand",
     "set": {
       "type": "weightRep",
       "sets": [
