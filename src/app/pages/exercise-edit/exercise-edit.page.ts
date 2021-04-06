@@ -37,7 +37,7 @@ export class ExerciseEditPage implements OnInit {
   ionViewWillEnter() {
     this.exerciseService.exerciseDetail.get().subscribe((exercise) => {
       this.exercise = exercise;
-      this.setDetail = getSetDetail(exercise);
+      this.setDetail = getSetDetail(this.exercise);
       this.sets = this.exercise.set.sets;
     });
   }
@@ -49,11 +49,13 @@ export class ExerciseEditPage implements OnInit {
     if (lastSet) {
       this.sets.push({
         ...lastSet,
+        checked: false,
       });
     } else {
       const defaultSet = getDefaultSet(this.exercise);
       this.sets.push({
         ...defaultSet,
+        checked: false,
       });
     }
   }
@@ -63,10 +65,10 @@ export class ExerciseEditPage implements OnInit {
   }
 
   onSaveClick() {
-    if(this.isModal) {
+    if (this.isModal) {
       this.modalCtrl.dismiss({
         exercise: this.exercise,
-        role: 'save'
+        role: 'save',
       });
     } else {
       const editWorkout = this.router.url.includes('edit-workout');
@@ -78,7 +80,6 @@ export class ExerciseEditPage implements OnInit {
         this.navCtrl.navigateBack('/create-workout');
       }
     }
-
   }
 
   onBlur(event: any, key: 'load' | 'rep') {

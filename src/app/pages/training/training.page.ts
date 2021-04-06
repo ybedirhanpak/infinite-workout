@@ -21,7 +21,7 @@ import { ExerciseEditPage } from '../exercise-edit/exercise-edit.page';
 
 // Model
 import { Workout } from '@models/workout.model';
-import { Exercise, Set } from '@models/exercise.model';
+import { Exercise } from '@models/exercise.model';
 
 // Service
 import { DateService } from '@services/date.service';
@@ -31,11 +31,6 @@ import { ExerciseService } from '@services/exercise.service';
 
 // Utils
 import { getSetDetail } from '@utils/exercise.util';
-import { copyFrom } from '@utils/object.util';
-
-interface ClockSet extends Set {
-  checked: boolean;
-}
 
 interface Clock {
   id: number;
@@ -50,8 +45,6 @@ interface ExerciseClock {
   nextExercise?: Exercise;
   clock: Clock;
   type: 'weightRep' | 'weightTime' | 'distanceTime';
-  sets: ClockSet[];
-  setCount: number;
   currentSet: number;
 }
 
@@ -113,12 +106,7 @@ export class TrainingPage implements OnInit {
   createExerciseClock(exercise: Exercise, index: number) {
     const type = exercise.set.type;
 
-    const clockSets = exercise.set.sets.map((s) => {
-      return {
-        ...s,
-        checked: false,
-      } as ClockSet;
-    });
+    const clockSets = exercise.set.sets;
 
     let clockTime = 0;
 
@@ -144,8 +132,6 @@ export class TrainingPage implements OnInit {
       },
       exercise: exercise,
       type: type,
-      sets: clockSets,
-      setCount: clockSets.length,
       currentSet: 0,
     } as ExerciseClock;
   }
@@ -373,8 +359,9 @@ export class TrainingPage implements OnInit {
     this.currentIndex = nextIndex;
   }
 
-  slideNextIfFinished(exercise: ExerciseClock) {
-    const { setCount, currentSet } = exercise;
+  slideNextIfFinished(ec: ExerciseClock) {
+    const { exercise, currentSet } = ec;
+    const setCount = exercise.set.sets.length;
     if (currentSet >= setCount) {
       // Go to the next exercise
       this.slides.slideNext();
@@ -488,68 +475,69 @@ export class TrainingPage implements OnInit {
    * If set is not finished -> Finish set and move current set to next
    * If set is finished -> Set current
    */
-  onSetClick(event: any, exercise: ExerciseClock, index: number) {
-    const checked = exercise.sets[index].checked;
-    const setCount = exercise.setCount;
+  onSetClick(event: any, ec: ExerciseClock, index: number) {
+    const sets = ec.exercise.set.sets;
+    const checked = sets[index].checked;
+    const setCount = sets.length;
     if (!checked) {
       // Update checkboxes
-      exercise.sets[index].checked = true;
+      sets[index].checked = true;
       const nextIndex = Math.min(index + 1, setCount);
-      exercise.currentSet = nextIndex;
+      ec.currentSet = nextIndex;
       for (let i = 0; i < index; i++) {
-        exercise.sets[i].checked = true;
+        sets[i].checked = true;
       }
 
       // Display Rest Clock
-      this.updateClockRest(exercise.clock, true);
+      this.updateClockRest(ec.clock, true);
 
       if (!this.trainingStarted) {
         // Start training if not started yet
         this.startTraining();
       }
 
-      this.startClock(exercise.clock.id);
+      this.startClock(ec.clock.id);
     } else {
       // Update checkboxes
-      exercise.currentSet = index;
+      ec.currentSet = index;
       for (let i = index; i < setCount; i++) {
-        exercise.sets[i].checked = false;
+        sets[i].checked = false;
       }
     }
   }
 
-  onNextClick(exercise: ExerciseClock) {
-    const { type, clock } = exercise;
+  onNextClick(ec: ExerciseClock) {
+    const { type, clock } = ec;
     if (type === 'weightRep') {
-      this.onRestSkip(exercise);
+      this.onRestSkip(ec);
     } else if (type === 'weightTime' || type === 'distanceTime') {
       if (clock.rest) {
-        this.onRestSkip(exercise);
+        this.onRestSkip(ec);
       } else {
-        this.onNextSet(exercise);
+        this.onNextSet(ec);
       }
     }
   }
 
   /** Set-Time Controllers */
-  onPreviousSet(exercise: ExerciseClock) {
-    const prevSet = Math.max(exercise.currentSet - 1, 0);
-    exercise.currentSet = prevSet;
+  onPreviousSet(ec: ExerciseClock) {
+    const prevSet = Math.max(ec.currentSet - 1, 0);
+    ec.currentSet = prevSet;
 
     // Reset
-    this.updateClockRest(exercise.clock, false);
-    this.resetClock(exercise.clock.id);
+    this.updateClockRest(ec.clock, false);
+    this.resetClock(ec.clock.id);
   }
 
   /**
    * Switches set to rest
    */
-  onNextSet(exercise: ExerciseClock) {
-    exercise.currentSet += 1;
+  onNextSet(ec: ExerciseClock) {
+    ec.currentSet += 1;
 
     // Switch to rest
-    this.updateClockRest(exercise.clock, true);
-    this.updateClockMax(exercise.clock.id, this.restTime);
+    this.updateClockRest(ec.clock, true);
+    this.updateClockMax(ec.clock.id, this.restTime);
 
     if (!this.trainingStarted) {
       // Start training if not started yet
@@ -559,48 +547,46 @@ export class TrainingPage implements OnInit {
 
   /** Rest Clock Controllers */
 
-  onRestReset(exercise: ExerciseClock) {
-    this.resetClock(exercise.clock.id);
+  onRestReset(ec: ExerciseClock) {
+    this.resetClock(ec.clock.id);
   }
 
   /**
    * Switches from rest to set
    */
-  onRestSkip(exercise: ExerciseClock) {
+  onRestSkip(ec: ExerciseClock) {
     // Decide on what to do according to rep type
-    const detail = getSetDetail(exercise.exercise);
-    const set = exercise.sets[exercise.currentSet];
+    const detail = getSetDetail(ec.exercise);
+    const sets = ec.exercise.set.sets;
+    const set = sets[ec.currentSet];
     const clockTime = this.convertTimeToSec(set?.rep, detail?.repUnit);
 
-    if (exercise.type === 'weightRep') {
-      this.stopClock(exercise.clock.id);
-      this.updateClockRest(exercise.clock, false);
-      this.slideNextIfFinished(exercise);
-    } else if (
-      exercise.type === 'weightTime' ||
-      exercise.type === 'distanceTime'
-    ) {
-      // Try to slide next exercise
-      const slided = this.slideNextIfFinished(exercise);
+    if (ec.type === 'weightRep') {
+      this.stopClock(ec.clock.id);
+      this.updateClockRest(ec.clock, false);
+      this.slideNextIfFinished(ec);
+    } else if (ec.type === 'weightTime' || ec.type === 'distanceTime') {
+      // Try to slide next ec
+      const slided = this.slideNextIfFinished(ec);
       // If slide happened, go back to first set
       if (slided) {
-        exercise.currentSet = 0;
+        ec.currentSet = 0;
       }
       // Switch to set
-      this.updateClockRest(exercise.clock, false);
+      this.updateClockRest(ec.clock, false);
       // Update clock to set time
-      this.updateClockMax(exercise.clock.id, clockTime);
+      this.updateClockMax(ec.clock.id, clockTime);
     }
   }
 
-  onClockFinish(clockFinish: boolean, exercise: ExerciseClock) {
+  onClockFinish(clockFinish: boolean, ec: ExerciseClock) {
     if (clockFinish) {
-      if (exercise.clock.rest) {
+      if (ec.clock.rest) {
         // Rest to set
-        this.onRestSkip(exercise);
+        this.onRestSkip(ec);
       } else {
         // Set to rest
-        this.onNextSet(exercise);
+        this.onNextSet(ec);
       }
     }
   }
@@ -616,37 +602,30 @@ export class TrainingPage implements OnInit {
     });
 
     modal.onDidDismiss().then((event) => {
-      if (event.data.exercise) {
-        const editedEC = this.createExerciseClock(
-          event.data.exercise,
-          this.currentIndex
-        );
-        editedEC.clock.rest = currentEC.clock.rest;
-        copyFrom(editedEC.exercise, currentEC.exercise);
-        copyFrom(editedEC.clock, currentEC.clock);
-        this.edited = true;
-      }
+      this.edited = true;
     });
 
     return await modal.present();
   }
 
   // UI display
-  getWeightUI(exercise: ExerciseClock, setIndex: number) {
-    const set = exercise.exercise.set.sets[setIndex];
-    const setDetails = getSetDetail(exercise.exercise);
-    return `${set.load} ${setDetails.loadUnit}`;
+  getWeightUI(ec: ExerciseClock, setIndex: number) {
+    const set = ec.exercise.set.sets[setIndex];
+    const setDetails = getSetDetail(ec.exercise);
+    if (set?.load) return `${set.load} ${setDetails.loadUnit}`;
+    return '--';
   }
 
-  getCurrentSetUI(exercise: ExerciseClock) {
-    return Math.min(exercise.currentSet + 1, exercise.setCount);
+  getCurrentSetUI(ec: ExerciseClock) {
+    const setCount = ec.exercise.set.sets.length;
+    return Math.min(ec.currentSet + 1, setCount);
   }
 
-  getChipColorUI(exercise: ExerciseClock) {
-    return exercise.clock.rest ? 'secondary' : 'primary';
+  getChipColorUI(ec: ExerciseClock) {
+    return ec.clock.rest ? 'secondary' : 'primary';
   }
 
-  getNextTextUI(exercise: ExerciseClock) {
-    return exercise.clock.rest ? 'Skip' : 'Next';
+  getNextTextUI(ec: ExerciseClock) {
+    return ec.clock.rest ? 'Skip' : 'Next';
   }
 }
