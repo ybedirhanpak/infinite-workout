@@ -132,6 +132,7 @@ export class WorkoutService {
         concatMap((workoutsData) => {
           if (workoutsData) {
             const workouts = Object.values(workoutsData);
+            workouts.sort((w1, w2) => w2.id - w1.id);
             return from(this.workouts.loadLocalStates(workouts));
           }
           return [];
