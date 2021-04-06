@@ -21,6 +21,7 @@ const EMPTY_WORKOUT = getEmptyWorkout(Date.now());
 export class WorkoutsPage implements OnInit {
   loading = false;
   workoutList: Workout[];
+  highlights: Workout[];
   workoutCategories: WorkoutCategory[];
 
   refresher: any;
@@ -38,6 +39,7 @@ export class WorkoutsPage implements OnInit {
     this.loading = true;
     this.workoutService.remoteWorkouts.get().subscribe((workouts) => {
       this.workoutList = workouts;
+      this.highlights = this.workoutList.slice(0, 5);
       this.loading = false;
       if (this.refresher) {
         this.refresher.complete();

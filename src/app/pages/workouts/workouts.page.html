@@ -20,7 +20,7 @@
         <app-highlight-card [skeleton]="true"></app-highlight-card>
       </div>
       <div *ngIf="!loading">
-        <app-highlight-workout-slide [workouts]="workoutList" (onClick)="onWorkoutClick($event)"></app-highlight-workout-slide>
+        <app-highlight-workout-slide [workouts]="highlights" (onClick)="onWorkoutClick($event)"></app-highlight-workout-slide>
       </div>
     </section>
     <section *ngFor="let category of workoutCategories">
