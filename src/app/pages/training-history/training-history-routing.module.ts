@@ -6,14 +6,7 @@ import { TrainingHistoryPage } from './training-history.page';
 const routes: Routes = [
   {
     path: '',
-    component: TrainingHistoryPage
-  },
-  {
-    path: 'record/:id',
-    loadChildren: () =>
-      import('./training-record/training-record.module').then(
-        (m) => m.TrainingRecordPageModule
-      ),
+    component: TrainingHistoryPage,
   },
 ];
 
