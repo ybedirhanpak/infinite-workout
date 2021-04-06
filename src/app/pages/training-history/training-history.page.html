@@ -12,15 +12,12 @@
       <ion-button class="primary-button" routerLink="/workouts/">Explore</ion-button>
     </div>
     <section>
-      <ion-virtual-scroll [items]="trainingRecordList" [trackBy]="recordIdentifier" approxItemHeight="254px">
-        <div *virtualItem="let trainingRecord" class="training-history-card">
-          <app-highlight-card [id]="trainingRecord.id" [imageUrl]="trainingRecord.workout.imageUrl"
-            [title]="trainingRecord.workout.name" [subtitle]="trainingRecord.duration"
-            [textList]="[trainingRecord.date]" [actionButton]="{ icon: 'trash', color: 'danger'}"
-            (onActionClick)="deleteTrainingRecord($event)">
-          </app-highlight-card>
-        </div>
-      </ion-virtual-scroll>
+      <div *ngFor="let trainingRecord of trainingRecordList" class="training-history-card">
+        <app-highlight-card [id]="trainingRecord.id" [imageUrl]="trainingRecord.workout.imageUrl"
+          [title]="trainingRecord.workout.name" [subtitle]="trainingRecord.duration" [textList]="[trainingRecord.date]"
+          [actionButton]="{ icon: 'trash', color: 'danger'}" (onActionClick)="deleteTrainingRecord($event)">
+        </app-highlight-card>
+      </div>
     </section>
   </app-page-layout>
 </ion-content>
