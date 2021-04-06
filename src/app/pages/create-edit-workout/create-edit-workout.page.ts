@@ -28,13 +28,17 @@ import { ImageGalleryPage } from '../image-gallery/image-gallery.page';
   styleUrls: ['./create-edit-workout.page.scss'],
 })
 export class CreateEditWorkoutPage implements OnInit {
-  mode: 'create' | 'edit' = 'create';
+  // Workout information
   workout: Workout;
   exercises: Exercise[];
   created = false;
   customized = false;
+
+  mode: 'create' | 'edit' = 'create';
+  // Create & Edit
   formGroup: FormGroup;
   reorder = false;
+  changed = false;
 
   defaultImage = '/assets/img/workout/workout-1.jpg';
 
@@ -45,7 +49,6 @@ export class CreateEditWorkoutPage implements OnInit {
     private navCtrl: NavController,
     private modalCtrl: ModalController,
     imageGalleryService: ImageGalleryService,
-    private toastController: ToastController,
     private alertController: AlertController
   ) {
     this.defaultImage = imageGalleryService.getRandomImage();
@@ -86,6 +89,12 @@ export class CreateEditWorkoutPage implements OnInit {
         equipments: new FormControl(''),
       });
     }
+
+    if (this.formGroup) {
+      this.formGroup.valueChanges.subscribe(() => {
+        this.changed = true;
+      });
+    }
   }
 
   getTitle() {
@@ -102,6 +111,7 @@ export class CreateEditWorkoutPage implements OnInit {
           } else {
             this.exercises.push(exercise);
           }
+          this.changed = true;
         }
       });
     }
@@ -112,7 +122,7 @@ export class CreateEditWorkoutPage implements OnInit {
     this.router.navigateByUrl(navigateUrl);
   }
 
-  async onSaveClick() {
+  async saveWorkout() {
     const workoutToSave = {
       imageUrl: this.defaultImage,
       ...this.workout,
@@ -175,6 +185,7 @@ export class CreateEditWorkoutPage implements OnInit {
     const itemMove = this.exercises.splice(event.detail.from, 1)[0];
     this.exercises.splice(event.detail.to, 0, itemMove);
     event.detail.complete();
+    this.changed = true;
   }
 
   onEditExerciseClick(exercise: Exercise) {
@@ -187,13 +198,14 @@ export class CreateEditWorkoutPage implements OnInit {
     const deleteExercise = () => {
       const index = this.exercises.findIndex((e) => e.id === exercise.id);
       this.exercises.splice(index, 1);
+      this.changed = true;
     };
+
     // Ask for permission before delete
     this.alertController
       .create({
         header: 'Remove this exercise?',
-        message:
-          'All information regarding this exercise will be deleted.',
+        message: 'All information regarding this exercise will be deleted.',
         buttons: [
           {
             text: 'Cancel',
@@ -225,10 +237,41 @@ export class CreateEditWorkoutPage implements OnInit {
     modal.onDidDismiss().then((event) => {
       if (event.data.image) {
         this.workout.imageUrl = event.data.image;
+        this.changed = true;
       }
     });
 
     return await modal.present();
+  }
+
+  onBackButtonClick() {
+    if (this.changed) {
+      this.alertController
+        .create({
+          header: 'Do you want to leave?',
+          message:
+            "You have changed this workout. If you don't save, all changes will be lost forever.",
+          buttons: [
+            {
+              text: 'Save',
+              handler: () => this.saveWorkout(),
+            },
+            {
+              text: 'Exit without saving',
+              handler: () => this.navCtrl.back(),
+            },
+            {
+              text: 'Cancel',
+              role: 'cancel',
+            },
+          ],
+        })
+        .then((alert) => {
+          alert.present();
+        });
+    } else {
+      this.navCtrl.back();
+    }
   }
 
   getReorderTextUI() {

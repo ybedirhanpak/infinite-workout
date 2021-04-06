@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home/my-library"></ion-back-button>
+      <ion-button (click)="onBackButtonClick()">
+        <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title>{{ getTitle() }}</ion-title>
     <ion-buttons slot="end">
@@ -66,7 +68,7 @@
 
 <ion-footer>
   <ion-toolbar>
-    <ion-button class="footer-button" expand="block" (click)="onSaveClick()">
+    <ion-button class="footer-button" expand="block" (click)="saveWorkout()">
       <ion-text>Save</ion-text>
     </ion-button>
   </ion-toolbar>
