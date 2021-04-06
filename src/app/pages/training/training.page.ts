@@ -106,6 +106,10 @@ export class TrainingPage implements OnInit {
   createExerciseClock(exercise: Exercise, index: number) {
     const type = exercise.set.type;
 
+    exercise.set.sets.forEach((set) => {
+      set.checked = false;
+    });
+
     const clockSets = exercise.set.sets;
 
     let clockTime = 0;
