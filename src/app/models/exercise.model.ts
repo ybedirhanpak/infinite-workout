@@ -8,6 +8,7 @@ export interface SetDetail {
 export interface Set {
   load: number;
   rep: number;
+  checked?: boolean;
 }
 
 interface WeightRep {
