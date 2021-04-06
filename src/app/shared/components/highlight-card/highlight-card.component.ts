@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./highlight-card.component.scss'],
 })
 export class HighlightCardComponent implements OnInit {
-  @Input() id: string;
+  @Input() id: string | number;
   @Input() imageUrl: string;
   @Input() title: string;
   @Input() subtitle: string;
