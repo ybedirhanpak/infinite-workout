@@ -19,7 +19,7 @@ export class RestTimePickerComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.trainingService.restTime.subscribe((value) => {
+    this.trainingService.restTime.value.subscribe((value) => {
       this.restTime = value;
       this.restTimeString = this.dateService.secondsToString(
         this.restTime,
@@ -29,7 +29,7 @@ export class RestTimePickerComponent implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.trainingService.fetchRestTime();
+    this.trainingService.restTime.fetch();
   }
 
   /**
@@ -38,8 +38,8 @@ export class RestTimePickerComponent implements OnInit {
    */
   onRestTimeChange(event: any) {
     const restTimeValue = event.detail.value;
-    this.trainingService
-      .saveRestTime(this.dateService.stringToSeconds(restTimeValue))
+    this.trainingService.restTime
+      .set(this.dateService.stringToSeconds(restTimeValue))
       .catch(() => {
         // TODO: Display error message
       });

@@ -29,14 +29,17 @@ export class AppComponent implements OnInit {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-      if (this.platform.is('cordova') || this.platform.is('capacitor')) {
-        this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+      if (this.platform.is('cordova') || this.platform.is('capacitor')) {
+        this.statusBar.styleDefault();
+        this.splashScreen.hide();
+        this.screenOrientation.lock(
+          this.screenOrientation.ORIENTATIONS.PORTRAIT
+        );
       }
+
       // Fetch values from storage
       this.themeService.fetchTheme();
-      this.trainingService.fetchRestTime();
+      this.trainingService.restTime.fetch();
 
       // Fetch static remote data
       this.workoutService.fetchWorkouts();

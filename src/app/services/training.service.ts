@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Workout } from '@models/workout.model';
+import { LocalState } from '@utils/local-state.util';
 import { BehaviorSubject } from 'rxjs';
 import { TrainingRecord } from '../models/training.model';
 
@@ -16,17 +17,16 @@ const REST_TIME_DEFAULT = 90;
 })
 export class TrainingService {
   private TRAINING_RECORD_LIST = new BehaviorSubject<TrainingRecord[]>([]);
-  private REST_TIME = new BehaviorSubject<number>(0);
+
+  public restTime: LocalState<number>;
 
   get trainingRecordList() {
     return this.TRAINING_RECORD_LIST.asObservable();
   }
 
-  get restTime() {
-    return this.REST_TIME.asObservable();
+  constructor(private storage: Storage) {
+    this.restTime = new LocalState(storage, REST_TIME_KEY, REST_TIME_DEFAULT);
   }
-
-  constructor(private storage: Storage) {}
 
   /**
    * Returns empty list if given trainingRecord list is null or empty
@@ -96,30 +96,5 @@ export class TrainingService {
       (w: TrainingRecord) => w.id === id
     )[0];
     return trainingRecord;
-  }
-
-  /**
-   * Retrevies rest time from storage and updates behavior subject
-   */
-  async fetchRestTime() {
-    let restTime = await this.storage.get(REST_TIME_KEY);
-    // If rest time is undefined or null, make it default value
-    if (restTime !== 0 && !restTime) {
-      await this.storage.set(REST_TIME_KEY, REST_TIME_DEFAULT);
-      restTime = REST_TIME_DEFAULT;
-    }
-    // If rest time is changed, update it
-    if (restTime !== this.REST_TIME.value) {
-      this.REST_TIME.next(restTime);
-    }
-  }
-
-  /**
-   * Saves resttime into storage and behavior subject
-   * @param restTime new value of restTime to be saved
-   */
-  async saveRestTime(restTime: number) {
-    await this.storage.set(REST_TIME_KEY, restTime);
-    this.REST_TIME.next(restTime);
   }
 }

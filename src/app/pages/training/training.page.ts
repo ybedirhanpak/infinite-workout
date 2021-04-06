@@ -98,9 +98,9 @@ export class TrainingPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.trainingService.restTime.subscribe((restTime) => {
+    this.trainingService.restTime.value.subscribe((restTime) => {
       this.restTime = restTime;
-    });
+    })
   }
 
   createExerciseClock(exercise: Exercise, index: number) {
