@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertController, ToastController } from '@ionic/angular';
 
 // Model
 import { Workout } from '@models/workout.model';
@@ -24,7 +25,12 @@ export class WorkoutDetailPage implements OnInit {
   customized = false;
   original: Workout;
 
-  constructor(private router: Router, private workoutService: WorkoutService) {}
+  constructor(
+    private router: Router,
+    private workoutService: WorkoutService,
+    private alertController: AlertController,
+    private toastController: ToastController
+  ) {}
 
   ngOnInit() {
     this.explore = this.router.url.includes('explore');
@@ -63,9 +69,39 @@ export class WorkoutDetailPage implements OnInit {
   }
 
   async onShareClick() {
-    this.workoutService.uploadWorkout(this.workout).then((workout) => {
-      // TODO: Show Toast Message
-    })
+    const share = () => {
+      this.workoutService.uploadWorkout(this.workout).then(() => {
+        this.toastController
+          .create({
+            message: 'Workout is uploaded.',
+            duration: 500,
+            position: 'top',
+          })
+          .then((toast) => {
+            toast.present();
+          });
+      });
+    };
+
+    // Ask for permission before delete
+    this.alertController
+      .create({
+        header: 'Upload this workout?',
+        message: 'This workout will be available on explore page.',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+          },
+          {
+            text: 'Upload',
+            handler: share,
+          },
+        ],
+      })
+      .then((alertEl) => {
+        alertEl.present();
+      });
   }
 
   getCustomizeTextUI() {
