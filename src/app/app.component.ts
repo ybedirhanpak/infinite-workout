@@ -40,6 +40,7 @@ export class AppComponent implements OnInit {
       // Fetch values from storage
       this.themeService.fetchTheme();
       this.trainingService.restTime.fetch();
+      this.trainingService.trainingRecordList.fetchFromStorage();
 
       // Fetch static remote data
       this.workoutService.fetchWorkouts();
