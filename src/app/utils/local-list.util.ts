@@ -59,6 +59,7 @@ export class LocalList<T extends Array<StateHolder>> {
   async fetchFromStorage() {
     const list = await this.getList();
     this.list$.next(list);
+    return list;
   }
 
   async contains(element: StateHolder): Promise<boolean> {
