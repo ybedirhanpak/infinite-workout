@@ -41,17 +41,19 @@ export class MyLibraryPage implements OnInit {
       this.customizedWorkouts = workouts;
     });
 
-    this.trainingService.trainingRecordList.subscribe((trainingRecordList) => {
-      if(trainingRecordList.length > 0) {
-        this.lastTraining = trainingRecordList[0];
-        this.lastWorkout = this.lastTraining.workout;
+    this.trainingService.trainingRecordList.elements.subscribe(
+      (trainingRecordList) => {
+        if (trainingRecordList.length > 0) {
+          this.lastTraining = trainingRecordList[0];
+          this.lastWorkout = this.lastTraining.workout;
+        }
       }
-    });
+    );
   }
 
   ionViewWillEnter() {
     this.workoutService.workouts.fetchFromStorage();
-    this.trainingService.fetchTrainingRecordList();
+    this.trainingService.trainingRecordList.fetchFromStorage();
   }
 
   onWorkoutClick(workout: Workout) {

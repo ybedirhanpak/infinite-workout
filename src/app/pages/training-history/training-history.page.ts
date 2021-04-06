@@ -1,5 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
 
 // Model
@@ -13,9 +12,8 @@ import { TrainingService } from '@services/training.service';
   templateUrl: './training-history.page.html',
   styleUrls: ['./training-history.page.scss'],
 })
-export class TrainingHistoryPage implements OnInit, OnDestroy {
+export class TrainingHistoryPage implements OnInit {
   trainingRecordList: TrainingRecord[];
-  trainingRecordSub: Subscription;
   isLoading = false;
 
   constructor(
@@ -25,34 +23,22 @@ export class TrainingHistoryPage implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.trainingRecordSub = this.trainingService.trainingRecordList.subscribe(
-      (trainingRecordList) => {
-        console.log('List', trainingRecordList);
-        this.trainingRecordList = trainingRecordList;
-      }
-    );
+    this.trainingService.trainingRecordList$.subscribe((trainingRecordList) => {
+      this.trainingRecordList = trainingRecordList;
+    });
   }
 
   ionViewWillEnter() {
     // Fetch training records from data source
-    this.isLoading = true;
-    this.trainingService.fetchTrainingRecordList().then(() => {
-      this.isLoading = false;
-    });
-  }
-
-  ngOnDestroy() {
-    if (this.trainingRecordSub) {
-      this.trainingRecordSub.unsubscribe();
-    }
+    this.trainingService.trainingRecordList.fetchFromStorage();
   }
 
   deleteTrainingRecord(id: number) {
     const deleteRecord = () => {
       let message = '';
 
-      this.trainingService
-        .deleteTrainingRecord(id)
+      this.trainingService.trainingRecordList
+        .remove({ id })
         .then(() => {
           message = 'Training record deleted successfully.';
         })

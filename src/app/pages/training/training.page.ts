@@ -31,6 +31,7 @@ import { ExerciseService } from '@services/exercise.service';
 
 // Utils
 import { getSetDetail } from '@utils/exercise.util';
+import { TrainingRecord } from '@models/training.model';
 
 interface Clock {
   id: number;
@@ -100,7 +101,7 @@ export class TrainingPage implements OnInit {
   ngOnInit() {
     this.trainingService.restTime.value.subscribe((restTime) => {
       this.restTime = restTime;
-    })
+    });
   }
 
   createExerciseClock(exercise: Exercise, index: number) {
@@ -284,8 +285,16 @@ export class TrainingPage implements OnInit {
 
       // Save this training to training records
       let message = '';
-      this.trainingService
-        .saveTrainingRecord(this.workout, new Date(), this.totalTimeString)
+
+      const trainingRecord: TrainingRecord = {
+        id: Date.now(),
+        workout: { ...this.workout },
+        date: new Date().toLocaleDateString(),
+        duration: this.totalTimeString,
+      };
+
+      this.trainingService.trainingRecordList
+        .create(trainingRecord)
         .then(() => {
           message = 'Training saved into records.';
         })
