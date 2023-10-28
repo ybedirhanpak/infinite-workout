@@ -8,7 +8,9 @@ Infinite workout provides customizable workout programs and tracks your progress
 
 ## Run on your local
 
-```
+```zsh
+git clone git@github.com:ybedirhanpak/infinite-workout.git
+nvm use v16.13.0
 npm install -g @ionic/cli
 npm install
 ionic serve
@@ -17,8 +19,22 @@ ionic serve
 ## Screenshots
 
 <div>
-<img alt='Get it on Google Play' src='https://raw.githubusercontent.com/ybedirhanpak/infinite-workout/master/.github/assets/screenshot_2.png' width="200"/>
-<img alt='Get it on Google Play' src='https://raw.githubusercontent.com/ybedirhanpak/infinite-workout/master/.github/assets/screenshot_3.png' width="200"/>
-<img alt='Get it on Google Play' src='https://raw.githubusercontent.com/ybedirhanpak/infinite-workout/master/.github/assets/screenshot_4.png' width="200"/>
-<img alt='Get it on Google Play' src='https://raw.githubusercontent.com/ybedirhanpak/infinite-workout/master/.github/assets/screenshot_5.png' width="200"/>
+    <img alt='Get it on Google Play' src='https://raw.githubusercontent.com/ybedirhanpak/infinite-workout/master/.github/assets/screenshot_2.png' width="200"/>
+    <img alt='Get it on Google Play' src='https://raw.githubusercontent.com/ybedirhanpak/infinite-workout/master/.github/assets/screenshot_3.png' width="200"/>
+    <img alt='Get it on Google Play' src='https://raw.githubusercontent.com/ybedirhanpak/infinite-workout/master/.github/assets/screenshot_4.png' width="200"/>
+    <img alt='Get it on Google Play' src='https://raw.githubusercontent.com/ybedirhanpak/infinite-workout/master/.github/assets/screenshot_5.png' width="200"/>
 </div>
+
+## Troubleshooting
+
+- Clear npm cache:
+
+```zsh
+npm cache clean --force
+```
+
+- Upgrade package-lock:
+
+```zsh
+npm install --package-lock-only
+```
