@@ -13,7 +13,7 @@ import {
   Platform,
   AlertController,
 } from '@ionic/angular';
-import { Insomnia } from '@ionic-native/insomnia/ngx';
+import { Insomnia } from '@awesome-cordova-plugins/insomnia/ngx';
 
 // Components
 import { ClockCircleComponent } from 'src/app/shared/components/clock-circle/clock-circle.component';
