@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import {
   AlertController,
   ModalController,
@@ -36,7 +36,7 @@ export class CreateEditWorkoutPage implements OnInit {
 
   mode: 'create' | 'edit' = 'create';
   // Create & Edit
-  formGroup: FormGroup;
+  formGroup: UntypedFormGroup;
   reorder = false;
   changed = false;
 
@@ -70,11 +70,11 @@ export class CreateEditWorkoutPage implements OnInit {
           this.workout.name = `${this.workout.name} (Copy)`;
         }
 
-        this.formGroup = new FormGroup({
-          name: new FormControl(this.workout.name),
-          duration: new FormControl(this.workout.duration),
-          category: new FormControl(this.workout.category),
-          equipments: new FormControl(this.workout.equipments),
+        this.formGroup = new UntypedFormGroup({
+          name: new UntypedFormControl(this.workout.name),
+          duration: new UntypedFormControl(this.workout.duration),
+          category: new UntypedFormControl(this.workout.category),
+          equipments: new UntypedFormControl(this.workout.equipments),
         });
       });
     } else {
@@ -82,11 +82,11 @@ export class CreateEditWorkoutPage implements OnInit {
       this.mode = 'create';
       this.workout = getEmptyWorkout(Date.now());
       this.exercises = [];
-      this.formGroup = new FormGroup({
-        name: new FormControl(''),
-        duration: new FormControl(''),
-        category: new FormControl(''),
-        equipments: new FormControl(''),
+      this.formGroup = new UntypedFormGroup({
+        name: new UntypedFormControl(''),
+        duration: new UntypedFormControl(''),
+        category: new UntypedFormControl(''),
+        equipments: new UntypedFormControl(''),
       });
     }
 
