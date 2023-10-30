@@ -10,18 +10,25 @@
     "module": "esnext",
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2020",
+    "target": "ES2022",
     "lib": [
       "es2018",
       "dom"
     ],
     "paths": {
-      "@services/*": ["./src/app/services/*"],
-      "@models/*": ["./src/app/models/*"],
-      "@utils/*": ["./src/app/utils/*"],
+      "@services/*": [
+        "./src/app/services/*"
+      ],
+      "@models/*": [
+        "./src/app/models/*"
+      ],
+      "@utils/*": [
+        "./src/app/utils/*"
+      ]
     },
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
