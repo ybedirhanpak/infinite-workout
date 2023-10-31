@@ -7,7 +7,7 @@ export interface Workout extends StateHolder {
   duration: string;
   equipments: string;
   category: string;
-  imageUrl: string;
+  imageUrl?: string;
   exercises: Exercise[];
   state?: {
     favorited?: boolean;

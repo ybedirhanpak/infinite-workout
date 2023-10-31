@@ -1,13 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
+import { Storage } from '@ionic/storage-angular';
 import { SplashScreen } from '@awesome-cordova-plugins/splash-screen/ngx';
 import { StatusBar } from '@awesome-cordova-plugins/status-bar/ngx';
 import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
+import { register as registerSwiper } from 'swiper/element/bundle';
 
 // Service
 import { ThemeService } from '@services/theme.service';
 import { TrainingService } from '@services/training.service';
 import { WorkoutService } from '@services/workout.service';
+
+registerSwiper();
 
 @Component({
   selector: 'app-root',
@@ -17,6 +21,7 @@ import { WorkoutService } from '@services/workout.service';
 export class AppComponent implements OnInit {
   constructor(
     private platform: Platform,
+    private storage: Storage,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private themeService: ThemeService,
@@ -47,5 +52,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  async ngOnInit() {
+    await this.storage.create();
+  }
 }

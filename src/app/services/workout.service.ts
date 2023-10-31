@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Storage } from '@ionic/storage';
+import { Storage } from '@ionic/storage-angular';
 import { HttpClient } from '@angular/common/http';
 import { from } from 'rxjs';
 import { concatMap, map, tap } from 'rxjs/operators';
@@ -24,10 +24,10 @@ export class WorkoutService {
   public remoteWorkouts = new State<Workout[]>([]);
   public workoutCategories = new State<WorkoutCategory[]>([]);
 
-  public workoutDetail = new State<Workout>(null);
-  public workoutEdit = new State<Workout>(null);
+  public workoutDetail = new State<Workout | null>(null);
+  public workoutEdit = new State<Workout | null>(null);
 
-  public workouts: LocalList<Workout[]>;
+  public workouts: LocalList<Workout>;
 
   constructor(storage: Storage, private http: HttpClient) {
     this.workouts = new LocalList(storage, WORKOUTS_KEY);

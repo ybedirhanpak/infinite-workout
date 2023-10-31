@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class ImageGalleryService {
 
-  public IMAGES = [];
+  public IMAGES: string[] = [];
   public IMAGE_COUNT = 62;
 
   constructor() {

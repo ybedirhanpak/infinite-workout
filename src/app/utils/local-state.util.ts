@@ -1,4 +1,4 @@
-import { Storage } from '@ionic/storage';
+import { Storage } from '@ionic/storage-angular';
 import { BehaviorSubject } from 'rxjs';
 
 export class LocalState<T> {

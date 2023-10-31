@@ -13,7 +13,7 @@ import { TrainingService } from '@services/training.service';
   styleUrls: ['./training-history.page.scss'],
 })
 export class TrainingHistoryPage implements OnInit {
-  trainingRecordList: TrainingRecord[];
+  trainingRecordList: TrainingRecord[] = [];
   isLoading = false;
 
   constructor(

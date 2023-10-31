@@ -19,8 +19,8 @@ export class MyLibraryPage implements OnInit {
   createdWorkouts: Workout[] = [];
   customizedWorkouts: Workout[] = [];
 
-  lastTraining: TrainingRecord;
-  lastWorkout: Workout;
+  lastTraining!: TrainingRecord;
+  lastWorkout!: Workout;
 
   constructor(
     private workoutService: WorkoutService,

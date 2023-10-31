@@ -25,7 +25,7 @@ export class ClockCircleComponent implements OnInit, OnDestroy {
   paused = true;
   currentString = '00:00';
   percent = 0;
-  tickInterval: NodeJS.Timeout;
+  tickInterval: ReturnType<typeof setTimeout> | null = null;
 
   constructor(private dateService: DateService) {}
 

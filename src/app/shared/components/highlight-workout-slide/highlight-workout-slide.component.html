@@ -1,7 +1,13 @@
-<ion-slides class="catalog" [options]="slideOptions">
-  <ion-slide *ngFor="let workout of workouts; trackBy:identifyWorkout">
+<swiper-container
+  class="catalog"
+  [modules]="swiperModules"
+  [initialSlide]="0"
+  [speed]="500"
+  [slidesPerView]="1.05"
+  [spaceBetween]="12">
+  <swiper-slide *ngFor="let workout of workouts; trackBy:identifyWorkout">
     <app-highlight-card [imageUrl]="workout.imageUrl" [title]="workout.name" [subtitle]="workout.category"
       [textList]="[workout.duration]" [filter]="filter" (click)="onWorkoutClick(workout)">
     </app-highlight-card>
-  </ion-slide>
-</ion-slides>
+  </swiper-slide>
+</swiper-container>

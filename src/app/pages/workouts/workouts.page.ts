@@ -20,9 +20,9 @@ const EMPTY_WORKOUT = getEmptyWorkout(Date.now());
 })
 export class WorkoutsPage implements OnInit {
   loading = false;
-  workoutList: Workout[];
-  highlights: Workout[];
-  workoutCategories: WorkoutCategory[];
+  workoutList: Workout[] = [];
+  highlights: Workout[] = [];
+  workoutCategories: WorkoutCategory[] = [];
 
   refresher: any;
 

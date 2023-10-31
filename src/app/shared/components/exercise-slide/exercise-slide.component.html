@@ -1,5 +1,12 @@
-<ion-slides class="catalog" [options]="slideOptions">
-  <ion-slide *ngFor="let exercise of exercises">
+<swiper-container
+  class="catalog"
+  [modules]="swiperModules"
+  [initialSlide]="0"
+  [speed]="500"
+  [slidesPerView]="2.1"
+  [spaceBetween]="12"
+  [centeredSlides]="false">
+  <swiper-slide *ngFor="let exercise of exercises">
     <app-card-medium 
       [title]="exercise.name" 
       [subtitle]="category" 
@@ -8,5 +15,5 @@
       (click)="onExerciseClick(exercise)"
     >
     </app-card-medium>
-  </ion-slide>
-</ion-slides>
+  </swiper-slide>
+</swiper-container>

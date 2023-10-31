@@ -13,9 +13,16 @@
 <ion-content scroll-y="false">
   <app-page-layout [fullScreen]="true">
     <div class="training-page-body">
-      <ion-slides [options]="slideOptions" (ionSlideWillChange)="onSlideChange($event)"
-        (ionSlidesDidLoad)="onSlideLoad($event)">
-        <ion-slide *ngFor="let ec of exerciseClocks; index as i;">
+      <swiper-container
+        #swiper
+        [modules]="swiperModules"
+        [initialSlide]="0"
+        [speed]="0"
+        [slidesPerView]="1.3"
+        [centeredSlides]="true"
+        (slidechange)="onSlideChange($event)"
+        (init)="onSlideLoad($event)">
+        <swiper-slide *ngFor="let ec of exerciseClocks; index as i;">
           <div class="exercise" [class.next]="i > currentIndex" [class.prev]="i < currentIndex">
             <div class="card exercise-card">
               <img class="cover-image" [src]="ec.exercise.imageUrl">
@@ -117,8 +124,8 @@
               </div>
             </div>
           </div>
-        </ion-slide>
-      </ion-slides>
+        </swiper-slide>
+      </swiper-container>
     </div>
   </app-page-layout>
 </ion-content>
