@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import {
   AlertController,
+  ItemReorderCustomEvent,
   ModalController,
   NavController,
   ToastController,
@@ -29,14 +30,14 @@ import { ImageGalleryPage } from '../image-gallery/image-gallery.page';
 })
 export class CreateEditWorkoutPage implements OnInit {
   // Workout information
-  workout: Workout;
-  exercises: Exercise[];
-  created = false;
-  customized = false;
+  workout!: Workout;
+  exercises!: Exercise[];
+  created?: boolean = false;
+  customized?: boolean = false;
 
   mode: 'create' | 'edit' = 'create';
   // Create & Edit
-  formGroup: UntypedFormGroup;
+  formGroup!: UntypedFormGroup;
   reorder = false;
   changed = false;
 
@@ -60,7 +61,7 @@ export class CreateEditWorkoutPage implements OnInit {
       // Edit Mode
       this.mode = 'edit';
       this.workoutService.workoutEdit.get().subscribe(async (workout) => {
-        this.workout = { ...workout };
+        this.workout = { ...workout! };
         this.exercises = this.workout.exercises;
 
         this.created = this.workout.state?.created;
@@ -181,7 +182,7 @@ export class CreateEditWorkoutPage implements OnInit {
       });
   }
 
-  async onReorderExercise(event) {
+  async onReorderExercise(event: ItemReorderCustomEvent) {
     const itemMove = this.exercises.splice(event.detail.from, 1)[0];
     this.exercises.splice(event.detail.to, 0, itemMove);
     event.detail.complete();

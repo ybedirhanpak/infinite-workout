@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { IonicSlides } from '@ionic/angular';
 
 // Model
 import { Exercise } from '@models/exercise.model';
@@ -9,18 +10,12 @@ import { Exercise } from '@models/exercise.model';
   styleUrls: ['./exercise-slide.component.scss'],
 })
 export class ExerciseSlideComponent {
-  @Input() category: string;
+  swiperModules = [IonicSlides];
+
+  @Input() category?: string;
   @Input() exercises: Exercise[] = [];
 
   @Output() onClick = new EventEmitter<Exercise>();
-
-  slideOptions = {
-    initialSlide: 0,
-    speed: 500,
-    slidesPerView: 2.1,
-    spaceBetween: 12,
-    centerSlide: false,
-  };
 
   onExerciseClick(exercise: Exercise) {
     this.onClick.emit(exercise);

@@ -8,6 +8,6 @@ import { State } from '@utils/state.util';
   providedIn: 'root',
 })
 export class ExerciseService {
-  public editedExercise = new State<Exercise>(null);
-  public exerciseDetail = new State<Exercise>(null);
+  public editedExercise = new State<Exercise | null>(null);
+  public exerciseDetail = new State<Exercise | null>(null);
 }

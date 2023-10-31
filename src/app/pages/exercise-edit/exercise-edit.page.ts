@@ -20,10 +20,10 @@ export class ExerciseEditPage implements OnInit {
   @Input() isModal = false;
   @Input() fromEdit = false;
 
-  exercise: Exercise;
-  sets: Set[];
-  suggestedSet: Set = { load: undefined, rep: undefined };
-  setDetail: SetDetail;
+  exercise!: Exercise;
+  sets!: Set[];
+  suggestedSet: Set = { load: 0, rep: 0 };
+  setDetail!: SetDetail;
 
   constructor(
     private exerciseService: ExerciseService,
@@ -36,7 +36,7 @@ export class ExerciseEditPage implements OnInit {
 
   ionViewWillEnter() {
     this.exerciseService.exerciseDetail.get().subscribe((exercise) => {
-      this.exercise = exercise;
+      this.exercise = exercise!;
       this.setDetail = getSetDetail(this.exercise);
       this.sets = this.exercise.set.sets;
     });

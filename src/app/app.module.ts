@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
@@ -11,6 +11,7 @@ import { StatusBar } from '@awesome-cordova-plugins/status-bar/ngx';
 import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
 import { Insomnia } from '@awesome-cordova-plugins/insomnia/ngx';
 
+import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -22,6 +23,7 @@ import { AppComponent } from './app.component';
         AppRoutingModule,
         IonicStorageModule.forRoot(),
         HttpClientModule,
+        SharedModule,
     ],
     providers: [
         StatusBar,
@@ -30,6 +32,7 @@ import { AppComponent } from './app.component';
         ScreenOrientation,
         Insomnia,
     ],
-    bootstrap: [AppComponent]
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    bootstrap: [AppComponent],
 })
 export class AppModule {}

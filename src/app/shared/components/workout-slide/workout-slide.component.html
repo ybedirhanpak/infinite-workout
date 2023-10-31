@@ -1,8 +1,14 @@
-<ion-slides class="catalog" [options]="slideOptions">
-  <ion-slide *ngFor="let workout of workouts">
+<swiper-container
+  class="catalog"
+  [modules]="swiperModules"
+  [initialSlide]="0"
+  [speed]="500"
+  [slidesPerView]="2.1"
+  [spaceBetween]="12">
+  <swiper-slide *ngFor="let workout of workouts">
     <app-card-medium [title]="workout.name" [subtitle]="workout.category" [text]="workout.duration"
       [imageUrl]="workout.imageUrl" (click)="onWorkoutClick(workout)" [heart]="workout.state?.favorited"
       [sparkles]="workout.state?.customized" [star]="workout.state?.created">
     </app-card-medium>
-  </ion-slide>
-</ion-slides>
+  </swiper-slide>
+</swiper-container>

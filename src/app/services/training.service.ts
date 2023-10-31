@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Storage } from '@ionic/storage';
+import { Storage } from '@ionic/storage-angular';
 import { map } from 'rxjs/operators';
 
 // Model
@@ -21,11 +21,11 @@ const REST_TIME_DEFAULT = 90;
 })
 export class TrainingService {
   public restTime: LocalState<number>;
-  public trainingRecordList: LocalList<TrainingRecord[]>;
+  public trainingRecordList: LocalList<TrainingRecord>;
 
   constructor(storage: Storage) {
     this.restTime = new LocalState(storage, REST_TIME_KEY, REST_TIME_DEFAULT);
-    this.trainingRecordList = new LocalList(storage, TRAINING_RECORDS_KEY, []);
+    this.trainingRecordList = new LocalList(storage, TRAINING_RECORDS_KEY, [] as TrainingRecord[]);
   }
 
   get trainingRecordList$() {

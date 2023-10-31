@@ -9,7 +9,7 @@ import { ExerciseService } from '@services/exercise.service';
   styleUrls: ['./exercise-detail.page.scss'],
 })
 export class ExerciseDetailPage {
-  exercise: Exercise;
+  exercise!: Exercise;
   selectable = false;
 
   constructor(
@@ -19,7 +19,7 @@ export class ExerciseDetailPage {
 
   ionViewWillEnter() {
     this.exerciseService.exerciseDetail.get().subscribe((exercise) => {
-      this.exercise = exercise;
+      this.exercise = exercise!;
     });
 
     if (

@@ -14,7 +14,7 @@ import { WorkoutService } from '@services/workout.service';
   styleUrls: ['./workout-detail.page.scss'],
 })
 export class WorkoutDetailPage implements OnInit {
-  @Input() workout: Workout;
+  @Input() workout: Workout | null = null;
 
   duration = '';
   explore = false;
@@ -23,7 +23,6 @@ export class WorkoutDetailPage implements OnInit {
 
   // Customization Logic
   customized = false;
-  original: Workout;
 
   constructor(
     private router: Router,
@@ -38,9 +37,13 @@ export class WorkoutDetailPage implements OnInit {
 
   ionViewWillEnter() {
     this.workoutService.workoutDetail.get().subscribe(async (workout) => {
-      this.favorited = workout.state?.favorited;
-      this.created = workout.state?.created;
-      this.customized = workout.state?.customized;
+      if (!workout) {
+        return;
+      }
+
+      this.favorited = !!workout.state?.favorited;
+      this.created = !!workout.state?.created;
+      this.customized = !!workout.state?.customized;
       this.workout = workout;
     });
   }
@@ -52,11 +55,11 @@ export class WorkoutDetailPage implements OnInit {
 
   async onFavoriteClick() {
     if (!this.favorited) {
-      this.workoutService.saveFavorite(this.workout).then(() => {
+      this.workoutService.saveFavorite(this.workout!).then(() => {
         this.favorited = true;
       });
     } else {
-      this.workoutService.removeFavorite(this.workout).then(() => {
+      this.workoutService.removeFavorite(this.workout!).then(() => {
         this.favorited = false;
       });
     }
@@ -70,7 +73,7 @@ export class WorkoutDetailPage implements OnInit {
 
   async onShareClick() {
     const share = () => {
-      this.workoutService.uploadWorkout(this.workout).then(() => {
+      this.workoutService.uploadWorkout(this.workout!).then(() => {
         this.toastController
           .create({
             message: 'Workout is uploaded.',

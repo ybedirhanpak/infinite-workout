@@ -1,5 +1,6 @@
 import {
   Component,
+  ElementRef,
   OnInit,
   QueryList,
   ViewChild,
@@ -7,7 +8,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import {
-  IonSlides,
+  IonicSlides,
   ModalController,
   ToastController,
   Platform,
@@ -55,15 +56,8 @@ interface ExerciseClock {
   styleUrls: ['./training.page.scss'],
 })
 export class TrainingPage implements OnInit {
-  /** Slide */
-  @ViewChild(IonSlides) slides: IonSlides;
-
-  slideOptions = {
-    initialSlide: 0,
-    speed: 500,
-    slidesPerView: 1.3,
-    centeredSlides: true,
-  };
+  swiperModules = [IonicSlides];
+  @ViewChild('swiper') swiper: ElementRef | undefined;
 
   slideLoaded = false;
 
@@ -71,17 +65,17 @@ export class TrainingPage implements OnInit {
   restTime = 90; // seconds
 
   /** Training */
-  @ViewChildren(ClockCircleComponent) clocks: QueryList<ClockCircleComponent>;
+  @ViewChildren(ClockCircleComponent) clocks!: QueryList<ClockCircleComponent>;
 
-  trainingStarted: boolean;
-  trainingPaused: boolean;
-  totalTime: number;
-  totalTimeString: string;
-  totalTimeInterval: NodeJS.Timeout;
+  trainingStarted = false;
+  trainingPaused = false;
+  totalTime = 0;
+  totalTimeString = '00:00:00';
+  totalTimeInterval: ReturnType<typeof setTimeout> | null = null;
 
-  workout: Workout;
-  exerciseClocks: ExerciseClock[];
-  currentIndex: number;
+  workout: Workout | null = null;
+  exerciseClocks: ExerciseClock[] = [];
+  currentIndex = 0;
 
   edited = false;
 
@@ -149,9 +143,14 @@ export class TrainingPage implements OnInit {
     this.totalTimeString = '00:00:00';
     this.exerciseClocks = [];
     this.currentIndex = 0;
-    this.slides.slideTo(this.currentIndex);
+    this.swiper?.nativeElement.slideTo(this.currentIndex);
 
     this.workoutService.workoutDetail.get().subscribe((workout) => {
+      if (workout === null) {
+        console.error('Workout is null');
+        return;
+      }
+
       this.workout = workout;
 
       // Create exercise clocks
@@ -213,7 +212,7 @@ export class TrainingPage implements OnInit {
     }
 
     // Decide on what to do based on rep type
-    const index = await this.slides.getActiveIndex();
+    const index = await this.swiper?.nativeElement.getActiveIndex();
     this.currentIndex = index;
     const { type, clock } = this.exerciseClocks[this.currentIndex];
 
@@ -280,7 +279,7 @@ export class TrainingPage implements OnInit {
     const finish = () => {
       // Update workout if edited
       if (this.edited) {
-        this.workout.exercises = this.exerciseClocks.map((ec) => ec.exercise);
+        this.workout!.exercises = this.exerciseClocks.map((ec) => ec.exercise);
       }
 
       // Save this training to training records
@@ -288,7 +287,7 @@ export class TrainingPage implements OnInit {
 
       const trainingRecord: TrainingRecord = {
         id: Date.now(),
-        workout: { ...this.workout },
+        workout: { ...this.workout! },
         date: new Date().toLocaleDateString(),
         duration: this.totalTimeString,
       };
@@ -352,7 +351,7 @@ export class TrainingPage implements OnInit {
   }
 
   async onSlideChange(event: any) {
-    const nextIndex = await this.slides.getActiveIndex();
+    const nextIndex = await this.swiper?.nativeElement.getActiveIndex();
 
     if (!this.trainingPaused) {
       // Stop current clock
@@ -377,7 +376,7 @@ export class TrainingPage implements OnInit {
     const setCount = exercise.set.sets.length;
     if (currentSet >= setCount) {
       // Go to the next exercise
-      this.slides.slideNext();
+      this.swiper?.nativeElement.slideNext();
       return true;
     }
     return false;

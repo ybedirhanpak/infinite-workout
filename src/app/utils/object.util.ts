@@ -5,17 +5,25 @@ export const copyFrom = (from: any, to: any) => {
   return to;
 };
 
-export const groupBy = (list: any[], name: string, group: string) => {
-  const grouped = {};
-  list.map((element) => {
-    if (grouped[element[group]]) {
-      grouped[element[group]][name].push(element);
-    } else {
-      grouped[element[group]] = {
-        [group]: element[group],
-        [name]: [element],
-      };
+type Grouped<T> = {
+  [key: string]: T[];
+};
+
+export const groupBy = <T extends Record<string, any>>(
+  list: T[],
+  name: string,
+  group: string
+): Grouped<T>[] => {
+  const grouped: Record<string, Grouped<T>> = {};
+
+  list.forEach((element) => {
+    const groupName = String(element[group]);
+    if (!grouped[groupName]) {
+      grouped[groupName] = { [name]: [] };
     }
+
+    grouped[groupName][name].push(element);
   });
+
   return Object.values(grouped);
 };

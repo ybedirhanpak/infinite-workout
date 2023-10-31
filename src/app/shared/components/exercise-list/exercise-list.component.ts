@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ItemReorderCustomEvent } from '@ionic/angular';
 
 // Model
 import { Exercise } from '@models/exercise.model';
@@ -12,13 +13,13 @@ import { getSetDetail } from '@utils/exercise.util';
   styleUrls: ['./exercise-list.component.scss'],
 })
 export class ExerciseListComponent {
-  @Input() exercises: Exercise[];
+  @Input() exercises: Exercise[] = [];
   @Input() reorder = false;
   @Input() editable = false;
 
   @Output() onEditClick = new EventEmitter<Exercise>();
   @Output() onDeleteClick = new EventEmitter<Exercise>();
-  @Output() onReorder = new EventEmitter<any>();
+  @Output() onReorder = new EventEmitter<ItemReorderCustomEvent>();
 
   constructor() {}
 
@@ -30,7 +31,7 @@ export class ExerciseListComponent {
     this.onDeleteClick.emit(exercise);
   }
 
-  onReorderExercise(event) {
+  onReorderExercise(event: ItemReorderCustomEvent) {
     this.onReorder.emit(event);
   }
 

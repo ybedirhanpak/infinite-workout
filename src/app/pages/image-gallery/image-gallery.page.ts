@@ -8,7 +8,7 @@ import { ImageGalleryService } from '@services/image-gallery.service';
   styleUrls: ['./image-gallery.page.scss'],
 })
 export class ImageGalleryPage implements OnInit {
-  images: string[];
+  images: string[] = [];
 
   constructor(
     private imageGalleryService: ImageGalleryService,
