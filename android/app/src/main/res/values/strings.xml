@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Infinite Workout</string>
-    <string name="title_activity_main">Infinite Workout</string>
+    <string name="app_name">infinite-workout</string>
+    <string name="title_activity_main">infinite-workout</string>
     <string name="package_name">com.infinite.workout</string>
     <string name="custom_url_scheme">com.infinite.workout</string>
 </resources>
