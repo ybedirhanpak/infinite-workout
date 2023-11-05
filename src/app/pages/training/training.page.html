@@ -19,9 +19,7 @@
         [initialSlide]="0"
         [speed]="0"
         [slidesPerView]="1.3"
-        [centeredSlides]="true"
-        (slidechange)="onSlideChange($event)"
-        (init)="onSlideLoad($event)">
+        [centeredSlides]="true">
         <swiper-slide *ngFor="let ec of exerciseClocks; index as i;">
           <div class="exercise" [class.next]="i > currentIndex" [class.prev]="i < currentIndex">
             <div class="card exercise-card">
@@ -65,7 +63,7 @@
                         <ion-label style="padding-left: 1rem;">{{ getWeightUI(ec, i) }}</ion-label>
                         <ion-label>{{ set.rep }} reps</ion-label>
                         <button style="background-color: transparent;" (click)="onSetClick($event, ec, i)">
-                          <ion-checkbox slot="end" [checked]="ec.exercise.set.sets[i].checked"></ion-checkbox>
+                          <ion-checkbox slot="end" [checked]="ec.exercise.set.sets[i].checked" aria-label="checkbox"></ion-checkbox>
                         </button>
                       </ion-item>
                     </ion-card>
