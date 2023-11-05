@@ -10,7 +10,7 @@ Infinite workout provides customizable workout programs and tracks your progress
 
 ```zsh
 git clone git@github.com:ybedirhanpak/infinite-workout.git
-nvm use v16.13.0
+nvm use v20.9.0
 npm install -g @ionic/cli
 npm install
 ionic serve
