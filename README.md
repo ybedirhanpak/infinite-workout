@@ -25,6 +25,9 @@ ionic serve
     <img alt='Get it on Google Play' src='https://raw.githubusercontent.com/ybedirhanpak/infinite-workout/master/.github/assets/screenshot_4.png' width="200"/>
 </div>
 
+<br>
+<br>
+
 <div>
     <img alt='Get it on Google Play' src='https://raw.githubusercontent.com/ybedirhanpak/infinite-workout/master/.github/assets/screenshot_5.png' width="200"/>
     <img alt='Get it on Google Play' src='https://raw.githubusercontent.com/ybedirhanpak/infinite-workout/master/.github/assets/screenshot_6.png' width="200"/>
