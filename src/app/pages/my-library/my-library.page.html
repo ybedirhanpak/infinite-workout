@@ -15,7 +15,7 @@
       <div style="margin: 12px;" *ngIf="lastTraining">
         <h3 class="ion-text-center">Last Workout</h3>
         <app-highlight-card [imageUrl]="lastTraining.workout.imageUrl" [title]="lastTraining.workout.name"
-          [subtitle]="lastTraining.workout.category" [textList]="[lastWorkout.duration]" filter="dark"
+          [subtitle]="lastTraining.workout.category" [textList]="[lastWorkout!.duration]" filter="dark"
           (click)="onWorkoutClick(lastTraining.workout)">
         </app-highlight-card>
       </div>
