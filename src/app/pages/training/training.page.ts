@@ -57,9 +57,7 @@ interface ExerciseClock {
 })
 export class TrainingPage implements OnInit {
   swiperModules = [IonicSlides];
-  @ViewChild('swiper') swiper: ElementRef | undefined;
-
-  slideLoaded = false;
+  @ViewChild('swiper') swiperRef: ElementRef | undefined;
 
   /** Rest */
   restTime = 90; // seconds
@@ -75,7 +73,7 @@ export class TrainingPage implements OnInit {
 
   workout: Workout | null = null;
   exerciseClocks: ExerciseClock[] = [];
-  currentIndex = 0;
+  currentIndex!: number;
 
   edited = false;
 
@@ -143,7 +141,7 @@ export class TrainingPage implements OnInit {
     this.totalTimeString = '00:00:00';
     this.exerciseClocks = [];
     this.currentIndex = 0;
-    this.swiper?.nativeElement.slideTo(this.currentIndex);
+    this.swiperRef?.nativeElement.swiper.slideTo(this.currentIndex);
 
     this.workoutService.workoutDetail.get().subscribe((workout) => {
       if (workout === null) {
@@ -161,11 +159,12 @@ export class TrainingPage implements OnInit {
 
       // Add 'next' field of each exercise
       for (let i = 0; i < this.exerciseClocks.length - 1; i++) {
-        this.exerciseClocks[i].nextExercise = this.exerciseClocks[
-          i + 1
-        ].exercise;
+        const nextExercise = this.exerciseClocks[i + 1].exercise;
+        this.exerciseClocks[i].nextExercise = nextExercise;
       }
     });
+
+    this.swiperRef?.nativeElement.swiper.on('slideChangeTransitionStart', this.onSlideChange);
   }
 
   ionViewWillLeave() {
@@ -212,7 +211,7 @@ export class TrainingPage implements OnInit {
     }
 
     // Decide on what to do based on rep type
-    const index = await this.swiper?.nativeElement.getActiveIndex();
+    const index = await this.swiperRef?.nativeElement.swiper.activeIndex;
     this.currentIndex = index;
     const { type, clock } = this.exerciseClocks[this.currentIndex];
 
@@ -225,7 +224,7 @@ export class TrainingPage implements OnInit {
     }
   }
 
-  async pauseTime() {
+  pauseTime() {
     // Pause clock
     const currentExercise = this.exerciseClocks[this.currentIndex];
     this.pauseClock(currentExercise.clock.id);
@@ -346,12 +345,8 @@ export class TrainingPage implements OnInit {
 
   /** Slide Controllers */
 
-  async onSlideLoad(event: any) {
-    this.slideLoaded = true;
-  }
-
-  async onSlideChange(event: any) {
-    const nextIndex = await this.swiper?.nativeElement.getActiveIndex();
+  onSlideChange = () => {
+    const nextIndex = this.swiperRef?.nativeElement.swiper.activeIndex;
 
     if (!this.trainingPaused) {
       // Stop current clock
@@ -376,7 +371,7 @@ export class TrainingPage implements OnInit {
     const setCount = exercise.set.sets.length;
     if (currentSet >= setCount) {
       // Go to the next exercise
-      this.swiper?.nativeElement.slideNext();
+      this.swiperRef?.nativeElement.swiper.slideNext();
       return true;
     }
     return false;
@@ -462,11 +457,7 @@ export class TrainingPage implements OnInit {
    */
   onFooterButtonClick() {
     if (!this.trainingStarted) {
-      if (this.slideLoaded) {
-        this.startTraining();
-      } else {
-        // Display error message to try again
-      }
+      this.startTraining();
       return;
     }
 
