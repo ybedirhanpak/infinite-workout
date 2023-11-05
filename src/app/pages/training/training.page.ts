@@ -145,7 +145,7 @@ export class TrainingPage implements OnInit {
 
     this.workoutService.workoutDetail.get().subscribe((workout) => {
       if (workout === null) {
-        console.error('Workout is null');
+        this.router.navigate(['/home/']);
         return;
       }
 
