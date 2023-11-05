@@ -38,6 +38,7 @@ export class WorkoutDetailPage implements OnInit {
   ionViewWillEnter() {
     this.workoutService.workoutDetail.get().subscribe(async (workout) => {
       if (!workout) {
+        this.router.navigate(['/home/']);
         return;
       }
 
