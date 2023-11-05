@@ -73,7 +73,7 @@ export class TrainingPage implements OnInit {
 
   workout: Workout | null = null;
   exerciseClocks: ExerciseClock[] = [];
-  currentIndex!: number;
+  currentIndex = 0;
 
   edited = false;
 
@@ -164,7 +164,7 @@ export class TrainingPage implements OnInit {
       }
     });
 
-    this.swiperRef?.nativeElement.swiper.on('slideChangeTransitionStart', this.onSlideChange);
+    this.swiperRef?.nativeElement.swiper.on('slideChange', this.onSlideChange);
   }
 
   ionViewWillLeave() {
