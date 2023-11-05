@@ -1,7 +1,6 @@
 {
 	"appId": "com.infinite.workout",
 	"appName": "infinite-workout",
-	"bundledWebRuntime": false,
 	"npmClient": "npm",
 	"webDir": "www",
 	"plugins": {
