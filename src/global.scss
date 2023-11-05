@@ -179,7 +179,7 @@ swiper-container img {
   max-height: 100%;
 }
 
-swiper-container.catalog {
+.catalog {
   padding: 0 12px;
 }
 
@@ -277,6 +277,7 @@ section {
 .card {
   border-radius: var(--card-border-radius, 5px);
   overflow: hidden;
+  position: relative;
 }
 
 img.cover {

@@ -1,0 +1,9 @@
+.workout-slide {
+  overflow-x: auto;
+
+  display: flex;
+
+  .workout-card {
+    margin-right: var(--card-padding);
+  }
+}
